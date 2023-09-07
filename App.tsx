@@ -13,7 +13,7 @@ export default function App() {
       <View style={{
         width: 150,
         height: 150,
-        backgroundColor: '#242424',
+        backgroundColor: '#222222',
         borderRadius: 20,
       }}>
       
