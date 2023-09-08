@@ -1,32 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-// color: dark["101010"] gray: [242424, 303030]
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister'
+import { QueryClient } from '@tanstack/react-query'
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
+import Toast from 'react-native-toast-message'
+import Navigation from './src/navigation/Navigation'
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1000 * 60 * 60 * 24,
+      networkMode: 'offlineFirst',
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    },
+  }
+})
+
+const asyncStoragePersister = createAsyncStoragePersister({
+  storage: AsyncStorage
+})
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={{
-        color: '#fff',
-      }}>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="light" />
-      
-      <View style={{
-        width: 150,
-        height: 150,
-        backgroundColor: '#222222',
-        borderRadius: 20,
-      }}>
-      
-      </View>
-    </View>
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{ persister: asyncStoragePersister }}>
+      <Navigation />
+      <Toast />
+    </PersistQueryClientProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#121212',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
