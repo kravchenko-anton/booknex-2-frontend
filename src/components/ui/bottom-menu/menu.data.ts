@@ -2,20 +2,20 @@ import { IMenuItem } from './menu.interface'
 
 export const menuItems: IMenuItem[] = [
 	{
-		iconName: 'home',
+		iconName: 'compass',
 		path: 'Home'
 	},
 	{
-		iconName: 'search',
+		iconName: 'ios-search',
 		path: 'Search'
 	},
 	{
-		iconName: 'book',
+		iconName: "md-book",
 		path: 'Book'
 	},
 	
 	{
-		iconName: 'person',
+		iconName: 'md-person-circle',
 		path: 'Profile'
 	}
 ]

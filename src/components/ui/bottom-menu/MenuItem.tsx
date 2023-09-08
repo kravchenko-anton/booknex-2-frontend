@@ -1,5 +1,7 @@
+import { Title } from '@/components/title/title'
 import { Ionicons } from '@expo/vector-icons'
 import { FC } from 'react'
+import { Pressable } from 'react-native'
 import { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
 import { AnimatedPressable } from '../../../types/component.types'
 import { Color } from '../../../utils/color'
@@ -31,13 +33,18 @@ const MenuItem: FC<IMenuItemProps> = ({ currentRoute, item, nav }) => {
 	};
 	
 	return (
-		<AnimatedPressable style={[animatedStyle]}  className='items-center w-[20%]' onPress={() => handlePress()}>
-				<Ionicons
+		<Pressable  className='items-center w-[20%]' onPress={() => handlePress()}>
+				<AnimatedPressable style={[animatedStyle]}>
+			<Ionicons
 					name={isActive ? item.iconName : `${item.iconName}-outline` as (typeof menuItems)[0]['iconName']}
-					size={30}
+					size={34}
 					color={isActive ? Color.accent : Color.gray}
 				/>
-		</AnimatedPressable>
+				</AnimatedPressable>
+				<Title> 
+					{item.path}
+				</Title>
+		</Pressable>
 	)
 }
 

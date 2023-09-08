@@ -18,9 +18,9 @@ const BottomMenu: FC<IBottomMenu> = props => {
 
 	return (
 		<View
-			className='flex-row justify-between pt-4 px-2 items-center w-full border-t border-t-solid'
+			className='flex-row justify-between pt-3 px-2 items-center w-full border-t border-t-solid'
 			style={{
-				paddingBottom: bottom + 10,
+				paddingBottom: bottom + 8,
 				borderTopColor: Color.gray,
 				backgroundColor: Color.background,
 			}}

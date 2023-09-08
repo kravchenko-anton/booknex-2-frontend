@@ -6,7 +6,7 @@ module.exports = function(api) {
       ["nativewind/babel"], [
         'babel-plugin-root-import',
         {
-          rootPathSuffix: 'app/',
+          rootPathSuffix: 'src/',
           rootPathPrefix: '@/'
         }
       ],

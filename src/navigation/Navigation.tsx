@@ -1,9 +1,11 @@
+import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
+import { FontProvider } from '@/provider/font-provider'
+import { Color } from '@/utils/color'
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import { FC, useEffect, useState } from 'react'
 import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context'
 import BottomMenu from '../components/ui/bottom-menu/BottomMenu'
-import { Color } from '../utils/color'
 
 import PrivateNavigator from './PrivateNavigator'
 
@@ -14,27 +16,23 @@ const { user } = {user : true}
 	)
 
 	const navRef = useNavigationContainerRef()
-
 	useEffect(() => {
-		setCurrentRoute(navRef.getCurrentRoute()?.name)
-
 		const listener = navRef.addListener('state', () =>
 			setCurrentRoute(navRef.getCurrentRoute()?.name)
 		)
-
 		return () => {
 			navRef.removeListener('state', listener)
 		}
 	}, [])
-
-
+	const fontLoad = FontProvider()
+	if (!fontLoad ) return <FullScreenLoader/>
 	return (
 		<SafeAreaProvider
 			initialMetrics={initialWindowMetrics}
 			style={{
 				backgroundColor: Color.background
 			}}>
-			<NavigationContainer ref={navRef}>
+			<NavigationContainer ref={navRef} fallback={<FullScreenLoader/>} >
 				<PrivateNavigator />
 			</NavigationContainer>
 			{user && currentRoute && (

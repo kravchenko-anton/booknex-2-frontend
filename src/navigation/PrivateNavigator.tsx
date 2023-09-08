@@ -1,7 +1,7 @@
+import { Color } from '@/utils/color'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { FC } from 'react'
 import Auth from '../screens/auth/auth'
-import { Color } from '../utils/color'
 
 
 import { TypeRootStackParamList } from './navigation.types'
@@ -11,12 +11,15 @@ const Stack = createNativeStackNavigator<TypeRootStackParamList>()
 
 const PrivateNavigator: FC = () => {
 	const { user } = {user :{
-		isAdmin: false
+		isAdmin: true
 		}}
 
 	return (
 		<Stack.Navigator
+			initialRouteName={user ? 'Home' : 'Auth'}
+			
 			screenOptions={{
+				animation: 'fade',
 				headerShown: false,
 				contentStyle: {
 					backgroundColor: Color.background
