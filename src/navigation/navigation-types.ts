@@ -9,6 +9,7 @@ export type TypeRootStackParamList = {
 	Catalog: undefined
 	Settings: undefined
 	Search: undefined
+	Welcome: undefined
 }
 
 export interface IRoute {

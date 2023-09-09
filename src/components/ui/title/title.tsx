@@ -1,5 +1,5 @@
-import { weightSettings } from '@/components/title/title-settings'
-import { TitleProps } from '@/components/title/title-types'
+import { weightSettings } from '@/components/ui/title/title-settings'
+import { TitleProps } from '@/components/ui/title/title-types'
 import { Color } from '@/utils/color'
 import { Text } from 'react-native'
 
@@ -13,7 +13,6 @@ export const Title = ({
 	                      ...props
                       }: TitleProps) => {
 	return <Text
-		testID='title'
 		style={[
 			{
 				fontFamily: weightSettings[weight],

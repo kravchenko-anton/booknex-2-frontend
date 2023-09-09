@@ -1,7 +1,7 @@
+import { Color } from '@/utils/color'
 import { FC } from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Color } from '../../../utils/color'
 import { menuItems } from './menu.data'
 
 

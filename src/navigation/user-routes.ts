@@ -1,4 +1,3 @@
-import Auth from '../screens/auth/auth'
 import Book from '../screens/book/book'
 import Catalog from '../screens/catalog/catalog'
 import Home from '../screens/home/home'
@@ -6,8 +5,8 @@ import Profile from '../screens/profile/profile'
 import Reading from '../screens/reading/reading'
 import Search from '../screens/search/search'
 import Settings from '../screens/settings/settings'
-import { adminRoutes } from './admin.routes'
-import { IRoute } from './navigation.types'
+import { adminRoutes } from './admin-routes'
+import { IRoute } from './navigation-types'
 
 export const userRoutes: IRoute[] = [
 	{
@@ -19,12 +18,8 @@ export const userRoutes: IRoute[] = [
 		component: Settings
 	},
 	{
-		name: 'Auth',
-		component: Auth
-	},
-	{
-name: 'Profile',
-component: Profile
+	name: 'Profile',
+	component: Profile
 	},
 	{
 		name: 'Reading',

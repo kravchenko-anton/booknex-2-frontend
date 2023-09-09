@@ -1,4 +1,4 @@
-import { weightSettings } from '@/components/title/title-settings'
+import { weightSettings } from '@/components/ui/title/title-settings'
 import { UTextProps } from '@/types/component.types'
 import { ColorProps } from '@/utils/color'
 

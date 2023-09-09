@@ -1,16 +1,16 @@
+import BottomMenu from '@/components/bottom-menu/BottomMenu'
 import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
-import { FontProvider } from '@/provider/font-provider'
+import { FontProvider } from '@/providers/font-provider'
 import { Color } from '@/utils/color'
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import { FC, useEffect, useState } from 'react'
 import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context'
-import BottomMenu from '../components/ui/bottom-menu/BottomMenu'
 
 import PrivateNavigator from './PrivateNavigator'
 
 const Navigation: FC = () => {
-const { user } = {user : true}
+const { user } = {user : false}
 	const [currentRoute, setCurrentRoute] = useState<string | undefined>(
 		undefined
 	)

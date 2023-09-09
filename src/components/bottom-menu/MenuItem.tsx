@@ -1,10 +1,10 @@
-import { Title } from '@/components/title/title'
+import { Title } from '@/components/ui/title/title'
+import { AnimatedPressable } from '@/types/component.types'
+import { Color } from '@/utils/color'
 import { Ionicons } from '@expo/vector-icons'
 import { FC } from 'react'
 import { Pressable } from 'react-native'
 import { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
-import { AnimatedPressable } from '../../../types/component.types'
-import { Color } from '../../../utils/color'
 import { menuItems } from './menu.data'
 
 
@@ -33,15 +33,15 @@ const MenuItem: FC<IMenuItemProps> = ({ currentRoute, item, nav }) => {
 	};
 	
 	return (
-		<Pressable  className='items-center w-[20%]' onPress={() => handlePress()}>
-				<AnimatedPressable style={[animatedStyle]}>
+		<Pressable  className='items-center w-[20%]'  onPress={() => handlePress()}>
+				<AnimatedPressable style={[animatedStyle]} pointerEvents='none'>
 			<Ionicons
 					name={isActive ? item.iconName : `${item.iconName}-outline` as (typeof menuItems)[0]['iconName']}
 					size={34}
 					color={isActive ? Color.accent : Color.gray}
 				/>
 				</AnimatedPressable>
-				<Title> 
+				<Title size={16} weight={isActive ? 'bold' : 'regular'} color={isActive ? Color.accent : Color.gray}>
 					{item.path}
 				</Title>
 		</Pressable>
