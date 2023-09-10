@@ -10,3 +10,9 @@ export interface WrapperProps<T> {
 	wrapperStyle?: T
 	wrapperClassName?: string
 }
+
+export interface DefaultModelFields {
+	id: number
+	createdAt: string
+	updatedAt: string
+}
