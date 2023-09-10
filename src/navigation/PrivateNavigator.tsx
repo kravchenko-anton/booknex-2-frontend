@@ -21,7 +21,7 @@ const PrivateNavigator: FC = () => {
 				animation: 'fade',
 				headerShown: false,
 				contentStyle: {
-					backgroundColor: Color.background
+					backgroundColor: Color.canvas
 				}
 			}}
 		>

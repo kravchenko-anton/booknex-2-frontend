@@ -26,3 +26,9 @@ export const TextWeight = {
 	medium: 'medium' as "medium",
 	large: 'bold'as "bold",
 }
+
+export const TextSize = {
+	small: 16,
+	medium: 20,
+	large: 24,
+}

@@ -1,5 +1,5 @@
-import BottomMenu from '@/components/bottom-menu/BottomMenu'
 import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
+import BottomMenu from '@/navigation/bottom-menu/BottomMenu'
 import { FontProvider } from '@/providers/font-provider'
 import { Color } from '@/utils/color'
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native'
@@ -30,7 +30,7 @@ const { user } = {user : false}
 		<SafeAreaProvider
 			initialMetrics={initialWindowMetrics}
 			style={{
-				backgroundColor: Color.background
+				backgroundColor: Color.canvas
 			}}>
 			<NavigationContainer ref={navRef} fallback={<FullScreenLoader/>} >
 				<PrivateNavigator />

@@ -22,7 +22,7 @@ const BottomMenu: FC<IBottomMenu> = props => {
 			style={{
 				paddingBottom: bottom + 8,
 				borderTopColor: Color.gray,
-				backgroundColor: Color.background,
+				backgroundColor: Color.canvas,
 			}}
 		>
 			{menuItems.map(item => (

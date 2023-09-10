@@ -9,7 +9,7 @@ const FullScreenLoader = () => {
 			style={{
 				height: SCREEN_HEIGHT,
 				width: SCREEN_WIDTH,
-				backgroundColor: Color.background
+				backgroundColor: Color.canvas
 			}}
 			className='absolute items-center justify-center'>
 			<ActivityIndicator

@@ -6,6 +6,6 @@ export type TitleProps = UTextProps &
 	ColorProps & {
 	center?: boolean
 	size?: number
-	children: string
+	children: string | string[] | any
 	weight?: keyof typeof weightSettings
 }

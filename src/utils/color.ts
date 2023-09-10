@@ -5,7 +5,8 @@ export type colorsType = {
 	primary: '#2B6B76',
 	secondary: '#2F3742',
 	accent: '#75471E',
-	background: '#F9EFE8',
+	canvas: '#F9EFE8',
+	dust: '#F2E4DC',
 	black: '#000',
 	white: '#fff',
 	alert: '#DC3F41',
@@ -19,6 +20,7 @@ export type lineColorType =
 	| '#2F3742'
 	| '#75471E'
 	| '#F9EFE8'
+	| '#F2E4DC'
 	| '#000'
 	| '#fff'
 	| '#DC3F41'

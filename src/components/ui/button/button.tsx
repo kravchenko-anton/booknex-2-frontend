@@ -1,4 +1,5 @@
-import { BackgroundColor, Padding, TextColor, TextWeight } from '@/components/ui/button/button-settings'
+import { usePressAnimation } from '@/components/ui/button/button-animation'
+import { BackgroundColor, Padding, TextColor, TextSize, TextWeight } from '@/components/ui/button/button-settings'
 import { IButtonTypes } from '@/components/ui/button/button-types'
 import { Title } from '@/components/ui/title/title'
 import { AnimatedPressable } from '@/types/component.types'
@@ -12,17 +13,16 @@ const Button: FC<IButtonTypes> =
 	 style,
 		icon,
 	 ...props}) => {
+	const {pressFunctions,animatedStyle} = usePressAnimation()
 	return <AnimatedPressable
 		style={[{
 		backgroundColor:  BackgroundColor[variant],
 		borderRadius: borderRadius,
 		padding: Padding[size],
 		alignItems: 'center',
-	}, style]} {...props}>
+	}, animatedStyle, style]} {...pressFunctions} {...props}>
 		<Title color={TextColor[variant]}
-		       weight={
-			TextWeight[size]
-		}>
+		       weight={TextWeight[size]} size={TextSize[size]}>
 			{props.text}
 		</Title>
 	</AnimatedPressable>

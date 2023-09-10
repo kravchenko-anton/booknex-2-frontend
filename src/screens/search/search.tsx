@@ -1,4 +1,4 @@
-import Layout from '../../components/layout'
+import Layout from '@/components/layout/layout'
 
 const Search = () => {
 	return <Layout></Layout>
