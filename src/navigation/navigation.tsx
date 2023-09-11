@@ -1,6 +1,6 @@
 import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
 import { useAuth } from '@/hooks/useAuth'
-import BottomMenu from '@/navigation/bottom-menu/BottomMenu'
+import BottomMenu from '@/navigation/bottom-menu/bottom-menu'
 import { FontProvider } from '@/providers/font-provider'
 import { Color } from '@/utils/color'
 import {
@@ -13,7 +13,7 @@ import {
 	initialWindowMetrics
 } from 'react-native-safe-area-context'
 
-import PrivateNavigator from './PrivateNavigator'
+import PrivateNavigator from './private-navigator'
 
 const Navigation: FC = () => {
 	const { user } = useAuth()

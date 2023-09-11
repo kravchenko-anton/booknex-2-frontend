@@ -1,6 +1,11 @@
-import { UViewProps } from '@/types/component.types'
+import { UViewProps } from '@/types/component-types'
 import { WrapperProps } from '@/types/global'
-import { Control, FieldPath, FieldValues, RegisterOptions } from 'react-hook-form'
+import {
+	Control,
+	FieldPath,
+	FieldValues,
+	RegisterOptions
+} from 'react-hook-form'
 import { KeyboardTypeOptions, TextInputProps } from 'react-native'
 
 export interface FieldProps<T extends FieldValues>
@@ -11,7 +16,7 @@ export interface FieldProps<T extends FieldValues>
 		WrapperProps<UViewProps['style']> {
 	control: Control<T>
 	name: FieldPath<T>
-	keyboardType?: KeyboardTypeOptions,
+	keyboardType?: KeyboardTypeOptions
 	placeholder: string
 	rules?: Omit<
 		RegisterOptions<T, FieldPath<T>>,

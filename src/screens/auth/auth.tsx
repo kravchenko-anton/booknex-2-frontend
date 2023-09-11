@@ -23,7 +23,7 @@ const Auth = () => {
 	}
 	return (
 		<Layout>
-			<Header />
+			<Header leftIcon={{ back: true }} />
 			<View className='mt-[20%]'>
 				<Title size={34} weight={'bold'} numberOfLines={2} className='mb-2'>
 					{isLogin ? 'Welcome back' : 'Create an account'}

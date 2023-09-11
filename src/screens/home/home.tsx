@@ -1,12 +1,28 @@
+import Header from '@/components/header/header'
 import Layout from '@/components/layout/layout'
-import Button from '@/components/ui/button/button'
-import { useAction } from '@/hooks/useAction'
+import { Title } from '@/components/ui/title/title'
 
 const Home = () => {
-	const { logout } = useAction()
 	return (
 		<Layout>
-			<Button size={'large'} text={'Logout'} onPress={logout} />
+			<Header
+				leftIcon={{
+					custom: (
+						<Title weight={'semiBold'} size={30}>
+							{new Date().getHours() < 12
+								? 'Good morning'
+								: new Date().getHours() < 18
+								? 'Good afternoon'
+								: 'Good evening'}
+						</Title>
+					)
+				}}
+				rightIcon={{
+					icon: {
+						name: `time-outline`
+					}
+				}}
+			/>
 		</Layout>
 	)
 }

@@ -1,4 +1,4 @@
-import { UViewProps } from '@/types/component.types'
+import { UViewProps } from '@/types/component-types'
 import { FC, memo, PropsWithChildren } from 'react'
 import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'

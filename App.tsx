@@ -1,4 +1,5 @@
 import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
+import Navigation from '@/navigation/navigation'
 import { persistor, store } from '@/redux/store'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister'
@@ -8,7 +9,6 @@ import { StatusBar } from 'expo-status-bar'
 import Toast from 'react-native-toast-message'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import Navigation from './src/navigation/Navigation'
 
 const queryClient = new QueryClient({
 	defaultOptions: {

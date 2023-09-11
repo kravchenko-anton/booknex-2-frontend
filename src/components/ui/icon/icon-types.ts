@@ -1,9 +1,8 @@
-import { UPressableProps } from '@/types/component.types'
+import { UPressableProps } from '@/types/component-types'
 import { IconType } from '@/types/global'
-import { ColorProps } from '@/utils/color'
 
-export interface IconProps extends UPressableProps, ColorProps {
+export interface IconProps extends UPressableProps {
 	name: IconType
-	size?: number
-	padding?: number
+	size: 'small' | 'medium' | 'large'
+	variant?: 'filled' | 'outlined' | 'ghost'
 }

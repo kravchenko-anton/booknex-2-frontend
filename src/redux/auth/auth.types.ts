@@ -1,4 +1,4 @@
-import { UserType } from '@/services/types/user.services.types'
+import { UserType } from '@/services/types/user-services-types'
 
 export interface AuthFieldsType extends Pick<UserType, 'email'> {
 	password: string
