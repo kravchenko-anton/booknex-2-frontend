@@ -1,4 +1,4 @@
-import { getHistoryUrl } from '@/services/api.config'
+import { getHistoryUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
 import {
 	addHistoryDto,

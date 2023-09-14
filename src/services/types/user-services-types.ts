@@ -9,3 +9,8 @@ export interface UserType extends DefaultModelFields {
 	finishBooks: []
 	readingBooks: []
 }
+
+export interface UserUpdateDto
+	extends Pick<UserType, 'email' | 'name' | 'picture'> {
+	password: string
+}

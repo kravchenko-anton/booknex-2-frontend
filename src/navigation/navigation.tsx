@@ -1,6 +1,7 @@
 import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
 import { useAuth } from '@/hooks/useAuth'
 import BottomMenu from '@/navigation/bottom-menu/bottom-menu'
+import { useCheckAuth } from '@/providers/auth-provider'
 import { FontProvider } from '@/providers/font-provider'
 import { Color } from '@/utils/color'
 import {
@@ -30,6 +31,7 @@ const Navigation: FC = () => {
 			navRef.removeListener('state', listener)
 		}
 	}, [])
+	useCheckAuth()
 	const fontLoad = FontProvider()
 	if (!fontLoad) return <FullScreenLoader />
 	return (

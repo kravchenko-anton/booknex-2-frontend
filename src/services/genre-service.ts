@@ -1,4 +1,4 @@
-import { getGenresUrl } from '@/services/api.config'
+import { getGenresUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
 import { GenreType } from '@/services/types/genre-service-types'
 

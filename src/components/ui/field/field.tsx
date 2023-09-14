@@ -21,7 +21,7 @@ const Field = <T extends Record<string, any>>({
 						<View
 							style={{
 								borderWidth: 1,
-								borderColor: error ? Color.alert : Color.accent,
+								borderColor: error ? Color.alert : Color.secondary,
 								backgroundColor: Color.dust
 							}}
 							className='my-1.5 w-full rounded-lg px-4 pb-4 pt-2.5'>
@@ -31,9 +31,9 @@ const Field = <T extends Record<string, any>>({
 								onChangeText={onChange}
 								keyboardAppearance='default'
 								renderToHardwareTextureAndroid={true}
-								placeholderTextColor={Color.accent}
+								placeholderTextColor={Color.secondary}
 								value={(value ? value : '').toString()}
-								className='text-base'
+								className='text-base text-secondary'
 								style={{
 									fontFamily: 'SpaceGrotesk_700Bold'
 								}}

@@ -3,7 +3,7 @@ import {
 	saveTokensStorage
 } from '@/redux/auth/auth.helper'
 import { AuthFieldsType, AuthResponseType } from '@/redux/auth/auth.types'
-import { SERVER_URL, getAuthUrl } from '@/services/api.config'
+import { SERVER_URL, getAuthUrl } from '@/services/api-config'
 import { errorCatch } from '@/utils/catch-error'
 import { errorToast } from '@/utils/errorToast'
 import { createAsyncThunk } from '@reduxjs/toolkit'

@@ -12,3 +12,7 @@ export interface BookType extends DefaultModelFields {
 	popularity: number
 	genres: Omit<GenreType, 'createdAt' | 'updatedAt'>[]
 }
+
+export interface BookByIdType extends BookType {
+	similarBooks: BookType[]
+}

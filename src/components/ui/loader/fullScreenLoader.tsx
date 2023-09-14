@@ -14,7 +14,7 @@ const FullScreenLoader = () => {
 			className='absolute items-center justify-center'>
 			<ActivityIndicator
 				size='large'
-				color={Color.accent}
+				color={Color.secondary}
 				style={{
 					width: 200,
 					height: 200

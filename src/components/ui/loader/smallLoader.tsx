@@ -6,7 +6,7 @@ const SmallLoader = () => (
 	<View className='h-full w-full items-center justify-center'>
 		<ActivityIndicator
 			size='small'
-			color={Color.accent}
+			color={Color.secondary}
 			style={{
 				width: 200,
 				height: 200

@@ -3,14 +3,12 @@ import { Color } from '@/utils/color'
 export const BackgroundColor = {
 	primary: Color.primary,
 	secondary: Color.secondary,
-	accent: Color.accent,
 	ghost: Color.white
 }
 
 export const TextColor = {
 	primary: Color.white,
 	secondary: Color.white,
-	accent: Color.white,
 	ghost: Color.black
 }
 

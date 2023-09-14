@@ -1,8 +1,7 @@
 import { deleteTokensStorage, getAccessToken } from '@/redux/auth/auth.helper'
-import { SERVER_URL } from '@/services/api.config'
+import { SERVER_URL } from '@/services/api-config'
 import { getNewTokens } from '@/services/api/helper.auth'
 import { errorCatch } from '@/utils/catch-error'
-import { errorToast } from '@/utils/errorToast'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -37,8 +36,7 @@ instance.interceptors.response.use(
 				await getNewTokens()
 				return instance.request(originalRequest)
 			} catch (error) {
-				await deleteTokensStorage()
-				errorToast(errorCatch(error))
+				if (errorCatch(error) === 'jwt expired') await deleteTokensStorage()
 			}
 		}
 

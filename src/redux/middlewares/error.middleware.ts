@@ -4,7 +4,6 @@ import { Middleware, MiddlewareAPI } from 'redux'
 
 export const rtkQueryErrorLogger: Middleware =
 	(api: MiddlewareAPI) => next => action => {
-		console.log('rtkQueryErrorLogger', action.error)
 		if (isRejectedWithValue(action)) {
 			errorToast(action.payload)
 		}

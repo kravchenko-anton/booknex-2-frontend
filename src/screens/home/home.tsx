@@ -1,8 +1,12 @@
 import Header from '@/components/header/header'
 import Layout from '@/components/layout/layout'
 import { Title } from '@/components/ui/title/title'
+import { catalogService } from '@/services/catalog-service'
+import { useQuery } from '@tanstack/react-query'
 
 const Home = () => {
+	const { data } = useQuery(['catalog'], () => catalogService.catalog())
+	console.log(data)
 	return (
 		<Layout>
 			<Header

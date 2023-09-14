@@ -35,13 +35,13 @@ const MenuItem: FC<IMenuItemProps> = ({ currentRoute, item, nav }) => {
 							: (`${item.iconName}-outline` as (typeof menuItems)[0]['iconName'])
 					}
 					size={34}
-					color={isActive ? Color.accent : Color.gray}
+					color={isActive ? Color.secondary : Color.gray}
 				/>
 			</AnimatedPressable>
 			<Title
 				size={16}
 				weight={isActive ? 'bold' : 'regular'}
-				color={isActive ? Color.accent : Color.gray}>
+				color={isActive ? Color.secondary : Color.gray}>
 				{item.path}
 			</Title>
 		</Pressable>
