@@ -15,6 +15,7 @@ const Icon: FC<IconProps> = ({
 	name = 'alert-outline',
 	variant = 'ghost',
 	size = 'small',
+	color,
 	style,
 	...props
 }) => {
@@ -37,7 +38,7 @@ const Icon: FC<IconProps> = ({
 			<Ionicons
 				name={name}
 				size={SizeSetting[size]}
-				color={IconColorSetting[variant]}
+				color={color ? color : IconColorSetting[variant]}
 			/>
 		</AnimatedPressable>
 	)

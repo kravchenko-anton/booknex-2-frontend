@@ -1,8 +1,8 @@
 import { weightSettings } from '@/components/ui/title/title-settings'
-import { UTextProps } from '@/types/component-types'
+import { TextDefaultProps } from '@/types/component-types'
 import { ColorProps } from '@/utils/color'
 
-export type TitleProps = UTextProps &
+export type TitleProps = TextDefaultProps &
 	ColorProps & {
 		center?: boolean
 		size?: number

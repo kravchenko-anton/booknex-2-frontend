@@ -1,4 +1,6 @@
 import { IconProps } from '@/components/ui/icon/icon-types'
+import { ViewDefaultProps } from '@/types/component-types'
+import { WrapperProps } from '@/types/global'
 
 type HeaderIcon =
 	| {
@@ -7,7 +9,7 @@ type HeaderIcon =
 	| {
 			icon?: Omit<IconProps, 'variant' | 'size'>
 	  }
-export interface HeaderProps {
+export interface HeaderProps extends WrapperProps<ViewDefaultProps> {
 	leftIcon: { back?: boolean } | HeaderIcon
 	rightIcon?: HeaderIcon
 }

@@ -1,14 +1,17 @@
-import { UViewProps } from '@/types/component-types'
+import { ScrollViewDefaultProps } from '@/types/component-types'
 import { FC, memo, PropsWithChildren } from 'react'
-import { View } from 'react-native'
+import { ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const Layout: FC<PropsWithChildren<UViewProps>> = ({ children, ...props }) => (
+const ScrollLayout: FC<PropsWithChildren<ScrollViewDefaultProps>> = ({
+	children,
+	...props
+}) => (
 	<SafeAreaView edges={['right', 'top', 'left']} className='flex-1'>
-		<View className='flex-1 p-2' {...props}>
+		<ScrollView className='flex-1' {...props}>
 			{children}
-		</View>
+		</ScrollView>
 	</SafeAreaView>
 )
 
-export default memo(Layout)
+export default memo(ScrollLayout)

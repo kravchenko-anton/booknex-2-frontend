@@ -1,4 +1,4 @@
-import { UViewProps } from '@/types/component-types'
+import { ViewDefaultProps } from '@/types/component-types'
 import { WrapperProps } from '@/types/global'
 import {
 	Control,
@@ -13,7 +13,7 @@ export interface FieldProps<T extends FieldValues>
 			TextInputProps,
 			'onChange' | 'onChangeText' | 'value' | 'placeholder' | 'testID'
 		>,
-		WrapperProps<UViewProps['style']> {
+		WrapperProps<ViewDefaultProps['style']> {
 	control: Control<T>
 	name: FieldPath<T>
 	keyboardType?: KeyboardTypeOptions

@@ -4,35 +4,34 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { FC } from 'react'
 import { View } from 'react-native'
 
-const Header: FC<HeaderProps> = props => {
+const Header: FC<HeaderProps> = ({
+	rightIcon,
+	leftIcon,
+	wrapperStyle,
+	wrapperClassName
+}) => {
 	const { goBack } = useTypedNavigation()
 	return (
-		<View className='flex-row items-center justify-between'>
-			{'back' in props.leftIcon && props.leftIcon.back ? (
+		<View
+			className={`flex-row items-center justify-between ${wrapperClassName}`}
+			style={wrapperStyle}>
+			{'back' in leftIcon && leftIcon.back ? (
 				<Icon
 					name={'chevron-back-outline'}
 					onPress={() => goBack()}
 					size={'large'}
 					style={{ paddingLeft: 0 }}
 				/>
-			) : 'icon' in props.leftIcon && props.leftIcon.icon ? (
-				<Icon
-					size={'large'}
-					style={{ paddingLeft: 0 }}
-					{...props.leftIcon.icon}
-				/>
+			) : 'icon' in leftIcon && leftIcon.icon ? (
+				<Icon size={'large'} style={{ paddingLeft: 0 }} {...leftIcon.icon} />
 			) : (
-				'custom' in props.leftIcon && props.leftIcon.custom
+				'custom' in leftIcon && leftIcon.custom
 			)}
 
-			{props.rightIcon && 'icon' in props.rightIcon && props.rightIcon.icon ? (
-				<Icon
-					size={'large'}
-					style={{ paddingRight: 0 }}
-					{...props.rightIcon.icon}
-				/>
+			{rightIcon && 'icon' in rightIcon && rightIcon.icon ? (
+				<Icon size={'large'} style={{ paddingRight: 0 }} {...rightIcon.icon} />
 			) : (
-				props.rightIcon && 'custom' in props.rightIcon && props.rightIcon.custom
+				rightIcon && 'custom' in rightIcon && rightIcon.custom
 			)}
 		</View>
 	)
