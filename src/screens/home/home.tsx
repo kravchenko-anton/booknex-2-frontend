@@ -12,7 +12,9 @@ import { useQuery } from '@tanstack/react-query'
 import { View } from 'react-native'
 
 const Home = () => {
-	const { data: catalog } = useQuery(['adss'], () => catalogService.catalog())
+	const { data: catalog } = useQuery(['catalog'], () =>
+		catalogService.catalog()
+	)
 	if (!catalog) return <FullScreenLoader />
 	console.log(catalog)
 	return (

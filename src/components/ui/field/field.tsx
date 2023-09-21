@@ -1,6 +1,6 @@
 import { Title } from '@/components/ui/title/title'
 import { Color } from '@/utils/color'
-import { Controller } from 'react-hook-form'
+import { Controller, Path, PathValue } from 'react-hook-form'
 import { TextInput, View } from 'react-native'
 import { FieldProps } from './filed.types'
 
@@ -13,6 +13,7 @@ const Field = <T extends Record<string, any>>({
 				control={props.control}
 				name={props.name}
 				rules={props.rules}
+				defaultValue={props.defaultValue as PathValue<T, Path<T>>}
 				render={({
 					field: { value, onChange, onBlur },
 					fieldState: { error }
@@ -32,6 +33,7 @@ const Field = <T extends Record<string, any>>({
 								keyboardAppearance='default'
 								renderToHardwareTextureAndroid={true}
 								placeholderTextColor={Color.secondary}
+								defaultValue={props.defaultValue}
 								value={(value ? value : '').toString()}
 								className='text-base text-secondary'
 								style={{

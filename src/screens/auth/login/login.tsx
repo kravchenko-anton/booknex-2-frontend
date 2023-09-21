@@ -4,40 +4,35 @@ import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
-import { useAuth } from '@/hooks/useAuth'
+import { useTypedRoute } from '@/hooks/useTypedRoute'
 import { AuthFieldsType } from '@/redux/auth/auth.types'
 import { Color } from '@/utils/color'
-import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
-const Auth = () => {
-	const [isLogin, setIsLogin] = useState<boolean>(true)
-	const { user } = useAuth()
-	const { register, login } = useAction()
+const Login = () => {
+	const {
+		params: { defaultEmail }
+	} = useTypedRoute<'Login'>()
+	const { login } = useAction()
 	const { control, handleSubmit } = useForm<AuthFieldsType>({
 		mode: 'onSubmit'
 	})
-	const onSubmit: SubmitHandler<AuthFieldsType> = ({ password, email }) => {
-		isLogin ? login({ password, email }) : register({ password, email })
-	}
+	const onSubmit: SubmitHandler<AuthFieldsType> = ({ password, email }) =>
+		login({ password, email })
 	return (
 		<Layout>
 			<Header leftIcon={{ back: true }} />
 			<View className='mt-[20%]'>
-				<Title size={34} weight={'bold'} numberOfLines={2} className='mb-2'>
-					{isLogin ? 'Welcome back' : 'Create an account'}
+				<Title size={34} weight={'bold'} className='mb-2'>
+					Welcome back
 				</Title>
-				<Title
-					size={18}
-					weight={'light'}
-					numberOfLines={2}
-					color={Color.gray}
-					className='mb-4'>
+				<Title size={18} weight={'light'} color={Color.gray} className='mb-4'>
 					Enter your credentials to continue
 				</Title>
 				<Field
 					control={control}
+					defaultValue={defaultEmail}
 					name={'email'}
 					keyboardType={'email-address'}
 					placeholder={'Email'}
@@ -71,23 +66,12 @@ const Auth = () => {
 				<Button
 					onPress={handleSubmit(onSubmit)}
 					size={'medium'}
-					text={isLogin ? 'Sign in' : 'Sign up'}
+					text={'Sign in'}
 					className='mb-4 mt-2'
 				/>
-				<Title
-					size={16}
-					weight={'light'}
-					center
-					color={Color.gray}
-					onPress={() => setIsLogin(!isLogin)}>
-					{isLogin ? "Don't h" : 'H'}ave an account?{' '}
-					<Text className='text-[16px] font-bold text-accent'>
-						Sign {isLogin ? 'up' : 'in'}
-					</Text>
-				</Title>
 			</View>
 		</Layout>
 	)
 }
 
-export default Auth
+export default Login

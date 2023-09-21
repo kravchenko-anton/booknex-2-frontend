@@ -21,6 +21,7 @@ const Button = ({
 		<AnimatedPressable
 			style={[
 				{
+					opacity: props.disabled ? 0.7 : 1,
 					backgroundColor: BackgroundColor[variant],
 					borderRadius: BorderRadiusSetting,
 					padding: PaddingSetting[size],

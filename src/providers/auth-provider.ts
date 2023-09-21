@@ -16,8 +16,9 @@ export const useCheckAuth = (routeName?: string) => {
 				try {
 					getNewToken(refreshToken)
 				} catch (e) {
+					console.log('logout')
 					errorToast(errorCatch(e))
-					await logout()
+					logout()
 				}
 			}
 		}

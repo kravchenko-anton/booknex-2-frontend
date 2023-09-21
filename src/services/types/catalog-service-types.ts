@@ -10,6 +10,7 @@ export interface CatalogType {
 	popularNow: (ShortBookType & { description: string })[]
 	bestSellers: ShortBookType[]
 	newReleases: ShortBookType[]
+	sameBreath: ShortBookType[]
 	genres: {
 		name: string
 		books: BookType[]

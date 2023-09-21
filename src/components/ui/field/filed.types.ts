@@ -11,13 +11,12 @@ import { KeyboardTypeOptions, TextInputProps } from 'react-native'
 export interface FieldProps<T extends FieldValues>
 	extends Omit<
 			TextInputProps,
-			'onChange' | 'onChangeText' | 'value' | 'placeholder' | 'testID'
+			'onChange' | 'onChangeText' | 'value' | 'testID'
 		>,
 		WrapperProps<ViewDefaultProps['style']> {
 	control: Control<T>
 	name: FieldPath<T>
 	keyboardType?: KeyboardTypeOptions
-	placeholder: string
 	rules?: Omit<
 		RegisterOptions<T, FieldPath<T>>,
 		'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'

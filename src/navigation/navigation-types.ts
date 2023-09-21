@@ -1,7 +1,6 @@
 import { ComponentType } from 'react'
 
 export type TypeRootStackParamList = {
-	Auth: undefined
 	Home: undefined
 	Profile: undefined
 	Reading: undefined
@@ -10,6 +9,8 @@ export type TypeRootStackParamList = {
 	Settings: undefined
 	Search: undefined
 	Welcome: undefined
+	Login: { defaultEmail: string }
+	Registration: { defaultEmail: string }
 }
 
 export interface IRoute {

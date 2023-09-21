@@ -1,9 +1,10 @@
 import { useAuth } from '@/hooks/useAuth'
-import Welcome from '@/screens/welcome/welcome'
+import Login from '@/screens/auth/login/login'
+import Register from '@/screens/auth/register/register'
+import Welcome from '@/screens/auth/welcome/welcome'
 import { Color } from '@/utils/color'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { FC } from 'react'
-import Auth from '../screens/auth/auth'
 
 import { TypeRootStackParamList } from './navigation-types'
 import { routes, userRoutes } from './user-routes'
@@ -32,7 +33,8 @@ const PrivateNavigator: FC = () => {
 			) : (
 				<>
 					<Stack.Screen name='Welcome' component={Welcome} />
-					<Stack.Screen name='Auth' component={Auth} />
+					<Stack.Screen name='Login' component={Login} />
+					<Stack.Screen name='Registration' component={Register} />
 				</>
 			)}
 		</Stack.Navigator>

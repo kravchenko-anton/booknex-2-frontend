@@ -3,13 +3,15 @@ import { Color } from '@/utils/color'
 export const BackgroundColor = {
 	primary: Color.primary,
 	secondary: Color.secondary,
-	ghost: Color.white
+	ghost: Color.white,
+	dust: Color.dust
 }
 
 export const TextColor = {
 	primary: Color.white,
 	secondary: Color.white,
-	ghost: Color.black
+	ghost: Color.black,
+	dust: Color.black
 }
 
 export const TextWeight = {

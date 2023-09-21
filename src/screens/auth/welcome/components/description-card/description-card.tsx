@@ -1,22 +1,25 @@
-import Layout from '@/components/layout/layout'
 import Button from '@/components/ui/button/button'
 import { Title } from '@/components/ui/title/title'
-import { useTypedNavigation } from '@/hooks/useTypedNavigation'
+import { useWelcomeAnimation } from '@/screens/auth/welcome/components/animations'
+import { WelcomeElementProps } from '@/screens/auth/welcome/components/types'
+import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { FC } from 'react'
 import { Image, View } from 'react-native'
 
-const Welcome: FC = () => {
-	const { navigate } = useTypedNavigation()
-
+const DescriptionCard: FC<WelcomeElementProps> = ({
+	isCheckEmailModal,
+	setIsCheckEmailModal
+}) => {
+	const { hideAnimation } = useWelcomeAnimation(isCheckEmailModal)
 	return (
-		<Layout className='relative justify-center p-4'>
+		<AnimatedView style={[hideAnimation]}>
 			<Image
-				source={require('../../../assets/icon.png')}
+				source={require('../../../../../../assets/icon.png')}
 				className='mb-[-75px] h-[180px] w-[180px] rotate-12 self-start'
 			/>
 
-			<View className='w-full items-center rounded-3xl bg-white p-4'>
+			<View className='z-50 w-full items-center rounded-3xl bg-white p-4'>
 				<Title
 					size={36}
 					color={Color.secondary}
@@ -38,15 +41,15 @@ const Welcome: FC = () => {
 				</Title>
 
 				<Button
-					onPress={() => navigate('Auth')}
+					onPress={() => setIsCheckEmailModal(true)}
 					size={'large'}
 					text={'Get Started'}
-					className='mt-6'
+					className='relative z-50 mt-6'
 					width={'100%'}
 				/>
 			</View>
-		</Layout>
+		</AnimatedView>
 	)
 }
 
-export default Welcome
+export default DescriptionCard
