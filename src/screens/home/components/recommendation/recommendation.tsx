@@ -1,5 +1,5 @@
+import BookCard from '@/components/book-card/book-card'
 import Icon from '@/components/ui/icon/icon'
-import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
 import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade.color'
@@ -31,23 +31,25 @@ const Recommendation: FC<RecommendationProps> = ({ data }) => {
 				Recommended for you
 			</Title>
 			<FlatList
+				ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
+				contentContainerStyle={{ paddingHorizontal: 8 }}
 				horizontal
 				className='mb-4'
 				bounces={false}
+				renderToHardwareTextureAndroid={true}
+				removeClippedSubviews={true}
 				showsHorizontalScrollIndicator={false}
 				data={data}
 				renderItem={({ item }) => (
-					<View className='mx-2 max-w-[160px]'>
-						<Image url={item.image} height={200} width={150} />
-						<View className='mt-2'>
-							<Title numberOfLines={2} weight={'semiBold'}>
-								{item.title}
-							</Title>
-							<Title numberOfLines={1} size={16} color={Color.gray}>
-								{item.author}
-							</Title>
-						</View>
-					</View>
+					<BookCard
+						image={{
+							uri: item.image,
+							height: 220,
+							width: 150
+						}}
+						title={item.title}
+						author={item.author}
+					/>
 				)}
 			/>
 		</View>

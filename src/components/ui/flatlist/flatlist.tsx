@@ -20,9 +20,9 @@ const FlatList = <T,>({
 			style={[{ marginTop: mt }, wrapperStyle]}>
 			{headerText && props.data.length !== 0 && (
 				<Title
-					className='mb-3'
+					className='mb-5'
 					style={{ paddingHorizontal: props.horizontal ? 8 : 0 }}
-					size={20}
+					size={22}
 					weight='semiBold'>
 					{headerText}
 				</Title>

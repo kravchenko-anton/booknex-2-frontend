@@ -1,3 +1,4 @@
+import Toast from '@/components/toast'
 import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
 import Navigation from '@/navigation/navigation'
 import { persistor, store } from '@/redux/store'
@@ -6,7 +7,6 @@ import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persi
 import { QueryClient } from '@tanstack/react-query'
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
 import { StatusBar } from 'expo-status-bar'
-import Toast from 'react-native-toast-message'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 

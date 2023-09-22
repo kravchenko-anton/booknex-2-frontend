@@ -2,22 +2,22 @@ import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { useWelcomeAnimation } from '@/screens/auth/welcome/components/animations'
-import { WelcomeElementProps } from '@/screens/auth/welcome/components/types'
+import { usePopupAnimation } from '@/screens/auth/welcome/usePopupAnimation'
 import { authService } from '@/services/auth-service'
 import { AnimatedView } from '@/types/component-types'
+import { PopupTypes } from '@/types/global'
 import { Color } from '@/utils/color'
 import { useDebounce } from '@/utils/useDebounce'
 import { useMutation } from '@tanstack/react-query'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-const CheckEmail: FC<Pick<WelcomeElementProps, 'isCheckEmailModal'>> = ({
-	isCheckEmailModal
-}) => {
+const CheckEmail: FC<
+	Pick<PopupTypes<'check-email' | 'description-card'>, 'isActivePopup'>
+> = ({ isActivePopup }) => {
 	const { control, watch } = useForm<{ email: string }>({ mode: 'onChange' })
 	const { navigate } = useTypedNavigation()
-	const { showAnimation } = useWelcomeAnimation(isCheckEmailModal)
+	const { showAnimation } = usePopupAnimation(isActivePopup)
 	const emailField = useDebounce(watch('email'), 500)
 	const noValidEmail = !!(
 		emailField &&
@@ -32,24 +32,14 @@ const CheckEmail: FC<Pick<WelcomeElementProps, 'isCheckEmailModal'>> = ({
 	)
 	useEffect(() => {
 		noValidEmail && checkEmailFunc()
-		console.log('emailField', noValidEmail && console.log('yes'))
 	}, [emailField])
-
 	return (
-		<AnimatedView
-			style={[
-				showAnimation,
-				{
-					justifyContent: 'center'
-				}
-			]}>
-			<Title
-				size={32}
-				center
-				color={Color.secondary}
-				className='mb-4'
-				weight={'bold'}>
-				Log in or register
+		<AnimatedView style={[showAnimation]}>
+			<Title size={34} color={Color.secondary} weight={'bold'}>
+				Log in or Sign up
+			</Title>
+			<Title size={18} color={Color.gray} className='mb-4' weight={'light'}>
+				Enter your email to continue
 			</Title>
 			<Field
 				control={control}

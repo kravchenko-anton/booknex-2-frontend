@@ -1,5 +1,6 @@
 import { ViewDefaultProps } from '@/types/component-types'
 import { Ionicons } from '@expo/vector-icons'
+import { Dispatch, SetStateAction } from 'react'
 import { WithSpringConfig, WithTimingConfig } from 'react-native-reanimated'
 
 export type IconType = keyof typeof Ionicons.glyphMap
@@ -17,4 +18,9 @@ export interface DefaultModelFields {
 	id: number
 	createdAt: string
 	updatedAt: string
+}
+
+export interface PopupTypes<T> {
+	isActivePopup: boolean
+	setIsActivePopup: Dispatch<SetStateAction<T>>
 }

@@ -1,22 +1,24 @@
+import BookCard from '@/components/book-card/book-card'
+import RainbowBookCard from '@/components/book-card/rainbow-book-card/rainbow-book-card'
 import Header from '@/components/header/header'
 import ScrollLayout from '@/components/layout/scroll-layout'
+import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
-import Image from '@/components/ui/image/image'
 import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
 import { Title } from '@/components/ui/title/title'
+import { useAction } from '@/hooks/useAction'
 import Recommendation from '@/screens/home/components/recommendation/recommendation'
+import SearchField from '@/screens/home/components/search-field/search-field'
 import { catalogService } from '@/services/catalog-service'
-import { Color } from '@/utils/color'
-import { WINDOW_WIDTH } from '@/utils/dimensions'
+import { removeEmoji } from '@/utils/removeEmoji'
 import { useQuery } from '@tanstack/react-query'
-import { View } from 'react-native'
 
 const Home = () => {
 	const { data: catalog } = useQuery(['catalog'], () =>
 		catalogService.catalog()
 	)
+	const { logout } = useAction()
 	if (!catalog) return <FullScreenLoader />
-	console.log(catalog)
 	return (
 		<ScrollLayout showsVerticalScrollIndicator={false}>
 			<Header
@@ -38,17 +40,18 @@ const Home = () => {
 					}
 				}}
 			/>
+			<SearchField />
 			<Recommendation data={catalog.recommendations} />
 			<FlatList
 				horizontal
 				data={catalog.mostRelatedGenres}
 				renderItem={({ item }) => (
-					<Title
-						color={Color.black}
-						weight={'regular'}
-						className='mr-2 rounded-3xl bg-white p-2 px-3'>
-						{item.name}
-					</Title>
+					<Button
+						size={'medium'}
+						variant={'ghost'}
+						text={item.name}
+						className='mb-2 mr-2 rounded-3xl bg-white px-4 py-2'
+					/>
 				)}
 			/>
 			<FlatList
@@ -56,42 +59,20 @@ const Home = () => {
 				horizontal
 				data={catalog.bestSellers}
 				renderItem={({ item }) => (
-					<Image url={item.image} height={220} width={160} />
+					<BookCard image={{ uri: item.image, height: 260, width: 170 }} />
 				)}
 			/>
 			<FlatList
-				headerText={'Popular Now'}
 				horizontal
+				mt={40}
 				data={catalog.popularNow}
 				renderItem={({ item }) => (
-					<View
-						className='justify-between rounded-xl p-4'
-						style={{
-							width: WINDOW_WIDTH * 0.9,
-							height: 300,
-							backgroundColor: `#${Math.floor(
-								Math.random() * 16777215
-							).toString(16)}`
-						}}>
-						<View className='items-center'>
-							<Image url={item.image} height={150} width={100} />
-							<Title
-								numberOfLines={1}
-								className='mt-2'
-								weight={'bold'}
-								size={20}
-								color={Color.white}>
-								{item.title}
-							</Title>
-						</View>
-						<Title
-							size={16}
-							numberOfLines={3}
-							color={Color.white}
-							weight={'regular'}>
-							{item.description}
-						</Title>
-					</View>
+					<RainbowBookCard
+						backgroundColor={item.color}
+						image={{ uri: item.image, height: 140, width: 100 }}
+						title={item.title}
+						description={item.description}
+					/>
 				)}
 			/>
 			<FlatList
@@ -99,23 +80,47 @@ const Home = () => {
 				horizontal
 				data={catalog.newReleases}
 				renderItem={({ item }) => (
-					<Image url={item.image} height={250} width={180} />
+					<BookCard image={{ uri: item.image, height: 240, width: 160 }} />
 				)}
 			/>
 			{catalog.genres.map(genre => {
 				return (
 					<FlatList
 						key={genre.name}
-						headerText={genre.name}
+						headerText={removeEmoji(genre.name)}
 						horizontal
-						data={genre.books}
+						mt={30}
+						data={genre.majorBooks}
 						renderItem={({ item }) => (
-							<Image url={item.image} height={220} width={160} />
+							<BookCard
+								image={{
+									uri: item.image,
+									height: 180,
+									width: 120
+								}}
+							/>
 						)}
 					/>
 				)
-				//TODO: сделать после жанров что читают другие в виде отзывов
 			})}
+
+			<FlatList
+				headerText={'In the same breath'}
+				horizontal
+				// in one item be 3 books
+				data={catalog.sameBreath}
+				renderItem={({ item }) => (
+					<BookCard
+						image={{
+							uri: item.image,
+							height: 260,
+							width: 170
+						}}
+						title={item.title}
+						author={item.author}
+					/>
+				)}
+			/>
 		</ScrollLayout>
 	)
 }

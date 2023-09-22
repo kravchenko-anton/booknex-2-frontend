@@ -2,19 +2,23 @@ import {
 	deleteTokensStorage,
 	saveTokensStorage
 } from '@/redux/auth/auth.helper'
-import { AuthFieldsType, AuthResponseType } from '@/redux/auth/auth.types'
+import {
+	AuthFieldsType,
+	AuthResponseType,
+	RegisterFieldsType
+} from '@/redux/auth/auth.types'
 import { SERVER_URL, getAuthUrl } from '@/services/api-config'
 import { errorCatch } from '@/utils/catch-error'
 import { errorToast } from '@/utils/errorToast'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const register = createAsyncThunk<AuthResponseType, AuthFieldsType>(
+export const register = createAsyncThunk<AuthResponseType, RegisterFieldsType>(
 	'auth/register',
-	async ({ email, password }, thunkAPI) => {
+	async (props, thunkAPI) => {
 		try {
 			const register = await axios
-				.post(SERVER_URL + getAuthUrl('/register'), { email, password })
+				.post(SERVER_URL + getAuthUrl('/register'), { ...props })
 				.then(res => res.data)
 			await saveTokensStorage({
 				accessToken: register.accessToken,

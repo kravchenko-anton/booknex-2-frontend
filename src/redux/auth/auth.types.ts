@@ -3,6 +3,10 @@ import { UserType } from '@/services/types/user-services-types'
 export interface AuthFieldsType extends Pick<UserType, 'email'> {
 	password: string
 }
+export interface RegisterFieldsType extends AuthFieldsType {
+	name: string
+	genres: string[]
+}
 
 export type IAuthState = Pick<UserType, 'email' | 'id' | 'isAdmin'>
 

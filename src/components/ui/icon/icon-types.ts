@@ -6,4 +6,5 @@ export interface IconProps extends UPressableProps, ColorProps {
 	name: IconType
 	size: 'small' | 'medium' | 'large'
 	variant?: 'filled' | 'outlined' | 'ghost'
+	noPadding?: boolean
 }

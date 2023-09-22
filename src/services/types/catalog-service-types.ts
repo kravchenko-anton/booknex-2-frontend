@@ -7,12 +7,12 @@ export interface CatalogType {
 		GenreType,
 		'name' | 'createdAt' | 'id' | 'updatedAt'
 	>[]
-	popularNow: (ShortBookType & { description: string })[]
+	popularNow: (ShortBookType & { description: string; color: string })[]
 	bestSellers: ShortBookType[]
 	newReleases: ShortBookType[]
 	sameBreath: ShortBookType[]
 	genres: {
 		name: string
-		books: BookType[]
+		majorBooks: BookType[]
 	}[]
 }

@@ -17,6 +17,7 @@ const Icon: FC<IconProps> = ({
 	size = 'small',
 	color,
 	style,
+	noPadding = false,
 	...props
 }) => {
 	const { pressFunctions, animatedStyle } = usePressAnimation()
@@ -25,7 +26,7 @@ const Icon: FC<IconProps> = ({
 			className='items-center justify-center border-[1px]'
 			style={[
 				{
-					padding: PaddingSetting[size],
+					padding: noPadding ? 0 : PaddingSetting[size],
 					backgroundColor: BackgroundColorSetting[variant],
 					borderRadius: BorderRadiusSetting,
 					borderColor: BorderColorSetting[variant]

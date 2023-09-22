@@ -53,13 +53,14 @@ const Login = () => {
 					secureTextEntry={true}
 					placeholder={'Password'}
 					rules={{
-						required: {
-							value: true,
-							message: 'Password is required'
-						},
+						required: 'Password is required',
 						minLength: {
 							value: 6,
 							message: 'Password must have at least 8 characters'
+						},
+						maxLength: {
+							value: 25,
+							message: 'Password must have at most 25 characters'
 						}
 					}}
 				/>

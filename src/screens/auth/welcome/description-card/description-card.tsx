@@ -1,21 +1,22 @@
 import Button from '@/components/ui/button/button'
 import { Title } from '@/components/ui/title/title'
-import { useWelcomeAnimation } from '@/screens/auth/welcome/components/animations'
-import { WelcomeElementProps } from '@/screens/auth/welcome/components/types'
+import { usePopupAnimation } from '@/screens/auth/welcome/usePopupAnimation'
+import { WelcomeElementProps } from '@/screens/auth/welcome/welcome-types'
 import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { FC } from 'react'
 import { Image, View } from 'react-native'
 
 const DescriptionCard: FC<WelcomeElementProps> = ({
-	isCheckEmailModal,
-	setIsCheckEmailModal
+	setIsActivePopup,
+	isActivePopup
 }) => {
-	const { hideAnimation } = useWelcomeAnimation(isCheckEmailModal)
+	const { showAnimation } = usePopupAnimation(isActivePopup)
+	console.log('isActivePopup DescriptionCard', isActivePopup)
 	return (
-		<AnimatedView style={[hideAnimation]}>
+		<AnimatedView style={[showAnimation]}>
 			<Image
-				source={require('../../../../../../assets/icon.png')}
+				source={require('../../../../../assets/icon.png')}
 				className='mb-[-75px] h-[180px] w-[180px] rotate-12 self-start'
 			/>
 
@@ -41,7 +42,7 @@ const DescriptionCard: FC<WelcomeElementProps> = ({
 				</Title>
 
 				<Button
-					onPress={() => setIsCheckEmailModal(true)}
+					onPress={() => setIsActivePopup('check-email')}
 					size={'large'}
 					text={'Get Started'}
 					className='relative z-50 mt-6'

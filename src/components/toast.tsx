@@ -1,25 +1,81 @@
+import Icon from '@/components/ui/icon/icon'
+import { weightSettings } from '@/components/ui/title/title-settings'
+import { Color } from '@/utils/color'
 import { FC } from 'react'
 import RnToast, { BaseToast } from 'react-native-toast-message'
 
-const options = (primaryColor: string) => ({
-	style: { backgroundColor: '#080808', borderLeftColor: primaryColor },
+const options = () => ({
+	style: {
+		backgroundColor: Color.white,
+		borderLeftColor: Color.white
+	},
 	text1Style: {
-		color: '#fff',
-		fontSize: 16
+		color: Color.black,
+		fontSize: 16,
+		marginLeft: -12,
+		fontFamily: weightSettings['light']
 	},
 	text2Style: {
-		fontSize: 14
+		fontSize: 12,
+		marginLeft: -12,
+
+		color: Color.gray,
+		fontFamily: weightSettings['light']
 	}
 })
 
 const Toast: FC = () => {
 	return (
 		<RnToast
-			topOffset={50}
+			autoHide={true}
+			visibilityTime={3000}
+			position={'top'}
 			config={{
-				success: props => <BaseToast {...props} {...options('#67E769')} />,
-				info: props => <BaseToast {...props} {...options('#65d4ff')} />,
-				error: props => <BaseToast {...props} {...options('#ff4949')} />
+				success: props => (
+					<BaseToast
+						renderTrailingIcon={() => (
+							<Icon
+								noPadding
+								color={Color.primary}
+								name={'checkmark-circle-outline'}
+								className='mr-4'
+								size={'large'}
+							/>
+						)}
+						{...props}
+						{...options()}
+					/>
+				),
+				info: props => (
+					<BaseToast
+						renderTrailingIcon={() => (
+							<Icon
+								noPadding
+								color={Color.highlight}
+								name={'help-circle-outline'}
+								className='mr-4'
+								size={'large'}
+							/>
+						)}
+						{...props}
+						{...options()}
+					/>
+				),
+				error: props => (
+					<BaseToast
+						renderTrailingIcon={() => (
+							<Icon
+								noPadding
+								color={Color.alert}
+								name={'close-circle-outline'}
+								className='mr-4'
+								size={'large'}
+							/>
+						)}
+						{...props}
+						{...options()}
+					/>
+				)
 			}}
 		/>
 	)
