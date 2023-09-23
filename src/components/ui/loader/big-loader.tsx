@@ -3,7 +3,7 @@ import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/utils/dimensions'
 import { memo } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
-const FullScreenLoader = () => {
+const BigLoader = () => {
 	return (
 		<View
 			style={{
@@ -24,4 +24,4 @@ const FullScreenLoader = () => {
 	)
 }
 
-export default memo(FullScreenLoader)
+export default memo(BigLoader)

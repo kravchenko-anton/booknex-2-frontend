@@ -1,4 +1,4 @@
-import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
+import FullScreenLoader from '@/components/ui/loader/big-loader'
 import { useAuth } from '@/hooks/useAuth'
 import BottomMenu from '@/navigation/bottom-menu/bottom-menu'
 import { useCheckAuth } from '@/providers/auth-provider'

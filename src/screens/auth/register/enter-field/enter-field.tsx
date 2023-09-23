@@ -3,7 +3,7 @@ import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
-import { usePopupAnimation } from '@/screens/auth/welcome/usePopupAnimation'
+import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
 import { UserUpdateDto } from '@/services/types/user-services-types'
 import { AnimatedView } from '@/types/component-types'
 import { PopupTypes } from '@/types/global'
@@ -27,7 +27,7 @@ const EnterField: FC<EnterFieldProps> = ({
 		if (!selectGenres.length || selectGenres.length < 3) return
 		register({ ...data, genres: selectGenres })
 	}
-	const { showAnimation } = usePopupAnimation(isActivePopup)
+	const { showAnimation } = popupAnimation(isActivePopup)
 	return (
 		<AnimatedView style={[showAnimation]}>
 			<Header

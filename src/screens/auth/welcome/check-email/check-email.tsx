@@ -2,7 +2,7 @@ import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { usePopupAnimation } from '@/screens/auth/welcome/usePopupAnimation'
+import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
 import { authService } from '@/services/auth-service'
 import { AnimatedView } from '@/types/component-types'
 import { PopupTypes } from '@/types/global'
@@ -17,7 +17,7 @@ const CheckEmail: FC<
 > = ({ isActivePopup }) => {
 	const { control, watch } = useForm<{ email: string }>({ mode: 'onChange' })
 	const { navigate } = useTypedNavigation()
-	const { showAnimation } = usePopupAnimation(isActivePopup)
+	const { showAnimation } = popupAnimation(isActivePopup)
 	const emailField = useDebounce(watch('email'), 500)
 	const noValidEmail = !!(
 		emailField &&

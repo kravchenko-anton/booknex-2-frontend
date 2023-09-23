@@ -1,12 +1,15 @@
 import { usePressAnimation } from '@/animations/press-animation'
 import {
+	BorderRadiusSetting,
+	PaddingSetting
+} from '@/components/ui/global-settings'
+import {
 	BackgroundColorSetting,
 	BorderColorSetting,
 	IconColorSetting,
 	SizeSetting
 } from '@/components/ui/icon/icon-settings'
 import { IconProps } from '@/components/ui/icon/icon-types'
-import { BorderRadiusSetting, PaddingSetting } from '@/components/ui/settings'
 import { AnimatedPressable } from '@/types/component-types'
 import { Ionicons } from '@expo/vector-icons'
 import { FC } from 'react'

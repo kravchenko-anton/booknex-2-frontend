@@ -1,7 +1,7 @@
 import { usePressAnimation } from '@/animations/press-animation'
-import { RainbowBookCardProps } from '@/components/book-card/rainbow-book-card/rainbow-book-card-types'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
+import { RainbowBookCardProps } from '@/screens/home/rainbow-book-card/rainbow-book-card-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { WINDOW_WIDTH } from '@/utils/dimensions'

@@ -1,5 +1,5 @@
 import Toast from '@/components/toast'
-import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
+import FullScreenLoader from '@/components/ui/loader/big-loader'
 import Navigation from '@/navigation/navigation'
 import { persistor, store } from '@/redux/store'
 import AsyncStorage from '@react-native-async-storage/async-storage'

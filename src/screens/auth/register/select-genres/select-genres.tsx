@@ -1,7 +1,7 @@
 import Header from '@/components/header/header'
 import Button from '@/components/ui/button/button'
 import { Title } from '@/components/ui/title/title'
-import { usePopupAnimation } from '@/screens/auth/welcome/usePopupAnimation'
+import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
 import { GenreType } from '@/services/types/genre-service-types'
 import { AnimatedView } from '@/types/component-types'
 import { PopupTypes } from '@/types/global'
@@ -21,7 +21,7 @@ const SelectGenres: FC<SelectGenresProps> = ({
 	selectGenres,
 	setIsActivePopup
 }) => {
-	const { showAnimation } = usePopupAnimation(isActivePopup)
+	const { showAnimation } = popupAnimation(isActivePopup)
 	return (
 		<AnimatedView style={[showAnimation]} className='h-full'>
 			<Header leftIcon={{ back: true }} />

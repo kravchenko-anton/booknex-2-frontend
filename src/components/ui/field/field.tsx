@@ -2,7 +2,7 @@ import { Title } from '@/components/ui/title/title'
 import { Color } from '@/utils/color'
 import { Controller, Path, PathValue } from 'react-hook-form'
 import { TextInput, View } from 'react-native'
-import { FieldProps } from './filed.types'
+import { FieldProps } from './filed-types'
 
 const Field = <T extends Record<string, any>>({
 	...props

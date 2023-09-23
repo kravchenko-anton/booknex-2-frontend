@@ -1,6 +1,6 @@
 import Button from '@/components/ui/button/button'
 import { Title } from '@/components/ui/title/title'
-import { usePopupAnimation } from '@/screens/auth/welcome/usePopupAnimation'
+import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
 import { WelcomeElementProps } from '@/screens/auth/welcome/welcome-types'
 import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
@@ -11,7 +11,7 @@ const DescriptionCard: FC<WelcomeElementProps> = ({
 	setIsActivePopup,
 	isActivePopup
 }) => {
-	const { showAnimation } = usePopupAnimation(isActivePopup)
+	const { showAnimation } = popupAnimation(isActivePopup)
 	console.log('isActivePopup DescriptionCard', isActivePopup)
 	return (
 		<AnimatedView style={[showAnimation]}>

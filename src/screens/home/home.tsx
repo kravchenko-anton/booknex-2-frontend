@@ -1,14 +1,13 @@
 import BookCard from '@/components/book-card/book-card'
-import RainbowBookCard from '@/components/book-card/rainbow-book-card/rainbow-book-card'
 import Header from '@/components/header/header'
 import ScrollLayout from '@/components/layout/scroll-layout'
 import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
-import FullScreenLoader from '@/components/ui/loader/fullScreenLoader'
+import FullScreenLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
-import Recommendation from '@/screens/home/components/recommendation/recommendation'
-import SearchField from '@/screens/home/components/search-field/search-field'
+import RainbowBookCard from '@/screens/home/rainbow-book-card/rainbow-book-card'
+import Recommendation from '@/screens/home/recommendation/recommendation'
 import { catalogService } from '@/services/catalog-service'
 import { removeEmoji } from '@/utils/removeEmoji'
 import { useQuery } from '@tanstack/react-query'
@@ -40,7 +39,6 @@ const Home = () => {
 					}
 				}}
 			/>
-			<SearchField />
 			<Recommendation data={catalog.recommendations} />
 			<FlatList
 				horizontal
@@ -95,8 +93,8 @@ const Home = () => {
 							<BookCard
 								image={{
 									uri: item.image,
-									height: 180,
-									width: 120
+									height: 190,
+									width: 130
 								}}
 							/>
 						)}

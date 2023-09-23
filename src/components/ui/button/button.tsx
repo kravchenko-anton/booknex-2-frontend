@@ -6,7 +6,10 @@ import {
 	TextWeight
 } from '@/components/ui/button/button-settings'
 import { ButtonProps } from '@/components/ui/button/button-types'
-import { BorderRadiusSetting, PaddingSetting } from '@/components/ui/settings'
+import {
+	BorderRadiusSetting,
+	PaddingSetting
+} from '@/components/ui/global-settings'
 import { Title } from '@/components/ui/title/title'
 import { AnimatedPressable } from '@/types/component-types'
 
@@ -25,7 +28,8 @@ const Button = ({
 					backgroundColor: BackgroundColor[variant],
 					borderRadius: BorderRadiusSetting,
 					padding: PaddingSetting[size],
-					alignItems: 'center'
+					alignItems: 'center',
+					justifyContent: 'center'
 				},
 				animatedStyle,
 				style
