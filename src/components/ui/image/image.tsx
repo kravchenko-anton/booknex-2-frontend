@@ -11,6 +11,7 @@ const Image: FC<ImageTypes> = ({
 	transparentSkeleton = false,
 	url,
 	style,
+	fullSize,
 	wrapperClassName,
 	wrapperStyle,
 	...props
@@ -30,7 +31,7 @@ const Image: FC<ImageTypes> = ({
 				style={[
 					{
 						width,
-						height,
+						height: fullSize ? '100%' : height,
 						display: isImageLoading ? 'none' : 'flex',
 						borderRadius
 					},

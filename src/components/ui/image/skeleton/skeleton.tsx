@@ -14,7 +14,7 @@ const Skeleton: FC<SkeletonProps> = ({
 		<View
 			style={[
 				{
-					height,
+					height: height as number,
 					width,
 					borderRadius,
 					backgroundColor: transparent ? 'transparent' : Color.dust

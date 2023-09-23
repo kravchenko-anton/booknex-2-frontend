@@ -16,3 +16,9 @@ export interface CatalogType {
 		majorBooks: BookType[]
 	}[]
 }
+
+export interface searchBookType extends ShortBookType {
+	likedPercent: number
+	pages: number
+	isbn: string
+}

@@ -15,8 +15,8 @@ export const TextColor = {
 }
 
 export const TextWeight = {
-	small: 'regular' as 'regular',
-	medium: 'medium' as 'medium',
+	small: 'medium' as 'medium',
+	medium: 'semiBold' as 'semiBold',
 	large: 'bold' as 'bold'
 }
 

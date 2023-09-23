@@ -1,11 +1,13 @@
 import { getCatalogUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import { ShortBookType } from '@/services/types/book-service-types'
-import { CatalogType } from '@/services/types/catalog-service-types'
+import {
+	CatalogType,
+	searchBookType
+} from '@/services/types/catalog-service-types'
 
 export const catalogService = {
 	async search(query: string) {
-		return request<ShortBookType[]>({
+		return request<searchBookType[]>({
 			url: getCatalogUrl(`/search/${query}`),
 			method: 'GET'
 		})

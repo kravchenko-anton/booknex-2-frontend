@@ -7,4 +7,5 @@ export interface ImageTypes
 		WrapperProps<ImageDefaultProps['style']> {
 	url: string
 	transparentSkeleton?: boolean
+	fullSize?: boolean
 }

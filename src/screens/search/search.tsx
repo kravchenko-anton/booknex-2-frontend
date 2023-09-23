@@ -1,101 +1,79 @@
 import Layout from '@/components/layout/layout'
+import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
-import Tabs from '@/components/ui/tabs/tabs'
+import Image from '@/components/ui/image/image'
+import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
 import { useSearch } from '@/screens/search/useSearch'
+import { Color } from '@/utils/color'
 import { FlatList, View } from 'react-native'
 
 const Search = () => {
-	const { searchTerm, books, isLoading, control } = useSearch()
-
+	const { searchTerm, books = [], isLoading, control } = useSearch()
+	console.log(isLoading, searchTerm)
 	return (
-		<Layout>
+		<Layout className='h-full'>
 			<Field
 				control={control}
 				name={'searchTerm'}
 				placeholder={'Type something...'}
 			/>
-			<Tabs
-				className='mt-2'
-				routes={[
-					{
-						key: 'books',
-						title: 'Books',
-						component: (
-							<FlatList
-								className='h-full w-full bg-secondary'
-								showsHorizontalScrollIndicator={false}
-								showsVerticalScrollIndicator={false}
-								data={books}
-								renderItem={({ item }) => {
-									return (
+			{!!searchTerm ? (
+				<View className='flex-1'>
+					{isLoading ? (
+						<BigLoader />
+					) : (
+						<FlatList
+							showsVerticalScrollIndicator={false}
+							renderToHardwareTextureAndroid={true}
+							initialNumToRender={10}
+							keyboardShouldPersistTaps={'handled'}
+							maxToRenderPerBatch={10}
+							style={{
+								flexGrow: 1,
+								width: '100%'
+							}}
+							data={books}
+							renderItem={({ item }) => (
+								<View className='mb-2 h-[160px] w-full  flex-row rounded-lg bg-dust p-2'>
+									<Image
+										url={item.image}
+										height={160}
+										fullSize={true}
+										width={100}
+									/>
+									<View className='h-[160px] flex-1 p-3 pb-0'>
 										<View>
-											<Title>{item.title}</Title>
+											<Title size={22} weight='bold' numberOfLines={2}>
+												{item.title}
+											</Title>
+											<Title
+												size={16}
+												weight='light'
+												className='mb-2 mt-1'
+												color={Color.gray}>
+												{item.author}
+											</Title>
 										</View>
-									)
-								}}
-							/>
-						)
-					},
-					{
-						key: 'authors',
-						title: 'Authors',
-						component: (
-							<FlatList
-								className='h-full w-full bg-alert'
-								data={books}
-								showsHorizontalScrollIndicator={false}
-								showsVerticalScrollIndicator={false}
-								renderItem={({ item }) => {
-									return (
-										<View>
-											<Title>{item.author}</Title>
+										<View className='mt-auto flex-row items-center gap-2'>
+											<Button
+												variant={'ghost'}
+												size={'small'}
+												text={`⭐ ${item.likedPercent}% liked`}
+											/>
+											<Button
+												variant={'ghost'}
+												size={'small'}
+												text={`📖 ${item.pages} pages`}
+											/>
 										</View>
-									)
-								}}
-							/>
-						)
-					},
-					{
-						key: 'Publishers',
-						title: 'Publishers',
-						component: (
-							<FlatList
-								data={books}
-								className='h-full w-full bg-highlight'
-								showsHorizontalScrollIndicator={false}
-								showsVerticalScrollIndicator={false}
-								renderItem={({ item }) => {
-									return (
-										<View>
-											<Title>{item.author}</Title>
-										</View>
-									)
-								}}
-							/>
-						)
-					},
-					{
-						key: 'other',
-						title: 'Other',
-						component: (
-							<FlatList
-								data={books}
-								className='h-full w-full bg-gray'
-								showsHorizontalScrollIndicator={false}
-								showsVerticalScrollIndicator={false}
-								renderItem={({ item }) => {
-									return (
-										<View>
-											<Title>{item.author}</Title>
-										</View>
-									)
-								}}
-							/>
-						)
-					}
-				]}
-			/>
+									</View>
+								</View>
+							)}
+						/>
+					)}
+				</View>
+			) : null}
 		</Layout>
 	)
 }

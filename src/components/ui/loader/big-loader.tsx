@@ -1,5 +1,4 @@
 import { Color } from '@/utils/color'
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/utils/dimensions'
 import { memo } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
@@ -7,8 +6,8 @@ const BigLoader = () => {
 	return (
 		<View
 			style={{
-				height: SCREEN_HEIGHT,
-				width: SCREEN_WIDTH,
+				height: '100%',
+				width: '100%',
 				backgroundColor: Color.canvas
 			}}
 			className='absolute items-center justify-center'>
