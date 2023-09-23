@@ -10,7 +10,6 @@ import { FlatList, View } from 'react-native'
 
 const Search = () => {
 	const { searchTerm, books = [], isLoading, control } = useSearch()
-	console.log(isLoading, searchTerm)
 	return (
 		<Layout className='h-full'>
 			<Field
@@ -59,7 +58,7 @@ const Search = () => {
 											<Button
 												variant={'ghost'}
 												size={'small'}
-												text={`⭐ ${item.likedPercent}% liked`}
+												text={`👍 ${item.likedPercent}% liked`}
 											/>
 											<Button
 												variant={'ghost'}

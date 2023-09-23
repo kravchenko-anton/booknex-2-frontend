@@ -1,6 +1,7 @@
+import Featured from '@/screens/featured/Featured'
+import Library from '@/screens/user-library/user-library'
 import Book from '../screens/book/book'
 import Catalog from '../screens/catalog/catalog'
-import Home from '../screens/home/home'
 import Profile from '../screens/profile/profile'
 import Reading from '../screens/reading/reading'
 import Search from '../screens/search/search'
@@ -10,16 +11,20 @@ import { IRoute } from './navigation-types'
 
 export const userRoutes: IRoute[] = [
 	{
-		name: 'Home',
-		component: Home
+		name: 'Featured',
+		component: Featured
+	},
+	{
+		name: 'Library',
+		component: Library
 	},
 	{
 		name: 'Settings',
 		component: Settings
 	},
 	{
-	name: 'Profile',
-	component: Profile
+		name: 'Profile',
+		component: Profile
 	},
 	{
 		name: 'Reading',

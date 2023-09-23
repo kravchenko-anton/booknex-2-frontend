@@ -1,6 +1,6 @@
-import { ViewDefaultProps } from '@/types/component-types'
+import { PressableDefaultProps } from '@/types/component-types'
 
-export interface BookCardProps extends ViewDefaultProps {
+export interface BookCardProps extends PressableDefaultProps {
 	image: {
 		uri: string
 		width: number
@@ -8,5 +8,6 @@ export interface BookCardProps extends ViewDefaultProps {
 	}
 	title?: string
 	author?: string
-	likingRate?: number
+	likedPercent?: number
+	pages?: number
 }

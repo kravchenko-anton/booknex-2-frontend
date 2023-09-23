@@ -3,7 +3,7 @@ import { Color } from '@/utils/color'
 export const SizeSetting = {
 	small: 18,
 	medium: 24,
-	large: 30
+	large: 28
 }
 
 export const BackgroundColorSetting = {

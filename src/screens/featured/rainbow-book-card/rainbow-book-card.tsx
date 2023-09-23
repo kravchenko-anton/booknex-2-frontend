@@ -1,14 +1,14 @@
 import { usePressAnimation } from '@/animations/press-animation'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
-import { RainbowBookCardProps } from '@/screens/home/rainbow-book-card/rainbow-book-card-types'
+import { WINDOW_WIDTH } from '@/constants/dimensions'
+import { RainbowBookCardProps } from '@/screens/featured/rainbow-book-card/rainbow-book-card-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
-import { WINDOW_WIDTH } from '@/utils/dimensions'
 import { FC } from 'react'
 import { View } from 'react-native'
 
-const RainbowBookCard: FC<RainbowBookCardProps> = props => {
+const RainbowBookCard: FC<RainbowBookCardProps> = ({ image, ...props }) => {
 	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
 		<AnimatedPressable
@@ -22,13 +22,10 @@ const RainbowBookCard: FC<RainbowBookCardProps> = props => {
 				},
 				animatedStyle
 			]}
-			{...pressFunctions}>
+			{...pressFunctions}
+			{...props}>
 			<View className='items-center'>
-				<Image
-					url={props.image.uri}
-					height={props.image.height}
-					width={props.image.width}
-				/>
+				<Image url={image.uri} height={image.height} width={image.width} />
 				<Title
 					numberOfLines={1}
 					className='mt-2'

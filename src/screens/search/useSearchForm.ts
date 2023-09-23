@@ -17,5 +17,8 @@ export const useSearchForm = () => {
 	const searchTerm = watch('searchTerm')
 	const debouncedSearch = useDebounce(searchTerm, 500)
 
-	return useMemo(() => ({ debouncedSearch, searchTerm, control }), [searchTerm])
+	return useMemo(
+		() => ({ debouncedSearch, searchTerm, control }),
+		[searchTerm, debouncedSearch]
+	)
 }

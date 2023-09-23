@@ -33,7 +33,7 @@ const EnterField: FC<EnterFieldProps> = ({
 			<Header
 				leftIcon={{
 					icon: {
-						name: 'close-outline',
+						name: 'x',
 						color: Color.black,
 						onPress: () => setIsActivePopup('genres')
 					}

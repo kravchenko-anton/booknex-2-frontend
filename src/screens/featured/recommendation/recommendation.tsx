@@ -1,6 +1,7 @@
 import BookCard from '@/components/book-card/book-card'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
+import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade.color'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -9,6 +10,7 @@ import { FlatList, View } from 'react-native'
 import { RecommendationProps } from './recommendation-types'
 
 const Recommendation: FC<RecommendationProps> = ({ data }) => {
+	const { navigate } = useTypedNavigation()
 	return (
 		<View className='relative mt-4 items-center px-2'>
 			<View className='absolute mb-4 h-full w-full rounded-[10px] bg-[#FDF7F4]'>
@@ -23,8 +25,8 @@ const Recommendation: FC<RecommendationProps> = ({ data }) => {
 				/>
 			</View>
 			<Icon
-				name='thumbs-up-sharp'
-				size={'small'}
+				name='thumbsup'
+				size={'medium'}
 				className='mb-2 mt-4 h-[45px] w-[45px] bg-canvas p-2'
 			/>
 			<Title className='mb-4' weight={'bold'} color={Color.white}>
@@ -42,6 +44,7 @@ const Recommendation: FC<RecommendationProps> = ({ data }) => {
 				data={data}
 				renderItem={({ item }) => (
 					<BookCard
+						onPress={() => navigate('Book', { id: item.id })}
 						image={{
 							uri: item.image,
 							height: 220,

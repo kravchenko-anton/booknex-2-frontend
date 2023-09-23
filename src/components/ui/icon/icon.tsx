@@ -11,11 +11,11 @@ import {
 } from '@/components/ui/icon/icon-settings'
 import { IconProps } from '@/components/ui/icon/icon-types'
 import { AnimatedPressable } from '@/types/component-types'
-import { Ionicons } from '@expo/vector-icons'
-import { FC } from 'react'
+import { Octicons } from '@expo/vector-icons'
+import type { FC } from 'react'
 
 const Icon: FC<IconProps> = ({
-	name = 'alert-outline',
+	name = 'alert',
 	variant = 'ghost',
 	size = 'small',
 	color,
@@ -39,7 +39,7 @@ const Icon: FC<IconProps> = ({
 			]}
 			{...pressFunctions}
 			{...props}>
-			<Ionicons
+			<Octicons
 				name={name}
 				size={SizeSetting[size]}
 				color={color ? color : IconColorSetting[variant]}

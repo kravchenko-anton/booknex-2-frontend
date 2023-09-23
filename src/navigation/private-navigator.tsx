@@ -16,7 +16,7 @@ const PrivateNavigator: FC = () => {
 
 	return (
 		<Stack.Navigator
-			initialRouteName={user ? 'Home' : 'Welcome'}
+			initialRouteName={user ? 'Featured' : 'Welcome'}
 			screenOptions={{
 				animation: 'fade',
 				headerShown: false,

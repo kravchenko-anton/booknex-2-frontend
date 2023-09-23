@@ -1,13 +1,12 @@
 import { usePressAnimation } from '@/animations/press-animation'
 import { Title } from '@/components/ui/title/title'
-import { menuItems } from '@/navigation/bottom-menu/menu-data'
 import {
 	IMenuItem,
 	TypeNavigate
 } from '@/navigation/bottom-menu/menu.interface'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
-import { Ionicons } from '@expo/vector-icons'
+import { Octicons } from '@expo/vector-icons'
 import { FC } from 'react'
 import { Pressable } from 'react-native'
 
@@ -28,13 +27,9 @@ const MenuItem: FC<IMenuItemProps> = ({ currentRoute, item, nav }) => {
 			onPress={() => nav(item.path)}
 			{...pressFunctions}>
 			<AnimatedPressable style={[animatedStyle]} pointerEvents='none'>
-				<Ionicons
-					name={
-						isActive
-							? item.iconName
-							: (`${item.iconName}-outline` as (typeof menuItems)[0]['iconName'])
-					}
-					size={34}
+				<Octicons
+					name={item.iconName}
+					size={30}
 					color={isActive ? Color.secondary : Color.gray}
 				/>
 			</AnimatedPressable>

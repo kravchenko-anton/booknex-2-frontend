@@ -5,18 +5,18 @@ import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import FullScreenLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
-import { useAction } from '@/hooks/useAction'
-import RainbowBookCard from '@/screens/home/rainbow-book-card/rainbow-book-card'
-import Recommendation from '@/screens/home/recommendation/recommendation'
+import { useTypedNavigation } from '@/hooks/useTypedNavigation'
+import RainbowBookCard from '@/screens/featured/rainbow-book-card/rainbow-book-card'
+import Recommendation from '@/screens/featured/recommendation/recommendation'
 import { catalogService } from '@/services/catalog-service'
 import { removeEmoji } from '@/utils/removeEmoji'
 import { useQuery } from '@tanstack/react-query'
 
-const Home = () => {
+const Featured = () => {
 	const { data: catalog } = useQuery(['catalog'], () =>
 		catalogService.catalog()
 	)
-	const { logout } = useAction()
+	const { navigate } = useTypedNavigation()
 	if (!catalog) return <FullScreenLoader />
 	return (
 		<ScrollLayout showsVerticalScrollIndicator={false}>
@@ -35,7 +35,7 @@ const Home = () => {
 				}}
 				rightIcon={{
 					icon: {
-						name: `time-outline`
+						name: `history`
 					}
 				}}
 			/>
@@ -57,7 +57,12 @@ const Home = () => {
 				horizontal
 				data={catalog.bestSellers}
 				renderItem={({ item }) => (
-					<BookCard image={{ uri: item.image, height: 260, width: 170 }} />
+					<BookCard
+						onPress={() => navigate('Book', { id: item.id })}
+						image={{ uri: item.image, height: 230, width: 150 }}
+						title={item.title}
+						likedPercent={item.likedPercent}
+					/>
 				)}
 			/>
 			<FlatList
@@ -66,6 +71,7 @@ const Home = () => {
 				data={catalog.popularNow}
 				renderItem={({ item }) => (
 					<RainbowBookCard
+						onPress={() => navigate('Book', { id: item.id })}
 						backgroundColor={item.color}
 						image={{ uri: item.image, height: 140, width: 100 }}
 						title={item.title}
@@ -78,7 +84,10 @@ const Home = () => {
 				horizontal
 				data={catalog.newReleases}
 				renderItem={({ item }) => (
-					<BookCard image={{ uri: item.image, height: 240, width: 160 }} />
+					<BookCard
+						onPress={() => navigate('Book', { id: item.id })}
+						image={{ uri: item.image, height: 230, width: 145 }}
+					/>
 				)}
 			/>
 			{catalog.genres.map(genre => {
@@ -91,6 +100,7 @@ const Home = () => {
 						data={genre.majorBooks}
 						renderItem={({ item }) => (
 							<BookCard
+								onPress={() => navigate('Book', { id: item.id })}
 								image={{
 									uri: item.image,
 									height: 190,
@@ -105,10 +115,11 @@ const Home = () => {
 			<FlatList
 				headerText={'In the same breath'}
 				horizontal
-				// in one item be 3 books
 				data={catalog.sameBreath}
 				renderItem={({ item }) => (
 					<BookCard
+						onPress={() => navigate('Book', { id: item.id })}
+						pages={item.pages}
 						image={{
 							uri: item.image,
 							height: 260,
@@ -123,4 +134,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export default Featured

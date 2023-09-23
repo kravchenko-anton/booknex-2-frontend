@@ -17,7 +17,7 @@ export type ViewDefaultProps = Pick<
 	'className' | 'style' | 'onLayout' | 'pointerEvents' | 'onMagicTap'
 >
 
-export type UPressableProps = Pick<
+export type PressableDefaultProps = Pick<
 	PressableProps,
 	| 'onLayout'
 	| 'pointerEvents'

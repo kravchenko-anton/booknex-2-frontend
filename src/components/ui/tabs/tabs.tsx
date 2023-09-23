@@ -1,6 +1,6 @@
 import Button from '@/components/ui/button/button'
 import { TabsProps } from '@/components/ui/tabs/tabs-types'
-import { WINDOW_WIDTH } from '@/utils/dimensions'
+import { WINDOW_WIDTH } from '@/constants/dimensions'
 import { FC, useRef, useState } from 'react'
 import { FlatList, View } from 'react-native'
 

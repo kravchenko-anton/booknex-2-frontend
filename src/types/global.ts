@@ -1,9 +1,9 @@
 import { ViewDefaultProps } from '@/types/component-types'
-import { Ionicons } from '@expo/vector-icons'
+import { Octicons } from '@expo/vector-icons'
 import { Dispatch, SetStateAction } from 'react'
 import { WithSpringConfig, WithTimingConfig } from 'react-native-reanimated'
 
-export type IconType = keyof typeof Ionicons.glyphMap
+export type IconType = keyof typeof Octicons.glyphMap
 export interface AnimationConfigType {
 	userConfig?: WithSpringConfig | WithTimingConfig
 }

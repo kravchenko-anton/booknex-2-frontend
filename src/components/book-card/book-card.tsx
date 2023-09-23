@@ -6,30 +6,38 @@ import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { FC } from 'react'
 
-const BookCard: FC<BookCardProps> = props => {
+const BookCard: FC<BookCardProps> = ({
+	image,
+	likedPercent,
+	pages,
+	...props
+}) => {
 	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
 		<AnimatedPressable
-			{...pressFunctions}
 			style={[
 				animatedStyle,
 				{
-					width: props.image.width,
+					width: image.width,
 					marginBottom: 6
 				}
-			]}>
-			<Image
-				url={props.image.uri}
-				height={props.image.height}
-				width={props.image.width}
-			/>
+			]}
+			{...pressFunctions}
+			{...props}>
+			<Image url={image.uri} height={image.height} width={image.width} />
+			{(likedPercent && !pages) ||
+				(!likedPercent && pages && (
+					<Title
+						numberOfLines={1}
+						weight={'semiBold'}
+						size={15}
+						color={Color.gray}
+						className=' mt-2'>
+						{likedPercent ? `👍 ${likedPercent}% liked` : ` 📖 ${pages} pages`}
+					</Title>
+				))}
 			{props.title && (
-				<Title
-					numberOfLines={2}
-					weight={'bold'}
-					size={20}
-					color={Color.black}
-					className='mt-2'>
+				<Title numberOfLines={2} weight={'bold'} size={20} color={Color.black}>
 					{props.title}
 				</Title>
 			)}

@@ -1,10 +1,11 @@
 import { ComponentType } from 'react'
 
 export type TypeRootStackParamList = {
-	Home: undefined
+	Featured: undefined
 	Profile: undefined
 	Reading: undefined
-	Book: undefined
+	Library: undefined
+	Book: { id: number }
 	Catalog: undefined
 	Settings: undefined
 	Search: undefined

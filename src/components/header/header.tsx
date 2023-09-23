@@ -17,7 +17,7 @@ const Header: FC<HeaderProps> = ({
 			style={wrapperStyle}>
 			{'back' in leftIcon && leftIcon.back ? (
 				<Icon
-					name={'chevron-back-outline'}
+					name={'chevron-left'}
 					onPress={() => goBack()}
 					size={'large'}
 					style={{ paddingLeft: 0 }}

@@ -37,7 +37,7 @@ const Toast: FC = () => {
 							<Icon
 								noPadding
 								color={Color.primary}
-								name={'checkmark-circle-outline'}
+								name={'thumbsup'}
 								className='mr-4'
 								size={'large'}
 							/>
@@ -52,7 +52,7 @@ const Toast: FC = () => {
 							<Icon
 								noPadding
 								color={Color.highlight}
-								name={'help-circle-outline'}
+								name={'alert'}
 								className='mr-4'
 								size={'large'}
 							/>
@@ -67,7 +67,7 @@ const Toast: FC = () => {
 							<Icon
 								noPadding
 								color={Color.alert}
-								name={'close-circle-outline'}
+								name={'thumbsdown'}
 								className='mr-4'
 								size={'large'}
 							/>
