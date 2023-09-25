@@ -19,7 +19,7 @@ const Featured = () => {
 	const { navigate } = useTypedNavigation()
 	if (!catalog) return <FullScreenLoader />
 	return (
-		<ScrollLayout showsVerticalScrollIndicator={false}>
+		<ScrollLayout>
 			<Header
 				wrapperClassName='px-2 mb-2'
 				leftIcon={{
@@ -43,12 +43,12 @@ const Featured = () => {
 			<FlatList
 				horizontal
 				data={catalog.mostRelatedGenres}
-				renderItem={({ item }) => (
+				renderItem={({ item: genre }) => (
 					<Button
 						size={'medium'}
 						variant={'ghost'}
-						text={item.name}
-						className='mb-2 mr-2 rounded-3xl bg-white px-4 py-2'
+						text={genre.name}
+						className='px-4 py-2'
 					/>
 				)}
 			/>
@@ -56,12 +56,12 @@ const Featured = () => {
 				headerText={'Best Sellers'}
 				horizontal
 				data={catalog.bestSellers}
-				renderItem={({ item }) => (
+				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => navigate('Book', { id: item.id })}
-						image={{ uri: item.image, height: 230, width: 150 }}
-						title={item.title}
-						likedPercent={item.likedPercent}
+						onPress={() => navigate('Book', { id: book.id })}
+						image={{ uri: book.image, height: 230, width: 150 }}
+						title={book.title}
+						likedPercent={book.likedPercent}
 					/>
 				)}
 			/>
@@ -69,13 +69,13 @@ const Featured = () => {
 				horizontal
 				mt={40}
 				data={catalog.popularNow}
-				renderItem={({ item }) => (
+				renderItem={({ item: book }) => (
 					<RainbowBookCard
-						onPress={() => navigate('Book', { id: item.id })}
-						backgroundColor={item.color}
-						image={{ uri: item.image, height: 140, width: 100 }}
-						title={item.title}
-						description={item.description}
+						onPress={() => navigate('Book', { id: book.id })}
+						backgroundColor={book.color}
+						image={{ uri: book.image, height: 140, width: 100 }}
+						title={book.title}
+						description={book.description}
 					/>
 				)}
 			/>
@@ -83,10 +83,10 @@ const Featured = () => {
 				headerText={'New Releases'}
 				horizontal
 				data={catalog.newReleases}
-				renderItem={({ item }) => (
+				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => navigate('Book', { id: item.id })}
-						image={{ uri: item.image, height: 230, width: 145 }}
+						onPress={() => navigate('Book', { id: book.id })}
+						image={{ uri: book.image, height: 230, width: 145 }}
 					/>
 				)}
 			/>
@@ -98,11 +98,11 @@ const Featured = () => {
 						horizontal
 						mt={30}
 						data={genre.majorBooks}
-						renderItem={({ item }) => (
+						renderItem={({ item: book }) => (
 							<BookCard
-								onPress={() => navigate('Book', { id: item.id })}
+								onPress={() => navigate('Book', { id: book.id })}
 								image={{
-									uri: item.image,
+									uri: book.image,
 									height: 190,
 									width: 130
 								}}
@@ -116,17 +116,17 @@ const Featured = () => {
 				headerText={'In the same breath'}
 				horizontal
 				data={catalog.sameBreath}
-				renderItem={({ item }) => (
+				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => navigate('Book', { id: item.id })}
-						pages={item.pages}
+						onPress={() => navigate('Book', { id: book.id })}
+						pages={book.pages}
 						image={{
-							uri: item.image,
+							uri: book.image,
 							height: 260,
 							width: 170
 						}}
-						title={item.title}
-						author={item.author}
+						title={book.title}
+						author={book.author}
 					/>
 				)}
 			/>

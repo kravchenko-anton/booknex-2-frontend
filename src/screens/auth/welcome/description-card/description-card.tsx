@@ -20,7 +20,7 @@ const DescriptionCard: FC<WelcomeElementProps> = ({
 				className='mb-[-75px] h-[180px] w-[180px] rotate-12 self-start'
 			/>
 
-			<View className='z-50 w-full items-center rounded-3xl bg-white p-4'>
+			<View className='w-full items-center rounded-3xl bg-white p-4'>
 				<Title
 					size={36}
 					color={Color.secondary}
@@ -45,7 +45,7 @@ const DescriptionCard: FC<WelcomeElementProps> = ({
 					onPress={() => setIsActivePopup('check-email')}
 					size={'large'}
 					text={'Get Started'}
-					className='relative z-50 mt-6'
+					className=' mt-6'
 					width={'100%'}
 				/>
 			</View>

@@ -6,7 +6,9 @@ export interface BookType extends DefaultModelFields {
 	author: string
 	description: string
 	isbn: string
+	color: string
 	epub: string
+	pages: number
 	image: string
 	likedPercent: number
 	popularity: number

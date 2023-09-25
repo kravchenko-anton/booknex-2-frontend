@@ -8,6 +8,7 @@ module.exports = {
 			gray: '#666666',
 			primary: '#2B6B76',
 			secondary: '#75471E',
+			pale: '#FDF7F4',
 			dust: '#F2E4DC',
 			canvas: '#F9EFE8',
 			black: '#000',

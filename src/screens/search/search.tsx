@@ -33,37 +33,37 @@ const Search = () => {
 								width: '100%'
 							}}
 							data={books}
-							renderItem={({ item }) => (
-								<View className='mb-2 h-[160px] w-full  flex-row rounded-lg bg-dust p-2'>
+							renderItem={({ item: book }) => (
+								<View className='mb-2 h-[170px] w-full  flex-row rounded-lg bg-dust p-2'>
 									<Image
-										url={item.image}
+										url={book.image}
 										height={160}
 										fullSize={true}
 										width={100}
 									/>
-									<View className='h-[160px] flex-1 p-3 pb-0'>
+									<View className='h-[170px] flex-1 p-3 pb-0'>
 										<View>
 											<Title size={22} weight='bold' numberOfLines={2}>
-												{item.title}
+												{book.title}
 											</Title>
 											<Title
 												size={16}
 												weight='light'
 												className='mb-2 mt-1'
 												color={Color.gray}>
-												{item.author}
+												{book.author}
 											</Title>
 										</View>
-										<View className='mt-auto flex-row items-center gap-2'>
+										<View className='flex-row items-center gap-2'>
 											<Button
 												variant={'ghost'}
 												size={'small'}
-												text={`👍 ${item.likedPercent}% liked`}
+												text={`👍 ${book.likedPercent}% liked`}
 											/>
 											<Button
 												variant={'ghost'}
 												size={'small'}
-												text={`📖 ${item.pages} pages`}
+												text={`📖 ${book.pages} pages`}
 											/>
 										</View>
 									</View>

@@ -13,7 +13,7 @@ const Recommendation: FC<RecommendationProps> = ({ data }) => {
 	const { navigate } = useTypedNavigation()
 	return (
 		<View className='relative mt-4 items-center px-2'>
-			<View className='absolute mb-4 h-full w-full rounded-[10px] bg-[#FDF7F4]'>
+			<View className='bg-pale absolute mb-4 h-full w-full rounded-[10px]'>
 				<LinearGradient
 					colors={[Color.primary, shadeRGBColor(Color.primary, -50)]}
 					start={[0.1, 1.5]}
@@ -42,16 +42,16 @@ const Recommendation: FC<RecommendationProps> = ({ data }) => {
 				removeClippedSubviews={true}
 				showsHorizontalScrollIndicator={false}
 				data={data}
-				renderItem={({ item }) => (
+				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => navigate('Book', { id: item.id })}
+						onPress={() => navigate('Book', { id: book.id })}
 						image={{
-							uri: item.image,
+							uri: book.image,
 							height: 220,
 							width: 150
 						}}
-						title={item.title}
-						author={item.author}
+						title={book.title}
+						author={book.author}
 					/>
 				)}
 			/>

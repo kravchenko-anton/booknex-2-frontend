@@ -1,7 +1,7 @@
 import Button from '@/components/ui/button/button'
 import { TabsProps } from '@/components/ui/tabs/tabs-types'
 import { WINDOW_WIDTH } from '@/constants/dimensions'
-import { FC, useRef, useState } from 'react'
+import { FC, memo, useRef, useState } from 'react'
 import { FlatList, View } from 'react-native'
 
 const Tabs: FC<TabsProps> = ({ routes, ...props }) => {
@@ -20,20 +20,19 @@ const Tabs: FC<TabsProps> = ({ routes, ...props }) => {
 					bounces={false}
 					ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
 					data={routes}
-					renderItem={({ item }) => {
+					renderItem={({ item: book }) => {
 						return (
 							<Button
-								className='mb-2'
 								size={'medium'}
 								onPress={() => {
 									const index = routes.findIndex(
-										route => route.key === item.key
+										route => route.key === book.key
 									)
 									tabListRef.current?.scrollToIndex({ index })
 									flatListRef.current?.scrollToIndex({ index })
 								}}
-								variant={activeTab === item.key ? 'primary' : 'dust'}
-								text={item.title}
+								variant={activeTab === book.key ? 'primary' : 'dust'}
+								text={book.title}
 							/>
 						)
 					}}
@@ -70,4 +69,4 @@ const Tabs: FC<TabsProps> = ({ routes, ...props }) => {
 	)
 }
 
-export default Tabs
+export default memo(Tabs)

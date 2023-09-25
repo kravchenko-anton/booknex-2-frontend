@@ -31,4 +31,5 @@ export interface FlatListProps<T>
 	renderItem: ListRenderItem<T>
 	headerText?: string
 	mt?: number
+	titleMb?: number
 }

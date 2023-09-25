@@ -1,4 +1,4 @@
-import { FlatListProps } from '@/components/ui/flatlist/uFlatList-types'
+import { FlatListProps } from '@/components/ui/flatlist/flatlist-types'
 import { Title } from '@/components/ui/title/title'
 import { FlatList as DefaultFlatlist, View } from 'react-native'
 
@@ -9,6 +9,7 @@ const FlatList = <T,>({
 	initialNumToRender,
 	wrapperStyle,
 	elementSpacing = 12,
+	titleMb = 16,
 	contentContainerStyle,
 	mt = 24,
 	...props
@@ -20,8 +21,10 @@ const FlatList = <T,>({
 			style={[{ marginTop: mt }, wrapperStyle]}>
 			{headerText && props.data.length !== 0 && (
 				<Title
-					className='mb-5'
-					style={{ paddingHorizontal: props.horizontal ? 8 : 0 }}
+					style={{
+						paddingHorizontal: props.horizontal ? 8 : 0,
+						marginBottom: titleMb
+					}}
 					size={22}
 					weight='semiBold'>
 					{headerText}

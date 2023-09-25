@@ -68,7 +68,7 @@ const Login = () => {
 					onPress={handleSubmit(onSubmit)}
 					size={'medium'}
 					text={'Sign in'}
-					className='mb-4 mt-2'
+					className='mt-2'
 				/>
 			</View>
 		</Layout>

@@ -47,7 +47,7 @@ const SelectGenres: FC<SelectGenresProps> = ({
 						variant={
 							selectGenres.some(g => g === genre.name) ? 'primary' : 'dust'
 						}
-						className='mb-2 mr-3'
+						className='mr-3'
 					/>
 				))}
 			</View>

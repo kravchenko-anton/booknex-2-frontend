@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/global-settings'
 import { Title } from '@/components/ui/title/title'
 import { AnimatedPressable } from '@/types/component-types'
+import { memo } from 'react'
 
 const Button = ({
 	size = 'large',
@@ -24,6 +25,7 @@ const Button = ({
 		<AnimatedPressable
 			style={[
 				{
+					marginBottom: 4,
 					opacity: props.disabled ? 0.7 : 1,
 					backgroundColor: BackgroundColor[variant],
 					borderRadius: BorderRadiusSetting,
@@ -46,4 +48,4 @@ const Button = ({
 	)
 }
 
-export default Button
+export default memo(Button)

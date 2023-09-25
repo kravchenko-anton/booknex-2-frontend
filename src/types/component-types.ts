@@ -2,6 +2,7 @@ import {
 	ImageProps,
 	Pressable,
 	PressableProps,
+	ScrollView,
 	ScrollViewProps,
 	TextProps,
 	View,
@@ -11,7 +12,7 @@ import Animated from 'react-native-reanimated'
 
 export const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 export const AnimatedView = Animated.createAnimatedComponent(View)
-
+export const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 export type ViewDefaultProps = Pick<
 	ViewProps,
 	'className' | 'style' | 'onLayout' | 'pointerEvents' | 'onMagicTap'
@@ -59,32 +60,17 @@ export type ImageDefaultProps = Pick<
 	| 'className'
 	| 'onError'
 >
-
 export type ScrollViewDefaultProps = Pick<
 	ScrollViewProps,
 	| 'scrollEnabled'
+	| 'children'
+	| 'snapToInterval'
 	| 'keyboardDismissMode'
-	| 'refreshControl'
-	| 'onScrollAnimationEnd'
 	| 'onScroll'
-	| 'scrollToOverflowEnabled'
-	| 'renderToHardwareTextureAndroid'
 	| 'contentContainerStyle'
 	| 'style'
 	| 'horizontal'
-	| 'decelerationRate'
 	| 'pointerEvents'
 	| 'className'
-	| 'showsVerticalScrollIndicator'
-	| 'showsHorizontalScrollIndicator'
-	| 'onScrollBeginDrag'
 	| 'onLayout'
-	| 'onContentSizeChange'
-	| 'onMomentumScrollEnd'
-	| 'onMomentumScrollBegin'
-	| 'onScrollEndDrag'
-	| 'onScrollToTop'
-	| 'onTouchEnd'
-	| 'onTouchMove'
-	| 'onTouchStart'
 >

@@ -4,7 +4,7 @@ import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 const BookCard: FC<BookCardProps> = ({
 	image,
@@ -55,4 +55,4 @@ const BookCard: FC<BookCardProps> = ({
 	)
 }
 
-export default BookCard
+export default memo(BookCard)
