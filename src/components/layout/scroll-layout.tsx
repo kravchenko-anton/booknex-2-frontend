@@ -1,3 +1,4 @@
+import AdminButton from '@/components/layout/admin-button'
 import ScrollView from '@/components/ui/scroll-view/scroll-view'
 import { ScrollViewDefaultProps } from '@/types/component-types'
 import { FC, memo, PropsWithChildren } from 'react'
@@ -11,6 +12,7 @@ const ScrollLayout: FC<PropsWithChildren<ScrollViewDefaultProps>> = ({
 		<ScrollView className='flex-1' {...props}>
 			{children}
 		</ScrollView>
+		<AdminButton />
 	</SafeAreaView>
 )
 

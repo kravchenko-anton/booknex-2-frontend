@@ -9,9 +9,12 @@ export type TypeRootStackParamList = {
 	Catalog: undefined
 	Settings: undefined
 	Search: undefined
+
 	Welcome: undefined
 	Login: { defaultEmail: string }
 	Registration: { defaultEmail: string }
+
+	Statistic: undefined
 }
 
 export interface IRoute {
