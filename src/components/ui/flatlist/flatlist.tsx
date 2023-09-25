@@ -12,6 +12,7 @@ const FlatList = <T,>({
 	titleMb = 16,
 	contentContainerStyle,
 	mt = 24,
+	px = 8,
 	...props
 }: FlatListProps<T>) => {
 	if (props.data.length === 0 && !props.ListEmptyComponent) return null
@@ -22,7 +23,7 @@ const FlatList = <T,>({
 			{headerText && props.data.length !== 0 && (
 				<Title
 					style={{
-						paddingHorizontal: props.horizontal ? 8 : 0,
+						paddingHorizontal: props.horizontal ? px : 0,
 						marginBottom: titleMb
 					}}
 					size={22}
@@ -40,7 +41,9 @@ const FlatList = <T,>({
 						}
 					/>
 				)}
-				contentContainerStyle={{ paddingHorizontal: props.horizontal ? 8 : 0 }}
+				contentContainerStyle={{
+					paddingHorizontal: props.horizontal ? px : 0
+				}}
 				bounces={false}
 				renderToHardwareTextureAndroid={true}
 				removeClippedSubviews={true}

@@ -5,6 +5,7 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 const AdminButton = () => {
 	const { navigate } = useTypedNavigation()
 	const { user } = useAuth()
+	if ((user && !user?.isAdmin) || !user) return null
 	return (
 		<Icon
 			onPress={() => navigate('Statistic')}
