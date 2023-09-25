@@ -9,6 +9,7 @@ import ScrollView from '@/components/ui/scroll-view/scroll-view'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
+import Feature from '@/screens/book/feature/feature'
 import { headerAnimation } from '@/screens/book/header-animation'
 import { bookService } from '@/services/book-service'
 import { AnimatedView } from '@/types/component-types'
@@ -24,7 +25,6 @@ const Book = () => {
 	const { navigate, goBack } = useTypedNavigation()
 	const { top } = useSafeAreaInsets()
 	const { params } = useTypedRoute<'Book'>()
-	console.log(typeof params.id)
 	const { data: book } = useQuery(['book', params.id], () =>
 		bookService.byId(+params.id)
 	)
@@ -67,6 +67,9 @@ const Book = () => {
 				/>
 			</AnimatedView>
 			<ScrollView
+				onLayout={() => {
+					scrollPosition.value = 0
+				}}
 				onScroll={event => {
 					scrollPosition.value = event.nativeEvent.contentOffset.y
 				}}>
@@ -74,8 +77,7 @@ const Book = () => {
 					style={{
 						paddingTop: top,
 						backgroundColor: shadeRGBColor(book.color, -30),
-						height: 230,
-						borderBottomLeftRadius: 20
+						height: 240
 					}}
 					className='p-4'>
 					<Header
@@ -95,46 +97,33 @@ const Book = () => {
 						numberOfLines={2}>
 						{book.title}
 					</Title>
-					<Title size={18} className='mt-2' weight={'bold'} color={Color.dust}>
+					<Title
+						size={18}
+						className='mt-2 w-1/2'
+						weight={'bold'}
+						color={Color.dust}>
 						{book.author}
 					</Title>
 				</View>
 				<View className='flex-row justify-between px-4'>
 					<View className='flex-1 justify-between'>
-						<View className='flex-row items-center'>
-							<Icon name={'clock'} size={'large'} className='pl-0' />
-							<View>
-								<Title size={22} weight={'bold'}>
-									{Math.round(book.pages / 25)}h{' '}
-									{Math.round((book.pages / 25) % 60)} min
-								</Title>
-								<Title size={15} weight={'regular'}>
-									Duration
-								</Title>
-							</View>
-						</View>
-						<View className='flex-row items-center'>
-							<Icon name={'book'} size={'large'} className='pl-0' />
-							<View>
-								<Title size={22} weight={'bold'}>
-									{book.pages}
-								</Title>
-								<Title size={15} weight={'regular'}>
-									Pages
-								</Title>
-							</View>
-						</View>
-						<View className='flex-row items-center'>
-							<Icon name={'thumbsup'} size={'large'} className='pl-0' />
-							<View>
-								<Title size={22} weight={'bold'}>
-									{book.likedPercent}%
-								</Title>
-								<Title size={15} weight={'regular'}>
-									Liked
-								</Title>
-							</View>
-						</View>
+						<Feature
+							iconDescription={'Duration'}
+							iconName={'clock'}
+							iconTitle={`${Math.round(book.pages / 25)}h ${Math.round(
+								(book.pages / 25) % 60
+							)} min`}
+						/>
+						<Feature
+							iconDescription={'Pages'}
+							iconName={'book'}
+							iconTitle={book.pages}
+						/>
+						<Feature
+							iconDescription={'Liked'}
+							iconName={'thumbsup'}
+							iconTitle={`${book.likedPercent}%`}
+						/>
 					</View>
 					<Image
 						url={book.image}
