@@ -1,7 +1,6 @@
 import { usePressAnimation } from '@/animations/press-animation'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
-import { WINDOW_WIDTH } from '@/constants/dimensions'
 import { RainbowBookCardProps } from '@/screens/featured/rainbow-book-card/rainbow-book-card-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
@@ -15,7 +14,7 @@ const RainbowBookCard: FC<RainbowBookCardProps> = ({ image, ...props }) => {
 			className='justify-between rounded-xl p-4'
 			style={[
 				{
-					width: WINDOW_WIDTH / 1.5 - 20,
+					width: 300,
 					height: 300,
 					marginBottom: 6,
 					backgroundColor: props.backgroundColor

@@ -74,8 +74,8 @@ const Book = () => {
 						<Feature
 							iconDescription={'Duration'}
 							iconName={'clock'}
-							iconTitle={`${Math.round(book.pages / 25)}h ${Math.round(
-								(book.pages / 25) % 60
+							iconTitle={`${Math.round(book.pages / 1.5 / 60)}h ${Math.round(
+								(book.pages / 1.5) % 60
 							)} min`}
 						/>
 						<Feature

@@ -21,7 +21,7 @@ const Featured = () => {
 	return (
 		<ScrollLayout>
 			<Header
-				wrapperClassName='px-2 mb-2'
+				wrapperClassName='px-2'
 				leftIcon={{
 					custom: (
 						<Title weight={'semiBold'} size={30}>
