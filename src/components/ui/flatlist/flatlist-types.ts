@@ -1,6 +1,6 @@
-import { ViewDefaultProps } from '@/types/component-types'
-import { WrapperProps } from '@/types/global'
-import {
+import type { ViewDefaultProps } from '@/types/component-types'
+import type { WrapperProps } from '@/types/global'
+import type {
 	FlatListProps as FlatListDefaultProps,
 	ListRenderItem
 } from 'react-native'

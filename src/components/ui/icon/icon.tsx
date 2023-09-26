@@ -9,7 +9,7 @@ import {
 	IconColorSetting,
 	SizeSetting
 } from '@/components/ui/icon/icon-settings'
-import { IconProps } from '@/components/ui/icon/icon-types'
+import type { IconProps } from '@/components/ui/icon/icon-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Octicons } from '@expo/vector-icons'
 import type { FC } from 'react'

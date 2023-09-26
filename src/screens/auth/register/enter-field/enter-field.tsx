@@ -8,7 +8,7 @@ import { UserUpdateDto } from '@/services/types/user-services-types'
 import { AnimatedView } from '@/types/component-types'
 import { PopupTypes } from '@/types/global'
 import { Color } from '@/utils/color'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 export interface EnterFieldProps extends PopupTypes<'genres' | 'fields'> {

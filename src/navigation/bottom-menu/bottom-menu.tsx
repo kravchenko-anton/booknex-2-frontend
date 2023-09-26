@@ -1,6 +1,6 @@
 import MenuItem from '@/navigation/bottom-menu/menu-item'
 import { Color } from '@/utils/color'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { View } from 'react-native'
 import { menuItems } from './menu-data'
 

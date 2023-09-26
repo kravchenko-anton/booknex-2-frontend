@@ -1,7 +1,7 @@
 import Icon from '@/components/ui/icon/icon'
 import { weightSettings } from '@/components/ui/title/title-settings'
 import { Color } from '@/utils/color'
-import { FC } from 'react'
+import type { FC } from 'react'
 import RnToast, { BaseToast } from 'react-native-toast-message'
 
 const options = () => ({

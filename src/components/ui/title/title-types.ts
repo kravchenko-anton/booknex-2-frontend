@@ -1,6 +1,6 @@
 import { weightSettings } from '@/components/ui/title/title-settings'
-import { TextDefaultProps } from '@/types/component-types'
-import { ColorProps } from '@/utils/color'
+import type { TextDefaultProps } from '@/types/component-types'
+import type { ColorProps } from '@/utils/color'
 
 export type TitleProps = TextDefaultProps &
 	ColorProps & {

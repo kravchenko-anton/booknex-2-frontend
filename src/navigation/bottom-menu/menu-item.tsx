@@ -7,7 +7,7 @@ import {
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { Octicons } from '@expo/vector-icons'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Pressable } from 'react-native'
 
 interface IMenuItemProps {

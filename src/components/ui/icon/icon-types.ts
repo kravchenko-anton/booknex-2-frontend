@@ -1,5 +1,5 @@
-import { PressableDefaultProps } from '@/types/component-types'
-import { ColorProps } from '@/utils/color'
+import type { PressableDefaultProps } from '@/types/component-types'
+import type { ColorProps } from '@/utils/color'
 import { Octicons } from '@expo/vector-icons'
 
 export interface IconProps extends PressableDefaultProps, ColorProps {

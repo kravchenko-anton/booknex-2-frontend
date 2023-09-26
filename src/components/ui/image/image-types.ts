@@ -1,5 +1,5 @@
-import { ImageDefaultProps } from '@/types/component-types'
-import { Width_Height, WrapperProps } from '@/types/global'
+import type { ImageDefaultProps } from '@/types/component-types'
+import type { Width_Height, WrapperProps } from '@/types/global'
 
 export interface ImageTypes
 	extends Omit<ImageDefaultProps, 'source'>,

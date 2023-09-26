@@ -5,15 +5,15 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade.color'
 import { LinearGradient } from 'expo-linear-gradient'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { FlatList, View } from 'react-native'
-import { RecommendationProps } from './recommendation-types'
+import type { RecommendationProps } from './recommendation-types'
 
 const Recommendation: FC<RecommendationProps> = ({ data }) => {
 	const { navigate } = useTypedNavigation()
 	return (
 		<View className='relative mt-4 items-center px-2'>
-			<View className='bg-pale absolute mb-4 h-full w-full rounded-[10px]'>
+			<View className='absolute mb-4 h-full w-full rounded-[10px] bg-pale'>
 				<LinearGradient
 					colors={[Color.primary, shadeRGBColor(Color.primary, -50)]}
 					start={[0.1, 1.5]}

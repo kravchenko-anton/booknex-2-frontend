@@ -2,7 +2,6 @@ import {
 	ImageProps,
 	Pressable,
 	PressableProps,
-	ScrollView,
 	ScrollViewProps,
 	TextProps,
 	View,
@@ -12,7 +11,6 @@ import Animated from 'react-native-reanimated'
 
 export const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 export const AnimatedView = Animated.createAnimatedComponent(View)
-export const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 export type ViewDefaultProps = Pick<
 	ViewProps,
 	'className' | 'style' | 'onLayout' | 'pointerEvents' | 'onMagicTap'

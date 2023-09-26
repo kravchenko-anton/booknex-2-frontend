@@ -1,5 +1,5 @@
-import { ViewDefaultProps } from '@/types/component-types'
-import { WrapperProps } from '@/types/global'
+import type { ViewDefaultProps } from '@/types/component-types'
+import type { WrapperProps } from '@/types/global'
 import {
 	Control,
 	FieldPath,

@@ -1,4 +1,4 @@
-import { SkeletonProps } from '@/components/ui/image/skeleton/skeleton-types'
+import type { SkeletonProps } from '@/components/ui/image/skeleton/skeleton-types'
 import { Color } from '@/utils/color'
 import { FC, memo } from 'react'
 import { View } from 'react-native'

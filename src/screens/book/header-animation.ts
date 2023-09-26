@@ -9,7 +9,7 @@ export const headerAnimation = (scrollPosition: { value: number }) => {
 			top: 0,
 			left: 0,
 			right: 0,
-			height: 90,
+			height: 75,
 			zIndex: 50,
 			backgroundColor: Color.canvas,
 			opacity: scrollPosition.value >= 85 ? 1 : 0,

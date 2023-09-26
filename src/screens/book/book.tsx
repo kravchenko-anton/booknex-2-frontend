@@ -9,10 +9,9 @@ import ScrollView from '@/components/ui/scroll-view/scroll-view'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
+import AnimatedHeader from '@/screens/book/feature/animated-header'
 import Feature from '@/screens/book/feature/feature'
-import { headerAnimation } from '@/screens/book/header-animation'
 import { bookService } from '@/services/book-service'
-import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade.color'
 import { useQuery } from '@tanstack/react-query'
@@ -29,47 +28,12 @@ const Book = () => {
 		bookService.byId(+params.id)
 	)
 	const scrollPosition = useSharedValue(0)
-	const { headerStyle } = headerAnimation(scrollPosition)
 	if (!book) return <BigLoader />
 	return (
 		<>
 			<StatusBar backgroundColor={Color.canvas} />
-			<AnimatedView
-				className='px-4'
-				style={[
-					{
-						paddingTop: top / 1.6
-					},
-					headerStyle
-				]}>
-				<Header
-					leftIcon={{
-						custom: (
-							<View className='flex-row items-center'>
-								<Icon
-									name={'arrow-left'}
-									onPress={() => goBack()}
-									className='pl-0'
-									size={'medium'}
-								/>
-								<Title size={18} className='w-3/4' weight={'bold'}>
-									{book.title}
-								</Title>
-							</View>
-						)
-					}}
-					color={Color.black}
-					rightIcon={{
-						icon: {
-							name: 'three-bars'
-						}
-					}}
-				/>
-			</AnimatedView>
+			<AnimatedHeader title={book.title} scrollPosition={scrollPosition} />
 			<ScrollView
-				onLayout={() => {
-					scrollPosition.value = 0
-				}}
 				onScroll={event => {
 					scrollPosition.value = event.nativeEvent.contentOffset.y
 				}}>
@@ -81,7 +45,7 @@ const Book = () => {
 					}}
 					className='p-4'>
 					<Header
-						wrapperClassName=' z-10 mx-2'
+						wrapperClassName='z-10 mx-2'
 						leftIcon={{ back: true }}
 						color={Color.white}
 						rightIcon={{

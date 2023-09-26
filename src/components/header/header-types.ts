@@ -1,7 +1,7 @@
-import { IconProps } from '@/components/ui/icon/icon-types'
-import { ViewDefaultProps } from '@/types/component-types'
-import { WrapperProps } from '@/types/global'
-import { ColorProps } from '@/utils/color'
+import type { IconProps } from '@/components/ui/icon/icon-types'
+import type { ViewDefaultProps } from '@/types/component-types'
+import type { WrapperProps } from '@/types/global'
+import type { ColorProps } from '@/utils/color'
 
 type HeaderIcon =
 	| {

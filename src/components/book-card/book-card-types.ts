@@ -1,4 +1,4 @@
-import { PressableDefaultProps } from '@/types/component-types'
+import type { PressableDefaultProps } from '@/types/component-types'
 
 export interface BookCardProps extends PressableDefaultProps {
 	image: {

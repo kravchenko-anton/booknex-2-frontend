@@ -1,4 +1,4 @@
-import { ViewDefaultProps } from '@/types/component-types'
+import type { ViewDefaultProps } from '@/types/component-types'
 import { Octicons } from '@expo/vector-icons'
 import { Dispatch, SetStateAction } from 'react'
 import { WithSpringConfig, WithTimingConfig } from 'react-native-reanimated'

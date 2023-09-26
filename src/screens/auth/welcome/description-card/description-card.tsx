@@ -4,7 +4,7 @@ import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
 import { WelcomeElementProps } from '@/screens/auth/welcome/welcome-types'
 import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Image, View } from 'react-native'
 
 const DescriptionCard: FC<WelcomeElementProps> = ({

@@ -5,7 +5,7 @@ import { WINDOW_WIDTH } from '@/constants/dimensions'
 import { RainbowBookCardProps } from '@/screens/featured/rainbow-book-card/rainbow-book-card-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { View } from 'react-native'
 
 const RainbowBookCard: FC<RainbowBookCardProps> = ({ image, ...props }) => {
@@ -15,7 +15,7 @@ const RainbowBookCard: FC<RainbowBookCardProps> = ({ image, ...props }) => {
 			className='justify-between rounded-xl p-4'
 			style={[
 				{
-					width: WINDOW_WIDTH * 0.9,
+					width: WINDOW_WIDTH / 1.5 - 20,
 					height: 300,
 					marginBottom: 6,
 					backgroundColor: props.backgroundColor

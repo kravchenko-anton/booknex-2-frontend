@@ -4,7 +4,7 @@ import Register from '@/screens/auth/register/register'
 import Welcome from '@/screens/auth/welcome/welcome'
 import { Color } from '@/utils/color'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 import { TypeRootStackParamList } from './navigation-types'
 import { routes, userRoutes } from './user-routes'

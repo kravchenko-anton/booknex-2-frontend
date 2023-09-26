@@ -1,7 +1,7 @@
 import { HeaderProps } from '@/components/header/header-types'
 import Icon from '@/components/ui/icon/icon'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { View } from 'react-native'
 //TODO: сделать код в хедере красивее намного
 const Header: FC<HeaderProps> = ({

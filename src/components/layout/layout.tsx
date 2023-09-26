@@ -1,6 +1,7 @@
 import AdminButton from '@/components/layout/admin-button'
-import { ViewDefaultProps } from '@/types/component-types'
-import { FC, memo, PropsWithChildren } from 'react'
+import type { ViewDefaultProps } from '@/types/component-types'
+import type { FC, PropsWithChildren } from 'react'
+import { memo } from 'react'
 import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 

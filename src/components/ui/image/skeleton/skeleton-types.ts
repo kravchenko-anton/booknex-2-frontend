@@ -1,4 +1,4 @@
-import { Style, Width_Height } from '@/types/global'
+import type { Style, Width_Height } from '@/types/global'
 
 export interface SkeletonProps extends Width_Height {
 	borderRadius?: number
