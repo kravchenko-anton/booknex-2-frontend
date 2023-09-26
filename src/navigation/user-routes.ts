@@ -1,3 +1,4 @@
+import GenreCatalog from '@/screens/catalog/genre-catalog/genre-catalog'
 import Featured from '@/screens/featured/Featured'
 import Library from '@/screens/user-library/user-library'
 import Book from '../screens/book/book'
@@ -17,6 +18,10 @@ export const userRoutes: IRoute[] = [
 	{
 		name: 'Library',
 		component: Library
+	},
+	{
+		name: 'GenreCatalog',
+		component: GenreCatalog
 	},
 	{
 		name: 'Settings',

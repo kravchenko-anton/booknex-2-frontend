@@ -4,12 +4,21 @@ import Field from '@/components/ui/field/field'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
+import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useSearch } from '@/screens/search/useSearch'
 import { Color } from '@/utils/color'
-import { FlatList, View } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 
 const Search = () => {
-	const { searchTerm, books = [], isLoading, control } = useSearch()
+	const {
+		searchTerm,
+		books = [],
+		topSearches,
+		topSearchesLoading,
+		bookLoading,
+		control
+	} = useSearch()
+	const { navigate } = useTypedNavigation()
 	return (
 		<Layout className='h-full'>
 			<Field
@@ -19,14 +28,13 @@ const Search = () => {
 			/>
 			{!!searchTerm ? (
 				<View className='flex-1'>
-					{isLoading ? (
+					{bookLoading ? (
 						<BigLoader />
 					) : (
 						<FlatList
 							showsVerticalScrollIndicator={false}
 							renderToHardwareTextureAndroid={true}
 							initialNumToRender={10}
-							keyboardShouldPersistTaps={'handled'}
 							maxToRenderPerBatch={10}
 							style={{
 								flexGrow: 1,
@@ -72,7 +80,31 @@ const Search = () => {
 						/>
 					)}
 				</View>
-			) : null}
+			) : !topSearchesLoading ? (
+				<FlatList
+					className='mt-2'
+					showsVerticalScrollIndicator={false}
+					renderToHardwareTextureAndroid={true}
+					initialNumToRender={10}
+					maxToRenderPerBatch={10}
+					data={topSearches}
+					renderItem={({ item }) => (
+						<Pressable
+							onPress={() =>
+								navigate(item.name ? 'GenreCatalog' : 'Book', {
+									id: item.id
+								})
+							}
+							className='mb-2 h-[65px] w-full justify-center rounded-xl  bg-dust p-2'>
+							<Title size={20} weight='bold'>
+								{item.name || item.title}
+							</Title>
+						</Pressable>
+					)}
+				/>
+			) : (
+				<BigLoader />
+			)}
 		</Layout>
 	)
 }
