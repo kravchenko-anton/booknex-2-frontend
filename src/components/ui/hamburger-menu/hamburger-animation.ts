@@ -11,6 +11,7 @@ export const hamburgerAnimation = (
 ) => {
 	const popupStyle = useAnimatedStyle(() => {
 		return {
+			pointerEvents: isShow.value ? 'auto' : 'none',
 			opacity: withTiming(isShow.value ? 1 : 0),
 			transform: [
 				{

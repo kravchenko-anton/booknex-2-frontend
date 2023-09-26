@@ -9,14 +9,14 @@ import ScrollView from '@/components/ui/scroll-view/scroll-view'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
-import AnimatedHeader from '@/screens/book/feature/animated-header'
+import AnimatedHeader from '@/screens/book/animated-header'
 import Feature from '@/screens/book/feature/feature'
 import { bookService } from '@/services/book-service'
 import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade.color'
 import { useQuery } from '@tanstack/react-query'
 import { StatusBar } from 'expo-status-bar'
-import { View } from 'react-native'
+import { Share, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -45,12 +45,17 @@ const Book = () => {
 					}}
 					className='p-4'>
 					<Header
-						wrapperClassName='z-10 mx-2'
 						leftIcon={{ back: true }}
 						color={Color.white}
 						rightIcon={{
 							icon: {
-								name: 'three-bars'
+								name: 'share-android',
+								onPress: () =>
+									Share.share({
+										message: `
+									Wow! I see ${book.title}  book on Booknex and I think you will like it too!
+								`
+									})
 							}
 						}}
 					/>
@@ -91,7 +96,7 @@ const Book = () => {
 					</View>
 					<Image
 						url={book.image}
-						className='mt-[-50px]'
+						className='z-0 mt-[-50px]'
 						height={260}
 						width={170}
 					/>

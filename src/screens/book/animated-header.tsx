@@ -1,3 +1,4 @@
+import HamburgerMenu from '@/components/ui/hamburger-menu/hamburger-menu'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
@@ -22,17 +23,20 @@ const AnimatedHeader: FC<AnimatedHeaderProps> = ({ scrollPosition, title }) => {
 						name={'arrow-left'}
 						onPress={() => goBack()}
 						size={'medium'}
+						className='pl-0'
 						color={Color.black}
 					/>
 					<Title size={18} className='w-3/4' weight={'bold'}>
 						{title}
 					</Title>
 				</View>
-				<Icon
-					name={'three-bars'}
-					size={'medium'}
-					variant={'ghost'}
+				<HamburgerMenu
+					position={'right'}
 					color={Color.black}
+					elements={[
+						{ title: 'Home', onPress: () => console.log('Home') },
+						{ title: 'Library', onPress: () => console.log('Library') }
+					]}
 				/>
 			</View>
 		</AnimatedView>

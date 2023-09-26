@@ -1,9 +1,10 @@
 import { hamburgerAnimation } from '@/components/ui/hamburger-menu/hamburger-animation'
 import { Title } from '@/components/ui/title/title'
+import { WINDOW_HEIGHT } from '@/constants/dimensions'
 import { AnimatedPressable, AnimatedView } from '@/types/component-types'
 import { Color, ColorProps } from '@/utils/color'
 import { FC } from 'react'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
 const className = 'w-6 h-0.5'
@@ -25,12 +26,18 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({
 		<>
 			<AnimatedPressable
 				onPress={() => (isOpen.value = false)}
-				style={animation.backdropStyle}
-				className='absolute bottom-0 left-0 right-0 top-0 z-10 h-full w-full '
+				style={[
+					{
+						...StyleSheet.absoluteFillObject,
+						height: WINDOW_HEIGHT,
+						zIndex: 20
+					},
+					animation.backdropStyle
+				]}
 			/>
-			<View className='relative z-50 '>
+			<View className='relative z-50'>
 				<AnimatedPressable
-					className='p-4'
+					className='z-50 p-4'
 					onPress={() => (isOpen.value = !isOpen.value)}
 					style={[
 						{
@@ -65,12 +72,11 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({
 				<AnimatedView
 					style={[
 						{
-							...(position === 'left' ? { left: 0 } : { right: 0 }),
-							pointerEvents: isOpen.value ? 'auto' : 'none'
+							...(position === 'left' ? { left: 0 } : { right: 0 })
 						},
 						animation.popupStyle
 					]}
-					className='absolute top-14 min-w-[200px] rounded-xl bg-white p-3'>
+					className='absolute top-14 z-50 min-w-[200px] rounded-xl bg-white p-3'>
 					{elements?.map(element => (
 						<Title
 							key={element.title}
