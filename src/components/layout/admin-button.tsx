@@ -1,11 +1,14 @@
 import Icon from '@/components/ui/icon/icon'
 import { useAuth } from '@/hooks/useAuth'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
+import { useRoute } from '@react-navigation/native'
 
 const AdminButton = () => {
 	const { navigate } = useTypedNavigation()
 	const { user } = useAuth()
-	if ((user && !user?.isAdmin) || !user) return null
+	const { name } = useRoute()
+	// TODO: Добавить по роуту проверку
+	if ((user && !user?.isAdmin) || !user || name === 'Statistic') return null
 	return (
 		<Icon
 			onPress={() => navigate('Statistic')}

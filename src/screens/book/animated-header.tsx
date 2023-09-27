@@ -33,6 +33,7 @@ const AnimatedHeader: FC<AnimatedHeaderProps> = ({ scrollPosition, title }) => {
 				<HamburgerMenu
 					position={'right'}
 					color={Color.black}
+					//TODO: сделать нормальный список
 					elements={[
 						{ title: 'Home', onPress: () => console.log('Home') },
 						{ title: 'Library', onPress: () => console.log('Library') }

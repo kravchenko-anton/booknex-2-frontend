@@ -1,8 +1,7 @@
-import GenreCatalog from '@/screens/catalog/genre-catalog/genre-catalog'
 import Featured from '@/screens/featured/Featured'
+import Genre from '@/screens/genre/genre'
 import Library from '@/screens/user-library/user-library'
 import Book from '../screens/book/book'
-import Catalog from '../screens/catalog/catalog'
 import Profile from '../screens/profile/profile'
 import Reading from '../screens/reading/reading'
 import Search from '../screens/search/search'
@@ -20,8 +19,8 @@ export const userRoutes: IRoute[] = [
 		component: Library
 	},
 	{
-		name: 'GenreCatalog',
-		component: GenreCatalog
+		name: 'Genre',
+		component: Genre
 	},
 	{
 		name: 'Settings',
@@ -39,10 +38,7 @@ export const userRoutes: IRoute[] = [
 		name: 'Book',
 		component: Book
 	},
-	{
-		name: 'Catalog',
-		component: Catalog
-	},
+
 	{
 		name: 'Search',
 		component: Search

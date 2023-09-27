@@ -52,9 +52,7 @@ const Book = () => {
 								name: 'share-android',
 								onPress: () =>
 									Share.share({
-										message: `
-									Wow! I see ${book.title}  book on Booknex and I think you will like it too!
-								`
+										message: `Wow! I see ${book.title}  book on Booknex and I think you will like it too!`
 									})
 							}
 						}}

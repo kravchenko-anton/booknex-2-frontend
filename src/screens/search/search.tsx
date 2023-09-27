@@ -91,7 +91,7 @@ const Search = () => {
 					renderItem={({ item }) => (
 						<Pressable
 							onPress={() =>
-								navigate(item.name ? 'GenreCatalog' : 'Book', {
+								navigate(item.name ? 'Genre' : 'Book', {
 									id: item.id
 								})
 							}

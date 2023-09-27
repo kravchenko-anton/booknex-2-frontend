@@ -1,10 +1,8 @@
 import BookCard from '@/components/book-card/book-card'
-import Header from '@/components/header/header'
 import ScrollLayout from '@/components/layout/scroll-layout'
 import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import FullScreenLoader from '@/components/ui/loader/big-loader'
-import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import RainbowBookCard from '@/screens/featured/rainbow-book-card/rainbow-book-card'
 import Recommendation from '@/screens/featured/recommendation/recommendation'
@@ -20,25 +18,6 @@ const Featured = () => {
 	if (!catalog) return <FullScreenLoader />
 	return (
 		<ScrollLayout>
-			<Header
-				wrapperClassName='px-2'
-				leftIcon={{
-					custom: (
-						<Title weight={'semiBold'} size={30}>
-							{new Date().getHours() < 12
-								? 'Good morning'
-								: new Date().getHours() < 18
-								? 'Good afternoon'
-								: 'Good evening'}
-						</Title>
-					)
-				}}
-				rightIcon={{
-					icon: {
-						name: `history`
-					}
-				}}
-			/>
 			<Recommendation data={catalog.recommendations} />
 			<FlatList
 				horizontal

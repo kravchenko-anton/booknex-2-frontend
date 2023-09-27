@@ -6,10 +6,9 @@ export type TypeRootStackParamList = {
 	Reading: undefined
 	Library: undefined
 	Book: { id: number }
-	Catalog: undefined
 	Settings: undefined
 	Search: undefined
-	GenreCatalog: { id: number }
+	Genre: { id: number }
 
 	Welcome: undefined
 	Login: { defaultEmail: string }

@@ -4,6 +4,7 @@ export const getUsersUrl = (string: string) => `/users${string}`
 export const getGenresUrl = (string: string) => `/genre${string}`
 export const getCatalogUrl = (string: string) => `/catalog${string}`
 export const getUploadUrl = (string: string) => `/upload${string}`
+export const getAdminUrl = (string: string) => `/admin${string}`
 
 export const getBookUrl = (string: string) => `/book${string}`
 
