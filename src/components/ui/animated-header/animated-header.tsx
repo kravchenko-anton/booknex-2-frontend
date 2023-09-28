@@ -1,5 +1,5 @@
-import HamburgerMenu from '@/components/ui/hamburger-menu/hamburger-menu'
 import Icon from '@/components/ui/icon/icon'
+import { IconProps } from '@/components/ui/icon/icon-types'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { headerAnimation } from '@/screens/book/header-animation'
@@ -10,13 +10,25 @@ import { View } from 'react-native'
 
 interface AnimatedHeaderProps {
 	title: string
+	transientValue: number
+	rightIcon?: {
+		icon?: IconProps
+		element?: JSX.Element
+	}
 	scrollPosition: { value: number }
 }
-const AnimatedHeader: FC<AnimatedHeaderProps> = ({ scrollPosition, title }) => {
+const AnimatedHeader: FC<AnimatedHeaderProps> = ({
+	scrollPosition,
+	title,
+	transientValue,
+	rightIcon
+}) => {
 	const { goBack } = useTypedNavigation()
-	const { headerStyle } = headerAnimation(scrollPosition)
+	const { headerStyle } = headerAnimation(scrollPosition, transientValue)
 	return (
-		<AnimatedView className='h-full' style={[headerStyle]}>
+		<AnimatedView
+			className='absolute left-0 right-0 top-0 z-50 h-[75px] bg-canvas'
+			style={[headerStyle]}>
 			<View className='mt-auto flex-row items-center justify-between px-4'>
 				<View className='flex-row items-center'>
 					<Icon
@@ -30,15 +42,7 @@ const AnimatedHeader: FC<AnimatedHeaderProps> = ({ scrollPosition, title }) => {
 						{title}
 					</Title>
 				</View>
-				<HamburgerMenu
-					position={'right'}
-					color={Color.black}
-					//TODO: сделать нормальный список
-					elements={[
-						{ title: 'Home', onPress: () => console.log('Home') },
-						{ title: 'Library', onPress: () => console.log('Library') }
-					]}
-				/>
+				{rightIcon?.icon ? <Icon {...rightIcon.icon} /> : rightIcon?.element}
 			</View>
 		</AnimatedView>
 	)
