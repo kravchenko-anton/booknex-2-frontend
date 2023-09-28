@@ -3,7 +3,7 @@ import Icon from '@/components/ui/icon/icon'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import type { FC } from 'react'
 import { View } from 'react-native'
-//TODO: сделать код в хедере красивее намного
+
 const Header: FC<HeaderProps> = ({
 	rightIcon,
 	leftIcon,
@@ -16,7 +16,7 @@ const Header: FC<HeaderProps> = ({
 		<View
 			className={`flex-row items-center justify-between ${wrapperClassName}`}
 			style={wrapperStyle}>
-			{'back' in leftIcon && leftIcon.back ? (
+			{leftIcon.back ? (
 				<Icon
 					name={'arrow-left'}
 					onPress={() => goBack()}
@@ -24,7 +24,7 @@ const Header: FC<HeaderProps> = ({
 					color={color}
 					style={{ paddingLeft: 0 }}
 				/>
-			) : 'icon' in leftIcon && leftIcon.icon ? (
+			) : leftIcon.icon ? (
 				<Icon
 					size={'large'}
 					style={{ paddingLeft: 0 }}
@@ -32,10 +32,10 @@ const Header: FC<HeaderProps> = ({
 					{...leftIcon.icon}
 				/>
 			) : (
-				'custom' in leftIcon && leftIcon.custom
+				leftIcon.element
 			)}
 
-			{rightIcon && 'icon' in rightIcon && rightIcon.icon ? (
+			{rightIcon && rightIcon.icon ? (
 				<Icon
 					size={'large'}
 					style={{ paddingRight: 0 }}
@@ -43,7 +43,7 @@ const Header: FC<HeaderProps> = ({
 					{...rightIcon.icon}
 				/>
 			) : (
-				rightIcon && 'custom' in rightIcon && rightIcon.custom
+				rightIcon?.element
 			)}
 		</View>
 	)

@@ -15,6 +15,7 @@ export interface EnterFieldProps extends PopupTypes<'genres' | 'fields'> {
 	defaultEmail: string
 	selectGenres: string[]
 }
+
 const EnterField: FC<EnterFieldProps> = ({
 	isActivePopup,
 	defaultEmail,
@@ -31,10 +32,10 @@ const EnterField: FC<EnterFieldProps> = ({
 	return (
 		<AnimatedView style={[showAnimation]}>
 			<Header
+				color={Color.black}
 				leftIcon={{
 					icon: {
 						name: 'x',
-						color: Color.black,
 						onPress: () => setIsActivePopup('genres')
 					}
 				}}

@@ -1,22 +1,13 @@
+import { AnimatedHeaderProps } from '@/components/ui/animated-header/animated-header-types'
+import { headerAnimation } from '@/components/ui/animated-header/header-animation'
 import Icon from '@/components/ui/icon/icon'
-import { IconProps } from '@/components/ui/icon/icon-types'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { headerAnimation } from '@/screens/book/header-animation'
 import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
-interface AnimatedHeaderProps {
-	title: string
-	transientValue: number
-	rightIcon?: {
-		icon?: IconProps
-		element?: JSX.Element
-	}
-	scrollPosition: { value: number }
-}
 const AnimatedHeader: FC<AnimatedHeaderProps> = ({
 	scrollPosition,
 	title,

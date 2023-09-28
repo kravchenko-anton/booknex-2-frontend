@@ -1,7 +1,9 @@
 import BookCard from '@/components/book-card/book-card'
 import Header from '@/components/header/header'
+import AnimatedHeader from '@/components/ui/animated-header/animated-header'
 import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
+import HamburgerMenu from '@/components/ui/hamburger-menu/hamburger-menu'
 import Icon from '@/components/ui/icon/icon'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
@@ -9,7 +11,6 @@ import ScrollView from '@/components/ui/scroll-view/scroll-view'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
-import AnimatedHeader from '@/screens/book/animated-header'
 import Feature from '@/screens/book/feature/feature'
 import { bookService } from '@/services/book-service'
 import { Color } from '@/utils/color'
@@ -21,7 +22,7 @@ import { useSharedValue } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const Book = () => {
-	const { navigate, goBack } = useTypedNavigation()
+	const { navigate } = useTypedNavigation()
 	const { top } = useSafeAreaInsets()
 	const { params } = useTypedRoute<'Book'>()
 	const { data: book } = useQuery(['book', params.id], () =>
@@ -32,7 +33,24 @@ const Book = () => {
 	return (
 		<>
 			<StatusBar backgroundColor={Color.canvas} />
-			<AnimatedHeader title={book.title} scrollPosition={scrollPosition} />
+			<AnimatedHeader
+				transientValue={85}
+				title={book.title}
+				scrollPosition={scrollPosition}
+				rightIcon={{
+					element: (
+						<HamburgerMenu
+							position={'right'}
+							color={Color.black}
+							//TODO: сделать нормальный список
+							elements={[
+								{ title: 'Home', onPress: () => console.log('Home') },
+								{ title: 'Library', onPress: () => console.log('Library') }
+							]}
+						/>
+					)
+				}}
+			/>
 			<ScrollView
 				onScroll={event => {
 					scrollPosition.value = event.nativeEvent.contentOffset.y

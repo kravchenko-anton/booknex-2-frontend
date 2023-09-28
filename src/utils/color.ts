@@ -26,6 +26,7 @@ export type lineColorType =
 	| '#DC3F41'
 	| '#FFBE0B'
 	| 'transparent'
+
 export interface ColorProps {
 	color?: lineColorType
 }

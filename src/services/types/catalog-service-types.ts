@@ -4,6 +4,7 @@ import { GenreType } from '@/services/types/genre-service-types'
 interface SameBreathBookType extends ShortBookType {
 	pages: number
 }
+
 export type topSearchersType = {
 	id: number
 	name?: string

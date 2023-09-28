@@ -15,6 +15,6 @@ export const FontProvider = () => {
 		SpaceGrotesk_600SemiBold,
 		SpaceGrotesk_700Bold
 	})
-	
-return isFontsLoaded
+
+	return isFontsLoaded
 }

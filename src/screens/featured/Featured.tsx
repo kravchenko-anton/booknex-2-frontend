@@ -24,6 +24,7 @@ const Featured = () => {
 				data={catalog.mostRelatedGenres}
 				renderItem={({ item: genre }) => (
 					<Button
+						onPress={() => navigate('Genre', { id: genre.id })}
 						size={'medium'}
 						variant={'ghost'}
 						text={genre.name}

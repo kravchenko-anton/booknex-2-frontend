@@ -17,14 +17,14 @@ const Statistic = () => {
 		<Layout>
 			<Header
 				leftIcon={{
-					custom: (
+					element: (
 						<Title size={26} weight={'bold'}>
 							Statistic
 						</Title>
 					)
 				}}
 				rightIcon={{
-					custom: (
+					element: (
 						<HamburgerMenu
 							position={'right'}
 							elements={[

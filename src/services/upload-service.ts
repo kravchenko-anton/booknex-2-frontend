@@ -5,6 +5,7 @@ import { BookType } from '@/services/types/book-service-types'
 interface BookByIdType extends BookType {
 	similarBooks: BookType[]
 }
+
 export const uploadService = {
 	async upload(file: File, type: 'image' | 'epub') {
 		return request<{ name: string }>({

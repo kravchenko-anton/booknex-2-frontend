@@ -14,6 +14,7 @@ export interface SelectGenresProps extends PopupTypes<'genres' | 'fields'> {
 	selectGenres: string[]
 	setSelectGenres: Dispatch<SetStateAction<string[]>>
 }
+
 const SelectGenres: FC<SelectGenresProps> = ({
 	genres,
 	isActivePopup,

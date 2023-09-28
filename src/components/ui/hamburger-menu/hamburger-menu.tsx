@@ -8,6 +8,7 @@ import { StyleSheet, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
 const className = 'w-6 h-0.5'
+
 interface HamburgerMenuProps extends ColorProps {
 	position?: 'left' | 'right'
 	elements?: {
@@ -15,6 +16,7 @@ interface HamburgerMenuProps extends ColorProps {
 		onPress: () => void
 	}[]
 }
+
 const HamburgerMenu: FC<HamburgerMenuProps> = ({
 	color = Color.black,
 	position = 'left',
