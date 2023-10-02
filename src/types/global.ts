@@ -1,4 +1,4 @@
-import type { ViewDefaultProps } from '@/types/component-types'
+import type { ViewDefaultProperties } from '@/types/component-types'
 import { Octicons } from '@expo/vector-icons'
 import { Dispatch, SetStateAction } from 'react'
 import { WithSpringConfig, WithTimingConfig } from 'react-native-reanimated'
@@ -9,13 +9,16 @@ export interface AnimationConfigType {
 	userConfig?: WithSpringConfig | WithTimingConfig
 }
 
-export interface WrapperProps<T> {
+export interface WrapperProperties<T> {
 	wrapperStyle?: T
 	wrapperClassName?: string
 }
 
-export type Width_Height = { width: number; height: number }
-export type Style = ViewDefaultProps['style']
+export interface Dimensions {
+	width: number
+	height: number
+}
+export type Style = ViewDefaultProperties['style']
 
 export interface DefaultModelFields {
 	id: number

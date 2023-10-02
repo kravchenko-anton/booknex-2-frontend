@@ -18,17 +18,15 @@ import PrivateNavigator from './private-navigator'
 
 const Navigation: FC = () => {
 	const { user } = useAuth()
-	const [currentRoute, setCurrentRoute] = useState<string | undefined>(
-		undefined
-	)
+	const [currentRoute, setCurrentRoute] = useState<string | undefined>()
 
-	const navRef = useNavigationContainerRef()
+	const navReference = useNavigationContainerRef()
 	useEffect(() => {
-		const listener = navRef.addListener('state', () =>
-			setCurrentRoute(navRef.getCurrentRoute()?.name)
-		)
+		const listener = navReference.addListener('state', () => {
+			setCurrentRoute(navReference.getCurrentRoute()?.name)
+		})
 		return () => {
-			navRef.removeListener('state', listener)
+			navReference.removeListener('state', listener)
 		}
 	}, [])
 	useCheckAuth()
@@ -40,11 +38,11 @@ const Navigation: FC = () => {
 			style={{
 				backgroundColor: Color.canvas
 			}}>
-			<NavigationContainer ref={navRef} fallback={<FullScreenLoader />}>
+			<NavigationContainer ref={navReference} fallback={<FullScreenLoader />}>
 				<PrivateNavigator />
 			</NavigationContainer>
 			{user && currentRoute && (
-				<BottomMenu nav={navRef.navigate} currentRoute={currentRoute} />
+				<BottomMenu nav={navReference.navigate} currentRoute={currentRoute} />
 			)}
 		</SafeAreaProvider>
 	)

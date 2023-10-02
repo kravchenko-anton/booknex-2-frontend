@@ -1,13 +1,9 @@
 import { BookType } from '@/services/types/book-service-types'
 import { DefaultModelFields } from '@/types/global'
 
-export interface addHistoryDto {
+export interface AddHistoryDto {
 	time: number
-	bookId: 8
-}
-
-export interface HistoryByBookIdType extends DefaultModelFields {
-	time: number
+	bookId: number
 }
 
 export interface HistoryGetType extends DefaultModelFields {

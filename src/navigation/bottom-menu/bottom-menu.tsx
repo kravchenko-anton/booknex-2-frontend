@@ -11,17 +11,16 @@ interface IBottomMenu {
 	currentRoute?: string
 }
 
-const BottomMenu: FC<IBottomMenu> = props => {
+const BottomMenu: FC<IBottomMenu> = properties => {
 	return (
 		<View
-			className='border-t-solid w-full flex-row items-center justify-between border-t px-2 pt-3'
+			className='border-t-solid w-full flex-row items-center justify-between border-t px-2 pb-2 pt-3'
 			style={{
-				paddingBottom: 8,
 				borderTopColor: Color.gray,
 				backgroundColor: Color.canvas
 			}}>
 			{menuItems.map(item => (
-				<MenuItem key={item.path} item={item} {...props} />
+				<MenuItem key={item.path} item={item} {...properties} />
 			))}
 		</View>
 	)

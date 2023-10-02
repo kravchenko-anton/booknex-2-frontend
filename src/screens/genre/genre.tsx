@@ -8,7 +8,7 @@ import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
 import { genreService } from '@/services/genre-service'
-import { removeEmoji } from '@/utils/removeEmoji'
+import { removeEmoji } from '@/utils/remove-emoji'
 import { useQuery } from '@tanstack/react-query'
 import { useSharedValue } from 'react-native-reanimated'
 
@@ -56,7 +56,9 @@ const Genre = () => {
 								height: 250,
 								width: 160
 							}}
-							onPress={() => navigate('Book', { id: book.id })}
+							onPress={() => {
+								navigate('Book', { id: book.id })
+							}}
 						/>
 					)}
 				/>
@@ -73,7 +75,9 @@ const Genre = () => {
 								height: 220,
 								width: 140
 							}}
-							onPress={() => navigate('Book', { id: book.id })}
+							onPress={() => {
+								navigate('Book', { id: book.id })
+							}}
 						/>
 					)}
 				/>

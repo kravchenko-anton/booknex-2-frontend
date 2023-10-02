@@ -1,8 +1,8 @@
-import { ScrollViewProps } from '@/components/ui/scroll-view/scroll-view-types'
+import { ScrollViewDefaultProperties } from '@/types/component-types'
 import type { FC } from 'react'
 import { ScrollView as DefaultScrollView } from 'react-native'
 
-const ScrollView: FC<ScrollViewProps> = ({ ...props }) => {
+const ScrollView: FC<ScrollViewDefaultProperties> = ({ ...properties }) => {
 	return (
 		<DefaultScrollView
 			automaticallyAdjustContentInsets={false}
@@ -15,8 +15,8 @@ const ScrollView: FC<ScrollViewProps> = ({ ...props }) => {
 			bounces={false}
 			bouncesZoom={false}
 			decelerationRate={'normal'}
-			{...props}>
-			{props.children}
+			{...properties}>
+			{properties.children}
 		</DefaultScrollView>
 	)
 }

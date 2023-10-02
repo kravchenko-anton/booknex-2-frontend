@@ -8,6 +8,11 @@ export const BackgroundColor = {
 	pale: Color.pale
 }
 
+export const disableOpacity = {
+	true: 0.7,
+	false: 1
+}
+
 export const TextColor = {
 	primary: Color.white,
 	secondary: Color.white,
@@ -17,9 +22,9 @@ export const TextColor = {
 }
 
 export const TextWeight = {
-	small: 'medium' as 'medium',
-	medium: 'semiBold' as 'semiBold',
-	large: 'bold' as 'bold'
+	small: 'medium' as const,
+	medium: 'semiBold' as const,
+	large: 'bold' as const
 }
 
 export const TextSize = {

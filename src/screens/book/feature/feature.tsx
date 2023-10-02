@@ -1,11 +1,11 @@
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
-import { FeatureProps } from '@/screens/book/feature/feature-types'
+import { FeatureProperties } from '@/screens/book/feature/feature-types'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
-const Feature: FC<FeatureProps> = ({
-	iconName,
+const Feature: FC<FeatureProperties> = ({
+	iconName = 'book',
 	iconTitle,
 	iconDescription
 }) => {

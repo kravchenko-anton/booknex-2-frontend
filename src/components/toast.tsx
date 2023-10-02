@@ -1,5 +1,5 @@
 import Icon from '@/components/ui/icon/icon'
-import { weightSettings } from '@/components/ui/title/title-settings'
+import { fontSettings } from '@/components/ui/title/title-settings'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import RnToast, { BaseToast } from 'react-native-toast-message'
@@ -13,14 +13,14 @@ const options = () => ({
 		color: Color.black,
 		fontSize: 16,
 		marginLeft: -12,
-		fontFamily: weightSettings['light']
+		fontFamily: fontSettings.light
 	},
 	text2Style: {
 		fontSize: 12,
 		marginLeft: -12,
 
 		color: Color.gray,
-		fontFamily: weightSettings['light']
+		fontFamily: fontSettings.light
 	}
 })
 
@@ -31,7 +31,7 @@ const Toast: FC = () => {
 			visibilityTime={3000}
 			position={'top'}
 			config={{
-				success: props => (
+				success: properties => (
 					<BaseToast
 						renderTrailingIcon={() => (
 							<Icon
@@ -42,11 +42,11 @@ const Toast: FC = () => {
 								size={'large'}
 							/>
 						)}
-						{...props}
+						{...properties}
 						{...options()}
 					/>
 				),
-				info: props => (
+				info: properties => (
 					<BaseToast
 						renderTrailingIcon={() => (
 							<Icon
@@ -57,11 +57,11 @@ const Toast: FC = () => {
 								size={'large'}
 							/>
 						)}
-						{...props}
+						{...properties}
 						{...options()}
 					/>
 				),
-				error: props => (
+				error: properties => (
 					<BaseToast
 						renderTrailingIcon={() => (
 							<Icon
@@ -72,7 +72,7 @@ const Toast: FC = () => {
 								size={'large'}
 							/>
 						)}
-						{...props}
+						{...properties}
 						{...options()}
 					/>
 				)

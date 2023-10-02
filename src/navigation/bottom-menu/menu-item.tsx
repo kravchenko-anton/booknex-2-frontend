@@ -10,13 +10,13 @@ import { Octicons } from '@expo/vector-icons'
 import type { FC } from 'react'
 import { Pressable } from 'react-native'
 
-interface IMenuItemProps {
+interface IMenuItemProperties {
 	item: IMenuItem
 	nav: TypeNavigate
 	currentRoute?: string
 }
 
-const MenuItem: FC<IMenuItemProps> = ({ currentRoute, item, nav }) => {
+const MenuItem: FC<IMenuItemProperties> = ({ currentRoute, item, nav }) => {
 	const isActive = currentRoute === item.path
 
 	const { pressFunctions, animatedStyle } = usePressAnimation()
@@ -24,9 +24,9 @@ const MenuItem: FC<IMenuItemProps> = ({ currentRoute, item, nav }) => {
 	return (
 		<Pressable
 			className='w-[20%] items-center'
-			onPress={() => nav(item.path)}
+			onPress={() => { nav(item.path); }}
 			{...pressFunctions}>
-			<AnimatedPressable style={[animatedStyle]} pointerEvents='none'>
+			<AnimatedPressable style={animatedStyle} pointerEvents='none'>
 				<Octicons
 					name={item.iconName}
 					size={30}

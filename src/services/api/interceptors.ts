@@ -34,9 +34,9 @@ instance.interceptors.response.use(
 			originalRequest._isRetry = true
 			try {
 				await getNewTokens()
-				return instance.request(originalRequest)
-			} catch (error) {
-				if (errorCatch(error) === 'jwt expired') await deleteTokensStorage()
+				return await instance.request(originalRequest)
+			} catch {
+				await deleteTokensStorage()
 			}
 		}
 

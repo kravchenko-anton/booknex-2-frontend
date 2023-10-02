@@ -9,24 +9,26 @@ import {
 } from '@/redux/auth/auth.types'
 import { SERVER_URL, getAuthUrl } from '@/services/api-config'
 import { errorCatch } from '@/utils/catch-error'
-import { errorToast } from '@/utils/errorToast'
+import { errorToast } from '@/utils/error-toast'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-
+// TODO: офиксить тут всё типы
 export const register = createAsyncThunk<AuthResponseType, RegisterFieldsType>(
 	'auth/register',
-	async (props, thunkAPI) => {
+	async (properties, thunkAPI) => {
 		try {
-			const register = await axios
-				.post(SERVER_URL + getAuthUrl('/register'), { ...props })
-				.then(res => res.data)
+			const registerResponse = await axios
+				.post<AuthResponseType>(SERVER_URL + getAuthUrl('/register'), {
+					...properties
+				})
+				.then(response => response.data)
 			await saveTokensStorage({
-				accessToken: register.accessToken,
-				refreshToken: register.refreshToken
+				accessToken: registerResponse.accessToken,
+				refreshToken: registerResponse.refreshToken
 			})
-			return register
-		} catch (e) {
-			return thunkAPI.rejectWithValue(e)
+			return registerResponse
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error)
 		}
 	}
 )
@@ -35,16 +37,19 @@ export const login = createAsyncThunk<AuthResponseType, AuthFieldsType>(
 	'auth/login',
 	async ({ email, password }, thunkAPI) => {
 		try {
-			const login = await axios
-				.post(SERVER_URL + getAuthUrl('/login'), { email, password })
-				.then(res => res.data)
+			const loginResponse = await axios
+				.post<AuthResponseType>(SERVER_URL + getAuthUrl('/login'), {
+					email,
+					password
+				})
+				.then(response => response.data)
 			await saveTokensStorage({
-				accessToken: login.accessToken,
-				refreshToken: login.refreshToken
+				accessToken: loginResponse.accessToken,
+				refreshToken: loginResponse.refreshToken
 			})
-			return login
-		} catch (e) {
-			return thunkAPI.rejectWithValue(e)
+			return loginResponse
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error)
 		}
 	}
 )
@@ -53,16 +58,18 @@ export const getNewToken = createAsyncThunk<AuthResponseType, string>(
 	'auth/getToken',
 	async (refreshToken, thunkAPI) => {
 		try {
-			const tokens = await axios
-				.post(SERVER_URL + getAuthUrl('/access-token'), { refreshToken })
-				.then(res => res.data)
+			const tokensResponse = await axios
+				.post<AuthResponseType>(SERVER_URL + getAuthUrl('/access-token'), {
+					refreshToken
+				})
+				.then(response => response.data)
 			await saveTokensStorage({
-				accessToken: tokens.accessToken,
-				refreshToken: tokens.refreshToken
+				accessToken: tokensResponse.accessToken,
+				refreshToken: tokensResponse.refreshToken
 			})
-			return tokens
-		} catch (e) {
-			return thunkAPI.rejectWithValue(e)
+			return tokensResponse
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error)
 		}
 	}
 )
@@ -70,8 +77,8 @@ export const getNewToken = createAsyncThunk<AuthResponseType, string>(
 export const logout = createAsyncThunk('auth/logout', async () => {
 	try {
 		await deleteTokensStorage()
-	} catch (e) {
-		errorToast(errorCatch(e))
+	} catch (error) {
+		errorToast(errorCatch(error))
 	}
 	return {}
 })

@@ -7,7 +7,7 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import RainbowBookCard from '@/screens/featured/rainbow-book-card/rainbow-book-card'
 import Recommendation from '@/screens/featured/recommendation/recommendation'
 import { catalogService } from '@/services/catalog-service'
-import { removeEmoji } from '@/utils/removeEmoji'
+import { removeEmoji } from '@/utils/remove-emoji'
 import { useQuery } from '@tanstack/react-query'
 
 const Featured = () => {
@@ -24,11 +24,13 @@ const Featured = () => {
 				data={catalog.mostRelatedGenres}
 				renderItem={({ item: genre }) => (
 					<Button
-						onPress={() => navigate('Genre', { id: genre.id })}
+						onPress={() => {
+							navigate('Genre', { id: genre.id })
+						}}
 						size={'medium'}
 						variant={'ghost'}
 						text={genre.name}
-						className='px-4 py-2'
+						className='mt-4 px-4'
 					/>
 				)}
 			/>
@@ -38,10 +40,12 @@ const Featured = () => {
 				data={catalog.bestSellers}
 				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => navigate('Book', { id: book.id })}
+						onPress={() => {
+							navigate('Book', { id: book.id })
+						}}
 						image={{ uri: book.image, height: 230, width: 150 }}
 						title={book.title}
-						likedPercent={book.likedPercent}
+						likedPercentage={book.likedPercentage}
 					/>
 				)}
 			/>
@@ -51,7 +55,9 @@ const Featured = () => {
 				data={catalog.popularNow}
 				renderItem={({ item: book }) => (
 					<RainbowBookCard
-						onPress={() => navigate('Book', { id: book.id })}
+						onPress={() => {
+							navigate('Book', { id: book.id })
+						}}
 						backgroundColor={book.color}
 						image={{ uri: book.image, height: 140, width: 100 }}
 						title={book.title}
@@ -65,7 +71,9 @@ const Featured = () => {
 				data={catalog.newReleases}
 				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => navigate('Book', { id: book.id })}
+						onPress={() => {
+							navigate('Book', { id: book.id })
+						}}
 						image={{ uri: book.image, height: 230, width: 145 }}
 					/>
 				)}
@@ -80,10 +88,12 @@ const Featured = () => {
 						data={genre.majorBooks}
 						renderItem={({ item: book }) => (
 							<BookCard
-								onPress={() => navigate('Book', { id: book.id })}
+								onPress={() => {
+									navigate('Book', { id: book.id })
+								}}
 								image={{
 									uri: book.image,
-									height: 190,
+									height: 200,
 									width: 130
 								}}
 							/>
@@ -98,7 +108,9 @@ const Featured = () => {
 				data={catalog.sameBreath}
 				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => navigate('Book', { id: book.id })}
+						onPress={() => {
+							navigate('Book', { id: book.id })
+						}}
 						pages={book.pages}
 						image={{
 							uri: book.image,

@@ -10,4 +10,5 @@ export interface GenreType extends DefaultModelFields {
 export interface GenreByIdType extends Omit<GenreType, 'books'> {
 	newestBooks: ShortBookType[]
 	bestSellers: ShortBookType[]
+	bestSellersFromSimilar: GenreType[]
 }

@@ -1,54 +1,56 @@
 import { usePressAnimation } from '@/animations/press-animation'
-import { BookCardProps } from '@/components/book-card/book-card-types'
+import { BookCardProperties } from '@/components/book-card/book-card-types'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { FC, memo } from 'react'
 
-const BookCard: FC<BookCardProps> = ({
+const BookCard: FC<BookCardProperties> = ({
 	image,
-	likedPercent,
+	likedPercentage,
 	pages,
-	...props
+	...properties
 }) => {
 	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
 		<AnimatedPressable
+			className='mb-2'
 			style={[
 				animatedStyle,
 				{
-					width: image.width,
-					marginBottom: 6
+					width: image.width
 				}
 			]}
 			{...pressFunctions}
-			{...props}>
+			{...properties}>
 			<Image url={image.uri} height={image.height} width={image.width} />
-			{(likedPercent && !pages) ||
-				(!likedPercent && pages && (
+			{(likedPercentage && !pages) ||
+				(!likedPercentage && pages && (
 					<Title
 						numberOfLines={1}
 						weight={'semiBold'}
 						size={15}
 						color={Color.gray}
 						className=' mt-2'>
-						{likedPercent ? `👍 ${likedPercent}% liked` : ` 📖 ${pages} pages`}
+						{likedPercentage
+							? `👍 ${likedPercentage}% liked`
+							: ` 📖 ${pages} pages`}
 					</Title>
 				))}
-			{props.title && (
+			{properties.title && (
 				<Title numberOfLines={2} weight={'bold'} size={20} color={Color.black}>
-					{props.title}
+					{properties.title}
 				</Title>
 			)}
-			{props.author && (
+			{properties.author && (
 				<Title
 					numberOfLines={1}
 					weight={'regular'}
 					size={16}
 					color={Color.gray}
 					className='mt-1'>
-					{props.author}
+					{properties.author}
 				</Title>
 			)}
 		</AnimatedPressable>

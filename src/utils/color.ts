@@ -1,6 +1,6 @@
 import { theme } from '../../tailwind.config'
 
-export type colorsType = {
+export interface ColorsType {
 	gray: '#666666'
 	primary: '#2B6B76'
 	secondary: '#75471E'
@@ -14,7 +14,7 @@ export type colorsType = {
 	transparent: 'transparent'
 }
 
-export type lineColorType =
+export type LineColorType =
 	| '#666666'
 	| '#2B6B76'
 	| '#75471E'
@@ -27,8 +27,8 @@ export type lineColorType =
 	| '#FFBE0B'
 	| 'transparent'
 
-export interface ColorProps {
-	color?: lineColorType
+export interface ColorProperties {
+	color?: LineColorType
 }
 
-export const Color = theme.colors as colorsType
+export const Color = theme.colors as ColorsType

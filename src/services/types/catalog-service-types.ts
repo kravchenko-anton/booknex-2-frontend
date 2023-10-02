@@ -5,7 +5,7 @@ interface SameBreathBookType extends ShortBookType {
 	pages: number
 }
 
-export type topSearchersType = {
+export interface TopSearchersType {
 	id: number
 	name?: string
 	title?: string
@@ -27,8 +27,8 @@ export interface CatalogType {
 	}[]
 }
 
-export interface searchBookType extends ShortBookType {
-	likedPercent: number
+export interface SearchBookType extends ShortBookType {
+	likedPercentage: number
 	pages: number
 	isbn: string
 }

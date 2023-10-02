@@ -30,15 +30,15 @@ const Statistic = () => {
 							elements={[
 								{
 									title: 'Books',
-									onPress: () => console.log('Books')
+									onPress: () => { console.log('Books'); }
 								},
 								{
 									title: 'Users',
-									onPress: () => console.log('Users')
+									onPress: () => { console.log('Users'); }
 								},
 								{
 									title: 'Statistic',
-									onPress: () => console.log('Statistic')
+									onPress: () => { console.log('Statistic'); }
 								}
 							]}
 						/>

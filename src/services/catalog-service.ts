@@ -2,19 +2,19 @@ import { getCatalogUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
 import {
 	CatalogType,
-	searchBookType,
-	topSearchersType
+	SearchBookType,
+	TopSearchersType
 } from '@/services/types/catalog-service-types'
 
 export const catalogService = {
 	async search(query: string) {
-		return request<searchBookType[]>({
+		return request<SearchBookType[]>({
 			url: getCatalogUrl(`/search/${query}`),
 			method: 'GET'
 		})
 	},
 	async topSearchers() {
-		return request<topSearchersType[]>({
+		return request<TopSearchersType[]>({
 			url: getCatalogUrl('/topSearchers'),
 			method: 'GET'
 		})

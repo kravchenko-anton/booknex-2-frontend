@@ -1,11 +1,11 @@
-import { weightSettings } from '@/components/ui/title/title-settings'
-import type { TextDefaultProps } from '@/types/component-types'
-import type { ColorProps } from '@/utils/color'
+import { fontSettings } from '@/components/ui/title/title-settings'
+import type { TextDefaultProperties } from '@/types/component-types'
+import type { ColorProperties } from '@/utils/color'
 
-export type TitleProps = TextDefaultProps &
-	ColorProps & {
+export type TitleProperties = TextDefaultProperties &
+	ColorProperties & {
 		center?: boolean
 		size?: number
-		children: string | string[] | any
-		weight?: keyof typeof weightSettings
+		children: any // eslint-disable-line @typescript-eslint/no-explicit-any
+		weight?: keyof typeof fontSettings
 	}

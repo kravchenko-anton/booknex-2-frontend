@@ -1,8 +1,8 @@
 import { ImageTypes } from '@/components/ui/image/image-types'
 import Skeleton from '@/components/ui/image/skeleton/skeleton'
 import { getFileUrl } from '@/services/api-config'
-import { FC, memo, useState } from 'react'
-import { Image as DefaultImage, View } from 'react-native'
+import { FC, memo, useEffect, useState } from 'react'
+import { Image as DefaultImage } from 'react-native'
 
 const Image: FC<ImageTypes> = ({
 	height = 100,
@@ -12,14 +12,23 @@ const Image: FC<ImageTypes> = ({
 	url,
 	style,
 	fullSize,
-	wrapperClassName,
-	wrapperStyle,
-	...props
+	...properties
 }) => {
 	const [isImageLoading, setIsImageLoading] = useState(true)
+
+	useEffect(() => {
+		setIsImageLoading(true)
+		DefaultImage.prefetch(getFileUrl(url)).then(() => {
+			setIsImageLoading(false)
+		})
+	}, [])
+
 	return (
-		<View className={wrapperClassName} style={wrapperStyle}>
+		<>
 			<DefaultImage
+				onError={error => {
+					console.error('Image loading error:', error)
+				}}
 				onLoadEnd={() => {
 					setIsImageLoading(false)
 				}}
@@ -37,7 +46,7 @@ const Image: FC<ImageTypes> = ({
 					},
 					style
 				]}
-				{...props}
+				{...properties}
 			/>
 			{isImageLoading && (
 				<Skeleton
@@ -52,7 +61,7 @@ const Image: FC<ImageTypes> = ({
 					]}
 				/>
 			)}
-		</View>
+		</>
 	)
 }
 

@@ -5,7 +5,7 @@ import {
 	TextSize,
 	TextWeight
 } from '@/components/ui/button/button-settings'
-import { ButtonProps } from '@/components/ui/button/button-types'
+import { ButtonProperties } from '@/components/ui/button/button-types'
 import {
 	BorderRadiusSetting,
 	PaddingSetting
@@ -18,31 +18,29 @@ const Button = ({
 	size = 'large',
 	variant = 'primary',
 	style,
-	...props
-}: ButtonProps) => {
+	...properties
+}: ButtonProperties) => {
 	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
 		<AnimatedPressable
+			className='mb-2 items-center justify-center'
 			style={[
 				{
-					marginBottom: 4,
-					opacity: props.disabled ? 0.7 : 1,
+					opacity: properties.disabled ? 0.7 : 1,
 					backgroundColor: BackgroundColor[variant],
 					borderRadius: BorderRadiusSetting,
-					padding: PaddingSetting[size],
-					alignItems: 'center',
-					justifyContent: 'center'
+					padding: PaddingSetting[size]
 				},
 				animatedStyle,
 				style
 			]}
 			{...pressFunctions}
-			{...props}>
+			{...properties}>
 			<Title
 				color={TextColor[variant]}
 				weight={TextWeight[size]}
 				size={TextSize[size]}>
-				{props.text}
+				{properties.text}
 			</Title>
 		</AnimatedPressable>
 	)

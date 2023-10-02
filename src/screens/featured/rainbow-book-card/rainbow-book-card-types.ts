@@ -1,9 +1,9 @@
-import { BookCardProps } from '@/components/book-card/book-card-types'
-import { PressableDefaultProps } from '@/types/component-types'
+import { BookCardProperties } from '@/components/book-card/book-card-types'
+import { PressableDefaultProperties } from '@/types/component-types'
 
-export interface RainbowBookCardProps
-	extends PressableDefaultProps,
-		Pick<BookCardProps, 'image'> {
+export interface RainbowBookCardProperties
+	extends PressableDefaultProperties,
+		Pick<BookCardProperties, 'image'> {
 	title: string
 	description: string
 	backgroundColor: string

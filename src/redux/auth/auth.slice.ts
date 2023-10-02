@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 	isLoading: false,
-	user: null as IAuthState | null
+	user: undefined as IAuthState | undefined
 }
 
 export const authSlice = createSlice({
@@ -22,7 +22,7 @@ export const authSlice = createSlice({
 			})
 			.addCase(register.rejected, state => {
 				state.isLoading = false
-				state.user = null
+				state.user = undefined
 			})
 			.addCase(login.pending, state => {
 				state.isLoading = true
@@ -33,11 +33,11 @@ export const authSlice = createSlice({
 			})
 			.addCase(login.rejected, state => {
 				state.isLoading = false
-				state.user = null
+				state.user = undefined
 			})
 			.addCase(logout.fulfilled, state => {
 				state.isLoading = false
-				state.user = null
+				state.user = undefined
 			})
 	}
 })

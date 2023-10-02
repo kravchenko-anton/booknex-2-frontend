@@ -1,5 +1,5 @@
-import { weightSettings } from '@/components/ui/title/title-settings'
-import { TitleProps } from '@/components/ui/title/title-types'
+import { fontSettings } from '@/components/ui/title/title-settings'
+import { TitleProperties } from '@/components/ui/title/title-types'
 import { Color } from '@/utils/color'
 import { memo } from 'react'
 import { Text } from 'react-native'
@@ -12,21 +12,21 @@ export const Title = memo(
 		size = 20,
 		center = false,
 		style,
-		...props
-	}: TitleProps) => {
+		...properties
+	}: TitleProperties) => {
 		return (
 			<Text
 				style={[
 					{
-						fontFamily: weightSettings[weight],
+						fontFamily: fontSettings[weight],
 						fontSize: size,
 						textAlign: center ? 'center' : 'left',
-						color: props.color ? props.color : Color.black
+						color: properties.color ?? Color.black
 					},
 					style
 				]}
 				numberOfLines={numberOfLines}
-				{...props}>
+				{...properties}>
 				{children}
 			</Text>
 		)

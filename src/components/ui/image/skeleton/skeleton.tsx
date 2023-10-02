@@ -1,9 +1,9 @@
-import type { SkeletonProps } from '@/components/ui/image/skeleton/skeleton-types'
+import type { SkeletonProperties } from '@/components/ui/image/skeleton/skeleton-types'
 import { Color } from '@/utils/color'
 import { FC, memo } from 'react'
 import { View } from 'react-native'
 
-const Skeleton: FC<SkeletonProps> = ({
+const Skeleton: FC<SkeletonProperties> = ({
 	style,
 	height = 100,
 	transparent = false,
@@ -14,10 +14,10 @@ const Skeleton: FC<SkeletonProps> = ({
 		<View
 			style={[
 				{
-					height: height as number,
+					height,
 					width,
 					borderRadius,
-					backgroundColor: transparent ? 'transparent' : Color.dust
+					backgroundColor: transparent ? Color.transparent : Color.dust
 				},
 				style
 			]}

@@ -8,10 +8,12 @@ const AdminButton = () => {
 	const { user } = useAuth()
 	const { name } = useRoute()
 	// TODO: Добавить по роуту проверку
-	if ((user && !user?.isAdmin) || !user || name === 'Statistic') return null
+	if ((user && !user?.isAdmin) || !user || name === 'Statistic') return
 	return (
 		<Icon
-			onPress={() => navigate('Statistic')}
+			onPress={() => {
+				navigate('Statistic')
+			}}
 			name={'key'}
 			size={'medium'}
 			className='absolute bottom-3 left-[-1.5px] w-[50px] rounded-l-none bg-pale'

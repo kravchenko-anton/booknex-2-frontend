@@ -6,10 +6,10 @@ import { Color } from '@/utils/color'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import type { FC } from 'react'
 
-import { TypeRootStackParamList } from './navigation-types'
+import { TypeRootStackParameterList } from './navigation-types'
 import { routes, userRoutes } from './user-routes'
 
-const Stack = createNativeStackNavigator<TypeRootStackParamList>()
+const Stack = createNativeStackNavigator<TypeRootStackParameterList>()
 
 const PrivateNavigator: FC = () => {
 	const { user } = useAuth()

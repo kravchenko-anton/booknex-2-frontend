@@ -12,7 +12,7 @@ export const genreService = {
 
 	async byId(id: number) {
 		return request<GenreByIdType>({
-			url: getGenresUrl(`/${id}`),
+			url: getGenresUrl(`/by-id/${id}`),
 			method: 'GET'
 		})
 	}

@@ -1,5 +1,10 @@
-import type { ViewDefaultProps } from '@/types/component-types'
+import type { ViewDefaultProperties } from '@/types/component-types'
 
-export interface TabsProps extends ViewDefaultProps {
-	routes: { key: string; title: string; component: JSX.Element }[]
+export interface Route {
+	key: string
+	title: string
+	component: JSX.Element
+}
+export interface TabsProperties extends ViewDefaultProperties {
+	routes: Route[]
 }

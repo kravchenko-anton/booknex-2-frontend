@@ -1,4 +1,4 @@
-import { errorToast } from '@/utils/errorToast'
+import { errorToast } from '@/utils/error-toast'
 import { isRejectedWithValue } from '@reduxjs/toolkit'
 import { Middleware, MiddlewareAPI } from 'redux'
 

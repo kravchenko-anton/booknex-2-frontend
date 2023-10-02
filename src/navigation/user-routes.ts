@@ -1,4 +1,4 @@
-import Featured from '@/screens/featured/Featured'
+import Featured from '@/screens/featured/featured'
 import Genre from '@/screens/genre/genre'
 import Library from '@/screens/user-library/user-library'
 import Book from '../screens/book/book'

@@ -2,14 +2,14 @@ import { hamburgerAnimation } from '@/components/ui/hamburger-menu/hamburger-ani
 import { Title } from '@/components/ui/title/title'
 import { WINDOW_HEIGHT } from '@/constants/dimensions'
 import { AnimatedPressable, AnimatedView } from '@/types/component-types'
-import { Color, ColorProps } from '@/utils/color'
+import { Color, ColorProperties } from '@/utils/color'
 import { FC } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
 const className = 'w-6 h-0.5'
 
-interface HamburgerMenuProps extends ColorProps {
+interface HamburgerMenuProperties extends ColorProperties {
 	position?: 'left' | 'right'
 	elements?: {
 		title: string
@@ -17,7 +17,7 @@ interface HamburgerMenuProps extends ColorProps {
 	}[]
 }
 
-const HamburgerMenu: FC<HamburgerMenuProps> = ({
+const HamburgerMenu: FC<HamburgerMenuProperties> = ({
 	color = Color.black,
 	position = 'left',
 	elements
@@ -27,12 +27,12 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({
 	return (
 		<>
 			<AnimatedPressable
-				onPress={() => (isOpen.value = false)}
+				onTouchStart={() => (isOpen.value = false)}
+				className='z-20 '
 				style={[
 					{
 						...StyleSheet.absoluteFillObject,
-						height: WINDOW_HEIGHT,
-						zIndex: 20
+						height: WINDOW_HEIGHT
 					},
 					animation.backdropStyle
 				]}

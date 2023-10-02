@@ -1,8 +1,7 @@
 import { getHistoryUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
 import {
-	addHistoryDto,
-	HistoryByBookIdType,
+	AddHistoryDto,
 	HistoryGetType
 } from '@/services/types/history-service-types'
 
@@ -14,11 +13,7 @@ export const historyService = {
 		})
 	},
 
-	async byBookId(id: number) {
-		return request<HistoryByBookIdType[]>({})
-	},
-
-	async addHistory(dto: addHistoryDto[]) {
+	async addHistory(dto: AddHistoryDto[]) {
 		return request({
 			url: getHistoryUrl('/add'),
 			method: 'POST',

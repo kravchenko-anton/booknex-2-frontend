@@ -26,19 +26,20 @@ const CheckEmail: FC<
 		emailField.includes('.')
 	)
 
-	const { data: isEmailExists, mutate: checkEmailFunc } = useMutation(
+	const { data: isEmailExists, mutate: checkEmailFunction } = useMutation(
 		['check-email'],
 		() => authService.checkEmail(emailField)
 	)
 	useEffect(() => {
-		noValidEmail && checkEmailFunc()
+		if (!emailField) return
+		checkEmailFunction()
 	}, [emailField])
 	return (
-		<AnimatedView style={[showAnimation]}>
-			<Title size={34} color={Color.secondary} weight={'bold'}>
+		<AnimatedView style={showAnimation}>
+			<Title size={34} color={Color.secondary} weight='bold'>
 				Log in or Sign up
 			</Title>
-			<Title size={18} color={Color.gray} className='mb-4' weight={'light'}>
+			<Title size={18} color={Color.gray} className='mb-4' weight='light'>
 				Enter your email to continue
 			</Title>
 			<Field
@@ -53,17 +54,17 @@ const CheckEmail: FC<
 				variant={isEmailExists?.isExist ? 'secondary' : 'primary'}
 				className='mt-2'
 				width={'100%'}
-				onPress={() =>
+				onPress={() => {
 					navigate(isEmailExists?.isExist ? 'Login' : 'Registration', {
 						defaultEmail: emailField
 					})
-				}
+				}}
 				text={
-					!noValidEmail
-						? 'continue'
-						: isEmailExists?.isExist
-						? 'log in'
-						: 'register'
+					noValidEmail
+						? isEmailExists?.isExist
+							? 'log in'
+							: 'register'
+						: 'continue'
 				}
 			/>
 		</AnimatedView>

@@ -1,10 +1,10 @@
-import { HeaderProps } from '@/components/header/header-types'
+import { HeaderProperties } from '@/components/header/header-types'
 import Icon from '@/components/ui/icon/icon'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
-const Header: FC<HeaderProps> = ({
+const Header: FC<HeaderProperties> = ({
 	rightIcon,
 	leftIcon,
 	wrapperStyle,
@@ -19,15 +19,17 @@ const Header: FC<HeaderProps> = ({
 			{leftIcon.back ? (
 				<Icon
 					name={'arrow-left'}
-					onPress={() => goBack()}
+					onPress={() => {
+						goBack()
+					}}
 					size={'large'}
 					color={color}
-					style={{ paddingLeft: 0 }}
+					className='pl-0'
 				/>
 			) : leftIcon.icon ? (
 				<Icon
 					size={'large'}
-					style={{ paddingLeft: 0 }}
+					className='pl-0'
 					color={color}
 					{...leftIcon.icon}
 				/>
@@ -35,10 +37,10 @@ const Header: FC<HeaderProps> = ({
 				leftIcon.element
 			)}
 
-			{rightIcon && rightIcon.icon ? (
+			{rightIcon?.icon ? (
 				<Icon
 					size={'large'}
-					style={{ paddingRight: 0 }}
+					className='pr-0'
 					color={color}
 					{...rightIcon.icon}
 				/>

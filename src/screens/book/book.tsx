@@ -14,7 +14,6 @@ import { useTypedRoute } from '@/hooks/useTypedRoute'
 import Feature from '@/screens/book/feature/feature'
 import { bookService } from '@/services/book-service'
 import { Color } from '@/utils/color'
-import { shadeRGBColor } from '@/utils/shade.color'
 import { useQuery } from '@tanstack/react-query'
 import { StatusBar } from 'expo-status-bar'
 import { Share, View } from 'react-native'
@@ -42,10 +41,20 @@ const Book = () => {
 						<HamburgerMenu
 							position={'right'}
 							color={Color.black}
-							//TODO: сделать нормальный список
+							// TODO: сделать нормальный список
 							elements={[
-								{ title: 'Home', onPress: () => console.log('Home') },
-								{ title: 'Library', onPress: () => console.log('Library') }
+								{
+									title: 'Home',
+									onPress: () => {
+										console.log('Home')
+									}
+								},
+								{
+									title: 'Library',
+									onPress: () => {
+										console.log('Library')
+									}
+								}
 							]}
 						/>
 					)
@@ -58,10 +67,9 @@ const Book = () => {
 				<View
 					style={{
 						paddingTop: top,
-						backgroundColor: shadeRGBColor(book.color, -30),
-						height: 240
+						backgroundColor: book.color
 					}}
-					className='p-4'>
+					className='h-[250px] p-4'>
 					<Header
 						leftIcon={{ back: true }}
 						color={Color.white}
@@ -107,7 +115,7 @@ const Book = () => {
 						<Feature
 							iconDescription={'Liked'}
 							iconName={'thumbsup'}
-							iconTitle={`${book.likedPercent}%`}
+							iconTitle={`${book.likedPercentage}%`}
 						/>
 					</View>
 					<Image
@@ -151,7 +159,9 @@ const Book = () => {
 					headerText={'Similar book'}
 					renderItem={({ item: similarBook }) => (
 						<BookCard
-							onPress={() => navigate('Book', { id: similarBook.id })}
+							onPress={() => {
+								navigate('Book', { id: similarBook.id })
+							}}
 							image={{ uri: similarBook.image, height: 230, width: 150 }}
 						/>
 					)}

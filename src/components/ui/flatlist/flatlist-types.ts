@@ -1,11 +1,11 @@
 import type {
-	FlatListProps as FlatListDefaultProps,
+	FlatListProps as FlatListDefaultProperties,
 	ListRenderItem
 } from 'react-native'
 
-export interface FlatListProps<T>
+export interface FlatListProperties<T>
 	extends Pick<
-		FlatListDefaultProps<T>,
+		FlatListDefaultProperties<T>,
 		| 'horizontal'
 		| 'ListEmptyComponent'
 		| 'keyExtractor'
@@ -21,7 +21,7 @@ export interface FlatListProps<T>
 		| 'contentContainerStyle'
 		| 'columnWrapperStyle'
 	> {
-	data: T[]
+	data: T[] | undefined
 	elementSpacing?: number
 	renderItem: ListRenderItem<T>
 	headerText?: string

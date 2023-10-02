@@ -6,18 +6,13 @@ const BigLoader = () => {
 	return (
 		<View
 			style={{
-				height: '100%',
-				width: '100%',
 				backgroundColor: Color.canvas
 			}}
-			className='absolute items-center justify-center'>
+			className='absolute h-full w-full items-center justify-center'>
 			<ActivityIndicator
 				size='large'
 				color={Color.secondary}
-				style={{
-					width: 200,
-					height: 200
-				}}
+				className='h-[200px] w-[200px]'
 			/>
 		</View>
 	)

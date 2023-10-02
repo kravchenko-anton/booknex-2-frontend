@@ -11,12 +11,12 @@ import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-export interface EnterFieldProps extends PopupTypes<'genres' | 'fields'> {
+export interface EnterFieldProperties extends PopupTypes<'genres' | 'fields'> {
 	defaultEmail: string
 	selectGenres: string[]
 }
 
-const EnterField: FC<EnterFieldProps> = ({
+const EnterField: FC<EnterFieldProperties> = ({
 	isActivePopup,
 	defaultEmail,
 	selectGenres,
@@ -25,18 +25,18 @@ const EnterField: FC<EnterFieldProps> = ({
 	const { register } = useAction()
 	const { control, handleSubmit } = useForm<Omit<UserUpdateDto, 'picture'>>()
 	const onSubmit = (data: Omit<UserUpdateDto, 'picture'>) => {
-		if (!selectGenres.length || selectGenres.length < 3) return
+		if (selectGenres.length === 0 || selectGenres.length < 3) return
 		register({ ...data, genres: selectGenres })
 	}
 	const { showAnimation } = popupAnimation(isActivePopup)
 	return (
-		<AnimatedView style={[showAnimation]}>
+		<AnimatedView style={showAnimation}>
 			<Header
 				color={Color.black}
 				leftIcon={{
 					icon: {
 						name: 'x',
-						onPress: () => setIsActivePopup('genres')
+						onPress: () => { setIsActivePopup('genres'); }
 					}
 				}}
 			/>

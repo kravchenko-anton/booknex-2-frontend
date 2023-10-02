@@ -1,6 +1,6 @@
-import type { Style, Width_Height } from '@/types/global'
+import type { Dimensions, Style } from '@/types/global'
 
-export interface SkeletonProps extends Width_Height {
+export interface SkeletonProperties extends Dimensions {
 	borderRadius?: number
 	transparent?: boolean
 	style: Style

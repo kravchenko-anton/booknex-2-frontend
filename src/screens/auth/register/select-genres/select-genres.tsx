@@ -9,13 +9,14 @@ import { Color } from '@/utils/color'
 import { Dispatch, FC, SetStateAction } from 'react'
 import { View } from 'react-native'
 
-export interface SelectGenresProps extends PopupTypes<'genres' | 'fields'> {
+export interface SelectGenresProperties
+	extends PopupTypes<'genres' | 'fields'> {
 	genres: GenreType[]
 	selectGenres: string[]
 	setSelectGenres: Dispatch<SetStateAction<string[]>>
 }
 
-const SelectGenres: FC<SelectGenresProps> = ({
+const SelectGenres: FC<SelectGenresProperties> = ({
 	genres,
 	isActivePopup,
 	setSelectGenres,
@@ -24,7 +25,7 @@ const SelectGenres: FC<SelectGenresProps> = ({
 }) => {
 	const { showAnimation } = popupAnimation(isActivePopup)
 	return (
-		<AnimatedView style={[showAnimation]} className='h-full'>
+		<AnimatedView style={showAnimation} className='h-full'>
 			<Header leftIcon={{ back: true }} />
 			<View>
 				<Title size={34} weight={'bold'} className='mb-2' numberOfLines={2}>
@@ -37,17 +38,15 @@ const SelectGenres: FC<SelectGenresProps> = ({
 			<View className='flex w-full flex-row flex-wrap '>
 				{genres.map(genre => (
 					<Button
-						onPress={() =>
-							selectGenres.some(g => g === genre.name)
+						onPress={() => {
+							selectGenres.includes(genre.name)
 								? setSelectGenres(selectGenres.filter(g => g !== genre.name))
 								: setSelectGenres([...selectGenres, genre.name])
-						}
+						}}
 						key={genre.id}
 						size={'medium'}
 						text={genre.name}
-						variant={
-							selectGenres.some(g => g === genre.name) ? 'primary' : 'dust'
-						}
+						variant={selectGenres.includes(genre.name) ? 'primary' : 'dust'}
 						className='mr-3'
 					/>
 				))}
@@ -58,7 +57,9 @@ const SelectGenres: FC<SelectGenresProps> = ({
 				variant={'secondary'}
 				size={'large'}
 				text={'Next step'}
-				onPress={() => setIsActivePopup('fields')}
+				onPress={() => {
+					setIsActivePopup('fields')
+				}}
 			/>
 		</AnimatedView>
 	)

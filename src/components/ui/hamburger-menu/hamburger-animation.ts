@@ -16,7 +16,7 @@ export const hamburgerAnimation = (
 			transform: [
 				{
 					translateX: withSpring(
-						isShow.value ? 0 : position === 'left' ? -100 : 100
+						isShow.value ? 0 : (position === 'left' ? -100 : 100)
 					)
 				}
 			]

@@ -3,13 +3,13 @@ import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { Color } from '@/utils/color'
-import { shadeRGBColor } from '@/utils/shade.color'
+import { shadeRGBColor } from '@/utils/shade-color'
 import { LinearGradient } from 'expo-linear-gradient'
 import type { FC } from 'react'
 import { FlatList, View } from 'react-native'
-import type { RecommendationProps } from './recommendation-types'
+import type { RecommendationProperties } from './recommendation-types'
 
-const Recommendation: FC<RecommendationProps> = ({ data }) => {
+const Recommendation: FC<RecommendationProperties> = ({ data = [] }) => {
 	const { navigate } = useTypedNavigation()
 	return (
 		<View className='relative mt-4 items-center px-2'>
@@ -18,10 +18,7 @@ const Recommendation: FC<RecommendationProps> = ({ data }) => {
 					colors={[Color.primary, shadeRGBColor(Color.primary, -50)]}
 					start={[0.1, 1.5]}
 					end={[1, 0.9]}
-					style={{
-						borderRadius: 10,
-						height: '50%'
-					}}
+					className='h-[50%] rounded-xl'
 				/>
 			</View>
 			<Icon
@@ -33,7 +30,7 @@ const Recommendation: FC<RecommendationProps> = ({ data }) => {
 				Recommended for you
 			</Title>
 			<FlatList
-				ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
+				ItemSeparatorComponent={() => <View className='w-[12px]' />}
 				contentContainerStyle={{ paddingHorizontal: 8 }}
 				horizontal
 				className='mb-4'
@@ -44,7 +41,9 @@ const Recommendation: FC<RecommendationProps> = ({ data }) => {
 				data={data}
 				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => navigate('Book', { id: book.id })}
+						onPress={() => {
+							navigate('Book', { id: book.id })
+						}}
 						image={{
 							uri: book.image,
 							height: 220,

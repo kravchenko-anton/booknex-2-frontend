@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 
-export type TypeRootStackParamList = {
+export type TypeRootStackParameterList = {
 	Featured: undefined
 	Profile: undefined
 	Reading: undefined
@@ -18,7 +18,7 @@ export type TypeRootStackParamList = {
 }
 
 export interface IRoute {
-	name: keyof TypeRootStackParamList
+	name: keyof TypeRootStackParameterList
 	component: ComponentType
 	isAdmin?: boolean
 }

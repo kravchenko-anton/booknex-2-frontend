@@ -1,16 +1,16 @@
-import type { IconProps } from '@/components/ui/icon/icon-types'
-import type { ViewDefaultProps } from '@/types/component-types'
-import type { WrapperProps } from '@/types/global'
-import type { ColorProps } from '@/utils/color'
+import type { IconProperties } from '@/components/ui/icon/icon-types'
+import type { ViewDefaultProperties } from '@/types/component-types'
+import { WrapperProperties } from '@/types/global'
+import type { ColorProperties } from '@/utils/color'
 
-type HeaderIcon = {
+interface HeaderIcon {
 	element?: JSX.Element
-	icon?: Omit<IconProps, 'color' | 'size'>
+	icon?: Omit<IconProperties, 'color' | 'size'>
 }
 
-export interface HeaderProps
-	extends WrapperProps<ViewDefaultProps>,
-		ColorProps {
+export interface HeaderProperties
+	extends WrapperProperties<ViewDefaultProperties>,
+		ColorProperties {
 	leftIcon: { back?: boolean } & HeaderIcon
 	rightIcon?: HeaderIcon
 }

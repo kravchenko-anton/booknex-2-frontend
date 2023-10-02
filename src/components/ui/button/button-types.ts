@@ -1,6 +1,6 @@
-import type { PressableDefaultProps } from '@/types/component-types'
+import type { PressableDefaultProperties } from '@/types/component-types'
 
-export type ButtonProps = PressableDefaultProps & {
+export type ButtonProperties = PressableDefaultProperties & {
 	width?: number | string
 	size: 'small' | 'medium' | 'large'
 	variant?: 'primary' | 'secondary' | 'ghost' | 'dust' | 'pale'

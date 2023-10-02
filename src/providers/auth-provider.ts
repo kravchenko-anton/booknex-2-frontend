@@ -1,7 +1,7 @@
 import { useAction } from '@/hooks/useAction'
 import { useAuth } from '@/hooks/useAuth'
 import { errorCatch } from '@/utils/catch-error'
-import { errorToast } from '@/utils/errorToast'
+import { errorToast } from '@/utils/error-toast'
 import { getItemAsync } from 'expo-secure-store'
 import { useEffect } from 'react'
 
@@ -15,9 +15,8 @@ export const useCheckAuth = (routeName?: string) => {
 			if (!accessToken && refreshToken) {
 				try {
 					getNewToken(refreshToken)
-				} catch (e) {
-					console.log('logout')
-					errorToast(errorCatch(e))
+				} catch (error) {
+					errorToast(errorCatch(error))
 					logout()
 				}
 			}

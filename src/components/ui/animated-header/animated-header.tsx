@@ -1,4 +1,4 @@
-import { AnimatedHeaderProps } from '@/components/ui/animated-header/animated-header-types'
+import { AnimatedHeaderProperties } from '@/components/ui/animated-header/animated-header-types'
 import { headerAnimation } from '@/components/ui/animated-header/header-animation'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
@@ -8,7 +8,7 @@ import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
-const AnimatedHeader: FC<AnimatedHeaderProps> = ({
+const AnimatedHeader: FC<AnimatedHeaderProperties> = ({
 	scrollPosition,
 	title,
 	transientValue,
@@ -19,12 +19,14 @@ const AnimatedHeader: FC<AnimatedHeaderProps> = ({
 	return (
 		<AnimatedView
 			className='absolute left-0 right-0 top-0 z-50 h-[75px] bg-canvas'
-			style={[headerStyle]}>
+			style={headerStyle}>
 			<View className='mt-auto flex-row items-center justify-between px-4'>
 				<View className='flex-row items-center'>
 					<Icon
 						name={'arrow-left'}
-						onPress={() => goBack()}
+						onPress={() => {
+							goBack()
+						}}
 						size={'medium'}
 						className='pl-0'
 						color={Color.black}

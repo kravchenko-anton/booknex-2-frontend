@@ -9,20 +9,20 @@ import {
 	IconColorSetting,
 	SizeSetting
 } from '@/components/ui/icon/icon-settings'
-import type { IconProps } from '@/components/ui/icon/icon-types'
+import type { IconProperties } from '@/components/ui/icon/icon-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Octicons } from '@expo/vector-icons'
 import type { FC } from 'react'
 import { memo } from 'react'
 
-const Icon: FC<IconProps> = ({
+const Icon: FC<IconProperties> = ({
 	name = 'alert',
 	variant = 'ghost',
 	size = 'small',
 	color,
 	style,
 	noPadding = false,
-	...props
+	...properties
 }) => {
 	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
@@ -39,11 +39,11 @@ const Icon: FC<IconProps> = ({
 				style
 			]}
 			{...pressFunctions}
-			{...props}>
+			{...properties}>
 			<Octicons
 				name={name}
 				size={SizeSetting[size]}
-				color={color ? color : IconColorSetting[variant]}
+				color={color ?? IconColorSetting[variant]}
 			/>
 		</AnimatedPressable>
 	)

@@ -1,4 +1,4 @@
-export const weightSettings = {
+export const fontSettings = {
 	light: 'SpaceGrotesk_300Light',
 	regular: 'SpaceGrotesk_400Regular',
 	medium: 'SpaceGrotesk_500Medium',

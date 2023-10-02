@@ -1,38 +1,40 @@
 import Button from '@/components/ui/button/button'
-import { TabsProps } from '@/components/ui/tabs/tabs-types'
+import { Route, TabsProperties } from '@/components/ui/tabs/tabs-types'
 import { WINDOW_WIDTH } from '@/constants/dimensions'
 import { FC, memo, useRef, useState } from 'react'
-import { FlatList, View } from 'react-native'
+import { View } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler'
 
-const Tabs: FC<TabsProps> = ({ routes, ...props }) => {
+const Tabs: FC<TabsProperties> = ({ routes = [], ...properties }) => {
 	const [activeTab, setActiveTab] = useState(routes[0].key)
-	let flatListRef = useRef<FlatList>(null)
-	let tabListRef = useRef<FlatList>(null)
+	const flatListReference = useRef<FlatList>(null)
+	const tabListReference = useRef<FlatList>(null)
 	return (
-		<View {...props}>
+		<View {...properties}>
 			<View>
 				<FlatList
-					ref={tabListRef}
+					ref={tabListReference}
 					renderToHardwareTextureAndroid={true}
 					horizontal={true}
 					showsVerticalScrollIndicator={false}
 					showsHorizontalScrollIndicator={false}
 					bounces={false}
-					ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+					ItemSeparatorComponent={() => <View className='w-[10px]' />}
 					data={routes}
-					renderItem={({ item: book }) => {
+					// If you add ref, the types break
+					renderItem={({ item: tab }: { item: Route }) => {
 						return (
 							<Button
 								size={'medium'}
 								onPress={() => {
-									const index = routes.findIndex(
-										route => route.key === book.key
+									const index: number = routes.findIndex(
+										route => route.key === tab.key
 									)
-									tabListRef.current?.scrollToIndex({ index })
-									flatListRef.current?.scrollToIndex({ index })
+									tabListReference.current?.scrollToIndex({ index })
+									flatListReference.current?.scrollToIndex({ index })
 								}}
-								variant={activeTab === book.key ? 'primary' : 'dust'}
-								text={book.title}
+								variant={activeTab === tab.key ? 'primary' : 'dust'}
+								text={tab.title}
 							/>
 						)
 					}}
@@ -43,10 +45,12 @@ const Tabs: FC<TabsProps> = ({ routes, ...props }) => {
 				bounces={false}
 				showsVerticalScrollIndicator={false}
 				pagingEnabled={true}
-				ref={flatListRef}
-				onScroll={e => {
-					const index = Math.round(e.nativeEvent.contentOffset.x / WINDOW_WIDTH)
-					tabListRef.current?.scrollToIndex({ index })
+				ref={flatListReference}
+				onScroll={event => {
+					const index = Math.round(
+						event.nativeEvent.contentOffset.x / WINDOW_WIDTH
+					)
+					tabListReference.current?.scrollToIndex({ index })
 					setActiveTab(routes[index].key)
 				}}
 				snapToInterval={WINDOW_WIDTH}

@@ -11,8 +11,8 @@ import { View } from 'react-native'
 const Search = () => {
 	const {
 		searchTerm,
-		books = [],
-		topSearches = [],
+		books,
+		topSearches,
 		topSearchesLoading,
 		bookLoading,
 		control
@@ -25,16 +25,14 @@ const Search = () => {
 				name={'searchTerm'}
 				placeholder={'Type something...'}
 			/>
-			{!!searchTerm ? (
+			{searchTerm ? (
 				<View className='flex-1'>
 					{bookLoading ? (
 						<BigLoader />
 					) : (
 						<FlatList
-							style={{
-								flexGrow: 1,
-								width: '100%'
-							}}
+							keyExtractor={item => `$${item.id}`}
+							className='w-full flex-grow'
 							data={books}
 							renderItem={({ item: book }) => (
 								<VerticalBookCard
@@ -46,32 +44,35 @@ const Search = () => {
 									title={book.title}
 									author={book.author}
 									pages={book.pages}
-									likedPercent={book.likedPercent}
-									onPress={() => navigate('Book', { id: book.id })}
+									likedPercentage={book.likedPercentage}
+									onPress={() => {
+										navigate('Book', { id: book.id })
+									}}
 								/>
 							)}
 						/>
 					)}
 				</View>
-			) : !topSearchesLoading ? (
+			) : topSearchesLoading ? (
+				<BigLoader />
+			) : (
 				<FlatList
+					keyExtractor={item => `#${item.id} - ${item.name}`}
 					data={topSearches}
 					renderItem={({ item }) => (
 						<Button
 							size={'large'}
 							className='items-start'
 							variant={'dust'}
-							onPress={() =>
+							onPress={() => {
 								navigate(item.name ? 'Genre' : 'Book', {
 									id: item.id
 								})
-							}
-							text={(item.name ? item.name : item.title) || 'Unknown'}
+							}}
+							text={(item.name ?? item.title) || 'Unknown'}
 						/>
 					)}
 				/>
-			) : (
-				<BigLoader />
 			)}
 		</Layout>
 	)

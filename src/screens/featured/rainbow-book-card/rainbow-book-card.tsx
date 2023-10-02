@@ -1,28 +1,28 @@
 import { usePressAnimation } from '@/animations/press-animation'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
-import { RainbowBookCardProps } from '@/screens/featured/rainbow-book-card/rainbow-book-card-types'
+import { RainbowBookCardProperties } from '@/screens/featured/rainbow-book-card/rainbow-book-card-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
-const RainbowBookCard: FC<RainbowBookCardProps> = ({ image, ...props }) => {
+const RainbowBookCard: FC<RainbowBookCardProperties> = ({
+	image,
+	...properties
+}) => {
 	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
 		<AnimatedPressable
-			className='justify-between rounded-xl p-4'
+			className='mb-1.5 h-[300px] w-[300px] justify-between rounded-xl p-4'
 			style={[
 				{
-					width: 300,
-					height: 300,
-					marginBottom: 6,
-					backgroundColor: props.backgroundColor
+					backgroundColor: properties.backgroundColor
 				},
 				animatedStyle
 			]}
 			{...pressFunctions}
-			{...props}>
+			{...properties}>
 			<View className='items-center'>
 				<Image url={image.uri} height={image.height} width={image.width} />
 				<Title
@@ -31,11 +31,11 @@ const RainbowBookCard: FC<RainbowBookCardProps> = ({ image, ...props }) => {
 					weight={'bold'}
 					size={20}
 					color={Color.white}>
-					{props.title}
+					{properties.title}
 				</Title>
 			</View>
 			<Title size={16} numberOfLines={3} color={Color.white} weight={'regular'}>
-				{props.description}
+				{properties.description}
 			</Title>
 		</AnimatedPressable>
 	)

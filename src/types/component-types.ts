@@ -11,12 +11,12 @@ import Animated from 'react-native-reanimated'
 
 export const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 export const AnimatedView = Animated.createAnimatedComponent(View)
-export type ViewDefaultProps = Pick<
+export type ViewDefaultProperties = Pick<
 	ViewProps,
 	'className' | 'style' | 'onLayout' | 'pointerEvents' | 'onMagicTap'
 >
 
-export type PressableDefaultProps = Pick<
+export type PressableDefaultProperties = Pick<
 	PressableProps,
 	| 'onLayout'
 	| 'pointerEvents'
@@ -30,7 +30,7 @@ export type PressableDefaultProps = Pick<
 	| 'onLongPress'
 >
 
-export type TextDefaultProps = Pick<
+export type TextDefaultProperties = Pick<
 	TextProps,
 	| 'style'
 	| 'onPress'
@@ -43,7 +43,7 @@ export type TextDefaultProps = Pick<
 	| 'numberOfLines'
 >
 
-export type ImageDefaultProps = Pick<
+export type ImageDefaultProperties = Pick<
 	ImageProps,
 	| 'blurRadius'
 	| 'onLoad'
@@ -58,7 +58,7 @@ export type ImageDefaultProps = Pick<
 	| 'className'
 	| 'onError'
 >
-export type ScrollViewDefaultProps = Pick<
+export type ScrollViewDefaultProperties = Pick<
 	ScrollViewProps,
 	| 'scrollEnabled'
 	| 'children'

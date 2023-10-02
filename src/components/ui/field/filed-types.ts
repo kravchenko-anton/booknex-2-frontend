@@ -1,5 +1,3 @@
-import type { ViewDefaultProps } from '@/types/component-types'
-import type { WrapperProps } from '@/types/global'
 import {
 	Control,
 	FieldPath,
@@ -8,12 +6,11 @@ import {
 } from 'react-hook-form'
 import { KeyboardTypeOptions, TextInputProps } from 'react-native'
 
-export interface FieldProps<T extends FieldValues>
+export interface FieldProperties<T extends FieldValues>
 	extends Omit<
-			TextInputProps,
-			'onChange' | 'onChangeText' | 'value' | 'testID'
-		>,
-		WrapperProps<ViewDefaultProps['style']> {
+		TextInputProps,
+		'onChange' | 'onChangeText' | 'value' | 'testID'
+	> {
 	control: Control<T>
 	name: FieldPath<T>
 	keyboardType?: KeyboardTypeOptions

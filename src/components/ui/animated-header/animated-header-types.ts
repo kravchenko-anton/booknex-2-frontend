@@ -1,10 +1,10 @@
-import { IconProps } from '@/components/ui/icon/icon-types'
+import { IconProperties } from '@/components/ui/icon/icon-types'
 
-export interface AnimatedHeaderProps {
+export interface AnimatedHeaderProperties {
 	title: string
 	transientValue: number
 	rightIcon?: {
-		icon?: IconProps
+		icon?: IconProperties
 		element?: JSX.Element
 	}
 	scrollPosition: { value: number }

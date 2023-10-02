@@ -1,24 +1,25 @@
-import { FlatListProps } from '@/components/ui/flatlist/flatlist-types'
+import { FlatListProperties } from '@/components/ui/flatlist/flatlist-types'
 import { Title } from '@/components/ui/title/title'
 import { FlatList as DefaultFlatlist, View } from 'react-native'
 
 const FlatList = <T,>({
 	headerText,
+	data = [],
 	elementSpacing = 12,
 	titleMb = 16,
 	contentContainerStyle,
 	mt = 24,
 	px = 8,
-	...props
-}: FlatListProps<T>) => {
-	if (props.data.length === 0 && !props.ListEmptyComponent) return null
+	...properties
+}: FlatListProperties<T>) => {
+	if (data.length === 0 && !properties.ListEmptyComponent) return
 	return (
 		<>
-			{headerText && props.data.length !== 0 && (
+			{headerText && data.length > 0 && (
 				<Title
 					style={{
 						marginTop: mt,
-						paddingHorizontal: props.horizontal ? px : 0,
+						paddingHorizontal: properties.horizontal ? px : 0,
 						marginBottom: titleMb
 					}}
 					size={22}
@@ -27,17 +28,18 @@ const FlatList = <T,>({
 				</Title>
 			)}
 			<DefaultFlatlist
+				data={data}
 				ItemSeparatorComponent={() => (
 					<View
 						style={
-							props.horizontal
+							properties.horizontal
 								? { width: elementSpacing }
 								: { height: elementSpacing }
 						}
 					/>
 				)}
 				contentContainerStyle={{
-					paddingHorizontal: props.horizontal ? px : 0
+					paddingHorizontal: properties.horizontal ? px : 0
 				}}
 				bounces={false}
 				renderToHardwareTextureAndroid={true}
@@ -49,7 +51,7 @@ const FlatList = <T,>({
 				showsHorizontalScrollIndicator={false}
 				showsVerticalScrollIndicator={false}
 				decelerationRate='normal'
-				{...props}
+				{...properties}
 			/>
 		</>
 	)

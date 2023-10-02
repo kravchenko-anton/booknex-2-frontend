@@ -1,4 +1,4 @@
-import { BookCardProps } from '@/components/book-card/book-card-types'
+import { BookCardProperties } from '@/components/book-card/book-card-types'
 import Button from '@/components/ui/button/button'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
@@ -6,7 +6,7 @@ import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { Pressable, View } from 'react-native'
 
-const VerticalBookCard: FC<BookCardProps> = ({ image, ...book }) => {
+const VerticalBookCard: FC<BookCardProperties> = ({ image, ...book }) => {
 	return (
 		<Pressable
 			className=' h-[170px] w-full  flex-row rounded-lg bg-dust p-2'
@@ -34,7 +34,7 @@ const VerticalBookCard: FC<BookCardProps> = ({ image, ...book }) => {
 					<Button
 						variant={'ghost'}
 						size={'small'}
-						text={`👍 ${book.likedPercent}% liked`}
+						text={`👍 ${book.likedPercentage}% liked`}
 					/>
 					<Button
 						variant={'ghost'}
