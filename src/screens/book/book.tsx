@@ -24,10 +24,10 @@ const Book = () => {
 	const { navigate } = useTypedNavigation()
 	const { top } = useSafeAreaInsets()
 	const { params } = useTypedRoute<'Book'>()
+	const scrollPosition = useSharedValue(0)
 	const { data: book } = useQuery(['book', params.id], () =>
 		bookService.byId(+params.id)
 	)
-	const scrollPosition = useSharedValue(0)
 	if (!book) return <BigLoader />
 	return (
 		<>
@@ -61,6 +61,9 @@ const Book = () => {
 				}}
 			/>
 			<ScrollView
+				onLayout={() => {
+					scrollPosition.value = 0
+				}}
 				onScroll={event => {
 					scrollPosition.value = event.nativeEvent.contentOffset.y
 				}}>

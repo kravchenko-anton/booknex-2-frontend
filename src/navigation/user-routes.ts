@@ -1,6 +1,6 @@
 import Featured from '@/screens/featured/featured'
 import Genre from '@/screens/genre/genre'
-import Library from '@/screens/user-library/user-library'
+import Library from '@/screens/user-library/library'
 import Book from '../screens/book/book'
 import Profile from '../screens/profile/profile'
 import Reading from '../screens/reading/reading'

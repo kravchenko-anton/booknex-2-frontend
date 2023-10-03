@@ -1,4 +1,5 @@
 import BookCard from '@/components/book-card/book-card'
+import RainbowBookCard from '@/components/book-card/rainbow-book-card/rainbow-book-card'
 import Header from '@/components/header/header'
 import ScrollLayout from '@/components/layout/scroll-layout'
 import AnimatedHeader from '@/components/ui/animated-header/animated-header'
@@ -68,19 +69,43 @@ const Genre = () => {
 					headerText={'Newest Books'}
 					data={genre.newestBooks}
 					renderItem={({ item: book }) => (
-						<BookCard
+						<RainbowBookCard
 							title={book.title}
 							image={{
-								uri: book.image,
-								height: 220,
-								width: 140
+								uri: book.image
 							}}
+							description={book.description}
 							onPress={() => {
 								navigate('Book', { id: book.id })
 							}}
+							backgroundColor={book.color}
 						/>
 					)}
 				/>
+
+				{genre.bestSellersFromSimilar.map(simular => {
+					return (
+						<FlatList
+							key={simular.name}
+							headerText={removeEmoji(simular.name)}
+							horizontal
+							mt={30}
+							data={simular.majorBooks}
+							renderItem={({ item: book }) => (
+								<BookCard
+									onPress={() => {
+										navigate('Book', { id: book.id })
+									}}
+									image={{
+										uri: book.image,
+										height: 200,
+										width: 130
+									}}
+								/>
+							)}
+						/>
+					)
+				})}
 			</ScrollLayout>
 		</>
 	)

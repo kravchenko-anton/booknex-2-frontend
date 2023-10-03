@@ -1,6 +1,5 @@
 import type { IconProperties } from '@/components/ui/icon/icon-types'
 import type { ViewDefaultProperties } from '@/types/component-types'
-import { WrapperProperties } from '@/types/global'
 import type { ColorProperties } from '@/utils/color'
 
 interface HeaderIcon {
@@ -8,9 +7,9 @@ interface HeaderIcon {
 	icon?: Omit<IconProperties, 'color' | 'size'>
 }
 
-export interface HeaderProperties
-	extends WrapperProperties<ViewDefaultProperties>,
-		ColorProperties {
+export interface HeaderProperties extends ColorProperties {
+	wrapperStyle?: ViewDefaultProperties['style']
+	wrapperClassName?: string
 	leftIcon: { back?: boolean } & HeaderIcon
 	rightIcon?: HeaderIcon
 }

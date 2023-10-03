@@ -9,11 +9,6 @@ export interface AnimationConfigType {
 	userConfig?: WithSpringConfig | WithTimingConfig
 }
 
-export interface WrapperProperties<T> {
-	wrapperStyle?: T
-	wrapperClassName?: string
-}
-
 export interface Dimensions {
 	width: number
 	height: number

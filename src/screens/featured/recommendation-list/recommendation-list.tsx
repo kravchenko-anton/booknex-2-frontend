@@ -7,9 +7,9 @@ import { shadeRGBColor } from '@/utils/shade-color'
 import { LinearGradient } from 'expo-linear-gradient'
 import type { FC } from 'react'
 import { FlatList, View } from 'react-native'
-import type { RecommendationProperties } from './recommendation-types'
+import type { RecommendationProperties } from './recommendation-list-types'
 
-const Recommendation: FC<RecommendationProperties> = ({ data = [] }) => {
+const RecommendationList: FC<RecommendationProperties> = ({ data = [] }) => {
 	const { navigate } = useTypedNavigation()
 	return (
 		<View className='relative mt-4 items-center px-2'>
@@ -58,4 +58,4 @@ const Recommendation: FC<RecommendationProperties> = ({ data = [] }) => {
 	)
 }
 
-export default Recommendation
+export default RecommendationList

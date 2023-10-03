@@ -7,8 +7,12 @@ export interface GenreType extends DefaultModelFields {
 	books: BookType[]
 }
 
+export interface SimilarBestSellersType extends Omit<GenreType, 'books'> {
+	majorBooks: ShortBookType[]
+}
+
 export interface GenreByIdType extends Omit<GenreType, 'books'> {
-	newestBooks: ShortBookType[]
+	newestBooks: Pick<BookType, keyof ShortBookType | 'color' | 'description'>[]
 	bestSellers: ShortBookType[]
-	bestSellersFromSimilar: GenreType[]
+	bestSellersFromSimilar: SimilarBestSellersType[]
 }

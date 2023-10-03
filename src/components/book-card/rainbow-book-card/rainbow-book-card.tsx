@@ -1,7 +1,7 @@
 import { usePressAnimation } from '@/animations/press-animation'
+import { RainbowBookCardProperties } from '@/components/book-card/rainbow-book-card/rainbow-book-card-types'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
-import { RainbowBookCardProperties } from '@/screens/featured/rainbow-book-card/rainbow-book-card-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
@@ -24,7 +24,7 @@ const RainbowBookCard: FC<RainbowBookCardProperties> = ({
 			{...pressFunctions}
 			{...properties}>
 			<View className='items-center'>
-				<Image url={image.uri} height={image.height} width={image.width} />
+				<Image url={image.uri} height={140} width={100} />
 				<Title
 					numberOfLines={1}
 					className='mt-2'

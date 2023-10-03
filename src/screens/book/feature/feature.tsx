@@ -5,7 +5,7 @@ import type { FC } from 'react'
 import { View } from 'react-native'
 
 const Feature: FC<FeatureProperties> = ({
-	iconName = 'book',
+	iconName = 'alert',
 	iconTitle,
 	iconDescription
 }) => {

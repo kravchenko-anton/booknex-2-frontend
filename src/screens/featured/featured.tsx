@@ -1,11 +1,11 @@
 import BookCard from '@/components/book-card/book-card'
+import RainbowBookCard from '@/components/book-card/rainbow-book-card/rainbow-book-card'
 import ScrollLayout from '@/components/layout/scroll-layout'
 import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import FullScreenLoader from '@/components/ui/loader/big-loader'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import RainbowBookCard from '@/screens/featured/rainbow-book-card/rainbow-book-card'
-import Recommendation from '@/screens/featured/recommendation/recommendation'
+import RecommendationList from '@/screens/featured/recommendation-list/recommendation-list'
 import { catalogService } from '@/services/catalog-service'
 import { removeEmoji } from '@/utils/remove-emoji'
 import { useQuery } from '@tanstack/react-query'
@@ -18,7 +18,7 @@ const Featured = () => {
 	if (!catalog) return <FullScreenLoader />
 	return (
 		<ScrollLayout>
-			<Recommendation data={catalog.recommendations} />
+			<RecommendationList data={catalog.recommendations} />
 			<FlatList
 				horizontal
 				data={catalog.mostRelatedGenres}
@@ -59,7 +59,7 @@ const Featured = () => {
 							navigate('Book', { id: book.id })
 						}}
 						backgroundColor={book.color}
-						image={{ uri: book.image, height: 140, width: 100 }}
+						image={{ uri: book.image }}
 						title={book.title}
 						description={book.description}
 					/>
