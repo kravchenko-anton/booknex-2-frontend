@@ -43,7 +43,7 @@ const Featured = () => {
 						onPress={() => {
 							navigate('Book', { id: book.id })
 						}}
-						image={{ uri: book.image, height: 230, width: 150 }}
+						image={{ uri: book.image, size: 'large' }}
 						title={book.title}
 						likedPercentage={book.likedPercentage}
 					/>
@@ -74,7 +74,7 @@ const Featured = () => {
 						onPress={() => {
 							navigate('Book', { id: book.id })
 						}}
-						image={{ uri: book.image, height: 230, width: 145 }}
+						image={{ uri: book.image, size: 'medium' }}
 					/>
 				)}
 			/>
@@ -93,8 +93,7 @@ const Featured = () => {
 								}}
 								image={{
 									uri: book.image,
-									height: 200,
-									width: 130
+									size: 'small'
 								}}
 							/>
 						)}
@@ -114,8 +113,7 @@ const Featured = () => {
 						pages={book.pages}
 						image={{
 							uri: book.image,
-							height: 260,
-							width: 170
+							size: 'medium'
 						}}
 						title={book.title}
 						author={book.author}

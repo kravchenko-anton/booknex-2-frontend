@@ -13,9 +13,9 @@ export const shelfService = {
 		})
 	},
 
-	async myList() {
+	async userShelf() {
 		return request<BookByIdType>({
-			url: getShelfUrl('/get-shelves')
+			url: getShelfUrl('/user-shelves')
 		})
 	},
 
@@ -23,7 +23,7 @@ export const shelfService = {
 
 	async all() {
 		return request({
-			url: getShelfUrl('/get-all')
+			url: getShelfUrl('/all')
 		})
 	},
 	async create(dto: ShelfManipulationType) {

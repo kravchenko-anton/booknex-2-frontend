@@ -38,8 +38,7 @@ const Search = () => {
 								<VerticalBookCard
 									image={{
 										uri: book.image,
-										height: 160,
-										width: 100
+										size: 'small'
 									}}
 									title={book.title}
 									author={book.author}

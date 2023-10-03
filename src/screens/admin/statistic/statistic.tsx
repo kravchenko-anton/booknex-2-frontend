@@ -30,15 +30,21 @@ const Statistic = () => {
 							elements={[
 								{
 									title: 'Books',
-									onPress: () => { console.log('Books'); }
+									onPress: () => {
+										console.log('Books')
+									}
 								},
 								{
 									title: 'Users',
-									onPress: () => { console.log('Users'); }
+									onPress: () => {
+										console.log('Users')
+									}
 								},
 								{
 									title: 'Statistic',
-									onPress: () => { console.log('Statistic'); }
+									onPress: () => {
+										console.log('Statistic')
+									}
 								}
 							]}
 						/>
@@ -72,8 +78,7 @@ const Statistic = () => {
 					<BookCard
 						image={{
 							uri: book.image,
-							height: 260,
-							width: 170
+							size: 'medium'
 						}}
 						key={book.id}
 						title={book.title}

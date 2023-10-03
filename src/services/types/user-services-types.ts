@@ -1,5 +1,26 @@
 import { DefaultModelFields } from '@/types/global'
 
+export interface UserProfileTypes
+	extends Pick<UserType, 'email' | 'name' | 'picture'>,
+		UserStatisticsType {}
+export type UserStatisticsType = [
+	{
+		name: 'Books read'
+		count: number
+	},
+	{
+		name: 'Pages read'
+		count: number
+	},
+	{
+		name: 'Time in read'
+		count: string
+	},
+	{
+		name: 'Reading speed'
+		count: string
+	}
+]
 export interface UserType extends DefaultModelFields {
 	email: string
 	name: string

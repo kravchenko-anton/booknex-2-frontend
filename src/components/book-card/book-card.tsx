@@ -1,4 +1,8 @@
 import { usePressAnimation } from '@/animations/press-animation'
+import {
+	heightSettings,
+	widthSettings
+} from '@/components/book-card/book-card-settings'
 import { BookCardProperties } from '@/components/book-card/book-card-types'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
@@ -19,12 +23,16 @@ const BookCard: FC<BookCardProperties> = ({
 			style={[
 				animatedStyle,
 				{
-					width: image.width
+					width: widthSettings[image.size]
 				}
 			]}
 			{...pressFunctions}
 			{...properties}>
-			<Image url={image.uri} height={image.height} width={image.width} />
+			<Image
+				url={image.uri}
+				height={heightSettings[image.size]}
+				width={widthSettings[image.size]}
+			/>
 			{(likedPercentage && !pages) ||
 				(!likedPercentage && pages && (
 					<Title

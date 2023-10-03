@@ -46,8 +46,7 @@ const RecommendationList: FC<RecommendationProperties> = ({ data = [] }) => {
 						}}
 						image={{
 							uri: book.image,
-							height: 220,
-							width: 150
+							size: 'medium'
 						}}
 						title={book.title}
 						author={book.author}

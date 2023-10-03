@@ -5,6 +5,7 @@ import { ShortShelfType } from '@/services/types/shelf-service-types'
 import {
 	UserLibraryFieldsType,
 	UserLibraryType,
+	UserProfileTypes,
 	UserType,
 	UserUpdateDto
 } from '@/services/types/user-services-types'
@@ -12,14 +13,14 @@ import { DefaultModelFields } from '@/types/global'
 
 export const userServices = {
 	async getProfile() {
-		return request<UserType>({
-			url: getUsersUrl('/get-profile'),
+		return request<UserProfileTypes>({
+			url: getUsersUrl('/profile'),
 			method: 'GET'
 		})
 	},
 	async getLibrary() {
 		return request<UserLibraryType>({
-			url: getUsersUrl('/get-library'),
+			url: getUsersUrl('/library'),
 			method: 'GET'
 		})
 	},
@@ -33,7 +34,7 @@ export const userServices = {
 	async update(dto: UserUpdateDto) {
 		return request<Pick<UserType, 'email' | 'name' | keyof DefaultModelFields>>(
 			{
-				url: getUsersUrl('/update-user'),
+				url: getUsersUrl('/update'),
 				method: 'POST',
 				data: dto
 			}
@@ -51,7 +52,7 @@ export const userServices = {
 
 	async all() {
 		return request({
-			url: getUsersUrl('/get-all-users')
+			url: getUsersUrl('/all')
 		})
 	},
 

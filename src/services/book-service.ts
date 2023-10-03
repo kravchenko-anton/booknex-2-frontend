@@ -18,7 +18,11 @@ export const bookService = {
 			method: 'POST'
 		})
 	},
-
+	async emotions() {
+		return request({
+			url: getBookUrl('/emotions')
+		})
+	},
 	// admin
 
 	async create() {
@@ -30,7 +34,7 @@ export const bookService = {
 
 	async all() {
 		return request({
-			url: getBookUrl('/get-all-books')
+			url: getBookUrl('/all')
 		})
 	},
 
@@ -38,11 +42,6 @@ export const bookService = {
 		return request({
 			url: getBookUrl(`/delete/${id}`),
 			method: 'DELETE'
-		})
-	},
-	async emotions() {
-		return request({
-			url: getBookUrl('/emotions')
 		})
 	},
 

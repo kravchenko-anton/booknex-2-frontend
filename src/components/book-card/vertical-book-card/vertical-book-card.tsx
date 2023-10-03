@@ -1,3 +1,7 @@
+import {
+	heightSettings,
+	widthSettings
+} from '@/components/book-card/book-card-settings'
 import { BookCardProperties } from '@/components/book-card/book-card-types'
 import Button from '@/components/ui/button/button'
 import Image from '@/components/ui/image/image'
@@ -9,13 +13,13 @@ import { Pressable, View } from 'react-native'
 const VerticalBookCard: FC<BookCardProperties> = ({ image, ...book }) => {
 	return (
 		<Pressable
-			className=' h-[170px] w-full  flex-row rounded-lg bg-dust p-2'
+			className=' h-[185spx] w-full  flex-row rounded-lg bg-dust p-2'
 			{...book}>
 			<Image
 				url={image.uri}
-				height={image.height}
+				height={heightSettings[image.size]}
 				fullSize={true}
-				width={image.width}
+				width={widthSettings[image.size]}
 			/>
 			<View className='h-[170px] flex-1 p-3 pb-0'>
 				<View>

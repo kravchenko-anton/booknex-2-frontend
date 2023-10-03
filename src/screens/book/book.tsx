@@ -144,7 +144,14 @@ const Book = () => {
 					px={16}
 					data={book.genres}
 					renderItem={({ item: genre }) => (
-						<Button variant={'ghost'} size={'small'} text={genre.name} />
+						<Button
+							onPress={() => {
+								navigate('Genre', { id: genre.id })
+							}}
+							variant={'ghost'}
+							size={'small'}
+							text={genre.name}
+						/>
 					)}
 				/>
 				<Title
@@ -165,7 +172,7 @@ const Book = () => {
 							onPress={() => {
 								navigate('Book', { id: similarBook.id })
 							}}
-							image={{ uri: similarBook.image, height: 230, width: 150 }}
+							image={{ uri: similarBook.image, size: 'medium' }}
 						/>
 					)}
 				/>

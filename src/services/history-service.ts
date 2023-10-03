@@ -1,21 +1,11 @@
 import { getHistoryUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import {
-	AddHistoryDto,
-	HistoryGetType
-} from '@/services/types/history-service-types'
+import { AddHistoryDto } from '@/services/types/history-service-types'
 
 export const historyService = {
-	async getHistory() {
-		return request<HistoryGetType[]>({
-			url: getHistoryUrl('/'),
-			method: 'GET'
-		})
-	},
-
-	async addHistory(dto: AddHistoryDto[]) {
+	async createHistory(dto: AddHistoryDto[]) {
 		return request({
-			url: getHistoryUrl('/add'),
+			url: getHistoryUrl('/create'),
 			method: 'POST',
 			data: dto
 		})

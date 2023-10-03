@@ -13,7 +13,7 @@ export const useSearch = () => {
 	)
 	const { data: topSearches, isLoading: topSearchesLoading } = useQuery(
 		['top searchers'],
-		() => catalogService.topSearchers()
+		() => catalogService.getSearchExamples()
 	)
 	return {
 		books,

@@ -8,14 +8,12 @@ import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
-const AnimatedHeader: FC<AnimatedHeaderProperties> = ({
-	scrollPosition,
-	title,
-	transientValue,
-	rightIcon
-}) => {
+const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 	const { goBack } = useTypedNavigation()
-	const { headerStyle } = headerAnimation(scrollPosition, transientValue)
+	const { headerStyle } = headerAnimation(
+		properties.scrollPosition,
+		properties.transientValue
+	)
 	return (
 		<AnimatedView
 			className='absolute left-0 right-0 top-0 z-50 h-[75px] bg-canvas'
@@ -32,10 +30,14 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = ({
 						color={Color.black}
 					/>
 					<Title size={18} className='w-3/4' weight={'bold'}>
-						{title}
+						{properties.title}
 					</Title>
 				</View>
-				{rightIcon?.icon ? <Icon {...rightIcon.icon} /> : rightIcon?.element}
+				{properties.rightIcon?.icon ? (
+					<Icon {...properties.rightIcon.icon} />
+				) : (
+					properties.rightIcon?.element
+				)}
 			</View>
 		</AnimatedView>
 	)

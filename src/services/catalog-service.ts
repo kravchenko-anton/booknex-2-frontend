@@ -13,9 +13,9 @@ export const catalogService = {
 			method: 'GET'
 		})
 	},
-	async topSearchers() {
+	async getSearchExamples() {
 		return request<TopSearchersType[]>({
-			url: getCatalogUrl('/topSearchers'),
+			url: getCatalogUrl('/search-examples'),
 			method: 'GET'
 		})
 	},

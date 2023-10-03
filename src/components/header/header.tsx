@@ -4,48 +4,42 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
-const Header: FC<HeaderProperties> = ({
-	rightIcon,
-	leftIcon,
-	wrapperStyle,
-	wrapperClassName,
-	color
-}) => {
+const Header: FC<HeaderProperties> = properties => {
 	const { goBack } = useTypedNavigation()
 	return (
 		<View
-			className={`flex-row items-center justify-between ${wrapperClassName}`}
-			style={wrapperStyle}>
-			{leftIcon.back ? (
+			className={`flex-row items-center justify-between ${properties.wrapperClassName}`}
+			style={properties.wrapperStyle}>
+			{properties.leftIcon.back ? (
 				<Icon
 					name={'arrow-left'}
 					onPress={() => {
 						goBack()
 					}}
 					size={'large'}
-					color={color}
+					color={properties.color}
 					className='pl-0'
 				/>
-			) : leftIcon.icon ? (
+			) : properties.leftIcon.icon ? (
 				<Icon
 					size={'large'}
 					className='pl-0'
-					color={color}
-					{...leftIcon.icon}
+					color={properties.color}
+					{...properties.leftIcon.icon}
 				/>
 			) : (
-				leftIcon.element
+				properties.leftIcon.element
 			)}
 
-			{rightIcon?.icon ? (
+			{properties.rightIcon?.icon ? (
 				<Icon
 					size={'large'}
 					className='pr-0'
-					color={color}
-					{...rightIcon.icon}
+					color={properties.color}
+					{...properties.rightIcon.icon}
 				/>
 			) : (
-				rightIcon?.element
+				properties.rightIcon?.element
 			)}
 		</View>
 	)
