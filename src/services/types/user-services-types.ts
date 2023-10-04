@@ -1,23 +1,28 @@
-import { DefaultModelFields } from '@/types/global'
+import { DefaultModelFields, IconType } from '@/types/global'
 
 export interface UserProfileTypes
-	extends Pick<UserType, 'email' | 'name' | 'picture'>,
-		UserStatisticsType {}
+	extends Pick<UserType, 'email' | 'name' | 'picture'> {
+	statistics: UserStatisticsType
+}
 export type UserStatisticsType = [
 	{
 		name: 'Books read'
+		icon: IconType
 		count: number
 	},
 	{
 		name: 'Pages read'
+		icon: IconType
 		count: number
 	},
 	{
 		name: 'Time in read'
+		icon: IconType
 		count: string
 	},
 	{
 		name: 'Reading speed'
+		icon: IconType
 		count: string
 	}
 ]

@@ -3,6 +3,7 @@ import { ComponentType } from 'react'
 export type TypeRootStackParameterList = {
 	Featured: undefined
 	Profile: undefined
+	UpdateProfile: undefined
 	Reading: undefined
 	Library: undefined
 	Book: { id: number }
