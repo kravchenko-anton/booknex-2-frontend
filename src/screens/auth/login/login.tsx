@@ -7,6 +7,7 @@ import { useAction } from '@/hooks/useAction'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
 import { AuthFieldsType } from '@/redux/auth/auth.types'
 import { Color } from '@/utils/color'
+import { emailRules, passwordRules } from '@/utils/input-validation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { View } from 'react-native'
 
@@ -36,33 +37,14 @@ const Login = () => {
 					name={'email'}
 					keyboardType={'email-address'}
 					placeholder={'Email'}
-					rules={{
-						required: {
-							value: true,
-							message: 'Email is required'
-						},
-						pattern: {
-							value: /\S+@\S+\.\S+/,
-							message: 'Entered value does not match email format'
-						}
-					}}
+					rules={emailRules}
 				/>
 				<Field
 					control={control}
 					name={'password'}
-					secureTextEntry={true}
 					placeholder={'Password'}
-					rules={{
-						required: 'Password is required',
-						minLength: {
-							value: 6,
-							message: 'Password must have at least 8 characters'
-						},
-						maxLength: {
-							value: 25,
-							message: 'Password must have at most 25 characters'
-						}
-					}}
+					secureTextEntry={true}
+					rules={passwordRules}
 				/>
 				<Button
 					onPress={handleSubmit(onSubmit)}

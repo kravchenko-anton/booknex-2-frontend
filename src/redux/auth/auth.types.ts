@@ -5,7 +5,7 @@ export interface AuthFieldsType extends Pick<UserType, 'email'> {
 }
 
 export interface RegisterFieldsType extends AuthFieldsType {
-	name: string
+	name?: string
 	genres: string[]
 }
 

@@ -3,11 +3,12 @@ import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
+import { RegisterFieldsType } from '@/redux/auth/auth.types'
 import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
-import { UserUpdateDto } from '@/services/types/user-services-types'
 import { AnimatedView } from '@/types/component-types'
 import { PopupTypes } from '@/types/global'
 import { Color } from '@/utils/color'
+import { emailRules, passwordRules } from '@/utils/input-validation'
 import type { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -23,8 +24,8 @@ const EnterField: FC<EnterFieldProperties> = ({
 	setIsActivePopup
 }) => {
 	const { register } = useAction()
-	const { control, handleSubmit } = useForm<Omit<UserUpdateDto, 'picture'>>()
-	const onSubmit = (data: Omit<UserUpdateDto, 'picture'>) => {
+	const { control, handleSubmit } = useForm<RegisterFieldsType>()
+	const onSubmit = (data: RegisterFieldsType) => {
 		if (selectGenres.length === 0 || selectGenres.length < 3) return
 		register({ ...data, genres: selectGenres })
 	}
@@ -36,7 +37,9 @@ const EnterField: FC<EnterFieldProperties> = ({
 				leftIcon={{
 					icon: {
 						name: 'x',
-						onPress: () => { setIsActivePopup('genres'); }
+						onPress: () => {
+							setIsActivePopup('genres')
+						}
 					}
 				}}
 			/>
@@ -51,30 +54,14 @@ const EnterField: FC<EnterFieldProperties> = ({
 				control={control}
 				name={'email'}
 				keyboardType={'email-address'}
-				rules={{
-					required: 'Email is required',
-					pattern: {
-						value: /\S+@\S+\.\S+/,
-						message: 'Entered value does not match email format'
-					}
-				}}
+				rules={emailRules}
 				placeholder={'Email'}
 				defaultValue={defaultEmail}
 			/>
 			<Field
 				control={control}
 				name={'password'}
-				rules={{
-					required: 'Password is required',
-					minLength: {
-						value: 6,
-						message: 'Password must have at least 8 characters'
-					},
-					maxLength: {
-						value: 25,
-						message: 'Password must have at most 25 characters'
-					}
-				}}
+				rules={passwordRules}
 				placeholder={'Password'}
 				secureTextEntry
 			/>

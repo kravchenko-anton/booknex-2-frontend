@@ -62,6 +62,8 @@ export type ScrollViewDefaultProperties = Pick<
 	ScrollViewProps,
 	| 'scrollEnabled'
 	| 'children'
+	| 'keyboardShouldPersistTaps'
+	| 'automaticallyAdjustKeyboardInsets'
 	| 'snapToInterval'
 	| 'keyboardDismissMode'
 	| 'onScroll'

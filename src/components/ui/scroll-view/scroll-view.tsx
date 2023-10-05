@@ -9,7 +9,6 @@ const ScrollView: FC<ScrollViewDefaultProperties> = ({ ...properties }) => {
 			showsHorizontalScrollIndicator={false}
 			showsVerticalScrollIndicator={false}
 			renderToHardwareTextureAndroid={true}
-			removeClippedSubviews={true}
 			alwaysBounceHorizontal={false}
 			alwaysBounceVertical={false}
 			bounces={false}

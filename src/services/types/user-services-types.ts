@@ -68,7 +68,9 @@ export type UserLibraryType = [
 	}
 ]
 
-export interface UserUpdateDto
-	extends Pick<UserType, 'email' | 'name' | 'picture'> {
+export type UserUpdateBioDto = Pick<UserType, 'email' | 'name'>
+
+export interface UserUpdatePasswordDto {
 	password: string
+	oldPassword: string
 }

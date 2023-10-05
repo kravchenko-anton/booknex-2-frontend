@@ -7,9 +7,9 @@ import {
 	UserLibraryType,
 	UserProfileTypes,
 	UserType,
-	UserUpdateDto
+	UserUpdateBioDto,
+	UserUpdatePasswordDto
 } from '@/services/types/user-services-types'
-import { DefaultModelFields } from '@/types/global'
 
 export const userServices = {
 	async getProfile() {
@@ -31,14 +31,29 @@ export const userServices = {
 			method: 'GET'
 		})
 	},
-	async update(dto: UserUpdateDto) {
-		return request<Pick<UserType, 'email' | 'name' | keyof DefaultModelFields>>(
-			{
-				url: getUsersUrl('/update'),
-				method: 'POST',
-				data: dto
+	async updateBio(dto: UserUpdateBioDto) {
+		return request<Pick<UserType, 'email' | 'name'>>({
+			url: getUsersUrl('/update-bio'),
+			method: 'POST',
+			data: dto
+		})
+	},
+
+	async updatePassword(dto: UserUpdatePasswordDto) {
+		return request({
+			url: getUsersUrl('/update-password'),
+			method: 'POST',
+			data: dto
+		})
+	},
+	async updatePicture(fileName: string) {
+		return request({
+			url: getUsersUrl('/update-picture'),
+			method: 'POST',
+			data: {
+				fileName
 			}
-		)
+		})
 	},
 
 	async toggle(type: keyof UserLibraryFieldsType, id: number) {
