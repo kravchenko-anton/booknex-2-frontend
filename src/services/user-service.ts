@@ -51,7 +51,7 @@ export const userServices = {
 			url: getUsersUrl('/update-picture'),
 			method: 'POST',
 			data: {
-				fileName
+				filename: fileName
 			}
 		})
 	},

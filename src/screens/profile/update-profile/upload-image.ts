@@ -1,6 +1,5 @@
 import { uploadService } from '@/services/upload-service'
 import { userServices } from '@/services/user-service'
-import { errorCatch } from '@/utils/catch-error'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as ImagePicker from 'expo-image-picker'
 import Toast from 'react-native-toast-message'
@@ -19,66 +18,62 @@ export const selectImage = async () => {
 			text2: 'Image picker was cancelled'
 		})
 	}
-	console.log(result.assets)
 	return result.assets ? result.assets[0] : undefined
 }
 
 export const useUploadUserPicture = (oldPicture?: string) => {
-	const queryClient = useQueryClient()
+	const QueryClient = useQueryClient()
+	const { mutateAsync: UserPictureUpdateMutateAsync } = useMutation(
+		['save user picture'],
+		(fileName: string) => userServices.updatePicture(fileName)
+	)
+	const { mutateAsync: UploadPictureMutateSync } = useMutation(
+		['upload picture'],
+		(formData: FormData) =>
+			oldPicture && oldPicture.startsWith('user-pictures')
+				? uploadService.replacement(formData)
+				: uploadService.upload(formData, 'user-pictures'),
+		{
+			onError: error => {
+				console.log(error, 'onError')
+				Toast.show({
+					text1: 'Update profile',
+					text2: 'An error occurred',
+					type: 'error'
+				})
+			},
+			onSuccess: async data => {
+				console.log('onSuccess')
+				if (!data) return
+				console.log(data, 'onSuccess')
 
-	const uploadUserPicture = async () => {
+				await UserPictureUpdateMutateAsync(data.name)
+				await QueryClient.invalidateQueries(['user-profile'])
+			}
+		}
+	)
+
+	const onSubmit = async () => {
 		const image = await selectImage()
 		if (!image) return
+		const formData = new FormData()
+		formData.append('file', {
+			uri: image.uri,
+			name:
+				image.uri.slice(image.uri.lastIndexOf('/') + 1, image.uri.length) ??
+				`${
+					Math.random().toString(36).slice(2, 15) +
+					Math.random().toString(36).slice(2, 15)
+				}.jpg`,
+			type: 'application/octet-stream'
+		} as unknown as Blob)
 
-		const file = await fetch(image.uri).then(response => response.blob())
-
-		if (oldPicture) {
-			const { data } = useMutation(
-				['upload user picture'],
-				() => uploadService.replacement(file, oldPicture, 'user-pictures'),
-				{
-					onError: error => {
-						Toast.show({
-							text1: 'Upload picture',
-							text2: errorCatch(error),
-							type: 'error'
-						})
-					},
-					onSuccess: () => {
-						if (!data) return
-						useMutation(['update user picture'], () =>
-							userServices.updatePicture(data.name)
-						)
-						queryClient.invalidateQueries(['user-profile'])
-					}
-				}
-			)
-		} else {
-			const { data } = useMutation(
-				['upload user picture'],
-				() => uploadService.upload(file, 'user-pictures'),
-				{
-					onError: error => {
-						Toast.show({
-							text1: 'Update profile',
-							text2: errorCatch(error),
-							type: 'error'
-						})
-					},
-					onSuccess: () => {
-						if (!data) return
-						useMutation(['update user picture'], () =>
-							userServices.updatePicture(data.name)
-						)
-						queryClient.invalidateQueries(['user-profile'])
-					}
-				}
-			)
+		if (oldPicture && oldPicture.startsWith('user-pictures')) {
+			formData.append('deleteFilename', oldPicture)
+			formData.append('folder', 'user-pictures')
 		}
+		await UploadPictureMutateSync(formData)
 	}
 
-	const toggleUserPicture = async () => {
-		await uploadUserPicture()
-	}
-	return { toggleUserPicture }
+	return { onSubmit }
 }

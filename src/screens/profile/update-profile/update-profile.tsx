@@ -12,12 +12,11 @@ import { useQuery } from '@tanstack/react-query'
 import { View } from 'react-native'
 
 const UpdateProfile = () => {
-	// сделать через парамы чтобы не делать запрос
 	const { data: profile } = useQuery(['user-profile'], () =>
 		userServices.getProfile()
 	)
 	if (!profile) return <BigLoader />
-	const { toggleUserPicture } = useUploadUserPicture()
+	const { onSubmit } = useUploadUserPicture(profile.picture)
 	return (
 		<ScrollLayout className='p-2'>
 			<Header
@@ -42,7 +41,9 @@ const UpdateProfile = () => {
 					<Button
 						className='mt-4 w-full'
 						variant={'primary'}
-						onPress={() => toggleUserPicture()}
+						onPress={() => {
+							onSubmit()
+						}}
 						size={'medium'}
 						text={'Change photo'}
 					/>

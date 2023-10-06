@@ -3,9 +3,9 @@ import { request } from '@/services/api/request.api'
 import { StorageFolderType } from '@/services/types/global'
 
 export const uploadService = {
-	async upload(file: Blob, type: StorageFolderType) {
+	async upload(file: FormData, type: StorageFolderType) {
 		return request<{ name: string }>({
-			url: getUploadUrl(`/upload/${type}`),
+			url: getUploadUrl(`/${type}`),
 			method: 'POST',
 			data: file,
 			headers: {
@@ -14,19 +14,12 @@ export const uploadService = {
 		})
 	},
 
-	async replacement(
-		file: Blob,
-		deleteFilename: string,
-		folder: StorageFolderType
-	) {
+	async replacement(formData: FormData) {
+		console.log('replacement', formData)
 		return request<{ name: string }>({
 			url: getUploadUrl('/replacement'),
 			method: 'POST',
-			data: {
-				file,
-				deleteFilename,
-				folder
-			},
+			data: formData,
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}
