@@ -15,7 +15,6 @@ export const uploadService = {
 	},
 
 	async replacement(formData: FormData) {
-		console.log('replacement', formData)
 		return request<{ name: string }>({
 			url: getUploadUrl('/replacement'),
 			method: 'POST',

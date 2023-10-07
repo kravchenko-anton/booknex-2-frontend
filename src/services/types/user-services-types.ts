@@ -26,47 +26,35 @@ export type UserStatisticsType = [
 		count: string
 	}
 ]
-export interface UserType extends DefaultModelFields {
+export interface UserType extends DefaultModelFields, UserLibraryFieldsType {
 	email: string
 	name: string
 	isAdmin: boolean
 	picture: string
-	likedShelves: []
-	unwatchedShelves: []
-	likedBooks: []
-	finishedBooks: []
-	readingBooks: []
 }
 export interface UserLibraryFieldsType {
-	likedShelves: []
+	watchedShelves: []
 	unwatchedShelves: []
 	likedBooks: []
 	finishedBooks: []
 	readingBooks: []
 }
 
-export type UserLibraryType = [
-	{
-		name: 'Finished books'
-		count: number
-	},
-	{
-		name: 'Liked books'
-		count: number
-	},
-	{
-		name: 'Reading Books'
-		count: number
-	},
-	{
-		name: 'Liked Shelves'
-		count: number
-	},
-	{
-		name: 'UnWatched Shelves'
-		count: number
-	}
-]
+type UserLibraryElementType = {
+	type: keyof UserLibraryFieldsType
+	name: string
+	icon: IconType
+	count: number
+}
+
+export type GetMoreType<T extends keyof UserLibraryFieldsType> = {
+	title: string
+} & Record<keyof UserLibraryFieldsType, UserLibraryFieldsType[T]>
+
+export type UserLibraryType = {
+	books: UserLibraryElementType[]
+	shelves: UserLibraryElementType[]
+}
 
 export type UserUpdateBioDto = Pick<UserType, 'email' | 'name'>
 

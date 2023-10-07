@@ -1,7 +1,6 @@
-import { Octicons } from '@expo/vector-icons'
+import { IconProperties } from '@/types/global'
 
-export interface FeatureProperties {
-	iconName: keyof typeof Octicons.glyphMap
-	iconTitle: string | number
-	iconDescription: string
+export interface FeatureProperties extends IconProperties {
+	count: string | number
+	description: string
 }

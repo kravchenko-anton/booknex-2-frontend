@@ -10,6 +10,7 @@ const FlatList = <T,>({
 	contentContainerStyle,
 	mt = 24,
 	px = 8,
+	style,
 	...properties
 }: FlatListProperties<T>) => {
 	if (data.length === 0 && !properties.ListEmptyComponent) return
@@ -29,6 +30,7 @@ const FlatList = <T,>({
 			)}
 			<DefaultFlatlist
 				data={data}
+				style={headerText ? style : [{ marginTop: mt }, style]}
 				ItemSeparatorComponent={() => (
 					<View
 						style={

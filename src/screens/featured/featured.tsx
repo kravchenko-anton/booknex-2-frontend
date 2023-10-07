@@ -6,6 +6,7 @@ import FlatList from '@/components/ui/flatlist/flatlist'
 import FullScreenLoader from '@/components/ui/loader/big-loader'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import RecommendationList from '@/screens/featured/recommendation-list/recommendation-list'
+import ShelfListItem from '@/screens/featured/shelf-list-item/shelf-list-item'
 import { catalogService } from '@/services/catalog-service'
 import { removeEmoji } from '@/utils/remove-emoji'
 import { useQuery } from '@tanstack/react-query'
@@ -18,6 +19,18 @@ const Featured = () => {
 	if (!catalog) return <FullScreenLoader />
 	return (
 		<ScrollLayout>
+			<FlatList
+				horizontal
+				data={catalog.shelves}
+				renderItem={({ item: shelve }) => (
+					<ShelfListItem
+						id={shelve.id}
+						backgroundColor={shelve.color}
+						icon={shelve.icon}
+						name={shelve.name}
+					/>
+				)}
+			/>
 			<RecommendationList data={catalog.recommendations} />
 			<FlatList
 				horizontal
@@ -30,7 +43,7 @@ const Featured = () => {
 						size={'medium'}
 						variant={'ghost'}
 						text={genre.name}
-						className='mt-4 px-4'
+						className='px-4'
 					/>
 				)}
 			/>

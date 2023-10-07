@@ -25,7 +25,16 @@ export const useUploadUserPicture = (oldPicture?: string) => {
 	const QueryClient = useQueryClient()
 	const { mutateAsync: UserPictureUpdateMutateAsync } = useMutation(
 		['save user picture'],
-		(fileName: string) => userServices.updatePicture(fileName)
+		(fileName: string) => userServices.updatePicture(fileName),
+		{
+			onSuccess: () => {
+				Toast.show({
+					text1: 'Update profile',
+					text2: 'Profile picture updated',
+					type: 'success'
+				})
+			}
+		}
 	)
 	const { mutateAsync: UploadPictureMutateSync } = useMutation(
 		['upload picture'],
@@ -34,8 +43,7 @@ export const useUploadUserPicture = (oldPicture?: string) => {
 				? uploadService.replacement(formData)
 				: uploadService.upload(formData, 'user-pictures'),
 		{
-			onError: error => {
-				console.log(error, 'onError')
+			onError: () => {
 				Toast.show({
 					text1: 'Update profile',
 					text2: 'An error occurred',
@@ -43,10 +51,7 @@ export const useUploadUserPicture = (oldPicture?: string) => {
 				})
 			},
 			onSuccess: async data => {
-				console.log('onSuccess')
 				if (!data) return
-				console.log(data, 'onSuccess')
-
 				await UserPictureUpdateMutateAsync(data.name)
 				await QueryClient.invalidateQueries(['user-profile'])
 			}

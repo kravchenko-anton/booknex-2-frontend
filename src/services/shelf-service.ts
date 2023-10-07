@@ -13,12 +13,6 @@ export const shelfService = {
 		})
 	},
 
-	async userShelf() {
-		return request<BookByIdType>({
-			url: getShelfUrl('/user-shelves')
-		})
-	},
-
 	// admin
 
 	async all() {

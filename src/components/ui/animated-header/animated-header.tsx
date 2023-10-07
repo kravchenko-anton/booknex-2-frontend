@@ -7,6 +7,7 @@ import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 	const { goBack } = useTypedNavigation()
@@ -14,11 +15,12 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 		properties.scrollPosition,
 		properties.transientValue
 	)
+	const { top } = useSafeAreaInsets()
 	return (
 		<AnimatedView
-			className='absolute left-0 right-0 top-0 z-50 h-[75px] bg-canvas'
-			style={headerStyle}>
-			<View className='mt-auto flex-row items-center justify-between px-4'>
+			className='absolute left-0 right-0 z-50 bg-canvas'
+			style={[{ top }, headerStyle]}>
+			<View className='mt-auto flex-row items-center justify-between px-4 py-0.5'>
 				<View className='flex-row items-center'>
 					<Icon
 						name={'arrow-left'}

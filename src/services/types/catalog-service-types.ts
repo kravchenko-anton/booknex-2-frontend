@@ -1,5 +1,6 @@
 import { BookType, ShortBookType } from '@/services/types/book-service-types'
 import { GenreType } from '@/services/types/genre-service-types'
+import { ShortShelfType } from '@/services/types/shelf-service-types'
 
 interface SameBreathBookType extends ShortBookType {
 	pages: number
@@ -12,6 +13,7 @@ export interface TopSearchersType {
 }
 
 export interface CatalogType {
+	shelves: ShortShelfType[]
 	recommendations: ShortBookType[]
 	mostRelatedGenres: Pick<
 		GenreType,

@@ -2,21 +2,21 @@ import { IMenuItem } from './menu.interface'
 
 export const menuItems: IMenuItem[] = [
 	{
-		iconName: 'light-bulb',
+		icon: 'light-bulb',
 		path: 'Featured'
 	},
 
 	{
-		iconName: 'repo',
+		icon: 'repo',
 		path: 'Library'
 	},
 	{
-		iconName: 'search',
+		icon: 'search',
 		path: 'Search'
 	},
 
 	{
-		iconName: 'person',
+		icon: 'person',
 		path: 'Profile'
 	}
 ]

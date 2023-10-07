@@ -1,3 +1,4 @@
+import { UserLibraryFieldsType } from '@/services/types/user-services-types'
 import { ComponentType } from 'react'
 
 export type TypeRootStackParameterList = {
@@ -5,7 +6,12 @@ export type TypeRootStackParameterList = {
 	Profile: undefined
 	UpdateProfile: undefined
 	Reading: undefined
+
+	ComprehensiveList: {
+		type: keyof UserLibraryFieldsType
+	}
 	Library: undefined
+	Shelf: { id: number }
 	Book: { id: number }
 	Settings: undefined
 	Search: undefined

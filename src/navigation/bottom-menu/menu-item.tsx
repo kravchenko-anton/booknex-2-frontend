@@ -24,11 +24,13 @@ const MenuItem: FC<IMenuItemProperties> = ({ currentRoute, item, nav }) => {
 	return (
 		<Pressable
 			className='w-[20%] items-center'
-			onPress={() => { nav(item.path); }}
+			onPress={() => {
+				nav(item.path)
+			}}
 			{...pressFunctions}>
 			<AnimatedPressable style={animatedStyle} pointerEvents='none'>
 				<Octicons
-					name={item.iconName}
+					name={item.icon}
 					size={30}
 					color={isActive ? Color.secondary : Color.gray}
 				/>

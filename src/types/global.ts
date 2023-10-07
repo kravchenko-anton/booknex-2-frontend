@@ -4,7 +4,9 @@ import { Dispatch, SetStateAction } from 'react'
 import { WithSpringConfig, WithTimingConfig } from 'react-native-reanimated'
 
 export type IconType = keyof typeof Octicons.glyphMap
-
+export interface IconProperties {
+	icon: keyof typeof Octicons.glyphMap
+}
 export interface AnimationConfigType {
 	userConfig?: WithSpringConfig | WithTimingConfig
 }

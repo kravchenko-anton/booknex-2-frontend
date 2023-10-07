@@ -1,7 +1,9 @@
 import Featured from '@/screens/featured/featured'
 import Genre from '@/screens/genre/genre'
+import ComprehensiveList from '@/screens/library/comprehensive-list/comprehensive-list'
 import Library from '@/screens/library/library'
 import updateProfile from '@/screens/profile/update-profile/update-profile'
+import Shelf from '@/screens/shelf/shelf'
 import Book from '../screens/book/book'
 import Profile from '../screens/profile/profile'
 import Reading from '../screens/reading/reading'
@@ -18,6 +20,14 @@ export const userRoutes: IRoute[] = [
 	{
 		name: 'Library',
 		component: Library
+	},
+	{
+		name: 'Shelf',
+		component: Shelf
+	},
+	{
+		name: 'ComprehensiveList',
+		component: ComprehensiveList
 	},
 	{
 		name: 'Genre',

@@ -104,21 +104,17 @@ const Book = () => {
 				<View className='flex-row justify-between px-4'>
 					<View className='flex-1 justify-between'>
 						<Feature
-							iconDescription={'Duration'}
-							iconName={'clock'}
-							iconTitle={`${Math.round(book.pages / 1.5 / 60)}h ${Math.round(
+							description={'Duration'}
+							icon={'clock'}
+							count={`${Math.round(book.pages / 1.5 / 60)}h ${Math.round(
 								(book.pages / 1.5) % 60
 							)} min`}
 						/>
+						<Feature description={'Pages'} icon={'book'} count={book.pages} />
 						<Feature
-							iconDescription={'Pages'}
-							iconName={'book'}
-							iconTitle={book.pages}
-						/>
-						<Feature
-							iconDescription={'Liked'}
-							iconName={'thumbsup'}
-							iconTitle={`${book.likedPercentage}%`}
+							description={'Liked'}
+							icon={'thumbsup'}
+							count={`${book.likedPercentage}%`}
 						/>
 					</View>
 					<Image

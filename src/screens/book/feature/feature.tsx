@@ -5,19 +5,19 @@ import type { FC } from 'react'
 import { View } from 'react-native'
 
 const Feature: FC<FeatureProperties> = ({
-	iconName = 'alert',
-	iconTitle,
-	iconDescription
+	icon = 'alert',
+	count,
+	description
 }) => {
 	return (
 		<View className='flex-row items-center'>
-			<Icon name={iconName} size={'large'} className='pl-0' />
+			<Icon name={icon} size={'large'} className='pl-0' />
 			<View>
 				<Title size={22} weight={'bold'}>
-					{iconTitle}
+					{count}
 				</Title>
 				<Title size={15} weight={'regular'}>
-					{iconDescription}
+					{description}
 				</Title>
 			</View>
 		</View>

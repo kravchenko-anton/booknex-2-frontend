@@ -1,8 +1,7 @@
 import { getUsersUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import { ShortBookType } from '@/services/types/book-service-types'
-import { ShortShelfType } from '@/services/types/shelf-service-types'
 import {
+	GetMoreType,
 	UserLibraryFieldsType,
 	UserLibraryType,
 	UserProfileTypes,
@@ -26,7 +25,7 @@ export const userServices = {
 	},
 
 	async getMore(type: keyof UserLibraryFieldsType) {
-		return request<ShortBookType[] | ShortShelfType[]>({
+		return request<GetMoreType<typeof type>>({
 			url: getUsersUrl(`/library/${type}`),
 			method: 'GET'
 		})

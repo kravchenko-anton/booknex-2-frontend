@@ -32,7 +32,7 @@ const UpdateProfile = () => {
 
 			<View className='mt-8 w-full items-center'>
 				<Image
-					className='z-50 bg-secondary'
+					className='z-50 bg-gray'
 					url={profile.picture}
 					height={150}
 					width={150}
