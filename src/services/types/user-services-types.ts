@@ -55,10 +55,3 @@ export type UserLibraryType = {
 	books: UserLibraryElementType[]
 	shelves: UserLibraryElementType[]
 }
-
-export type UserUpdateBioDto = Pick<UserType, 'email' | 'name'>
-
-export interface UserUpdatePasswordDto {
-	password: string
-	oldPassword: string
-}

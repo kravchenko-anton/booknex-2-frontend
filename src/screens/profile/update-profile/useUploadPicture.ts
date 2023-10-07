@@ -1,4 +1,5 @@
-import { uploadService } from '@/services/upload-service'
+import { storageService } from '@/services/storage-service'
+import { StorageFolderEnum } from '@/services/types/storage-service-types'
 import { userServices } from '@/services/user-service'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as ImagePicker from 'expo-image-picker'
@@ -39,9 +40,9 @@ export const useUploadUserPicture = (oldPicture?: string) => {
 	const { mutateAsync: UploadPictureMutateSync } = useMutation(
 		['upload picture'],
 		(formData: FormData) =>
-			oldPicture && oldPicture.startsWith('user-pictures')
-				? uploadService.replacement(formData)
-				: uploadService.upload(formData, 'user-pictures'),
+			oldPicture && oldPicture.startsWith(StorageFolderEnum.userPictures)
+				? storageService.replacement(formData)
+				: storageService.upload(formData, StorageFolderEnum.userPictures),
 		{
 			onError: () => {
 				Toast.show({
@@ -73,9 +74,9 @@ export const useUploadUserPicture = (oldPicture?: string) => {
 			type: 'application/octet-stream'
 		} as unknown as Blob)
 
-		if (oldPicture && oldPicture.startsWith('user-pictures')) {
+		if (oldPicture && oldPicture.startsWith(StorageFolderEnum.userPictures)) {
 			formData.append('deleteFilename', oldPicture)
-			formData.append('folder', 'user-pictures')
+			formData.append('folder', StorageFolderEnum.userPictures)
 		}
 		await UploadPictureMutateSync(formData)
 	}

@@ -2,7 +2,6 @@ import BookCard from '@/components/book-card/book-card'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
-import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade-color'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -22,7 +21,6 @@ import { View } from 'react-native'
 // 					/>
 // 				</View>
 const BookCarousel = () => {
-	const { navigate } = useTypedNavigation()
 	return (
 		<View className='mt-2'>
 			<LinearGradient

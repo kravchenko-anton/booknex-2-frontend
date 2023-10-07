@@ -1,13 +1,12 @@
+import { UserUpdateBioTypes } from '@/screens/profile/update-profile/update-bio/update-bio-types'
+import { EditPasswordTypes } from '@/screens/profile/update-profile/update-password/update-password-types'
 import { getUsersUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
 import {
 	GetMoreType,
 	UserLibraryFieldsType,
 	UserLibraryType,
-	UserProfileTypes,
-	UserType,
-	UserUpdateBioDto,
-	UserUpdatePasswordDto
+	UserProfileTypes
 } from '@/services/types/user-services-types'
 
 export const userServices = {
@@ -30,15 +29,15 @@ export const userServices = {
 			method: 'GET'
 		})
 	},
-	async updateBio(dto: UserUpdateBioDto) {
-		return request<Pick<UserType, 'email' | 'name'>>({
+	async updateBio(dto: UserUpdateBioTypes) {
+		return request({
 			url: getUsersUrl('/update-bio'),
 			method: 'POST',
 			data: dto
 		})
 	},
 
-	async updatePassword(dto: UserUpdatePasswordDto) {
+	async updatePassword(dto: EditPasswordTypes) {
 		return request({
 			url: getUsersUrl('/update-password'),
 			method: 'POST',

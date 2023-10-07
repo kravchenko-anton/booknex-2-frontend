@@ -7,10 +7,7 @@ const SmallLoader = () => (
 		<ActivityIndicator
 			size='small'
 			color={Color.secondary}
-			style={{
-				width: 200,
-				height: 200
-			}}
+			className='h-[200px] w-[200px]'
 		/>
 	</View>
 )

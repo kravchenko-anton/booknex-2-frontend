@@ -1,11 +1,11 @@
-import { getUploadUrl } from '@/services/api-config'
+import { getStorageUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import { StorageFolderType } from '@/services/types/global'
+import { StorageFolderType } from '@/services/types/storage-service-types'
 
-export const uploadService = {
+export const storageService = {
 	async upload(file: FormData, type: StorageFolderType) {
 		return request<{ name: string }>({
-			url: getUploadUrl(`/${type}`),
+			url: getStorageUrl(`/${type}`),
 			method: 'POST',
 			data: file,
 			headers: {
@@ -16,7 +16,7 @@ export const uploadService = {
 
 	async replacement(formData: FormData) {
 		return request<{ name: string }>({
-			url: getUploadUrl('/replacement'),
+			url: getStorageUrl('/replacement'),
 			method: 'POST',
 			data: formData,
 			headers: {
@@ -27,7 +27,7 @@ export const uploadService = {
 
 	async delete(filename: string) {
 		return request({
-			url: getUploadUrl('/delete'),
+			url: getStorageUrl('/delete'),
 			method: 'POST',
 			data: {
 				filename
