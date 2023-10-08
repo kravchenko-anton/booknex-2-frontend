@@ -26,7 +26,7 @@ const SelectGenres: FC<SelectGenresProperties> = ({
 	const { showAnimation } = popupAnimation(isActivePopup)
 	return (
 		<AnimatedView style={showAnimation} className='h-full'>
-			<Header leftIcon={{ back: true }} />
+			<Header />
 			<View>
 				<Title size={34} weight={'bold'} className='mb-2' numberOfLines={2}>
 					Choose your favorite genres

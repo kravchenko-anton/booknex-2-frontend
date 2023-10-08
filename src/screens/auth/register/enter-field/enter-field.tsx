@@ -35,11 +35,9 @@ const EnterField: FC<EnterFieldProperties> = ({
 			<Header
 				color={Color.black}
 				leftIcon={{
-					icon: {
-						name: 'x',
-						onPress: () => {
-							setIsActivePopup('genres')
-						}
+					name: 'x',
+					onPress: () => {
+						setIsActivePopup('genres')
 					}
 				}}
 			/>

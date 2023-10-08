@@ -23,7 +23,7 @@ const Login = () => {
 		login({ password, email })
 	return (
 		<Layout>
-			<Header leftIcon={{ back: true }} />
+			<Header />
 			<View className='mt-[20%]'>
 				<Title size={34} weight={'bold'} className='mb-2'>
 					Welcome back

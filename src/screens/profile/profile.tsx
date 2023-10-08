@@ -18,17 +18,13 @@ const Profile = () => {
 	const { navigate } = useTypedNavigation()
 	if (!profile) return <BigLoader />
 	return (
-		<ScrollLayout>
+		<ScrollLayout className='px-4'>
 			<Header
-				wrapperClassName='px-4'
-				leftIcon={{ back: true }}
 				rightIcon={{
-					icon: {
-						onPress: () => {
-							navigate('UpdateProfile')
-						},
-						name: 'pencil'
-					}
+					onPress: () => {
+						navigate('UpdateProfile')
+					},
+					name: 'pencil'
 				}}
 			/>
 			<View className='items-center self-center '>
@@ -43,12 +39,12 @@ const Profile = () => {
 					{profile.name}
 				</Title>
 			</View>
-			<Title className='mt-8 px-4' weight={'semiBold'} size={32}>
+			<Title className='mt-8' weight={'semiBold'} size={32}>
 				Statistics
 			</Title>
 			<FlatList
 				scrollEnabled={false}
-				className='my-2 px-4'
+				className='my-2'
 				data={profile.statistics}
 				renderItem={({ item }) => (
 					<View className='flex-row items-center justify-between rounded-xl bg-dust p-4'>

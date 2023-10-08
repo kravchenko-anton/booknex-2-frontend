@@ -16,14 +16,11 @@ const UpdateProfile = () => {
 	return (
 		<ScrollLayout className='p-2'>
 			<Header
-				leftIcon={{ back: true }}
-				rightIcon={{
-					element: (
-						<Title weight={'bold'} size={28}>
-							Account
-						</Title>
-					)
-				}}
+				rightIcon={
+					<Title weight={'bold'} size={28}>
+						Account
+					</Title>
+				}
 			/>
 			<UpdatePicture picture={profile.picture} />
 			<UpdateBio defaultName={profile.name} defaultEmail={profile.email} />

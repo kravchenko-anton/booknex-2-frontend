@@ -16,40 +16,36 @@ const Statistic = () => {
 	return (
 		<Layout>
 			<Header
-				leftIcon={{
-					element: (
-						<Title size={26} weight={'bold'}>
-							Statistic
-						</Title>
-					)
-				}}
-				rightIcon={{
-					element: (
-						<HamburgerMenu
-							position={'right'}
-							elements={[
-								{
-									title: 'Books',
-									onPress: () => {
-										console.log('Books')
-									}
-								},
-								{
-									title: 'Users',
-									onPress: () => {
-										console.log('Users')
-									}
-								},
-								{
-									title: 'Statistic',
-									onPress: () => {
-										console.log('Statistic')
-									}
+				leftIcon={
+					<Title size={26} weight={'bold'}>
+						Statistic
+					</Title>
+				}
+				rightIcon={
+					<HamburgerMenu
+						position={'right'}
+						elements={[
+							{
+								title: 'Books',
+								onPress: () => {
+									console.log('Books')
 								}
-							]}
-						/>
-					)
-				}}
+							},
+							{
+								title: 'Users',
+								onPress: () => {
+									console.log('Users')
+								}
+							},
+							{
+								title: 'Statistic',
+								onPress: () => {
+									console.log('Statistic')
+								}
+							}
+						]}
+					/>
+				}
 			/>
 
 			<View className='flex-row items-center justify-between gap-4 pt-4'>

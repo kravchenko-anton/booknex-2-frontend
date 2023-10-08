@@ -20,8 +20,9 @@ module.exports = {
 		'plugin:@typescript-eslint/stylistic-type-checked',
 		'plugin:jsx-a11y/recommended',
 		'plugin:sonarjs/recommended',
-		'plugin:unicorn/recommended',
-		'plugin:react-native/all'
+		'plugin:unicorn/all',
+		'plugin:react-native/all',
+		'plugin:react-hooks/recommended'
 	],
 	root: true,
 	env: {
@@ -37,6 +38,8 @@ module.exports = {
 		sourceType: 'module'
 	},
 	rules: {
+		'react-hooks/rules-of-hooks': 'error',
+		'react-hooks/exhaustive-deps': 'warn',
 		'react-native/no-unused-styles': 2,
 		'react-native/split-platform-components': 2,
 		'react-native/no-inline-styles': 1,

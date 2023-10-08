@@ -19,14 +19,11 @@ const ComprehensiveList = () => {
 	return (
 		<Layout>
 			<Header
-				leftIcon={{ back: true }}
-				rightIcon={{
-					element: (
-						<Title size={24} weight={'medium'}>
-							{library.title}
-						</Title>
-					)
-				}}
+				rightIcon={
+					<Title size={24} weight={'medium'}>
+						{library.title}
+					</Title>
+				}
 			/>
 			<FlatList
 				mt={25}

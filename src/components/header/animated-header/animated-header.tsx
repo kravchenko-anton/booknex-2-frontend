@@ -1,5 +1,5 @@
-import { AnimatedHeaderProperties } from '@/components/ui/animated-header/animated-header-types'
-import { headerAnimation } from '@/components/ui/animated-header/header-animation'
+import { AnimatedHeaderProperties } from '@/components/header/animated-header/animated-header-types'
+import { useHeaderAnimation } from '@/components/header/animated-header/header-animation'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
@@ -11,7 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 	const { goBack } = useTypedNavigation()
-	const { headerStyle } = headerAnimation(
+	const { headerStyle } = useHeaderAnimation(
 		properties.scrollPosition,
 		properties.transientValue
 	)
@@ -35,11 +35,13 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 						{properties.title}
 					</Title>
 				</View>
-				{properties.rightIcon?.icon ? (
-					<Icon {...properties.rightIcon.icon} />
-				) : (
-					properties.rightIcon?.element
-				)}
+				{properties.rightIcon ? (
+					'name' in properties.rightIcon ? (
+						<Icon size={'medium'} {...properties.rightIcon} />
+					) : (
+						(properties.rightIcon as JSX.Element)
+					)
+				) : null}
 			</View>
 		</AnimatedView>
 	)

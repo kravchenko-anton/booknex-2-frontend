@@ -1,4 +1,4 @@
-import { hamburgerAnimation } from '@/components/ui/hamburger-menu/hamburger-animation'
+import { useHamburgerAnimation } from '@/components/ui/hamburger-menu/hamburger-animation'
 import { Title } from '@/components/ui/title/title'
 import { WINDOW_HEIGHT } from '@/constants/dimensions'
 import { AnimatedPressable, AnimatedView } from '@/types/component-types'
@@ -7,7 +7,7 @@ import { FC } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
-const className = 'w-6 h-0.5'
+const HamburgerLineStyle = 'w-6 h-0.5'
 
 interface HamburgerMenuProperties extends ColorProperties {
 	position?: 'left' | 'right'
@@ -23,7 +23,7 @@ const HamburgerMenu: FC<HamburgerMenuProperties> = ({
 	elements
 }) => {
 	const isOpen = useSharedValue(false)
-	const animation = hamburgerAnimation(isOpen, position)
+	const animation = useHamburgerAnimation(isOpen, position)
 	return (
 		<>
 			<AnimatedPressable
@@ -50,21 +50,21 @@ const HamburgerMenu: FC<HamburgerMenuProperties> = ({
 						animation.styleAnimation
 					]}>
 					<AnimatedView
-						className={className}
+						className={HamburgerLineStyle}
 						style={[
 							{ backgroundColor: color },
 							animation.transformFirstLineAnimation
 						]}
 					/>
 					<AnimatedView
-						className={className}
+						className={HamburgerLineStyle}
 						style={[
 							{ backgroundColor: color },
 							animation.widthSecondLineAnimation
 						]}
 					/>
 					<AnimatedView
-						className={className}
+						className={HamburgerLineStyle}
 						style={[
 							{ backgroundColor: color },
 							animation.transformThirdLineAnimation

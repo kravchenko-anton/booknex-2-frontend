@@ -31,6 +31,7 @@ const Search = () => {
 						<BigLoader />
 					) : (
 						<FlatList
+							mt={0}
 							keyExtractor={item => `$${item.id}`}
 							className='w-full flex-grow'
 							data={books}
@@ -56,6 +57,7 @@ const Search = () => {
 				<BigLoader />
 			) : (
 				<FlatList
+					mt={0}
 					keyExtractor={item => `#${item.id} - ${item.name}`}
 					data={topSearches}
 					renderItem={({ item }) => (

@@ -1,8 +1,8 @@
 import BookCard from '@/components/book-card/book-card'
 import RainbowBookCard from '@/components/book-card/rainbow-book-card/rainbow-book-card'
+import AnimatedHeader from '@/components/header/animated-header/animated-header'
 import Header from '@/components/header/header'
 import ScrollLayout from '@/components/layout/scroll-layout'
-import AnimatedHeader from '@/components/ui/animated-header/animated-header'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
@@ -33,17 +33,12 @@ const Genre = () => {
 					scrollPosition.value = event.nativeEvent.contentOffset.y
 				}}>
 				<Header
-					wrapperClassName='px-2'
-					rightIcon={{
-						element: (
-							<Title size={24} weight={'bold'}>
-								{genre.name}
-							</Title>
-						)
-					}}
-					leftIcon={{
-						back: true
-					}}
+					className='px-2'
+					rightIcon={
+						<Title size={24} weight={'bold'}>
+							{genre.name}
+						</Title>
+					}
 				/>
 				<FlatList
 					horizontal
