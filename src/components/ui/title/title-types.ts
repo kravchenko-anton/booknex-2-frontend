@@ -6,6 +6,6 @@ export type TitleProperties = TextDefaultProperties &
 	ColorProperties & {
 		center?: boolean
 		size?: number
-		children: any // eslint-disable-line @typescript-eslint/no-explicit-any
+		children: string | number | undefined
 		weight?: keyof typeof fontSettings
 	}

@@ -16,18 +16,16 @@ const FlatList = <T,>({
 	if (data.length === 0 && !properties.ListEmptyComponent) return
 	return (
 		<>
-			{headerText && data.length > 0 && (
-				<Title
-					style={{
-						marginTop: mt,
-						paddingHorizontal: properties.horizontal ? px : 0,
-						marginBottom: titleMb
-					}}
-					size={22}
-					weight='semiBold'>
-					{headerText}
-				</Title>
-			)}
+			<Title
+				style={{
+					marginTop: mt,
+					paddingHorizontal: properties.horizontal ? px : 0,
+					marginBottom: titleMb
+				}}
+				size={22}
+				weight='semiBold'>
+				{headerText}
+			</Title>
 			<DefaultFlatlist
 				data={data}
 				style={headerText ? style : [{ marginTop: mt }, style]}

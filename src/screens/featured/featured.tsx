@@ -6,7 +6,7 @@ import FlatList from '@/components/ui/flatlist/flatlist'
 import FullScreenLoader from '@/components/ui/loader/big-loader'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import RecommendationList from '@/screens/featured/recommendation-list/recommendation-list'
-import ShelfListItem from '@/screens/featured/shelf-list-item/shelf-list-item'
+import ShelfCard from '@/screens/featured/shelf-card/shelf-card'
 import { catalogService } from '@/services/catalog-service'
 import { removeEmoji } from '@/utils/remove-emoji'
 import { useQuery } from '@tanstack/react-query'
@@ -23,11 +23,11 @@ const Featured = () => {
 				horizontal
 				data={catalog.shelves}
 				renderItem={({ item: shelve }) => (
-					<ShelfListItem
+					<ShelfCard
 						id={shelve.id}
 						backgroundColor={shelve.color}
 						icon={shelve.icon}
-						name={shelve.name}
+						name={shelve.title}
 					/>
 				)}
 			/>

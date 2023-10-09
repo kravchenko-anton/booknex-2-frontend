@@ -1,10 +1,12 @@
 import Header from '@/components/header/header'
 import ScrollLayout from '@/components/layout/scroll-layout'
+import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
+import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { userServices } from '@/services/user-service'
 import { Color } from '@/utils/color'
@@ -16,7 +18,9 @@ const Profile = () => {
 		userServices.getProfile()
 	)
 	const { navigate } = useTypedNavigation()
+	const { logout } = useAction()
 	if (!profile) return <BigLoader />
+	// TODO: делать тут аниминованный лист
 	return (
 		<ScrollLayout className='px-4'>
 			<Header
@@ -64,6 +68,13 @@ const Profile = () => {
 						/>
 					</View>
 				)}
+			/>
+			<Button
+				className='my-4'
+				text={'Logout'}
+				size={'medium'}
+				variant={'primary'}
+				onPress={() => logout()}
 			/>
 		</ScrollLayout>
 	)

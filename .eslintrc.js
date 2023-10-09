@@ -113,6 +113,7 @@ module.exports = {
 		'import/named': 'off',
 		'import/no-default-export': 'off',
 		'import/prefer-default-export': 'off',
+		'no-mixed-spaces-and-tabs': 'off',
 		'class-methods-use-this': 'off',
 		'consistent-return': 'off',
 		'newline-per-chained-call': 'off',

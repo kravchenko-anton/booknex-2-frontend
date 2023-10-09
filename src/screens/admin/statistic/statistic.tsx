@@ -62,7 +62,7 @@ const Statistic = () => {
 						Total Read Time
 					</Title>
 					<Title size={18} weight={'regular'}>
-						{Math.round(statistic.totalReadTime / 60 / 60)} hours
+						{`${Math.round(statistic.totalReadTime / 60 / 60)} hours`}
 					</Title>
 				</View>
 			</View>

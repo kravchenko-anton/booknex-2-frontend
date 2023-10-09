@@ -27,7 +27,8 @@ export const useHeader = (
 				{...(properties.leftIcon as Omit<IconProperties, 'color' | 'size'>)}
 			/>
 		) : null,
-		element: properties.leftIcon as JSX.Element
+		element: properties.leftIcon as JSX.Element,
+		null: null
 	}
 
 	const rightIconSettings = {
@@ -39,7 +40,8 @@ export const useHeader = (
 				{...(properties.rightIcon as Omit<IconProperties, 'color' | 'size'>)}
 			/>
 		),
-		element: properties.rightIcon as JSX.Element
+		element: properties.rightIcon as JSX.Element,
+		null: null
 	}
 
 	return {

@@ -4,7 +4,7 @@ import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import BookCarousel from '@/screens/library/book-carousel/book-carousel'
-import LibraryListElement from '@/screens/library/library-list-element/library-list-element'
+import LibraryCard from '@/screens/library/library-card/library-card'
 import { userServices } from '@/services/user-service'
 import { useQuery } from '@tanstack/react-query'
 
@@ -26,7 +26,7 @@ const Library = () => {
 				headerText={'Books'}
 				data={library.books}
 				renderItem={({ item }) => (
-					<LibraryListElement
+					<LibraryCard
 						onPress={() => {
 							navigate('ComprehensiveList', { type: item.type })
 						}}
@@ -43,7 +43,7 @@ const Library = () => {
 				headerText={'Shelves'}
 				data={library.shelves}
 				renderItem={({ item }) => (
-					<LibraryListElement
+					<LibraryCard
 						onPress={() => {
 							navigate('ComprehensiveList', { type: item.type })
 						}}

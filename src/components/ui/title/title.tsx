@@ -14,6 +14,7 @@ export const Title = memo(
 		style,
 		...properties
 	}: TitleProperties) => {
+		if (!children && children !== 0) return null
 		return (
 			<Text
 				style={[

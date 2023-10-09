@@ -6,7 +6,7 @@ export interface LargeHeaderScrollLayoutProperties {
 	header: Omit<HeaderProperties, 'className' | 'style' | 'color'>
 	animatedHeader: Omit<AnimatedHeaderProperties, 'scrollPosition'>
 	title: string
-	description?: string
+	description?: typeof this.type extends 'background' ? string : never
 	type: 'background' | 'image'
 	background: typeof this.type extends 'background' ? LineColorType : string
 }

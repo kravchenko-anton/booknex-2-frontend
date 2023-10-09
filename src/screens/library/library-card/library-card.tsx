@@ -1,13 +1,13 @@
 import { usePressAnimation } from '@/animations/press-animation'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
-import { LibraryListElementType } from '@/screens/library/library-list-element/library-list-element-types'
+import { LibraryListElementType } from '@/screens/library/library-card/library-card-types'
 import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { FC } from 'react'
 import { View } from 'react-native'
 
-const LibraryListElement: FC<LibraryListElementType> = ({
+const LibraryCard: FC<LibraryListElementType> = ({
 	icon,
 	name,
 	count,
@@ -34,4 +34,4 @@ const LibraryListElement: FC<LibraryListElementType> = ({
 	)
 }
 
-export default LibraryListElement
+export default LibraryCard

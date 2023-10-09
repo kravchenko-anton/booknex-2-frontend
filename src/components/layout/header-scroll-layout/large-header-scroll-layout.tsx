@@ -5,7 +5,6 @@ import ScrollLayout from '@/components/layout/scroll-layout'
 import { Title } from '@/components/ui/title/title'
 import { getFileUrl } from '@/services/api-config'
 import { Color } from '@/utils/color'
-import { StatusBar } from 'expo-status-bar'
 import { FC, PropsWithChildren } from 'react'
 import { ImageBackground, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
@@ -14,29 +13,6 @@ const LargeHeaderScrollLayout: FC<
 	PropsWithChildren<LargeHeaderScrollLayoutProperties>
 > = ({ children, ...properties }) => {
 	const scrollPosition = useSharedValue(0)
-	const headerChildren = (
-		<>
-			<StatusBar backgroundColor={Color.canvas} />
-			<Header color={Color.white} {...properties.header} />
-			<Title
-				size={26}
-				color={Color.white}
-				weight={'bold'}
-				center={properties.type === 'image'}
-				numberOfLines={2}>
-				{properties.title}
-			</Title>
-			{properties.description && (
-				<Title
-					size={18}
-					className='mt-2 w-1/2'
-					weight={'bold'}
-					color={Color.dust}>
-					{properties.description}
-				</Title>
-			)}
-		</>
-	)
 	return (
 		<>
 			<AnimatedHeader
@@ -56,18 +32,36 @@ const LargeHeaderScrollLayout: FC<
 							backgroundColor: properties.background
 						}}
 						className='h-[230px] p-4 pt-0'>
-						{headerChildren}
+						<Header color={Color.white} {...properties.header} />
+						<Title
+							size={26}
+							color={Color.white}
+							weight={'bold'}
+							numberOfLines={2}>
+							{properties.title}
+						</Title>
+						<Title
+							size={18}
+							className='mt-2 w-1/2'
+							weight={'bold'}
+							color={Color.dust}>
+							{properties.description}
+						</Title>
 					</View>
 				) : (
 					<ImageBackground
 						source={{ uri: getFileUrl(properties.background) }}
 						className='h-[250px]'>
-						<View
-							style={{
-								backgroundColor: 'rgba(0,0,0,0.5)'
-							}}
-							className=' flex-1 p-4 pt-0'>
-							{headerChildren}
+						<View className='flex-1 bg-[#0000009a] p-4 pt-0'>
+							<Header color={Color.white} {...properties.header} />
+							<Title
+								size={26}
+								color={Color.white}
+								center={true}
+								weight={'bold'}
+								numberOfLines={2}>
+								{properties.title}
+							</Title>
 						</View>
 					</ImageBackground>
 				)}

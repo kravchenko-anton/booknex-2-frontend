@@ -1,11 +1,13 @@
 import { AnimatedHeaderProperties } from '@/components/header/animated-header/animated-header-types'
 import { useHeaderAnimation } from '@/components/header/animated-header/header-animation'
 import Icon from '@/components/ui/icon/icon'
+import { IconProperties } from '@/components/ui/icon/icon-types'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
+import { isValidElement } from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -16,6 +18,7 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 		properties.transientValue
 	)
 	const { top } = useSafeAreaInsets()
+	console.log(properties.rightIcon)
 	return (
 		<AnimatedView
 			className='absolute left-0 right-0 z-50 bg-canvas'
@@ -36,10 +39,10 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 					</Title>
 				</View>
 				{properties.rightIcon ? (
-					'name' in properties.rightIcon ? (
-						<Icon size={'medium'} {...properties.rightIcon} />
+					isValidElement(properties.rightIcon) ? (
+						properties.rightIcon
 					) : (
-						(properties.rightIcon as JSX.Element)
+						<Icon {...(properties.rightIcon as IconProperties)} />
 					)
 				) : null}
 			</View>

@@ -1,11 +1,13 @@
-import { ShortBookType } from '@/services/types/book-service-types'
+import { BookType, ShortBookType } from '@/services/types/book-service-types'
 import { DefaultModelFields } from '@/types/global'
 
 export interface ShelfType extends DefaultModelFields {
-	name: string
+	title: string
+	description: string
 	color: string
 	image: string
-	books: ShortBookType[]
+	books: (ShortBookType &
+		Pick<BookType, 'description' | 'pages' | 'likedPercentage'>)[]
 }
 
 export interface ShortShelfType extends Omit<ShelfType, 'books'> {

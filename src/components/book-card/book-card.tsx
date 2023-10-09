@@ -46,21 +46,17 @@ const BookCard: FC<BookCardProperties> = ({
 							: ` 📖 ${pages} pages`}
 					</Title>
 				))}
-			{properties.title && (
-				<Title numberOfLines={2} weight={'bold'} size={20} color={Color.black}>
-					{properties.title}
-				</Title>
-			)}
-			{properties.author && (
-				<Title
-					numberOfLines={1}
-					weight={'regular'}
-					size={16}
-					color={Color.gray}
-					className='mt-1'>
-					{properties.author}
-				</Title>
-			)}
+			<Title numberOfLines={2} weight={'bold'} size={20} color={Color.black}>
+				{properties.title}
+			</Title>
+			<Title
+				numberOfLines={1}
+				weight={'regular'}
+				size={16}
+				color={Color.gray}
+				className='mt-1'>
+				{properties.author}
+			</Title>
 		</AnimatedPressable>
 	)
 }

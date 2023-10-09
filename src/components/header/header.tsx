@@ -2,6 +2,7 @@ import { HeaderProperties } from '@/components/header/header-types'
 import { useHeader } from '@/components/header/useHeader'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
+import { isValidElement } from 'react'
 import { View } from 'react-native'
 
 const Header: FC<HeaderProperties> = ({
@@ -21,13 +22,15 @@ const Header: FC<HeaderProperties> = ({
 				leftIconSettings[
 					leftIcon === 'back'
 						? leftIcon
-						: 'name' in leftIcon
-						? 'icon'
-						: 'element'
+						: isValidElement(properties.rightIcon)
+						? 'element'
+						: 'icon'
 				]
 			}
 			{properties.rightIcon &&
-				rightIconSettings['name' in properties.rightIcon ? 'icon' : 'element']}
+				rightIconSettings[
+					isValidElement(properties.rightIcon) ? 'element' : 'icon'
+				]}
 		</View>
 	)
 }

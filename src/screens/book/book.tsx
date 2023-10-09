@@ -9,7 +9,7 @@ import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
-import Feature from '@/screens/book/feature/feature'
+import StatisticCard from '@/screens/book/statistic-card/statistic-card'
 import { bookService } from '@/services/book-service'
 import { useQuery } from '@tanstack/react-query'
 import { Share, View } from 'react-native'
@@ -61,15 +61,19 @@ const Book = () => {
 			description={book.author}>
 			<View className='flex-row justify-between px-4'>
 				<View className='flex-1 justify-between'>
-					<Feature
+					<StatisticCard
 						description={'Duration'}
 						icon={'clock'}
 						count={`${Math.round(book.pages / 1.5 / 60)}h ${Math.round(
 							(book.pages / 1.5) % 60
 						)} min`}
 					/>
-					<Feature description={'Pages'} icon={'book'} count={book.pages} />
-					<Feature
+					<StatisticCard
+						description={'Pages'}
+						icon={'book'}
+						count={book.pages}
+					/>
+					<StatisticCard
 						description={'Liked'}
 						icon={'thumbsup'}
 						count={`${book.likedPercentage}%`}

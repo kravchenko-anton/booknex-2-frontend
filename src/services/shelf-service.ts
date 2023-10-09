@@ -1,14 +1,23 @@
 import { getShelfUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import { BookByIdType } from '@/services/types/book-service-types'
 import {
 	ShelfManipulationType,
+	ShelfType,
 	ShortShelfType
 } from '@/services/types/shelf-service-types'
 
 export const shelfService = {
 	async byId(id: number) {
-		return request<BookByIdType>({
+		return request<
+			ShelfType & {
+				statistics: [
+					{
+						title: string
+						count: number | string
+					}
+				]
+			}
+		>({
 			url: getShelfUrl(`/by-id/${id}`)
 		})
 	},
