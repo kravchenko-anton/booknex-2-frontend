@@ -1,3 +1,5 @@
+import { ShortBookType } from '@/services/types/book-service-types'
+import { ShortShelfType } from '@/services/types/shelf-service-types'
 import { DefaultModelFields, IconType } from '@/types/global'
 
 export interface UserProfileTypes
@@ -33,11 +35,11 @@ export interface UserType extends DefaultModelFields, UserLibraryFieldsType {
 	picture: string
 }
 export interface UserLibraryFieldsType {
-	watchedShelves: []
-	unwatchedShelves: []
-	likedBooks: []
-	finishedBooks: []
-	readingBooks: []
+	watchedShelves: ShortShelfType[]
+	unwatchedShelves: ShortShelfType[]
+	likedBooks: ShortBookType[]
+	finishedBooks: ShortBookType[]
+	readingBooks: ShortBookType[]
 }
 
 type UserLibraryElementType = {

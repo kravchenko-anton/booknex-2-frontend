@@ -18,7 +18,6 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 		properties.transientValue
 	)
 	const { top } = useSafeAreaInsets()
-	console.log(properties.rightIcon)
 	return (
 		<AnimatedView
 			className='absolute left-0 right-0 z-50 bg-canvas'

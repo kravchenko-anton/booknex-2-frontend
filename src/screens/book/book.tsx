@@ -1,9 +1,9 @@
+import AnimatedHeart from '@/components/animated-heart/animated-heart'
 import BookCard from '@/components/book-card/book-card'
 import LargeHeaderScrollLayout from '@/components/layout/header-scroll-layout/large-header-scroll-layout'
 import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import HamburgerMenu from '@/components/ui/hamburger-menu/hamburger-menu'
-import Icon from '@/components/ui/icon/icon'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
@@ -11,6 +11,7 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
 import StatisticCard from '@/screens/book/statistic-card/statistic-card'
 import { bookService } from '@/services/book-service'
+import { Color } from '@/utils/color'
 import { useQuery } from '@tanstack/react-query'
 import { Share, View } from 'react-native'
 
@@ -42,15 +43,31 @@ const Book = () => {
 						position={'right'}
 						elements={[
 							{
-								title: 'Home',
+								title: 'Share',
 								onPress: () => {
-									console.log('Home')
+									Share.share({
+										message: `Wow! I see ${book.title}  book on Booknex and I think you will like it too!`
+									})
+								}
+							},
+							// TODO: сделать форму для репорта, отставить отзыв,
+							{
+								title: 'Report problem',
+								onPress: () => {
+									console.log('Report problem')
 								}
 							},
 							{
-								title: 'Library',
+								title: 'Write review',
 								onPress: () => {
-									console.log('Library')
+									console.log('Write review')
+								}
+							},
+							{
+								// TODO: сделать добавление в список прочитанных и Уже прочитано для удаления
+								title: 'Add to reading',
+								onPress: () => {
+									console.log('Add to reading list')
 								}
 							}
 						]}
@@ -88,11 +105,11 @@ const Book = () => {
 			</View>
 			<View className='mb-2 flex-row justify-between gap-2 px-4 pt-6'>
 				<Button text={'Read'} size={'medium'} className='flex-1' />
-				<Icon
-					name={'heart'}
-					size={'medium'}
-					variant={'outlined'}
-					className='w-[50px]'
+				<AnimatedHeart
+					className='mb-2 h-[50px] w-[50px] rounded-xl border-2 border-primary'
+					id={book.id}
+					color={Color.primary}
+					type={'likedBooks'}
 				/>
 			</View>
 			<FlatList

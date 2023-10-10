@@ -78,11 +78,12 @@ const HamburgerMenu: FC<HamburgerMenuProperties> = ({
 						},
 						animation.popupStyle
 					]}
-					className='absolute top-14 z-50 min-w-[200px] rounded-xl bg-white p-3'>
+					className='absolute top-14 z-50 min-w-[180px] rounded-md bg-white p-3'>
 					{elements?.map(element => (
 						<Title
 							key={element.title}
 							className='py-3'
+							numberOfLines={2}
 							weight={'regular'}
 							onPress={element.onPress}>
 							{element.title}

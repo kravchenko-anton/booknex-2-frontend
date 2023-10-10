@@ -1,9 +1,11 @@
 import VerticalBookCard from '@/components/book-card/vertical-book-card/vertical-book-card'
 import LargeHeaderScrollLayout from '@/components/layout/header-scroll-layout/large-header-scroll-layout'
+import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
-import HamburgerMenu from '@/components/ui/hamburger-menu/hamburger-menu'
+import Icon from '@/components/ui/icon/icon'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
+import { useToggle } from '@/hooks/useToggle/useToggle'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
 import { shelfService } from '@/services/shelf-service'
@@ -15,6 +17,27 @@ const Shelf = () => {
 	const { data: shelf } = useQuery(['shelf  ' + params.id], () =>
 		shelfService.byId(params.id)
 	)
+	const {
+		handleToggle: handleToggleWatchedShelves,
+		isSmashed: isSmashedWatchedShelves
+	} = useToggle(
+		{
+			type: 'watchedShelves',
+			id: params.id
+		},
+		[`shelf  ${params.id}`]
+	)
+	const {
+		handleToggle: handleToggleUnWatchedShelves,
+		isSmashed: isSmashedUnwatchedShelves
+	} = useToggle(
+		{
+			type: 'unwatchedShelves',
+			id: params.id
+		},
+		[`shelf  ${params.id}`]
+	)
+
 	const { navigate } = useTypedNavigation()
 	if (!shelf) return <BigLoader />
 	return (
@@ -32,29 +55,29 @@ const Shelf = () => {
 			}}
 			animatedHeader={{
 				title: shelf.title,
-				transientValue: 85,
-				rightIcon: (
-					<HamburgerMenu
-						position={'right'}
-						elements={[
-							// TODO: сделать тут список для shelf
-							{
-								title: 'Home',
-								onPress: () => {
-									console.log('Home')
-								}
-							},
-							{
-								title: 'Library',
-								onPress: () => {
-									console.log('Library')
-								}
-							}
-						]}
-					/>
-				)
+				transientValue: 85
 			}}
 			title={shelf.title}>
+			<View className='mx-auto mt-[-40px] w-4/5 flex-row justify-between rounded-xl bg-dust p-2 px-4 pb-1 pt-2'>
+				<Button
+					variant={isSmashedWatchedShelves ? 'secondary' : 'primary'}
+					onPress={() => {
+						handleToggleWatchedShelves()
+					}}
+					className='mr-1.5 flex-1'
+					size={'medium'}
+					text={isSmashedWatchedShelves ? 'Cancel watching' : 'Start watching'}
+				/>
+				<Icon
+					onPress={() => {
+						handleToggleUnWatchedShelves()
+					}}
+					name={isSmashedUnwatchedShelves ? 'eye-closed' : 'eye'}
+					className='mb-2 w-[50px]'
+					size={'medium'}
+					variant={'outlined'}
+				/>
+			</View>
 			<View className='flex-row items-center justify-center gap-5 pt-4'>
 				{shelf.statistics.map(item => (
 					<View className='items-center' key={item.title}>
