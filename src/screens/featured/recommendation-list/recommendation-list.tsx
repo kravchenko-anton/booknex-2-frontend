@@ -45,11 +45,11 @@ const RecommendationList: FC<RecommendationProperties> = ({ data = [] }) => {
 							navigate('Book', { id: book.id })
 						}}
 						image={{
-							uri: book.image,
+							uri: book.picture,
 							size: 'medium'
 						}}
 						title={book.title}
-						author={book.author}
+						author={book.author.name}
 					/>
 				)}
 			/>

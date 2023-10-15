@@ -36,8 +36,7 @@ export interface UserType extends DefaultModelFields, UserLibraryFieldsType {
 }
 export interface UserLibraryFieldsType {
 	watchedShelves: ShortShelfType[]
-	unwatchedShelves: ShortShelfType[]
-	likedBooks: ShortBookType[]
+	hiddenShelves: ShortShelfType[]
 	finishedBooks: ShortBookType[]
 	readingBooks: ShortBookType[]
 }

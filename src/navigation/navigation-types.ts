@@ -13,6 +13,7 @@ export type TypeRootStackParameterList = {
 	Library: undefined
 	Shelf: { id: number }
 	Book: { id: number }
+	Author: { id: number }
 	Settings: undefined
 	Search: undefined
 	Genre: { id: number }

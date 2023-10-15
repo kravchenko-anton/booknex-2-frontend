@@ -5,6 +5,5 @@ export interface ImageTypes
 	extends Omit<ImageDefaultProperties, 'source'>,
 		Dimensions {
 	url: string
-	transparentSkeleton?: boolean
 	fullSize?: boolean
 }

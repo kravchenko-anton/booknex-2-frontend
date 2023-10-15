@@ -1,5 +1,4 @@
 import VerticalBookCard from '@/components/book-card/vertical-book-card/vertical-book-card'
-import LargeHeaderScrollLayout from '@/components/layout/header-scroll-layout/large-header-scroll-layout'
 import Button from '@/components/ui/button/button'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
@@ -8,9 +7,10 @@ import { Title } from '@/components/ui/title/title'
 import { useToggle } from '@/hooks/useToggle/useToggle'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
+import ShelfLayout from '@/screens/shelf/shelf-layout/shelf-layout'
 import { shelfService } from '@/services/shelf-service'
 import { useQuery } from '@tanstack/react-query'
-import { Share, View } from 'react-native'
+import { View } from 'react-native'
 
 const Shelf = () => {
 	const { params } = useTypedRoute<'Shelf'>()
@@ -32,7 +32,7 @@ const Shelf = () => {
 		isSmashed: isSmashedUnwatchedShelves
 	} = useToggle(
 		{
-			type: 'unwatchedShelves',
+			type: 'hiddenShelves',
 			id: params.id
 		},
 		[`shelf  ${params.id}`]
@@ -41,37 +41,19 @@ const Shelf = () => {
 	const { navigate } = useTypedNavigation()
 	if (!shelf) return <BigLoader />
 	return (
-		<LargeHeaderScrollLayout
-			type={'image'}
-			background={shelf.image}
-			header={{
-				rightIcon: {
-					name: 'share-android',
-					onPress: () =>
-						Share.share({
-							message: `Wow! I see ${shelf?.title} shelf on Booknex! Check it out`
-						})
-				}
-			}}
-			animatedHeader={{
-				title: shelf.title,
-				transientValue: 85
-			}}
-			title={shelf.title}>
+		<ShelfLayout title={shelf.title} backgroundImage={shelf.picture}>
 			<View className='mx-auto mt-[-40px] w-4/5 flex-row justify-between rounded-xl bg-dust p-2 px-4 pb-1 pt-2'>
 				<Button
 					variant={isSmashedWatchedShelves ? 'secondary' : 'primary'}
-					onPress={() => {
-						handleToggleWatchedShelves()
-					}}
+					onPress={() => handleToggleWatchedShelves()}
 					className='mr-1.5 flex-1'
 					size={'medium'}
+					disabled={isSmashedUnwatchedShelves}
 					text={isSmashedWatchedShelves ? 'Cancel watching' : 'Start watching'}
 				/>
 				<Icon
-					onPress={() => {
-						handleToggleUnWatchedShelves()
-					}}
+					onPress={() => handleToggleUnWatchedShelves()}
+					disabled={isSmashedWatchedShelves}
 					name={isSmashedUnwatchedShelves ? 'eye-closed' : 'eye'}
 					className='mb-2 w-[50px]'
 					size={'medium'}
@@ -91,7 +73,7 @@ const Shelf = () => {
 				))}
 			</View>
 			<View className='mx-2 mt-4 rounded-xl  bg-pale p-4'>
-				<Title size={22} numberOfLines={20} weight={'regular'}>
+				<Title size={22} numberOfLines={3} weight={'regular'}>
 					{shelf.description}
 				</Title>
 			</View>
@@ -103,11 +85,11 @@ const Shelf = () => {
 				renderItem={({ item }) => (
 					<VerticalBookCard
 						image={{
-							uri: item.image,
+							uri: item.picture,
 							size: 'small'
 						}}
 						title={item.title}
-						author={item.author}
+						author={item.author.name}
 						pages={item.pages}
 						likedPercentage={item.likedPercentage}
 						onPress={() => {
@@ -116,7 +98,7 @@ const Shelf = () => {
 					/>
 				)}
 			/>
-		</LargeHeaderScrollLayout>
+		</ShelfLayout>
 	)
 }
 

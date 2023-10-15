@@ -1,9 +1,6 @@
-import {
-	deleteTokensStorage,
-	saveTokensStorage
-} from '@/redux/auth/auth.helper'
+import { saveTokensStorage } from '@/redux/auth/auth.helper'
 import { AuthResponseType } from '@/redux/auth/auth.types'
-import { SERVER_URL, getAuthUrl } from '@/services/api-config'
+import { getAuthUrl, SERVER_URL } from '@/services/api-config'
 import axios from 'axios'
 import { getItemAsync } from 'expo-secure-store'
 
@@ -25,6 +22,6 @@ export const getNewTokens = async () => {
 
 		return response
 	} catch {
-		await deleteTokensStorage()
+		/* empty */
 	}
 }

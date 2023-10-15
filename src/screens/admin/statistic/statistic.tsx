@@ -73,7 +73,7 @@ const Statistic = () => {
 				{statistic.mostReadBook.map(book => (
 					<BookCard
 						image={{
-							uri: book.image,
+							uri: book.picture,
 							size: 'medium'
 						}}
 						key={book.id}

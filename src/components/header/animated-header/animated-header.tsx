@@ -41,9 +41,14 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 					isValidElement(properties.rightIcon) ? (
 						properties.rightIcon
 					) : (
-						<Icon {...(properties.rightIcon as IconProperties)} />
+						<Icon
+							size={'medium'}
+							className='pr-0'
+							color={Color.black}
+							{...(properties.rightIcon as Omit<IconProperties, 'size'>)}
+						/>
 					)
-				) : null}
+				) : undefined}
 			</View>
 		</AnimatedView>
 	)

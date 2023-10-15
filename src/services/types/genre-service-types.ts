@@ -15,4 +15,5 @@ export interface GenreByIdType extends Omit<GenreType, 'books'> {
 	newestBooks: Pick<BookType, keyof ShortBookType | 'color' | 'description'>[]
 	bestSellers: ShortBookType[]
 	bestSellersFromSimilar: SimilarBestSellersType[]
+	bestAuthors: string[]
 }

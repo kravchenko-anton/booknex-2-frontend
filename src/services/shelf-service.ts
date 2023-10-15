@@ -7,6 +7,12 @@ import {
 } from '@/services/types/shelf-service-types'
 
 export const shelfService = {
+	async catalog() {
+		return request<ShortShelfType[]>({
+			url: getShelfUrl('/catalog'),
+			method: 'GET'
+		})
+	},
 	async byId(id: number) {
 		return request<
 			ShelfType & {

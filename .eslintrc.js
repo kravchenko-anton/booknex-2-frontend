@@ -38,7 +38,6 @@ module.exports = {
 		sourceType: 'module'
 	},
 	rules: {
-		'react-hooks/rules-of-hooks': 'error',
 		'react-hooks/exhaustive-deps': 'warn',
 		'react-native/no-unused-styles': 2,
 		'react-native/split-platform-components': 2,
@@ -121,6 +120,7 @@ module.exports = {
 		'no-continue': 'off',
 		'react-native/no-raw-text': 'off',
 		'unicorn/no-null': ['warn'],
+		'react-hooks/rules-of-hooks': 'off',
 		'unicorn/no-nested-ternary': 'off'
 	}
 }

@@ -1,15 +1,15 @@
+import { ShortAuthorType } from '@/services/types/author-service-types'
 import { GenreType } from '@/services/types/genre-service-types'
 import { DefaultModelFields } from '@/types/global'
 
 export interface BookType extends DefaultModelFields {
 	title: string
-	author: string
+	author: ShortAuthorType
 	description: string
-	isbn: string
 	color: string
 	epub: string
 	pages: number
-	image: string
+	picture: string
 	likedPercentage: number
 	popularity: number
 	genres: Omit<GenreType, 'createdAt' | 'updatedAt'>[]
@@ -19,7 +19,7 @@ export type ShortBookType = Pick<
 	BookType,
 	| 'title'
 	| 'author'
-	| 'image'
+	| 'picture'
 	| 'likedPercentage'
 	| 'id'
 	| 'updatedAt'

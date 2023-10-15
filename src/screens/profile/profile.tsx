@@ -1,15 +1,14 @@
 import Header from '@/components/header/header'
-import ScrollLayout from '@/components/layout/scroll-layout'
-import Button from '@/components/ui/button/button'
+import Layout from '@/components/layout/layout'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
-import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { userServices } from '@/services/user-service'
 import { Color } from '@/utils/color'
+import { shadeRGBColor } from '@/utils/shade-color'
 import { useQuery } from '@tanstack/react-query'
 import { View } from 'react-native'
 
@@ -18,26 +17,29 @@ const Profile = () => {
 		userServices.getProfile()
 	)
 	const { navigate } = useTypedNavigation()
-	const { logout } = useAction()
 	if (!profile) return <BigLoader />
-	// TODO: делать тут аниминованный лист
+	// TODO: делать тут обычный layout и повыноить обновление профиля в настройки
 	return (
-		<ScrollLayout className='px-4'>
+		<Layout className='px-4'>
 			<Header
 				rightIcon={{
 					onPress: () => {
-						navigate('UpdateProfile')
+						navigate('Settings')
 					},
-					name: 'pencil'
+					name: 'gear'
 				}}
 			/>
-			<View className='items-center self-center '>
-				<Image
-					className='rounded-3xl bg-gray p-4'
-					height={150}
-					width={150}
-					url={profile.picture}
-				/>
+			<View className='items-center self-center'>
+				<View
+					style={{ backgroundColor: shadeRGBColor(Color.gray, -70) }}
+					className='rounded-2xl p-3'>
+					<Image
+						className='p-4'
+						height={120}
+						width={120}
+						url={profile.picture}
+					/>
+				</View>
 
 				<Title className='mt-2 text-center' size={36} weight={'bold'}>
 					{profile.name}
@@ -69,14 +71,7 @@ const Profile = () => {
 					</View>
 				)}
 			/>
-			<Button
-				className='my-4'
-				text={'Logout'}
-				size={'medium'}
-				variant={'primary'}
-				onPress={() => logout()}
-			/>
-		</ScrollLayout>
+		</Layout>
 	)
 }
 

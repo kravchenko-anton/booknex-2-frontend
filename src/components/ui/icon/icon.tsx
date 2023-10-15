@@ -27,9 +27,10 @@ const Icon: FC<IconProperties> = ({
 	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
 		<AnimatedPressable
-			className='items-center justify-center border-[1px]'
+			className='items-center justify-center border-[2px]'
 			style={[
 				{
+					opacity: properties.disabled ? 0.5 : 1,
 					padding: noPadding ? 0 : PaddingSetting[size],
 					backgroundColor: BackgroundColorSetting[variant],
 					borderRadius: BorderRadiusSetting,

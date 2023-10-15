@@ -5,7 +5,7 @@ export interface ShelfType extends DefaultModelFields {
 	title: string
 	description: string
 	color: string
-	image: string
+	picture: string
 	books: (ShortBookType &
 		Pick<BookType, 'description' | 'pages' | 'likedPercentage'>)[]
 }

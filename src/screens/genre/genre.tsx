@@ -38,7 +38,7 @@ const Genre = () => {
 					<BookCard
 						title={book.title}
 						image={{
-							uri: book.image,
+							uri: book.picture,
 							size: 'medium'
 						}}
 						onPress={() => {
@@ -56,7 +56,7 @@ const Genre = () => {
 					<RainbowBookCard
 						title={book.title}
 						image={{
-							uri: book.image
+							uri: book.picture
 						}}
 						description={book.description}
 						onPress={() => {
@@ -81,7 +81,7 @@ const Genre = () => {
 									navigate('Book', { id: book.id })
 								}}
 								image={{
-									uri: book.image,
+									uri: book.picture,
 									size: 'medium'
 								}}
 							/>

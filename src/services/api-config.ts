@@ -7,6 +7,7 @@ export const getStorageUrl = (string: string) => `/storage${string}`
 export const getAdminUrl = (string: string) => `/admin${string}`
 
 export const getBookUrl = (string: string) => `/book${string}`
+export const getAuthorUrl = (string: string) => `/author${string}`
 export const getShelfUrl = (string: string) => `/shelf${string}`
 
 export const getHistoryUrl = (string: string) => `/history${string}`

@@ -18,12 +18,12 @@ export const usePressAnimation = ({
 		translateY.value = withTiming(5, userConfig)
 	}
 	const onPressOut = () => {
-		translateY.value = withTiming(1, userConfig)
+		translateY.value = withTiming(0, userConfig)
 	}
-	const pressFunctions = {
-		onPressIn,
-		onPressOut
-	}
+	const pressFunctions = useMemo(
+		() => ({ onPressIn, onPressOut }),
+		[onPressIn, onPressOut]
+	)
 	return useMemo(
 		() => ({ animatedStyle, pressFunctions }),
 		[animatedStyle, pressFunctions]

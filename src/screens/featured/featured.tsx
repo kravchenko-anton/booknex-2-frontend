@@ -8,20 +8,22 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import RecommendationList from '@/screens/featured/recommendation-list/recommendation-list'
 import ShelfCard from '@/screens/featured/shelf-card/shelf-card'
 import { catalogService } from '@/services/catalog-service'
+import { shelfService } from '@/services/shelf-service'
 import { removeEmoji } from '@/utils/remove-emoji'
 import { useQuery } from '@tanstack/react-query'
 
 const Featured = () => {
-	const { data: catalog } = useQuery(['catalog'], () =>
+	const { data: catalog } = useQuery(['catalogs'], () =>
 		catalogService.catalog()
 	)
+	const { data: shelves } = useQuery(['shelves'], () => shelfService.catalog())
 	const { navigate } = useTypedNavigation()
 	if (!catalog) return <FullScreenLoader />
 	return (
 		<ScrollLayout>
 			<FlatList
 				horizontal
-				data={catalog.shelves}
+				data={shelves}
 				renderItem={({ item: shelve }) => (
 					<ShelfCard
 						id={shelve.id}
@@ -56,7 +58,7 @@ const Featured = () => {
 						onPress={() => {
 							navigate('Book', { id: book.id })
 						}}
-						image={{ uri: book.image, size: 'large' }}
+						image={{ uri: book.picture, size: 'large' }}
 						title={book.title}
 						likedPercentage={book.likedPercentage}
 					/>
@@ -72,7 +74,7 @@ const Featured = () => {
 							navigate('Book', { id: book.id })
 						}}
 						backgroundColor={book.color}
-						image={{ uri: book.image }}
+						image={{ uri: book.picture }}
 						title={book.title}
 						description={book.description}
 					/>
@@ -87,7 +89,7 @@ const Featured = () => {
 						onPress={() => {
 							navigate('Book', { id: book.id })
 						}}
-						image={{ uri: book.image, size: 'medium' }}
+						image={{ uri: book.picture, size: 'medium' }}
 					/>
 				)}
 			/>
@@ -105,7 +107,7 @@ const Featured = () => {
 									navigate('Book', { id: book.id })
 								}}
 								image={{
-									uri: book.image,
+									uri: book.picture,
 									size: 'small'
 								}}
 							/>
@@ -125,11 +127,11 @@ const Featured = () => {
 						}}
 						pages={book.pages}
 						image={{
-							uri: book.image,
+							uri: book.picture,
 							size: 'medium'
 						}}
 						title={book.title}
-						author={book.author}
+						author={book.author.name}
 					/>
 				)}
 			/>

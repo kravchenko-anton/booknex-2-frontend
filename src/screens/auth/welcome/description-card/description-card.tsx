@@ -1,13 +1,12 @@
 import image from '@/../assets/icon.png'
 import Button from '@/components/ui/button/button'
-import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
 import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
 import { WelcomeElementProperties } from '@/screens/auth/welcome/welcome-types'
 import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
-import { View } from 'react-native'
+import { Image, ImageSourcePropType, View } from 'react-native'
 
 const DescriptionCard: FC<WelcomeElementProperties> = ({
 	setIsActivePopup,
@@ -18,10 +17,8 @@ const DescriptionCard: FC<WelcomeElementProperties> = ({
 	return (
 		<AnimatedView style={showAnimation}>
 			<Image
-				className='mb-[-75px] rotate-12 self-start'
-				width={180}
-				height={180}
-				url={image as string}
+				className='mb-[-75px] h-[180px] w-[180px] rotate-12 self-start'
+				source={image as ImageSourcePropType}
 			/>
 
 			<View className='w-full items-center rounded-3xl bg-white p-4'>

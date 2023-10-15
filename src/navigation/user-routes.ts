@@ -1,3 +1,4 @@
+import Author from '@/screens/author/author'
 import Featured from '@/screens/featured/featured'
 import Genre from '@/screens/genre/genre'
 import ComprehensiveList from '@/screens/library/comprehensive-list/comprehensive-list'
@@ -24,6 +25,10 @@ export const userRoutes: IRoute[] = [
 	{
 		name: 'Shelf',
 		component: Shelf
+	},
+	{
+		name: 'Author',
+		component: Author
 	},
 	{
 		name: 'ComprehensiveList',

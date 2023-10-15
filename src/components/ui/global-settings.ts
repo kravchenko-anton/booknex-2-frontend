@@ -1,6 +1,6 @@
 export const PaddingSetting = {
-	small: 10,
-	medium: 12,
+	small: 8,
+	medium: 10,
 	large: 16
 }
 

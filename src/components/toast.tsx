@@ -1,24 +1,28 @@
-import Icon from '@/components/ui/icon/icon'
 import { fontSettings } from '@/components/ui/title/title-settings'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
+import { Text } from 'react-native'
 import RnToast, { BaseToast } from 'react-native-toast-message'
 
-const options = () => ({
+const options = (color: string) => ({
 	style: {
-		backgroundColor: Color.white,
-		borderLeftColor: Color.white
+		backgroundColor: Color.pale,
+		alignItems: 'center' as const,
+		borderRadius: 8,
+		borderLeftColor: color,
+		borderColor: color,
+		borderWidth: 3,
+		borderLeftWidth: 3
 	},
 	text1Style: {
-		color: Color.black,
-		fontSize: 16,
+		color: color,
+		fontSize: 18,
 		marginLeft: -12,
-		fontFamily: fontSettings.light
+		fontFamily: fontSettings.bold
 	},
 	text2Style: {
 		fontSize: 12,
 		marginLeft: -12,
-
 		color: Color.gray,
 		fontFamily: fontSettings.light
 	}
@@ -34,46 +38,34 @@ const Toast: FC = () => {
 				success: properties => (
 					<BaseToast
 						renderTrailingIcon={() => (
-							<Icon
-								noPadding
-								color={Color.primary}
-								name={'thumbsup'}
-								className='mr-4'
-								size={'large'}
-							/>
+							<Text className='items-center justify-center  pr-3 text-3xl'>
+								🎉
+							</Text>
 						)}
 						{...properties}
-						{...options()}
+						{...options('#3F612D')}
 					/>
 				),
 				info: properties => (
 					<BaseToast
 						renderTrailingIcon={() => (
-							<Icon
-								noPadding
-								color={Color.highlight}
-								name={'alert'}
-								className='mr-4'
-								size={'large'}
-							/>
+							<Text className='items-center justify-center  pr-3 text-3xl'>
+								⚠️
+							</Text>
 						)}
 						{...properties}
-						{...options()}
+						{...options('#F9C74F')}
 					/>
 				),
 				error: properties => (
 					<BaseToast
 						renderTrailingIcon={() => (
-							<Icon
-								noPadding
-								color={Color.alert}
-								name={'thumbsdown'}
-								className='mr-4'
-								size={'large'}
-							/>
+							<Text className='items-center justify-center  pr-3 text-3xl'>
+								🚨
+							</Text>
 						)}
 						{...properties}
-						{...options()}
+						{...options('#D7263D')}
 					/>
 				)
 			}}
