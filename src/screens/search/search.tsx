@@ -37,10 +37,7 @@ const Search = () => {
 							data={books}
 							renderItem={({ item: book }) => (
 								<VerticalBookCard
-									image={{
-										uri: book.picture,
-										size: 'small'
-									}}
+									coverUrl={book.picture}
 									title={book.title}
 									author={book.author.name}
 									pages={book.pages}

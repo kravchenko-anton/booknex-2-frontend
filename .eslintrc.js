@@ -120,7 +120,6 @@ module.exports = {
 		'no-continue': 'off',
 		'react-native/no-raw-text': 'off',
 		'unicorn/no-null': ['warn'],
-		'react-hooks/rules-of-hooks': 'off',
 		'unicorn/no-nested-ternary': 'off'
 	}
 }

@@ -1,5 +1,6 @@
 import VerticalBookCard from '@/components/book-card/vertical-book-card/vertical-book-card'
 import Button from '@/components/ui/button/button'
+import Description from '@/components/ui/description/description'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
 import BigLoader from '@/components/ui/loader/big-loader'
@@ -73,9 +74,9 @@ const Shelf = () => {
 				))}
 			</View>
 			<View className='mx-2 mt-4 rounded-xl  bg-pale p-4'>
-				<Title size={22} numberOfLines={3} weight={'regular'}>
+				<Description defaultSentences={2} size={22} weight={'regular'}>
 					{shelf.description}
-				</Title>
+				</Description>
 			</View>
 
 			<FlatList
@@ -84,10 +85,7 @@ const Shelf = () => {
 				className='mb-2 px-2'
 				renderItem={({ item }) => (
 					<VerticalBookCard
-						image={{
-							uri: item.picture,
-							size: 'small'
-						}}
+						coverUrl={item.picture}
 						title={item.title}
 						author={item.author.name}
 						pages={item.pages}

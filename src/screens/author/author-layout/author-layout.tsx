@@ -30,7 +30,7 @@ const AuthorLayout: FC<PropsWithChildren<AuthorLayoutProperties>> = ({
 						backgroundColor: properties.backgroundColor
 					}}
 					className='h-[250px]'>
-					<View className='flex-1 bg-[#0000009a] p-4 pt-0'>
+					<View className='flex-1 bg-[#0000009a]  p-4 pt-0'>
 						<Header
 							color={Color.white}
 							rightIcon={{

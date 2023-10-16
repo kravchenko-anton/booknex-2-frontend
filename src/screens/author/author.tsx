@@ -1,5 +1,8 @@
+import VerticalBookCard from '@/components/book-card/vertical-book-card/vertical-book-card'
+import Description from '@/components/ui/description/description'
+import FlatList from '@/components/ui/flatlist/flatlist'
 import BigLoader from '@/components/ui/loader/big-loader'
-import { Title } from '@/components/ui/title/title'
+import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
 import AuthorLayout from '@/screens/author/author-layout/author-layout'
 import { authorService } from '@/services/author-service'
@@ -11,6 +14,7 @@ const Author = () => {
 	const { data: author } = useQuery(['author'], () =>
 		authorService.byId(params.id)
 	)
+	const { navigate } = useTypedNavigation()
 	if (!author) return <BigLoader />
 	return (
 		<AuthorLayout
@@ -18,14 +22,27 @@ const Author = () => {
 			backgroundColor={author.color}
 			picture={author.picture}>
 			<View className='mx-2 mt-4 rounded-xl  bg-pale p-4'>
-				<Title
-					size={22}
-					numberOfLines={3}
-					className='w-full'
-					weight={'regular'}>
+				<Description size={22} className='w-full' weight={'regular'}>
 					{author.description}
-				</Title>
+				</Description>
 			</View>
+
+			<FlatList
+				data={author.books}
+				scrollEnabled={false}
+				className='mb-2 px-2'
+				renderItem={({ item: book }) => (
+					<VerticalBookCard
+						coverUrl={book.picture}
+						title={book.title}
+						author={book.author.name}
+						likedPercentage={book.likedPercentage}
+						onPress={() => {
+							navigate('Book', { id: book.id })
+						}}
+					/>
+				)}
+			/>
 		</AuthorLayout>
 	)
 }

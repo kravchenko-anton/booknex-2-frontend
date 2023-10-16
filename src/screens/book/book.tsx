@@ -1,14 +1,14 @@
 import BookCard from '@/components/book-card/book-card'
 import Button from '@/components/ui/button/button'
+import Description from '@/components/ui/description/description'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
-import { Title } from '@/components/ui/title/title'
+import { useToggle } from '@/hooks/useToggle/useToggle'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
 import BookLayout from '@/screens/book/book-layout/book-layout'
-import { useBookLayoutSettings } from '@/screens/book/book-layout/book-settings'
 import StatisticCard from '@/screens/book/statistic-card/statistic-card'
 import { bookService } from '@/services/book-service'
 import { Color } from '@/utils/color'
@@ -21,36 +21,44 @@ const Book = () => {
 	const { data: book } = useQuery(['book ', params.id], () =>
 		bookService.byId(+params.id)
 	)
+	const { handleToggle: toggleReadingBooks, isSmashed: isSmashedReadingBooks } =
+		useToggle({
+			type: 'readingBooks',
+			id: params.id
+		})
 	if (!book) return <BigLoader />
-	const {
-		shareFunction,
-		toggleReadingBooks,
-		isSmashedReadingBooks,
-		statistics,
-		hamburgerMenuElements
-	} = useBookLayoutSettings({
-		id: book.id,
-		title: book.title,
-		pages: book.pages,
-		likedPercentage: book.likedPercentage
-	})
 	return (
 		<BookLayout
 			title={book.title}
 			backgroundColor={book.color}
-			hamburgerMenuElements={hamburgerMenuElements}
-			shareFunction={shareFunction}
+			hamburgerMenuElements={[
+				{
+					title: isSmashedReadingBooks
+						? 'Remove from reading list'
+						: 'Add to reading list',
+					onPress: () => toggleReadingBooks()
+				}
+			]}
 			author={book.author}>
 			<View className='flex-row justify-between px-4'>
 				<View className='flex-1 justify-between'>
-					{statistics.map(statistic => (
-						<StatisticCard
-							key={statistic.title}
-							description={statistic.title}
-							icon={statistic.icon}
-							count={statistic.count}
-						/>
-					))}
+					<StatisticCard
+						description={'Duration'}
+						icon={'clock'}
+						count={`${Math.round(book.pages / 1.5 / 60)}h ${Math.round(
+							(book.pages / 1.5) % 60
+						)} min`}
+					/>
+					<StatisticCard
+						description={'Pages'}
+						icon={'book'}
+						count={book.pages}
+					/>
+					<StatisticCard
+						description={'Liked'}
+						icon={'thumbsup'}
+						count={`${book.likedPercentage}%`}
+					/>
 				</View>
 				<Image
 					url={book.picture}
@@ -94,13 +102,9 @@ const Book = () => {
 					/>
 				)}
 			/>
-			<Title
-				size={18}
-				numberOfLines={60}
-				className='mt-2 px-4'
-				weight={'light'}>
+			<Description size={18} className='mt-2 px-4' weight={'light'}>
 				{book.description}
-			</Title>
+			</Description>
 
 			<FlatList
 				data={book.similarBooks}

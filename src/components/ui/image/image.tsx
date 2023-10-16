@@ -15,9 +15,6 @@ const Image: FC<ImageTypes> = ({
 }) => {
 	return (
 		<DefaultImage
-			onError={error => {
-				console.error('Image loading error:', error)
-			}}
 			source={{
 				uri: getFileUrl(url),
 				width,
@@ -27,7 +24,7 @@ const Image: FC<ImageTypes> = ({
 				{
 					width,
 					height: fullSize ? '100%' : height,
-					backgroundColor: Color.dust,
+					backgroundColor: Color.secondary,
 					borderRadius
 				},
 				style

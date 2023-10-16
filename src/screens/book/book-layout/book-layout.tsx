@@ -6,7 +6,7 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { BookLayoutProperties } from '@/screens/book/book-layout/book-layout-types'
 import { Color } from '@/utils/color'
 import { FC, PropsWithChildren } from 'react'
-import { View } from 'react-native'
+import { Share, View } from 'react-native'
 
 const BookLayout: FC<PropsWithChildren<BookLayoutProperties>> = ({
 	children,
@@ -21,7 +21,29 @@ const BookLayout: FC<PropsWithChildren<BookLayoutProperties>> = ({
 				rightIcon: (
 					<HamburgerMenu
 						position={'right'}
-						elements={properties.hamburgerMenuElements}
+						elements={[
+							{
+								title: 'Share',
+								onPress: () => {
+									Share.share({
+										message: `Wow! I see ${properties.title} book on Booknex and I think you will like it too!`
+									})
+								}
+							},
+							{
+								title: 'Report problem',
+								onPress: () => {
+									console.log('Report problem')
+								}
+							},
+							{
+								title: 'Write review',
+								onPress: () => {
+									console.log('Write review')
+								}
+							},
+							...properties.hamburgerMenuElements
+						]}
 					/>
 				)
 			}}
@@ -35,7 +57,10 @@ const BookLayout: FC<PropsWithChildren<BookLayoutProperties>> = ({
 						color={Color.white}
 						rightIcon={{
 							name: 'share-android',
-							onPress: properties.shareFunction
+							onPress: () =>
+								Share.share({
+									message: `Wow! I see ${properties.title} book on Booknex and I think you will like it too!`
+								})
 						}}
 					/>
 					<Title
