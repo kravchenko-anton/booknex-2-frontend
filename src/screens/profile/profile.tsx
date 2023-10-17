@@ -8,7 +8,6 @@ import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { userServices } from '@/services/user-service'
 import { Color } from '@/utils/color'
-import { shadeRGBColor } from '@/utils/shade-color'
 import { useQuery } from '@tanstack/react-query'
 import { View } from 'react-native'
 
@@ -30,16 +29,7 @@ const Profile = () => {
 				}}
 			/>
 			<View className='items-center self-center'>
-				<View
-					style={{ backgroundColor: shadeRGBColor(Color.gray, -70) }}
-					className='rounded-2xl p-3'>
-					<Image
-						className='p-4'
-						height={120}
-						width={120}
-						url={profile.picture}
-					/>
-				</View>
+				<Image height={140} width={140} url={profile.picture} />
 
 				<Title className='mt-2 text-center' size={36} weight={'bold'}>
 					{profile.name}

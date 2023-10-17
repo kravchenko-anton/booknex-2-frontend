@@ -13,10 +13,12 @@ import { removeEmoji } from '@/utils/remove-emoji'
 import { useQuery } from '@tanstack/react-query'
 
 const Featured = () => {
-	const { data: catalog } = useQuery(['catalogs'], () =>
+	const { data: catalog } = useQuery(['catalog'], () =>
 		catalogService.catalog()
 	)
-	const { data: shelves } = useQuery(['shelves'], () => shelfService.catalog())
+	const { data: shelves } = useQuery(['shelf', 'shelves'], () =>
+		shelfService.catalog()
+	)
 	const { navigate } = useTypedNavigation()
 	if (!catalog) return <FullScreenLoader />
 	return (

@@ -1,3 +1,4 @@
+import AuthorCard from '@/components/author-card/author-card'
 import BookCard from '@/components/book-card/book-card'
 import RainbowBookCard from '@/components/book-card/rainbow-book-card/rainbow-book-card'
 import HeaderScrollLayout from '@/components/layout/header-scroll-layout/header-scroll-layout'
@@ -12,7 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 
 const Genre = () => {
 	const { params } = useTypedRoute<'Genre'>()
-	const { data: genre } = useQuery(['genres', params.id], () =>
+	const { data: genre } = useQuery(['genre', params.id], () =>
 		genreService.byId(+params.id)
 	)
 	const { navigate } = useTypedNavigation()
@@ -66,7 +67,21 @@ const Genre = () => {
 					/>
 				)}
 			/>
-
+			<FlatList
+				horizontal
+				headerText={'Best Authors'}
+				data={genre.bestAuthors}
+				renderItem={({ item: author }) => (
+					<AuthorCard
+						onPress={() => {
+							navigate('Author', { id: author.id })
+						}}
+						name={author.name}
+						picture={author.picture}
+						size={'medium'}
+					/>
+				)}
+			/>
 			{genre.bestSellersFromSimilar.map(simular => {
 				return (
 					<FlatList

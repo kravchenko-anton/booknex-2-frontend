@@ -29,6 +29,13 @@ export const userServices = {
 			method: 'GET'
 		})
 	},
+
+	async getFavoriteList() {
+		return request<UserLibraryFieldsType>({
+			url: getUsersUrl('/favorite-list'),
+			method: 'GET'
+		})
+	},
 	async updateBio(dto: UserUpdateBioTypes) {
 		return request({
 			url: getUsersUrl('/update-bio'),

@@ -4,17 +4,15 @@ import FlatList from '@/components/ui/flatlist/flatlist'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
-import { ShortBookType } from '@/services/types/book-service-types'
 import { userServices } from '@/services/user-service'
 import { useQuery } from '@tanstack/react-query'
 import { View } from 'react-native'
 
 const ComprehensiveList = () => {
 	const { params } = useTypedRoute<'ComprehensiveList'>()
-	const { data: library } = useQuery(['user-library-more'], () =>
+	const { data: library } = useQuery(['user-library-more' + params.type], () =>
 		userServices.getMore(params.type)
 	)
-	console.log(library)
 	// TODO: сделать лист и пофиксить типы
 	if (!library) return <BigLoader />
 	return (
@@ -29,7 +27,7 @@ const ComprehensiveList = () => {
 			<FlatList
 				mt={25}
 				scrollEnabled={false}
-				data={library[params.type] as ShortBookType[]}
+				data={library[params.type] as never[]}
 				renderItem={({ item }) => <View></View>}
 			/>
 		</Layout>

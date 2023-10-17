@@ -15,7 +15,7 @@ import { View } from 'react-native'
 
 const Shelf = () => {
 	const { params } = useTypedRoute<'Shelf'>()
-	const { data: shelf } = useQuery(['shelf  ' + params.id], () =>
+	const { data: shelf } = useQuery(['shelf', 'shelf' + params.id], () =>
 		shelfService.byId(params.id)
 	)
 	const {
@@ -26,7 +26,7 @@ const Shelf = () => {
 			type: 'watchedShelves',
 			id: params.id
 		},
-		[`shelf  ${params.id}`]
+		['shelf']
 	)
 	const {
 		handleToggle: handleToggleUnWatchedShelves,
@@ -36,7 +36,7 @@ const Shelf = () => {
 			type: 'hiddenShelves',
 			id: params.id
 		},
-		[`shelf  ${params.id}`]
+		['shelf']
 	)
 
 	const { navigate } = useTypedNavigation()

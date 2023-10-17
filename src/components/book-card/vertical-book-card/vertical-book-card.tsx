@@ -7,9 +7,10 @@ import type { FC } from 'react'
 import { Pressable, View } from 'react-native'
 
 const VerticalBookCard: FC<VerticalBookCardProperties> = ({ ...book }) => {
+	// TODO: добавить тут анимацию нажатия
 	return (
 		<Pressable
-			className=' h-[185px] w-full  flex-row rounded-lg bg-dust p-2'
+			className='h-[185px] w-full flex-row rounded-lg bg-dust p-2'
 			{...book}>
 			<Image url={book.coverUrl} height={140} fullSize={true} width={115} />
 			<View className='h-[170px] flex-1 p-3 pb-0'>

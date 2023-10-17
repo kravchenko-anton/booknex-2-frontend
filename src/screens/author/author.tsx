@@ -11,7 +11,7 @@ import { View } from 'react-native'
 
 const Author = () => {
 	const { params } = useTypedRoute<'Author'>()
-	const { data: author } = useQuery(['author'], () =>
+	const { data: author } = useQuery(['author', params.id], () =>
 		authorService.byId(params.id)
 	)
 	const { navigate } = useTypedNavigation()

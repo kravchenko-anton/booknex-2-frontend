@@ -1,3 +1,7 @@
+import {
+	AuthorType,
+	ShortAuthorType
+} from '@/services/types/author-service-types'
 import { BookType, ShortBookType } from '@/services/types/book-service-types'
 import { DefaultModelFields } from '@/types/global'
 
@@ -15,5 +19,5 @@ export interface GenreByIdType extends Omit<GenreType, 'books'> {
 	newestBooks: Pick<BookType, keyof ShortBookType | 'color' | 'description'>[]
 	bestSellers: ShortBookType[]
 	bestSellersFromSimilar: SimilarBestSellersType[]
-	bestAuthors: string[]
+	bestAuthors: (ShortAuthorType & Pick<AuthorType, 'picture'>)[]
 }

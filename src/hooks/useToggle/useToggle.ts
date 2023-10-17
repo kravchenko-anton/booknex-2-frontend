@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useLayoutEffect, useState } from 'react'
 import Toast from 'react-native-toast-message'
 
-export const useToggle = (data: UseToggleProperties, invalidate?: string[]) => {
+export const useToggle = (data: UseToggleProperties, invalidate?: [string]) => {
 	const QueryClient = useQueryClient()
 	const [isSmashed, setIsSmashed] = useState(false)
 	const { favoriteList } = useFavoritesList(data.type)
@@ -23,9 +23,12 @@ export const useToggle = (data: UseToggleProperties, invalidate?: string[]) => {
 			userServices.toggle(properties.type, properties.id),
 		{
 			onSuccess: async ({ message }) => {
-				await QueryClient.invalidateQueries([`Favorite list ${data.type}`])
+				console.log(invalidate)
+				await QueryClient.invalidateQueries(['Favorite list'])
 				if (invalidate) {
-					await QueryClient.invalidateQueries(invalidate)
+					await QueryClient.invalidateQueries({
+						queryKey: invalidate
+					})
 				}
 				Toast.show({
 					type: 'success',
