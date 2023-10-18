@@ -16,7 +16,7 @@ const Featured = () => {
 	const { data: catalog } = useQuery(['catalog'], () =>
 		catalogService.catalog()
 	)
-	const { data: shelves } = useQuery(['shelf', 'shelves'], () =>
+	const { data: shelves } = useQuery(['library', 'shelves'], () =>
 		shelfService.catalog()
 	)
 	const { navigate } = useTypedNavigation()
@@ -29,7 +29,7 @@ const Featured = () => {
 				renderItem={({ item: shelve }) => (
 					<ShelfCard
 						id={shelve.id}
-						backgroundColor={shelve.color}
+						picture={shelve.picture}
 						icon={shelve.icon}
 						name={shelve.title}
 					/>

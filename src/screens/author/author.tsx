@@ -1,4 +1,4 @@
-import VerticalBookCard from '@/components/book-card/vertical-book-card/vertical-book-card'
+import VerticalCard from '@/components/book-card/vertical-card/vertical-card'
 import Description from '@/components/ui/description/description'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import BigLoader from '@/components/ui/loader/big-loader'
@@ -32,11 +32,14 @@ const Author = () => {
 				scrollEnabled={false}
 				className='mb-2 px-2'
 				renderItem={({ item: book }) => (
-					<VerticalBookCard
-						coverUrl={book.picture}
+					<VerticalCard
+						image={{
+							uri: book.picture,
+							size: 'medium'
+						}}
 						title={book.title}
-						author={book.author.name}
-						likedPercentage={book.likedPercentage}
+						description={book.author.name}
+						buttons={[`👍 ${book.likedPercentage}% liked`]}
 						onPress={() => {
 							navigate('Book', { id: book.id })
 						}}

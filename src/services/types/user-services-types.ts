@@ -41,6 +41,13 @@ export interface UserLibraryFieldsType {
 	readingBooks: ShortBookType[]
 }
 
+export const DesignationType = {
+	finishedBooks: 'book',
+	readingBooks: 'book',
+	watchedShelves: 'shelf',
+	hiddenShelves: 'shelf'
+}
+
 type UserLibraryElementType = {
 	type: keyof UserLibraryFieldsType
 	name: string

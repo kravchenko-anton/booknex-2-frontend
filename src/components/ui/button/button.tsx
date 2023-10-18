@@ -1,4 +1,4 @@
-import { usePressAnimation } from '@/animations/press-animation'
+import PressableContainer from '@/components/pressable-container/pressable-container'
 import {
 	BackgroundColor,
 	TextColor,
@@ -11,7 +11,7 @@ import {
 	PaddingSetting
 } from '@/components/ui/global-settings'
 import { Title } from '@/components/ui/title/title'
-import { AnimatedPressable } from '@/types/component-types'
+import { Style } from '@/types/global'
 import { memo } from 'react'
 
 const Button = ({
@@ -20,9 +20,8 @@ const Button = ({
 	style,
 	...properties
 }: ButtonProperties) => {
-	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
-		<AnimatedPressable
+		<PressableContainer
 			className='mb-2 items-center justify-center'
 			style={[
 				{
@@ -31,10 +30,8 @@ const Button = ({
 					borderRadius: BorderRadiusSetting,
 					padding: PaddingSetting[size]
 				},
-				animatedStyle,
-				style
+				style as Style
 			]}
-			{...pressFunctions}
 			{...properties}>
 			<Title
 				color={TextColor[variant]}
@@ -42,7 +39,7 @@ const Button = ({
 				size={TextSize[size]}>
 				{properties.text}
 			</Title>
-		</AnimatedPressable>
+		</PressableContainer>
 	)
 }
 

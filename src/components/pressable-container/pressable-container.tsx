@@ -1,10 +1,24 @@
 import { usePressAnimation } from '@/animations/press-animation'
-import { AnimatedPressable } from '@/types/component-types'
+import {
+	AnimatedPressable,
+	PressableDefaultProperties
+} from '@/types/component-types'
+import { FC, PropsWithChildren, memo } from 'react'
 
-const PressableContainer = () => {
-	// TODO: сделать один компонент провайдер для анимации наажатия и использовать его везде
+const PressableContainer: FC<PropsWithChildren<PressableDefaultProperties>> = ({
+	children,
+	style,
+	...properties
+}) => {
 	const { pressFunctions, animatedStyle } = usePressAnimation()
-	return <AnimatedPressable></AnimatedPressable>
+	return (
+		<AnimatedPressable
+			{...pressFunctions}
+			style={[style, animatedStyle]}
+			{...properties}>
+			{children}
+		</AnimatedPressable>
+	)
 }
 
-export default PressableContainer
+export default memo(PressableContainer)

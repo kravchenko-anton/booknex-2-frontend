@@ -1,4 +1,4 @@
-import VerticalBookCard from '@/components/book-card/vertical-book-card/vertical-book-card'
+import VerticalCard from '@/components/book-card/vertical-card/vertical-card'
 import Layout from '@/components/layout/layout'
 import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
@@ -36,12 +36,17 @@ const Search = () => {
 							className='w-full flex-grow'
 							data={books}
 							renderItem={({ item: book }) => (
-								<VerticalBookCard
-									coverUrl={book.picture}
+								<VerticalCard
+									image={{
+										uri: book.picture,
+										size: 'medium'
+									}}
 									title={book.title}
-									author={book.author.name}
-									pages={book.pages}
-									likedPercentage={book.likedPercentage}
+									description={book.author.name}
+									buttons={[
+										`📖 ${book.pages} pages`,
+										`👍 ${book.likedPercentage}% liked`
+									]}
 									onPress={() => {
 										navigate('Book', { id: book.id })
 									}}

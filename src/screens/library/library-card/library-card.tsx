@@ -1,11 +1,11 @@
-import { usePressAnimation } from '@/animations/press-animation'
+import PressableContainer from '@/components/pressable-container/pressable-container'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
 import { LibraryListElementType } from '@/screens/library/library-card/library-card-types'
-import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { FC } from 'react'
 import { View } from 'react-native'
+// TODO: убрать и вынести в обычный пропс, нигде больше не юзаеться и рне будет
 
 const LibraryCard: FC<LibraryListElementType> = ({
 	icon,
@@ -14,12 +14,10 @@ const LibraryCard: FC<LibraryListElementType> = ({
 	style,
 	...properties
 }) => {
-	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
-		<AnimatedPressable
+		<PressableContainer
 			className='w-full flex-row items-center justify-between rounded-xl bg-dust p-4'
-			style={[animatedStyle, style]}
-			{...pressFunctions}
+			style={style}
 			{...properties}>
 			<View className='flex-row items-center justify-between'>
 				<Icon name={icon} size={'medium'} className='w-[40px] pb-0 pl-0 pt-0' />
@@ -30,7 +28,7 @@ const LibraryCard: FC<LibraryListElementType> = ({
 			<Title size={20} weight={'regular'} color={Color.secondary}>
 				{count}
 			</Title>
-		</AnimatedPressable>
+		</PressableContainer>
 	)
 }
 

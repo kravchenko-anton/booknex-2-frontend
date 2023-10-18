@@ -1,50 +1,47 @@
-import { usePressAnimation } from '@/animations/press-animation'
+import PressableContainer from '@/components/pressable-container/pressable-container'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { AnimatedPressable } from '@/types/component-types'
 import { Color } from '@/utils/color'
-import { shadeRGBColor } from '@/utils/shade-color'
 import { LinearGradient } from 'expo-linear-gradient'
 import { FC } from 'react'
+import { ImageBackground } from 'react-native'
 
 interface ShelfListItemProperties {
 	id: number
-	backgroundColor: string
+	picture: string
 	icon: string
 	name: string
 }
 const ShelfCard: FC<ShelfListItemProperties> = properties => {
-	const { pressFunctions, animatedStyle } = usePressAnimation()
 	const { navigate } = useTypedNavigation()
 	return (
-		<AnimatedPressable
+		<PressableContainer
 			onPress={() => {
 				navigate('Shelf', { id: properties.id })
 			}}
-			className='mb-2 h-[120px] w-[110px]'
-			style={animatedStyle}
-			{...pressFunctions}>
-			<LinearGradient
-				start={[0.45, 0.1]}
-				end={[0.4, 1]}
-				colors={[
-					properties.backgroundColor,
-					shadeRGBColor(properties.backgroundColor, -40)
-				]}
-				className='h-full w-full flex-1 rounded-xl  px-2 pb-2'>
-				<Title className='ml-auto mt-1' color={Color.white} size={32}>
-					{properties.icon}
-				</Title>
+			className='mb-2 h-[130px] w-[120px] rounded-xl'>
+			<ImageBackground
+				source={{
+					uri: properties.picture
+				}}
+				borderRadius={12}
+				className='h-full w-full flex-1'>
+				<LinearGradient
+					colors={['transparent', Color.black]}
+					start={[0.2, 0.2]}
+					end={[0, 0.8]}
+					className='absolute h-full w-full flex-1 rounded-xl'
+				/>
 				<Title
 					numberOfLines={2}
 					color={Color.white}
 					weight={'bold'}
-					className='mt-auto'
+					className='mb-2 ml-2 mt-auto'
 					size={16}>
 					{properties.name}
 				</Title>
-			</LinearGradient>
-		</AnimatedPressable>
+			</ImageBackground>
+		</PressableContainer>
 	)
 }
 

@@ -1,12 +1,12 @@
-import { usePressAnimation } from '@/animations/press-animation'
 import {
 	heightSettings,
 	widthSettings
 } from '@/components/book-card/book-card-settings'
 import { BookCardProperties } from '@/components/book-card/book-card-types'
+import PressableContainer from '@/components/pressable-container/pressable-container'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
-import { AnimatedPressable } from '@/types/component-types'
+import { Style } from '@/types/global'
 import { Color } from '@/utils/color'
 import { FC, memo } from 'react'
 
@@ -14,19 +14,18 @@ const BookCard: FC<BookCardProperties> = ({
 	image,
 	likedPercentage,
 	pages,
+	style,
 	...properties
 }) => {
-	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
-		<AnimatedPressable
+		<PressableContainer
 			className='mb-2'
 			style={[
-				animatedStyle,
 				{
 					width: widthSettings[image.size]
-				}
+				},
+				style as Style
 			]}
-			{...pressFunctions}
 			{...properties}>
 			<Image
 				url={image.uri}
@@ -57,7 +56,7 @@ const BookCard: FC<BookCardProperties> = ({
 				className='mt-1'>
 				{properties.author}
 			</Title>
-		</AnimatedPressable>
+		</PressableContainer>
 	)
 }
 

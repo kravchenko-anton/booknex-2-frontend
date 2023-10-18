@@ -22,10 +22,13 @@ const Book = () => {
 		bookService.byId(+params.id)
 	)
 	const { handleToggle: toggleReadingBooks, isSmashed: isSmashedReadingBooks } =
-		useToggle({
-			type: 'readingBooks',
-			id: params.id
-		})
+		useToggle(
+			{
+				type: 'readingBooks',
+				id: params.id
+			},
+			['library']
+		)
 	if (!book) return <BigLoader />
 	return (
 		<BookLayout

@@ -1,4 +1,4 @@
-import { usePressAnimation } from '@/animations/press-animation'
+import PressableContainer from '@/components/pressable-container/pressable-container'
 import {
 	BorderRadiusSetting,
 	PaddingSetting
@@ -10,7 +10,7 @@ import {
 	SizeSetting
 } from '@/components/ui/icon/icon-settings'
 import type { IconProperties } from '@/components/ui/icon/icon-types'
-import { AnimatedPressable } from '@/types/component-types'
+import { Style } from '@/types/global'
 import { Octicons } from '@expo/vector-icons'
 import type { FC } from 'react'
 import { memo } from 'react'
@@ -24,9 +24,8 @@ const Icon: FC<IconProperties> = ({
 	noPadding = false,
 	...properties
 }) => {
-	const { pressFunctions, animatedStyle } = usePressAnimation()
 	return (
-		<AnimatedPressable
+		<PressableContainer
 			className='items-center justify-center border-[2px]'
 			style={[
 				{
@@ -36,17 +35,15 @@ const Icon: FC<IconProperties> = ({
 					borderRadius: BorderRadiusSetting,
 					borderColor: BorderColorSetting[variant]
 				},
-				animatedStyle,
-				style
+				style as Style
 			]}
-			{...pressFunctions}
 			{...properties}>
 			<Octicons
 				name={name}
 				size={SizeSetting[size]}
 				color={color ?? IconColorSetting[variant]}
 			/>
-		</AnimatedPressable>
+		</PressableContainer>
 	)
 }
 

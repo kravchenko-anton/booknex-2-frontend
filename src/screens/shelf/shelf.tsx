@@ -1,4 +1,4 @@
-import VerticalBookCard from '@/components/book-card/vertical-book-card/vertical-book-card'
+import VerticalCard from '@/components/book-card/vertical-card/vertical-card'
 import Button from '@/components/ui/button/button'
 import Description from '@/components/ui/description/description'
 import FlatList from '@/components/ui/flatlist/flatlist'
@@ -15,7 +15,7 @@ import { View } from 'react-native'
 
 const Shelf = () => {
 	const { params } = useTypedRoute<'Shelf'>()
-	const { data: shelf } = useQuery(['shelf', 'shelf' + params.id], () =>
+	const { data: shelf } = useQuery(['library', 'shelf' + params.id], () =>
 		shelfService.byId(params.id)
 	)
 	const {
@@ -26,7 +26,7 @@ const Shelf = () => {
 			type: 'watchedShelves',
 			id: params.id
 		},
-		['shelf']
+		['library']
 	)
 	const {
 		handleToggle: handleToggleUnWatchedShelves,
@@ -36,7 +36,7 @@ const Shelf = () => {
 			type: 'hiddenShelves',
 			id: params.id
 		},
-		['shelf']
+		['library']
 	)
 
 	const { navigate } = useTypedNavigation()
@@ -83,15 +83,20 @@ const Shelf = () => {
 				data={shelf.books}
 				scrollEnabled={false}
 				className='mb-2 px-2'
-				renderItem={({ item }) => (
-					<VerticalBookCard
-						coverUrl={item.picture}
-						title={item.title}
-						author={item.author.name}
-						pages={item.pages}
-						likedPercentage={item.likedPercentage}
+				renderItem={({ item: book }) => (
+					<VerticalCard
+						image={{
+							uri: book.picture,
+							size: 'medium'
+						}}
+						title={book.title}
+						description={book.author.name}
+						buttons={[
+							`📖 ${book.pages} pages`,
+							`👍 ${book.likedPercentage}% liked`
+						]}
 						onPress={() => {
-							navigate('Book', { id: item.id })
+							navigate('Book', { id: book.id })
 						}}
 					/>
 				)}

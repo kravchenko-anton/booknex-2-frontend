@@ -1,8 +1,9 @@
-import AuthorCard from '@/components/author-card/author-card'
 import BookCard from '@/components/book-card/book-card'
 import RainbowBookCard from '@/components/book-card/rainbow-book-card/rainbow-book-card'
 import HeaderScrollLayout from '@/components/layout/header-scroll-layout/header-scroll-layout'
+import PressableContainer from '@/components/pressable-container/pressable-container'
 import FlatList from '@/components/ui/flatlist/flatlist'
+import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
@@ -72,14 +73,16 @@ const Genre = () => {
 				headerText={'Best Authors'}
 				data={genre.bestAuthors}
 				renderItem={({ item: author }) => (
-					<AuthorCard
+					<PressableContainer
+						className='mb-2 w-[120px]'
 						onPress={() => {
 							navigate('Author', { id: author.id })
-						}}
-						name={author.name}
-						picture={author.picture}
-						size={'medium'}
-					/>
+						}}>
+						<Image url={author.picture} width={120} height={120} />
+						<Title size={16} center weight={'bold'}>
+							{author.name}
+						</Title>
+					</PressableContainer>
 				)}
 			/>
 			{genre.bestSellersFromSimilar.map(simular => {
