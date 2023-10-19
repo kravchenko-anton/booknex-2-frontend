@@ -24,7 +24,7 @@ const RecommendationList: FC<RecommendationProperties> = ({ data = [] }) => {
 			<Icon
 				name='thumbsup'
 				size={'medium'}
-				className='mb-2 mt-4 h-[45px] w-[45px] bg-canvas p-2'
+				className='mb-1 mt-4 h-[45px] w-[45px] bg-canvas p-2'
 			/>
 			<Title className='mb-4' weight={'bold'} color={Color.white}>
 				Recommended for you

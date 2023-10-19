@@ -8,5 +8,6 @@ export interface VerticalBookCardProperties extends PressableDefaultProperties {
 
 	title: string
 	description?: string
+	descriptionLines?: number
 	buttons?: string[]
 }

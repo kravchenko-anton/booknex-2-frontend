@@ -21,38 +21,26 @@ export const Description = memo(
 			textAlign: center ? 'center' : ('left' as 'center' | 'left')
 		}
 
-		const shortenText = (text: string, skip: number) => {
-			const sentences = text
-				.replaceAll('...', '')
-				.split('.')
-				.slice(0, defaultSentences + skip)
-
-			let displayedText = sentences.join('.') + '.'
-
-			if (!text.endsWith(sentences.at(-1))) {
-				displayedText = sentences.join('.')
-			}
-
-			return expanded ? text : displayedText
-		}
-
 		const originalText = children.toString()
+		const sentences = originalText.split(/(?<=[!.?])\s+/)
+		const text = expanded
+			? originalText
+			: sentences.slice(0, defaultSentences).join('')
 		return (
 			<View style={style}>
 				<Text style={textStyle} {...properties}>
-					{shortenText(originalText, 0)}
+					{text}
 				</Text>
-				{!expanded &&
-					originalText.length > shortenText(originalText, 2).length && (
-						<Text
-							style={textStyle}
-							onPress={() => {
-								setExpanded(!expanded)
-							}}
-							className='text-primary underline'>
-							more
-						</Text>
-					)}
+				{!expanded && sentences.length > defaultSentences && (
+					<Text
+						style={textStyle}
+						onPress={() => {
+							setExpanded(!expanded)
+						}}
+						className='text-primary underline'>
+						more
+					</Text>
+				)}
 			</View>
 		)
 	}

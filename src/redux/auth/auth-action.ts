@@ -12,7 +12,6 @@ import { errorCatch } from '@/utils/catch-error'
 import { errorToast } from '@/utils/error-toast'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-// TODO: офиксить тут всё типы
 export const register = createAsyncThunk<AuthResponseType, RegisterFieldsType>(
 	'auth/register',
 	async (properties, thunkAPI) => {

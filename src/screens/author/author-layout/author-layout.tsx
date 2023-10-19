@@ -15,7 +15,7 @@ const AuthorLayout: FC<PropsWithChildren<AuthorLayoutProperties>> = ({
 		<LargeHeaderScrollLayout
 			animatedHeader={{
 				title: properties.name,
-				transientValue: 195,
+				transientValue: 90,
 				rightIcon: {
 					name: 'share-android',
 					onPress: () =>

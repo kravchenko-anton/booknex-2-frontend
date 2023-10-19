@@ -5,7 +5,6 @@ import { LibraryListElementType } from '@/screens/library/library-card/library-c
 import { Color } from '@/utils/color'
 import { FC } from 'react'
 import { View } from 'react-native'
-// TODO: убрать и вынести в обычный пропс, нигде больше не юзаеться и рне будет
 
 const LibraryCard: FC<LibraryListElementType> = ({
 	icon,
@@ -16,7 +15,7 @@ const LibraryCard: FC<LibraryListElementType> = ({
 }) => {
 	return (
 		<PressableContainer
-			className='w-full flex-row items-center justify-between rounded-xl bg-dust p-4'
+			className='mb-1.5 w-full flex-row items-center justify-between rounded-xl bg-dust p-4'
 			style={style}
 			{...properties}>
 			<View className='flex-row items-center justify-between'>

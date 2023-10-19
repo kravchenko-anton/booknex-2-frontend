@@ -21,29 +21,7 @@ const BookLayout: FC<PropsWithChildren<BookLayoutProperties>> = ({
 				rightIcon: (
 					<HamburgerMenu
 						position={'right'}
-						elements={[
-							{
-								title: 'Share',
-								onPress: () => {
-									Share.share({
-										message: `Wow! I see ${properties.title} book on Booknex and I think you will like it too!`
-									})
-								}
-							},
-							{
-								title: 'Report problem',
-								onPress: () => {
-									console.log('Report problem')
-								}
-							},
-							{
-								title: 'Write review',
-								onPress: () => {
-									console.log('Write review')
-								}
-							},
-							...properties.hamburgerMenuElements
-						]}
+						elements={properties.hamburgerMenuElements}
 					/>
 				)
 			}}

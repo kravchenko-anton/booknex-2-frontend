@@ -5,43 +5,26 @@ import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
-import { useToggle } from '@/hooks/useToggle/useToggle'
-import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { useTypedRoute } from '@/hooks/useTypedRoute'
 import BookLayout from '@/screens/book/book-layout/book-layout'
 import StatisticCard from '@/screens/book/statistic-card/statistic-card'
-import { bookService } from '@/services/book-service'
+import { useHeader } from '@/screens/book/useHeader'
 import { Color } from '@/utils/color'
-import { useQuery } from '@tanstack/react-query'
 import { View } from 'react-native'
 
 const Book = () => {
-	const { navigate } = useTypedNavigation()
-	const { params } = useTypedRoute<'Book'>()
-	const { data: book } = useQuery(['book ', params.id], () =>
-		bookService.byId(+params.id)
-	)
-	const { handleToggle: toggleReadingBooks, isSmashed: isSmashedReadingBooks } =
-		useToggle(
-			{
-				type: 'readingBooks',
-				id: params.id
-			},
-			['library']
-		)
+	const {
+		book,
+		isSmashedReadingBooks,
+		toggleReadingBooks,
+		hamburgerMenuElements,
+		navigate
+	} = useHeader()
 	if (!book) return <BigLoader />
 	return (
 		<BookLayout
 			title={book.title}
 			backgroundColor={book.color}
-			hamburgerMenuElements={[
-				{
-					title: isSmashedReadingBooks
-						? 'Remove from reading list'
-						: 'Add to reading list',
-					onPress: () => toggleReadingBooks()
-				}
-			]}
+			hamburgerMenuElements={hamburgerMenuElements}
 			author={book.author}>
 			<View className='flex-row justify-between px-4'>
 				<View className='flex-1 justify-between'>
@@ -73,7 +56,7 @@ const Book = () => {
 			<View className='flex-row justify-between gap-2 px-4 pt-6'>
 				<Button
 					onPress={() => {
-						navigate('Reading')
+						navigate.reading()
 					}}
 					text={'Read'}
 					size={'medium'}
@@ -97,7 +80,7 @@ const Book = () => {
 				renderItem={({ item: genre }) => (
 					<Button
 						onPress={() => {
-							navigate('Genre', { id: genre.id })
+							navigate.genre(genre.id)
 						}}
 						variant={'ghost'}
 						size={'small'}
@@ -117,7 +100,7 @@ const Book = () => {
 				renderItem={({ item: similarBook }) => (
 					<BookCard
 						onPress={() => {
-							navigate('Book', { id: similarBook.id })
+							navigate.similar(similarBook.id)
 						}}
 						image={{ uri: similarBook.picture, size: 'medium' }}
 					/>

@@ -5,7 +5,7 @@ export type TypeRootStackParameterList = {
 	Featured: undefined
 	Profile: undefined
 	UpdateProfile: undefined
-	Reading: undefined
+	Reading: { id: number }
 
 	ComprehensiveList: {
 		type: keyof UserLibraryFieldsType

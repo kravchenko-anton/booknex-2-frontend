@@ -65,6 +65,7 @@ const ComprehensiveList = () => {
 								size: 'cube',
 								uri: shelf.picture
 							}}
+							descriptionLines={2}
 							description={`${shelf.description}`}
 							onPress={() => {
 								navigate('Shelf', { id: shelf.id })
