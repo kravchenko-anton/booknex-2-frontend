@@ -5,9 +5,9 @@ module.exports = {
 		'@typescript-eslint/eslint-plugin',
 		'sonarjs',
 		'unicorn',
-		'react',
 		'react-native',
 		'jsx-a11y',
+		'typescript-sort-keys',
 		'jsx-expressions'
 	],
 	extends: [
@@ -22,6 +22,7 @@ module.exports = {
 		'plugin:jsx-a11y/recommended',
 		'plugin:sonarjs/recommended',
 		'plugin:unicorn/all',
+		'plugin:typescript-sort-keys/recommended',
 		'plugin:react-native/all',
 		'plugin:react-hooks/recommended'
 	],
@@ -39,7 +40,13 @@ module.exports = {
 		sourceType: 'module'
 	},
 	rules: {
+		'no-shadow': 'error',
+		'max-params': ['error', 2],
+		'arrow-body-style': ['error', 'as-needed'],
+		complexity: ['error', 2],
 		'no-nested-ternary': 'error',
+		'typescript-sort-keys/interface': 'error',
+		'typescript-sort-keys/string-enum': 'error',
 		'no-unneeded-ternary': 'error',
 		// 'no-ternary': 'error',
 		'jsx-expressions/strict-logical-expressions': 'error',
@@ -115,6 +122,7 @@ module.exports = {
 		'@typescript-eslint/prefer-nullish-coalescing': 'off',
 		'@typescript-eslint/no-throw-literal': 'off',
 		'import/no-extraneous-dependencies': 'off',
+		'react/jsx-filename-extension': 'off',
 		'import/extensions': 'off',
 		'import/named': 'off',
 		'import/no-default-export': 'off',
