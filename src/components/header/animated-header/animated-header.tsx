@@ -1,13 +1,12 @@
 import { AnimatedHeaderProperties } from '@/components/header/animated-header/animated-header-types'
 import { useHeaderAnimation } from '@/components/header/animated-header/header-animation'
+import { HeaderElementComponent } from '@/components/header/useHeader'
 import Icon from '@/components/ui/icon/icon'
-import { IconProperties } from '@/components/ui/icon/icon-types'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
-import { isValidElement } from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -37,18 +36,14 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 						{properties.title}
 					</Title>
 				</View>
-				{properties.rightIcon ? (
-					isValidElement(properties.rightIcon) ? (
-						properties.rightIcon
-					) : (
-						<Icon
-							size={'medium'}
-							className='pr-0'
-							color={Color.black}
-							{...(properties.rightIcon as Omit<IconProperties, 'size'>)}
-						/>
-					)
-				) : undefined}
+				{properties.right
+					? HeaderElementComponent(
+							Object.keys(properties.right)[0],
+							properties.right,
+							Color.black,
+							'right'
+					  )
+					: null}
 			</View>
 		</AnimatedView>
 	)

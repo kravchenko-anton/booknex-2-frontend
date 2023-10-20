@@ -5,7 +5,7 @@ import { Title } from '@/components/ui/title/title'
 import { AuthorLayoutProperties } from '@/screens/author/author-layout/author-layout-types'
 import { Color } from '@/utils/color'
 import { FC, PropsWithChildren } from 'react'
-import { Share, View } from 'react-native'
+import { View } from 'react-native'
 
 const AuthorLayout: FC<PropsWithChildren<AuthorLayoutProperties>> = ({
 	children,
@@ -16,12 +16,8 @@ const AuthorLayout: FC<PropsWithChildren<AuthorLayoutProperties>> = ({
 			animatedHeader={{
 				title: properties.name,
 				transientValue: 90,
-				rightIcon: {
-					name: 'share-android',
-					onPress: () =>
-						Share.share({
-							message: `${properties.name} is a great author! Check him on Booknex!`
-						})
+				right: {
+					sharing: `${properties.name} is a great author! Check him on Booknex!`
 				}
 			}}
 			headerChildren={
@@ -33,12 +29,8 @@ const AuthorLayout: FC<PropsWithChildren<AuthorLayoutProperties>> = ({
 					<View className='flex-1 bg-[#0000009a]  p-4 pt-0'>
 						<Header
 							color={Color.white}
-							rightIcon={{
-								name: 'share-android',
-								onPress: () =>
-									Share.share({
-										message: `${properties.name} is a great author! Check him on Booknex!`
-									})
+							right={{
+								sharing: `${properties.name} is a great author! Check him on Booknex!`
 							}}
 						/>
 						<Image

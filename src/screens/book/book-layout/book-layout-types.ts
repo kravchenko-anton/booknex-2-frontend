@@ -8,5 +8,6 @@ export interface BookLayoutProperties {
 	author: {
 		name: string
 		id: number
+		navigate: (id: number) => void
 	}
 }

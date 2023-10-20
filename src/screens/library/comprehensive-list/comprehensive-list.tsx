@@ -3,7 +3,6 @@ import Header from '@/components/header/header'
 import Layout from '@/components/layout/layout'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import BigLoader from '@/components/ui/loader/big-loader'
-import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
 import { ShortBookType } from '@/services/types/book-service-types'
@@ -24,11 +23,9 @@ const ComprehensiveList = () => {
 	return (
 		<Layout>
 			<Header
-				rightIcon={
-					<Title size={24} weight={'medium'}>
-						{library.title}
-					</Title>
-				}
+				right={{
+					title: library.title
+				}}
 			/>
 			{
 				// TODO: сделать тут лист намного красивее

@@ -21,11 +21,13 @@ const Profile = () => {
 	return (
 		<Layout className='px-4'>
 			<Header
-				rightIcon={{
-					onPress: () => {
-						navigate('Settings')
-					},
-					name: 'gear'
+				right={{
+					icon: {
+						onPress: () => {
+							navigate('Settings')
+						},
+						name: 'gear'
+					}
 				}}
 			/>
 			<View className='items-center self-center'>

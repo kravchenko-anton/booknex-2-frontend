@@ -5,7 +5,7 @@ import { ShelfLayoutProperties } from '@/screens/shelf/shelf-layout/shelf-layout
 import { getFileUrl } from '@/services/api-config'
 import { Color } from '@/utils/color'
 import { FC, PropsWithChildren } from 'react'
-import { ImageBackground, Share, View } from 'react-native'
+import { ImageBackground, View } from 'react-native'
 
 const ShelfLayout: FC<PropsWithChildren<ShelfLayoutProperties>> = ({
 	children,
@@ -16,12 +16,8 @@ const ShelfLayout: FC<PropsWithChildren<ShelfLayoutProperties>> = ({
 			animatedHeader={{
 				title: properties.title,
 				transientValue: 85,
-				rightIcon: {
-					name: 'share-android',
-					onPress: () =>
-						Share.share({
-							message: `Check out ${properties.title} shelf on Booknex! It's awesome!`
-						})
+				right: {
+					sharing: `Check out ${properties.title} shelf on Booknex! It's awesome!`
 				}
 			}}
 			headerChildren={
@@ -31,12 +27,8 @@ const ShelfLayout: FC<PropsWithChildren<ShelfLayoutProperties>> = ({
 					<View className='flex-1 bg-[#0000009a] p-4 pt-0'>
 						<Header
 							color={Color.white}
-							rightIcon={{
-								name: 'share-android',
-								onPress: () =>
-									Share.share({
-										message: `Check out ${properties.title} shelf on Booknex! It's awesome!`
-									})
+							right={{
+								sharing: `Check out ${properties.title} shelf on Booknex! It's awesome!`
 							}}
 						/>
 						<Title

@@ -39,10 +39,12 @@ module.exports = {
 	},
 	rules: {
 		'react-hooks/exhaustive-deps': 'warn',
+		'@typescript-eslint/no-unnecessary-condition': 'error',
 		'react-native/no-unused-styles': 2,
 		'react-native/split-platform-components': 2,
 		'react-native/no-inline-styles': 1,
 		'react-native/no-color-literals': 2,
+
 		'react-native/no-single-element-style-arrays': 2,
 		'max-len': [
 			'error',
@@ -119,7 +121,7 @@ module.exports = {
 		'no-await-in-loop': 'off',
 		'no-continue': 'off',
 		'react-native/no-raw-text': 'off',
-		'unicorn/no-null': ['warn'],
+		'unicorn/no-null': ['off'],
 		'unicorn/no-nested-ternary': 'off'
 	}
 }

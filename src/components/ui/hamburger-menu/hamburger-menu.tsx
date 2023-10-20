@@ -1,21 +1,14 @@
 import { useHamburgerAnimation } from '@/components/ui/hamburger-menu/hamburger-animation'
+import { HamburgerMenuProperties } from '@/components/ui/hamburger-menu/hamburger-menu-types'
 import { Title } from '@/components/ui/title/title'
 import { AnimatedPressable, AnimatedView } from '@/types/component-types'
-import { Color, ColorProperties } from '@/utils/color'
+import { Color } from '@/utils/color'
 import { WINDOW_HEIGHT } from '@/utils/dimensions'
 import { FC } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
 const HamburgerLineStyle = 'w-6 h-0.5'
-
-interface HamburgerMenuProperties extends ColorProperties {
-	position?: 'left' | 'right'
-	elements?: {
-		title: string
-		onPress: () => void
-	}[]
-}
 
 const HamburgerMenu: FC<HamburgerMenuProperties> = ({
 	color = Color.black,

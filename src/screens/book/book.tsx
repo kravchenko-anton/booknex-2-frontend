@@ -7,7 +7,7 @@ import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
 import BookLayout from '@/screens/book/book-layout/book-layout'
 import StatisticCard from '@/screens/book/statistic-card/statistic-card'
-import { useHeader } from '@/screens/book/useHeader'
+import { useBook } from '@/screens/book/useBook'
 import { Color } from '@/utils/color'
 import { View } from 'react-native'
 
@@ -18,14 +18,17 @@ const Book = () => {
 		toggleReadingBooks,
 		hamburgerMenuElements,
 		navigate
-	} = useHeader()
+	} = useBook()
 	if (!book) return <BigLoader />
 	return (
 		<BookLayout
 			title={book.title}
 			backgroundColor={book.color}
 			hamburgerMenuElements={hamburgerMenuElements}
-			author={book.author}>
+			author={{
+				...book.author,
+				navigate: navigate.author
+			}}>
 			<View className='flex-row justify-between px-4'>
 				<View className='flex-1 justify-between'>
 					<StatisticCard

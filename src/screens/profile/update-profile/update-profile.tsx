@@ -1,7 +1,6 @@
 import Header from '@/components/header/header'
 import ScrollLayout from '@/components/layout/scroll-layout'
 import BigLoader from '@/components/ui/loader/big-loader'
-import { Title } from '@/components/ui/title/title'
 import UpdateBio from '@/screens/profile/update-profile/update-bio/update-bio'
 import UpdatePassword from '@/screens/profile/update-profile/update-password/update-password'
 import UpdatePicture from '@/screens/profile/update-profile/update-picture/update-picture'
@@ -16,11 +15,9 @@ const UpdateProfile = () => {
 	return (
 		<ScrollLayout className='p-2'>
 			<Header
-				rightIcon={
-					<Title weight={'bold'} size={28}>
-						Account
-					</Title>
-				}
+				right={{
+					title: 'Account'
+				}}
 			/>
 			<UpdatePicture picture={profile.picture} />
 			<UpdateBio defaultName={profile.name} defaultEmail={profile.email} />

@@ -1,7 +1,6 @@
 import BookCard from '@/components/book-card/book-card'
 import Header from '@/components/header/header'
 import Layout from '@/components/layout/layout'
-import HamburgerMenu from '@/components/ui/hamburger-menu/hamburger-menu'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
 import { adminService } from '@/services/admin-service'
@@ -12,19 +11,17 @@ const Statistic = () => {
 	const { data: statistic } = useQuery(['statistic'], () =>
 		adminService.statistics()
 	)
+	// TODO: сделать layout для админки и вынести туда хедер с хамбургером
 	if (!statistic) return <BigLoader />
 	return (
 		<Layout>
 			<Header
-				leftIcon={
-					<Title size={26} weight={'bold'}>
-						Statistic
-					</Title>
-				}
-				rightIcon={
-					<HamburgerMenu
-						position={'right'}
-						elements={[
+				left={{
+					title: 'Statistic'
+				}}
+				right={{
+					hamburger: {
+						elements: [
 							{
 								title: 'Books',
 								onPress: () => {
@@ -43,9 +40,9 @@ const Statistic = () => {
 									console.log('Statistic')
 								}
 							}
-						]}
-					/>
-				}
+						]
+					}
+				}}
 			/>
 
 			<View className='flex-row items-center justify-between gap-4 pt-4'>

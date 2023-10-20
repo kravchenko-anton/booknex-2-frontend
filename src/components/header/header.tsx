@@ -2,35 +2,27 @@ import { HeaderProperties } from '@/components/header/header-types'
 import { useHeader } from '@/components/header/useHeader'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
-import { isValidElement } from 'react'
 import { View } from 'react-native'
-
+// TODO: дочинить везде и заменить
 const Header: FC<HeaderProperties> = ({
 	style,
 	color = Color.black,
-	leftIcon = 'back',
+	left = { back: true },
+	right,
 	...properties
 }) => {
-	const { rightIconSettings, leftIconSettings } = useHeader({
-		color,
-		leftIcon,
-		rightIcon: properties.rightIcon
+	const { rightComponent, leftComponent } = useHeader({
+		left,
+		right,
+		color
 	})
 	return (
-		<View className={'flex-row items-center justify-between'} style={style}>
-			{
-				leftIconSettings[
-					leftIcon === 'back'
-						? leftIcon
-						: isValidElement(properties.rightIcon)
-						? 'element'
-						: 'icon'
-				]
-			}
-			{properties.rightIcon &&
-				rightIconSettings[
-					isValidElement(properties.rightIcon) ? 'element' : 'icon'
-				]}
+		<View
+			className='flex-row items-center justify-between'
+			style={style}
+			{...properties}>
+			{leftComponent}
+			{rightComponent}
 		</View>
 	)
 }

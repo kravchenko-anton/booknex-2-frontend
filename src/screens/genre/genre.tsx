@@ -22,11 +22,9 @@ const Genre = () => {
 	return (
 		<HeaderScrollLayout
 			header={{
-				rightIcon: (
-					<Title size={24} weight={'bold'}>
-						{genre.name}
-					</Title>
-				)
+				right: {
+					title: genre.name
+				}
 			}}
 			animatedHeader={{
 				title: removeEmoji(genre.name),

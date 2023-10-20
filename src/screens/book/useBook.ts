@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { Share } from 'react-native'
 
-export const useHeader = () => {
+export const useBook = () => {
 	const { navigate: navigateFunction } = useTypedNavigation()
 	const { params } = useTypedRoute<'Book'>()
 	const { data: book } = useQuery(['book ', params.id], () =>
@@ -62,10 +62,12 @@ export const useHeader = () => {
 		},
 		similar: (id: number) => {
 			navigateFunction('Book', { id })
+		},
+		author: (id: number) => {
+			navigateFunction('Author', { id })
 		}
 	}
 
-	console.log('render useHeader')
 	return useMemo(
 		() => ({
 			book,
@@ -74,6 +76,6 @@ export const useHeader = () => {
 			toggleReadingBooks,
 			isSmashedReadingBooks
 		}),
-		[book]
+		[book, toggleReadingBooks, isSmashedReadingBooks]
 	)
 }

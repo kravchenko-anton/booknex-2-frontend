@@ -1,51 +1,113 @@
-import { HeaderProperties } from '@/components/header/header-types'
+import {
+	HeaderProperties,
+	LeftHeaderElementType
+} from '@/components/header/header-types'
+import HamburgerMenu from '@/components/ui/hamburger-menu/hamburger-menu'
 import Icon from '@/components/ui/icon/icon'
-import { IconProperties } from '@/components/ui/icon/icon-types'
+import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
+import { ColorProperties, LineColorType } from '@/utils/color'
+import { Share } from 'react-native'
+
+export const HeaderElementComponent = (
+	type: string,
+	properties: LeftHeaderElementType,
+	color: LineColorType,
+	position: 'left' | 'right'
+) => {
+	const padding = position === 'left' ? 'pl-0' : 'pr-0'
+	switch (type) {
+		default: {
+			return null
+		}
+		case 'icon': {
+			return (
+				properties.icon && (
+					<Icon
+						color={color}
+						className={padding}
+						size='medium'
+						{...properties.icon}
+					/>
+				)
+			)
+		}
+		case 'title': {
+			return (
+				properties.title && (
+					<Title size={24} color={color} weight='bold'>
+						{properties.title}
+					</Title>
+				)
+			)
+		}
+		case 'hamburger': {
+			return (
+				properties.hamburger && (
+					<HamburgerMenu
+						position={position}
+						color={color}
+						elements={properties.hamburger.elements}
+					/>
+				)
+			)
+		}
+		case 'sharing': {
+			return (
+				properties.sharing && (
+					<Icon
+						color={color}
+						name='share-android'
+						className={padding}
+						size='medium'
+						onPress={() =>
+							Share.share({
+								message:
+									properties.sharing ||
+									'Booknex is the best reading app, you should try it.'
+							})
+						}
+					/>
+				)
+			)
+		}
+	}
+}
 
 export const useHeader = (
-	properties: Omit<HeaderProperties, 'style' | 'className'>
+	properties: {
+		left: LeftHeaderElementType
+	} & Pick<HeaderProperties, 'right'> &
+		Required<ColorProperties>
 ) => {
 	const { goBack } = useTypedNavigation()
-	const leftIconSettings = {
-		back: (
+
+	return {
+		leftComponent: properties.left.back ? (
 			<Icon
-				name={'arrow-left'}
+				name='arrow-left'
+				size='medium'
 				onPress={() => {
 					goBack()
 				}}
-				size={'large'}
-				color={properties.color}
-				className='pl-0'
-			/>
-		),
-		icon: properties.leftIcon ? (
-			<Icon
-				size={'large'}
 				className='pl-0'
 				color={properties.color}
-				{...(properties.leftIcon as Omit<IconProperties, 'color' | 'size'>)}
 			/>
-		) : null,
-		element: properties.leftIcon as JSX.Element,
-		null: null
-	}
-
-	const rightIconSettings = {
-		icon: properties.rightIcon && (
-			<Icon
-				size={'large'}
-				className='pr-0'
-				color={properties.color}
-				{...(properties.rightIcon as Omit<IconProperties, 'color' | 'size'>)}
-			/>
+		) : (
+			HeaderElementComponent(
+				Object.keys(properties.left)[0] || 'back',
+				properties.left,
+				properties.color,
+				'left'
+			)
 		),
-		element: properties.rightIcon as JSX.Element,
-		null: null
-	}
-
-	return {
-		leftIconSettings,
-		rightIconSettings
+		rightComponent: properties.right
+			? HeaderElementComponent(
+					Object.keys(properties.right)[0] || 'back',
+					properties.right,
+					properties.color,
+					'right'
+			  )
+			: null
 	}
 }
