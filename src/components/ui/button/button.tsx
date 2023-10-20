@@ -22,7 +22,7 @@ const Button = ({
 }: ButtonProperties) => {
 	return (
 		<PressableContainer
-			className='mb-2 items-center justify-center'
+			className='items-center justify-center'
 			style={[
 				{
 					opacity: properties.disabled ? 0.7 : 1,

@@ -15,7 +15,7 @@ const LibraryCard: FC<LibraryListElementType> = ({
 }) => {
 	return (
 		<PressableContainer
-			className='mb-1.5 w-full flex-row items-center justify-between rounded-xl bg-dust p-4'
+			className='w-full flex-row items-center justify-between rounded-xl bg-dust p-4'
 			style={style}
 			{...properties}>
 			<View className='flex-row items-center justify-between'>

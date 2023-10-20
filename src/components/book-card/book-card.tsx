@@ -19,7 +19,6 @@ const BookCard: FC<BookCardProperties> = ({
 }) => {
 	return (
 		<PressableContainer
-			className='mb-2'
 			style={[
 				{
 					width: widthSettings[image.size]

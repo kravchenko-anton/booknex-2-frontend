@@ -1,7 +1,7 @@
 import { AnimatedHeaderProperties } from '@/components/header/animated-header/animated-header-types'
 import { useHeaderAnimation } from '@/components/header/animated-header/header-animation'
 import { HeaderElementComponent } from '@/components/header/useHeader'
-import Icon from '@/components/ui/icon/icon'
+import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { AnimatedView } from '@/types/component-types'
@@ -23,7 +23,7 @@ const AnimatedHeader: FC<AnimatedHeaderProperties> = properties => {
 			style={[{ top }, headerStyle]}>
 			<View className='mt-auto flex-row items-center justify-between px-4 py-0.5'>
 				<View className='flex-row items-center'>
-					<Icon
+					<AnimatedIcon
 						name={'arrow-left'}
 						onPress={() => {
 							goBack()

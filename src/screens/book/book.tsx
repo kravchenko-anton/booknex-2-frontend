@@ -2,7 +2,7 @@ import BookCard from '@/components/book-card/book-card'
 import Button from '@/components/ui/button/button'
 import Description from '@/components/ui/description/description'
 import FlatList from '@/components/ui/flatlist/flatlist'
-import Icon from '@/components/ui/icon/icon'
+import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
 import BookLayout from '@/screens/book/book-layout/book-layout'
@@ -65,7 +65,7 @@ const Book = () => {
 					size={'medium'}
 					className='flex-1'
 				/>
-				<Icon
+				<AnimatedIcon
 					name={isSmashedReadingBooks ? 'x' : 'plus'}
 					onPress={() => toggleReadingBooks()}
 					size={'medium'}

@@ -3,7 +3,7 @@ import {
 	LeftHeaderElementType
 } from '@/components/header/header-types'
 import HamburgerMenu from '@/components/ui/hamburger-menu/hamburger-menu'
-import Icon from '@/components/ui/icon/icon'
+import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import { Title } from '@/components/ui/title/title'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { ColorProperties, LineColorType } from '@/utils/color'
@@ -23,7 +23,7 @@ export const HeaderElementComponent = (
 		case 'icon': {
 			return (
 				properties.icon && (
-					<Icon
+					<AnimatedIcon
 						color={color}
 						className={padding}
 						size='medium'
@@ -55,7 +55,7 @@ export const HeaderElementComponent = (
 		case 'sharing': {
 			return (
 				properties.sharing && (
-					<Icon
+					<AnimatedIcon
 						color={color}
 						name='share-android'
 						className={padding}
@@ -84,7 +84,7 @@ export const useHeader = (
 
 	return {
 		leftComponent: properties.left.back ? (
-			<Icon
+			<AnimatedIcon
 				name='arrow-left'
 				size='medium'
 				onPress={() => {

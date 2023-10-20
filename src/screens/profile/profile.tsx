@@ -1,5 +1,6 @@
 import Header from '@/components/header/header'
-import Layout from '@/components/layout/layout'
+import ScrollLayout from '@/components/layout/scroll-layout'
+import PressableContainer from '@/components/pressable-container/pressable-container'
 import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
 import Image from '@/components/ui/image/image'
@@ -19,7 +20,7 @@ const Profile = () => {
 	if (!profile) return <BigLoader />
 	// TODO: делать тут обычный layout и повыноить обновление профиля в настройки
 	return (
-		<Layout className='px-4'>
+		<ScrollLayout className='px-4'>
 			<Header
 				right={{
 					icon: {
@@ -45,7 +46,7 @@ const Profile = () => {
 				className='my-2'
 				data={profile.statistics}
 				renderItem={({ item }) => (
-					<View className='flex-row items-center justify-between rounded-xl bg-dust p-4'>
+					<PressableContainer className='flex-row items-center justify-between rounded-xl bg-dust p-4'>
 						<View>
 							<Title weight={'bold'} size={24}>
 								{item.count}
@@ -60,10 +61,10 @@ const Profile = () => {
 							color={Color.secondary}
 							variant={'ghost'}
 						/>
-					</View>
+					</PressableContainer>
 				)}
 			/>
-		</Layout>
+		</ScrollLayout>
 	)
 }
 

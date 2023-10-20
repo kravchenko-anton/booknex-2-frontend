@@ -34,10 +34,12 @@ const EnterField: FC<EnterFieldProperties> = ({
 		<AnimatedView style={showAnimation}>
 			<Header
 				color={Color.black}
-				leftIcon={{
-					name: 'x',
-					onPress: () => {
-						setIsActivePopup('genres')
+				left={{
+					icon: {
+						name: 'x',
+						onPress: () => {
+							setIsActivePopup('genres')
+						}
 					}
 				}}
 			/>

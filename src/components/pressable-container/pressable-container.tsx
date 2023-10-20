@@ -14,6 +14,8 @@ const PressableContainer: FC<PropsWithChildren<PressableDefaultProperties>> = ({
 	return (
 		<AnimatedPressable
 			{...pressFunctions}
+			// TODO: возможно плохое решение
+			className='mb-2'
 			style={[style, animatedStyle]}
 			{...properties}>
 			{children}

@@ -7,7 +7,8 @@ module.exports = {
 		'unicorn',
 		'react',
 		'react-native',
-		'jsx-a11y'
+		'jsx-a11y',
+		'jsx-expressions'
 	],
 	extends: [
 		'eslint:recommended',
@@ -38,8 +39,11 @@ module.exports = {
 		sourceType: 'module'
 	},
 	rules: {
+		'no-nested-ternary': 'error',
+		'no-unneeded-ternary': 'error',
+		// 'no-ternary': 'error',
+		'jsx-expressions/strict-logical-expressions': 'error',
 		'react-hooks/exhaustive-deps': 'warn',
-		'@typescript-eslint/no-unnecessary-condition': 'error',
 		'react-native/no-unused-styles': 2,
 		'react-native/split-platform-components': 2,
 		'react-native/no-inline-styles': 1,
@@ -96,6 +100,7 @@ module.exports = {
 				ignore: ['App.tsx', 'use']
 			}
 		],
+		'@typescript-eslint/no-confusing-void-expression': 'off',
 		'@typescript-eslint/comma-dangle': 'off',
 		'@typescript-eslint/semi': 'off',
 		'@typescript-eslint/unbound-method': 'off',

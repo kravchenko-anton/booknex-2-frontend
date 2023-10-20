@@ -19,6 +19,7 @@ const Featured = () => {
 	const { data: shelves } = useQuery(['library', 'shelves'], () =>
 		shelfService.catalog()
 	)
+	// TODO: возможно вынести всё flatlist в отдельный компонент
 	const { navigate } = useTypedNavigation()
 	if (!catalog) return <FullScreenLoader />
 	return (

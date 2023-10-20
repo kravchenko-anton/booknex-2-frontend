@@ -19,7 +19,7 @@ const ShelfCard: FC<ShelfListItemProperties> = properties => {
 			onPress={() => {
 				navigate('Shelf', { id: properties.id })
 			}}
-			className='mb-2 h-[130px] w-[120px] rounded-xl'>
+			className='h-[130px] w-[120px] rounded-xl'>
 			<ImageBackground
 				source={{
 					uri: properties.picture

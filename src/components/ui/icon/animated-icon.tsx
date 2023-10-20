@@ -1,3 +1,4 @@
+import PressableContainer from '@/components/pressable-container/pressable-container'
 import {
 	BorderRadiusSetting,
 	PaddingSetting
@@ -13,9 +14,8 @@ import { Style } from '@/types/global'
 import { Octicons } from '@expo/vector-icons'
 import type { FC } from 'react'
 import { memo } from 'react'
-import { Pressable } from 'react-native'
 
-const Icon: FC<IconProperties> = ({
+const AnimatedIcon: FC<IconProperties> = ({
 	name = 'alert',
 	variant = 'ghost',
 	size = 'small',
@@ -25,7 +25,7 @@ const Icon: FC<IconProperties> = ({
 	...properties
 }) => {
 	return (
-		<Pressable
+		<PressableContainer
 			className='items-center justify-center border-[2px]'
 			style={[
 				{
@@ -43,8 +43,8 @@ const Icon: FC<IconProperties> = ({
 				size={SizeSetting[size]}
 				color={color ?? IconColorSetting[variant]}
 			/>
-		</Pressable>
+		</PressableContainer>
 	)
 }
 
-export default memo(Icon)
+export default memo(AnimatedIcon)

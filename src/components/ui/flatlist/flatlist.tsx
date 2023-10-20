@@ -5,7 +5,7 @@ import { FlatList as DefaultFlatlist, View } from 'react-native'
 const FlatList = <T,>({
 	headerText,
 	data = [],
-	elementSpacing = 8,
+	elementSpacing = 12,
 	titleMb = 16,
 	contentContainerStyle,
 	mt = 24,
@@ -32,9 +32,10 @@ const FlatList = <T,>({
 				ItemSeparatorComponent={() => (
 					<View
 						style={
+							// TODO: возможно тут будут проблемы, пофиксить по необходимости
 							properties.horizontal
 								? { width: elementSpacing }
-								: { height: elementSpacing }
+								: { height: elementSpacing / 2 }
 						}
 					/>
 				)}

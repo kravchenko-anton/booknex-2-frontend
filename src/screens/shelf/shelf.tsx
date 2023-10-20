@@ -2,7 +2,7 @@ import VerticalCard from '@/components/book-card/vertical-card/vertical-card'
 import Button from '@/components/ui/button/button'
 import Description from '@/components/ui/description/description'
 import FlatList from '@/components/ui/flatlist/flatlist'
-import Icon from '@/components/ui/icon/icon'
+import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
 import { useToggle } from '@/hooks/useToggle/useToggle'
@@ -52,7 +52,7 @@ const Shelf = () => {
 					disabled={isSmashedUnwatchedShelves}
 					text={isSmashedWatchedShelves ? 'Cancel watching' : 'Start watching'}
 				/>
-				<Icon
+				<AnimatedIcon
 					onPress={() => handleToggleUnWatchedShelves()}
 					disabled={isSmashedWatchedShelves}
 					name={isSmashedUnwatchedShelves ? 'eye-closed' : 'eye'}
