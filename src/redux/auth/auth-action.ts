@@ -2,7 +2,7 @@ import {
 	deleteTokensStorage,
 	saveTokensStorage
 } from '@/redux/auth/auth.helper'
-import {
+import type {
 	AuthFieldsType,
 	AuthResponseType,
 	RegisterFieldsType

@@ -4,6 +4,6 @@ import type { Dimensions } from '@/types/global'
 export interface ImageTypes
 	extends Omit<ImageDefaultProperties, 'source'>,
 		Dimensions {
+	fullSize?: boolean,
 	url: string
-	fullSize?: boolean
 }

@@ -62,8 +62,7 @@ const Genre = () => {
 					</PressableContainer>
 				)}
 			/>
-			{genre.bestSellersFromSimilar.map(simular => {
-				return (
+			{genre.bestSellersFromSimilar.map(simular => (
 					<FlatList
 						key={simular.name}
 						headerText={removeEmoji(simular.name)}
@@ -80,8 +79,7 @@ const Genre = () => {
 							/>
 						)}
 					/>
-				)
-			})}
+				))}
 		</GenreLayout>
 	)
 }

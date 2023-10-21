@@ -6,7 +6,7 @@ import { Color } from '@/utils/color'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import type { FC } from 'react'
 
-import { TypeRootStackParameterList } from './navigation-types'
+import type { TypeRootStackParameterList } from './navigation-types'
 import { routes, userRoutes } from './user-routes'
 
 const Stack = createNativeStackNavigator<TypeRootStackParameterList>()

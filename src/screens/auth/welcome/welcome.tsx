@@ -1,7 +1,8 @@
 import Layout from '@/components/layout/layout'
 import CheckEmail from '@/screens/auth/welcome/check-email/check-email'
 import DescriptionCard from '@/screens/auth/welcome/description-card/description-card'
-import { FC, useState } from 'react'
+import type { FC } from 'react';
+import { useState } from 'react'
 
 const Welcome: FC = () => {
 	const [activePopup, setIsActivePopup] = useState<

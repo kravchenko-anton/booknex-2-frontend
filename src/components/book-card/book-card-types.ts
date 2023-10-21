@@ -1,12 +1,12 @@
 import type { PressableDefaultProperties } from '@/types/component-types'
 
 export interface BookCardProperties extends PressableDefaultProperties {
+	author?: string,
 	image: {
+		size: 'small' | 'medium' | 'large',
 		uri: string
-		size: 'small' | 'medium' | 'large'
-	}
+	},
+	likedPercentage?: number,
+	pages?: number,
 	title?: string
-	author?: string
-	likedPercentage?: number
-	pages?: number
 }

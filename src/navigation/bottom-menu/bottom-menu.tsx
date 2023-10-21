@@ -4,15 +4,14 @@ import type { FC } from 'react'
 import { View } from 'react-native'
 import { menuItems } from './menu-data'
 
-import { TypeNavigate } from './menu.interface'
+import type { TypeNavigate } from './menu.interface'
 
 interface IBottomMenu {
+	currentRoute?: string,
 	nav: TypeNavigate
-	currentRoute?: string
 }
 
-const BottomMenu: FC<IBottomMenu> = properties => {
-	return (
+const BottomMenu: FC<IBottomMenu> = properties => (
 		<View
 			className='border-t-solid w-full flex-row items-center justify-between border-t px-2 pb-2 pt-3'
 			style={{
@@ -24,6 +23,5 @@ const BottomMenu: FC<IBottomMenu> = properties => {
 			))}
 		</View>
 	)
-}
 
 export default BottomMenu

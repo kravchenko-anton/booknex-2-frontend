@@ -1,10 +1,10 @@
-import { PressableDefaultProperties } from '@/types/component-types'
+import type { PressableDefaultProperties } from '@/types/component-types'
 
 export interface RainbowBookCardProperties extends PressableDefaultProperties {
-	title: string
+	backgroundColor: string,
+	description: string,
 	image: {
 		uri: string
-	}
-	description: string
-	backgroundColor: string
+	},
+	title: string
 }

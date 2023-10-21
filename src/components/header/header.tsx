@@ -1,9 +1,9 @@
-import { HeaderProperties } from '@/components/header/header-types'
+import type { HeaderProperties } from '@/components/header/header-types'
 import { useHeader } from '@/components/header/useHeader'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { View } from 'react-native'
-// TODO: дочинить везде и заменить
+
 const Header: FC<HeaderProperties> = ({
 	style,
 	color = Color.black,

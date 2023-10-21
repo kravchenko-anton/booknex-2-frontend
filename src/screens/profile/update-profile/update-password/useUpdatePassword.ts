@@ -1,5 +1,5 @@
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { EditPasswordTypes } from '@/screens/profile/update-profile/update-password/update-password-types'
+import type { EditPasswordTypes } from '@/screens/profile/update-profile/update-password/update-password-types'
 import { userServices } from '@/services/user-service'
 import { errorCatch } from '@/utils/catch-error'
 import { useMutation } from '@tanstack/react-query'

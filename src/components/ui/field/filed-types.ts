@@ -1,10 +1,10 @@
-import {
+import type {
 	Control,
 	FieldPath,
 	FieldValues,
 	RegisterOptions
 } from 'react-hook-form'
-import { KeyboardTypeOptions, TextInputProps } from 'react-native'
+import type { KeyboardTypeOptions, TextInputProps } from 'react-native'
 
 export interface FieldProperties<T extends FieldValues>
 	extends Omit<
@@ -12,8 +12,8 @@ export interface FieldProperties<T extends FieldValues>
 		'onChange' | 'onChangeText' | 'value' | 'testID'
 	> {
 	control: Control<T>
-	name: FieldPath<T>
-	keyboardType?: KeyboardTypeOptions
+	keyboardType?: KeyboardTypeOptions,
+	name: FieldPath<T>,
 	rules?: Omit<
 		RegisterOptions<T, FieldPath<T>>,
 		'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'

@@ -1,7 +1,7 @@
-import { ShortBookType } from '@/services/types/book-service-types'
+import type { ShortBookType } from '@/services/types/book-service-types'
 
 export interface StatisticsType {
-	totalUsers: number
+	mostReadBook: ShortBookType[],
 	totalReadTime: number
-	mostReadBook: ShortBookType[]
+	totalUsers: number
 }

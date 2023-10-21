@@ -1,5 +1,5 @@
 import { useFavoritesList } from '@/hooks/useToggle/useFavoriteList'
-import { UseToggleProperties } from '@/hooks/useToggle/useToggle-types'
+import type { UseToggleProperties } from '@/hooks/useToggle/useToggle-types'
 import { userServices } from '@/services/user-service'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useLayoutEffect, useState } from 'react'

@@ -1,5 +1,5 @@
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { UserUpdateBioTypes } from '@/screens/profile/update-profile/update-bio/update-bio-types'
+import type { UserUpdateBioTypes } from '@/screens/profile/update-profile/update-bio/update-bio-types'
 import { userServices } from '@/services/user-service'
 import { errorCatch } from '@/utils/catch-error'
 import { useMutation, useQueryClient } from '@tanstack/react-query'

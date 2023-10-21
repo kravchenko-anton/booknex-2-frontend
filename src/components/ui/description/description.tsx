@@ -1,4 +1,4 @@
-import { DescriptionProperties } from '@/components/ui/description/description-types'
+import type { DescriptionProperties } from '@/components/ui/description/description-types'
 import { fontSettings } from '@/components/ui/title/title-settings'
 import { memo, useState } from 'react'
 import { Text, View } from 'react-native'

@@ -1,8 +1,8 @@
 import Button from '@/components/ui/button/button'
 import Image from '@/components/ui/image/image'
-import { UpdatePictureProperties } from '@/screens/profile/update-profile/update-picture/update-picture-types'
+import type { UpdatePictureProperties } from '@/screens/profile/update-profile/update-picture/update-picture-types'
 import { useUploadUserPicture } from '@/screens/profile/update-profile/update-picture/useUploadPicture'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { View } from 'react-native'
 
 const UpdatePicture: FC<UpdatePictureProperties> = ({ picture }) => {

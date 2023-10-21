@@ -1,6 +1,6 @@
 import { getStorageUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import { StorageFolderType } from '@/services/types/storage-service-types'
+import type { StorageFolderType } from '@/services/types/storage-service-types'
 
 export const storageService = {
 	async upload(file: FormData, type: StorageFolderType) {

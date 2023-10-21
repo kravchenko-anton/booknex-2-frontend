@@ -1,9 +1,12 @@
 import { usePressAnimation } from '@/animations/press-animation'
-import {
-	AnimatedPressable,
+import type {
 	PressableDefaultProperties
+} from '@/types/component-types';
+import {
+	AnimatedPressable
 } from '@/types/component-types'
-import { FC, PropsWithChildren, memo } from 'react'
+import type { FC, PropsWithChildren } from 'react';
+import { memo } from 'react'
 
 const PressableContainer: FC<PropsWithChildren<PressableDefaultProperties>> = ({
 	children,
@@ -14,8 +17,6 @@ const PressableContainer: FC<PropsWithChildren<PressableDefaultProperties>> = ({
 	return (
 		<AnimatedPressable
 			{...pressFunctions}
-			// TODO: возможно плохое решение
-			className='mb-2'
 			style={[style, animatedStyle]}
 			{...properties}>
 			{children}

@@ -5,11 +5,12 @@ import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
 import { authService } from '@/services/auth-service'
 import { AnimatedView } from '@/types/component-types'
-import { PopupTypes } from '@/types/global'
+import type { PopupTypes } from '@/types/global'
 import { Color } from '@/utils/color'
 import { useDebounce } from '@/utils/useDebounce'
 import { useMutation } from '@tanstack/react-query'
-import  { FC, useEffect } from 'react'
+import type { FC } from 'react';
+import  { useEffect } from 'react'
 import  { useForm } from 'react-hook-form'
 
 const CheckEmail: FC<

@@ -1,4 +1,4 @@
-import { FlatListProperties } from '@/components/ui/flatlist/flatlist-types'
+import type { FlatListProperties } from '@/components/ui/flatlist/flatlist-types'
 import { Title } from '@/components/ui/title/title'
 import { FlatList as DefaultFlatlist, View } from 'react-native'
 
@@ -32,23 +32,22 @@ const FlatList = <T,>({
 				ItemSeparatorComponent={() => (
 					<View
 						style={
-							// TODO: возможно тут будут проблемы, пофиксить по необходимости
 							properties.horizontal
 								? { width: elementSpacing }
-								: { height: elementSpacing / 2 }
+								: { height: elementSpacing }
 						}
 					/>
 				)}
 				contentContainerStyle={{
-					paddingHorizontal: properties.horizontal ? px : 0
+					paddingHorizontal: properties.horizontal ? px : 0,
+					paddingBottom: 8
 				}}
 				bounces={false}
 				renderToHardwareTextureAndroid={true}
-				removeClippedSubviews={true}
 				alwaysBounceHorizontal={false}
+				alwaysBounceVertical={false}
 				maxToRenderPerBatch={10}
 				initialNumToRender={10}
-				alwaysBounceVertical={false}
 				showsHorizontalScrollIndicator={false}
 				showsVerticalScrollIndicator={false}
 				decelerationRate='normal'

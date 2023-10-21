@@ -1,6 +1,6 @@
 import { usePressAnimation } from '@/animations/press-animation'
 import { Title } from '@/components/ui/title/title'
-import {
+import type {
 	IMenuItem,
 	TypeNavigate
 } from '@/navigation/bottom-menu/menu.interface'
@@ -11,9 +11,9 @@ import type { FC } from 'react'
 import { Pressable } from 'react-native'
 
 interface IMenuItemProperties {
-	item: IMenuItem
+	currentRoute?: string,
+	item: IMenuItem,
 	nav: TypeNavigate
-	currentRoute?: string
 }
 
 const MenuItem: FC<IMenuItemProperties> = ({ currentRoute, item, nav }) => {

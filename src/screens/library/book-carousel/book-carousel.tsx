@@ -20,8 +20,7 @@ import { View } from 'react-native'
 // 						className='mt-4'
 // 					/>
 // 				</View>
-const BookCarousel = () => {
-	return (
+const BookCarousel = () => (
 		<View className='mt-2'>
 			<LinearGradient
 				colors={[Color.primary, shadeRGBColor(Color.primary, -30)]}
@@ -84,6 +83,5 @@ const BookCarousel = () => {
 			</View>
 		</View>
 	)
-}
 
 export default BookCarousel

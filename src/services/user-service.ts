@@ -1,8 +1,8 @@
-import { UserUpdateBioTypes } from '@/screens/profile/update-profile/update-bio/update-bio-types'
-import { EditPasswordTypes } from '@/screens/profile/update-profile/update-password/update-password-types'
+import type { UserUpdateBioTypes } from '@/screens/profile/update-profile/update-bio/update-bio-types'
+import type { EditPasswordTypes } from '@/screens/profile/update-profile/update-password/update-password-types'
 import { getUsersUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import {
+import type {
 	GetMoreType,
 	UserLibraryFieldsType,
 	UserLibraryType,
@@ -62,7 +62,7 @@ export const userServices = {
 	},
 
 	async toggle(type: keyof UserLibraryFieldsType, id: number) {
-		return request<{ message: string; isExist: boolean }>({
+		return request<{ isExist: boolean, message: string; }>({
 			url: getUsersUrl(`/toggle/${type}/${id}`),
 			method: 'PATCH'
 		})

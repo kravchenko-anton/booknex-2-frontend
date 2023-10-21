@@ -1,15 +1,15 @@
-import { fontSettings } from '@/components/ui/title/title-settings'
-import { TextDefaultProperties } from '@/types/component-types'
-import { ColorProperties } from '@/utils/color'
+import type { fontSettings } from '@/components/ui/title/title-settings'
+import type { TextDefaultProperties } from '@/types/component-types'
+import type { ColorProperties } from '@/utils/color'
 
 export type DescriptionProperties = Omit<
 	TextDefaultProperties,
 	'numberOfLines'
 > &
 	ColorProperties & {
-		children: string | number | undefined
-		center?: boolean
-		size?: number
-		defaultSentences?: number
+		center?: boolean,
+		children: string | number | undefined,
+		defaultSentences?: number,
+		size?: number,
 		weight?: keyof typeof fontSettings
 	}

@@ -2,7 +2,7 @@ import {
 	heightSettings,
 	widthSettings
 } from '@/components/book-card/vertical-card/vertical-card-settings'
-import { VerticalBookCardProperties } from '@/components/book-card/vertical-card/vertical-card-types'
+import type { VerticalBookCardProperties } from '@/components/book-card/vertical-card/vertical-card-types'
 import PressableContainer from '@/components/pressable-container/pressable-container'
 import Button from '@/components/ui/button/button'
 import Image from '@/components/ui/image/image'
@@ -11,8 +11,7 @@ import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
-const VerticalCard: FC<VerticalBookCardProperties> = ({ ...card }) => {
-	return (
+const VerticalCard: FC<VerticalBookCardProperties> = ({ ...card }) => (
 		<PressableContainer
 			style={{
 				height: heightSettings[card.image.size]
@@ -54,6 +53,5 @@ const VerticalCard: FC<VerticalBookCardProperties> = ({ ...card }) => {
 			</View>
 		</PressableContainer>
 	)
-}
 
 export default VerticalCard

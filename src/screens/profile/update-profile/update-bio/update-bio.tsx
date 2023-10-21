@@ -1,13 +1,13 @@
 import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
 import { Title } from '@/components/ui/title/title'
-import {
+import type {
 	BioSectionProperties,
 	UserUpdateBioTypes
 } from '@/screens/profile/update-profile/update-bio/update-bio-types'
 import { useUpdateBio } from '@/screens/profile/update-profile/update-bio/useUpdateBio'
 import { emailRules, nameRules } from '@/utils/input-validation'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { View } from 'react-native'
 

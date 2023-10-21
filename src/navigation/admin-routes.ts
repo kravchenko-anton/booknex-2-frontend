@@ -1,5 +1,5 @@
 import Statistic from '@/screens/admin/statistic/statistic'
-import { IRoute } from './navigation-types'
+import type { IRoute } from './navigation-types'
 
 export const adminRoutes: IRoute[] = [
 	{

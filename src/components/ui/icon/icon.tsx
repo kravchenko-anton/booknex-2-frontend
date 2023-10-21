@@ -9,7 +9,7 @@ import {
 	SizeSetting
 } from '@/components/ui/icon/icon-settings'
 import type { IconProperties } from '@/components/ui/icon/icon-types'
-import { Style } from '@/types/global'
+import type { Style } from '@/types/global'
 import { Octicons } from '@expo/vector-icons'
 import type { FC } from 'react'
 import { memo } from 'react'
@@ -20,31 +20,30 @@ const Icon: FC<IconProperties> = ({
 	variant = 'ghost',
 	size = 'small',
 	color,
+	backgroundColor,
 	style,
 	noPadding = false,
 	...properties
-}) => {
-	return (
-		<Pressable
-			className='items-center justify-center border-[2px]'
-			style={[
-				{
-					opacity: properties.disabled ? 0.5 : 1,
-					padding: noPadding ? 0 : PaddingSetting[size],
-					backgroundColor: BackgroundColorSetting[variant],
-					borderRadius: BorderRadiusSetting,
-					borderColor: BorderColorSetting[variant]
-				},
-				style as Style
-			]}
-			{...properties}>
-			<Octicons
-				name={name}
-				size={SizeSetting[size]}
-				color={color ?? IconColorSetting[variant]}
-			/>
-		</Pressable>
-	)
-}
+}) => (
+	<Pressable
+		className='items-center justify-center border-[2px]'
+		style={[
+			{
+				opacity: properties.disabled ? 0.5 : 1,
+				padding: noPadding ? 0 : PaddingSetting[size],
+				backgroundColor: backgroundColor ?? BackgroundColorSetting[variant],
+				borderRadius: BorderRadiusSetting,
+				borderColor: BorderColorSetting[variant]
+			},
+			style as Style
+		]}
+		{...properties}>
+		<Octicons
+			name={name}
+			size={SizeSetting[size]}
+			color={color ?? IconColorSetting[variant]}
+		/>
+	</Pressable>
+)
 
 export default memo(Icon)

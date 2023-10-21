@@ -1,6 +1,6 @@
 import { getBookUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import {
+import type {
 	BookByIdType,
 	BookManipulationType,
 	ReviewType

@@ -1,4 +1,4 @@
-import { HamburgerMenuProperties } from '@/components/ui/hamburger-menu/hamburger-menu-types'
+import type { HamburgerMenuProperties } from '@/components/ui/hamburger-menu/hamburger-menu-types'
 import type { IconProperties } from '@/components/ui/icon/icon-types'
 import type { ViewDefaultProperties } from '@/types/component-types'
 import type { ColorProperties } from '@/utils/color'

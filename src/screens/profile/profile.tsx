@@ -2,6 +2,7 @@ import Header from '@/components/header/header'
 import ScrollLayout from '@/components/layout/scroll-layout'
 import PressableContainer from '@/components/pressable-container/pressable-container'
 import FlatList from '@/components/ui/flatlist/flatlist'
+import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import Icon from '@/components/ui/icon/icon'
 import Image from '@/components/ui/image/image'
 import BigLoader from '@/components/ui/loader/big-loader'
@@ -32,7 +33,19 @@ const Profile = () => {
 				}}
 			/>
 			<View className='items-center self-center'>
-				<Image height={140} width={140} url={profile.picture} />
+				<View className='relative'>
+					<Image height={140} width={140} url={profile.picture} />
+					<AnimatedIcon
+						name={'pencil'}
+						backgroundColor={Color.gray}
+						onPress={() => {
+							navigate('UpdateProfile')
+						}}
+						size={'medium'}
+						variant={'filled'}
+						className='absolute right-[-20px] top-[-20px]'
+					/>
+				</View>
 
 				<Title className='mt-2 text-center' size={36} weight={'bold'}>
 					{profile.name}

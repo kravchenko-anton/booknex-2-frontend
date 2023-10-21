@@ -1,14 +1,14 @@
 import { Title } from '@/components/ui/title/title'
 import { fontSettings } from '@/components/ui/title/title-settings'
 import { Color } from '@/utils/color'
-import { Controller, Path, PathValue } from 'react-hook-form'
+import type { Path, PathValue } from 'react-hook-form';
+import { Controller } from 'react-hook-form'
 import { TextInput, View } from 'react-native'
-import { FieldProperties } from './filed-types'
+import type { FieldProperties } from './filed-types'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Field = <T extends Record<string, any>>({
 	...properties
-}: FieldProperties<T>): JSX.Element | null => {
-	return (
+}: FieldProperties<T>): JSX.Element | null => (
 		<Controller
 			control={properties.control}
 			name={properties.name}
@@ -50,6 +50,5 @@ const Field = <T extends Record<string, any>>({
 			)}
 		/>
 	)
-}
 
 export default Field

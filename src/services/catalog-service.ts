@@ -1,6 +1,6 @@
 import { getCatalogUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import {
+import type {
 	CatalogType,
 	SearchBookType,
 	TopSearchersType

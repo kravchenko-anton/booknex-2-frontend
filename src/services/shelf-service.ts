@@ -1,6 +1,6 @@
 import { getShelfUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import {
+import type {
 	ShelfManipulationType,
 	ShelfType,
 	ShortShelfType
@@ -18,8 +18,8 @@ export const shelfService = {
 			ShelfType & {
 				statistics: [
 					{
+						count: number | string,
 						title: string
-						count: number | string
 					}
 				]
 			}

@@ -2,13 +2,14 @@ import {
 	heightSettings,
 	widthSettings
 } from '@/components/book-card/book-card-settings'
-import { BookCardProperties } from '@/components/book-card/book-card-types'
+import type { BookCardProperties } from '@/components/book-card/book-card-types'
 import PressableContainer from '@/components/pressable-container/pressable-container'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
-import { Style } from '@/types/global'
+import type { Style } from '@/types/global'
 import { Color } from '@/utils/color'
-import { FC, memo } from 'react'
+import type { FC } from 'react';
+import { memo } from 'react'
 
 const BookCard: FC<BookCardProperties> = ({
 	image,
@@ -16,8 +17,7 @@ const BookCard: FC<BookCardProperties> = ({
 	pages,
 	style,
 	...properties
-}) => {
-	return (
+}) => (
 		<PressableContainer
 			style={[
 				{
@@ -57,6 +57,5 @@ const BookCard: FC<BookCardProperties> = ({
 			</Title>
 		</PressableContainer>
 	)
-}
 
 export default memo(BookCard)

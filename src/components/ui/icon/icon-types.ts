@@ -1,12 +1,13 @@
 import type { PressableDefaultProperties } from '@/types/component-types'
-import type { ColorProperties } from '@/utils/color'
-import { Octicons } from '@expo/vector-icons'
+import type { IconType } from '@/types/global'
+import type { ColorProperties, LineColorType } from '@/utils/color'
 
 export interface IconProperties
 	extends PressableDefaultProperties,
 		ColorProperties {
-	name: keyof typeof Octicons.glyphMap
+	backgroundColor?: LineColorType
+	name: IconType
+	noPadding?: boolean
 	size: 'small' | 'medium' | 'large'
 	variant?: 'filled' | 'outlined' | 'ghost'
-	noPadding?: boolean
 }

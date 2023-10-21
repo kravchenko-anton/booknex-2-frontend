@@ -1,7 +1,8 @@
 import Button from '@/components/ui/button/button'
-import { Route, TabsProperties } from '@/components/ui/tabs/tabs-types'
+import type { Route, TabsProperties } from '@/components/ui/tabs/tabs-types'
 import { WINDOW_WIDTH } from '@/utils/dimensions'
-import { FC, memo, useRef, useState } from 'react'
+import type { FC } from 'react';
+import { memo, useRef, useState } from 'react'
 import { View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 
@@ -22,8 +23,7 @@ const Tabs: FC<TabsProperties> = ({ routes = [], ...properties }) => {
 					ItemSeparatorComponent={() => <View className='w-[10px]' />}
 					data={routes}
 					// If you add ref, the types break
-					renderItem={({ item: tab }: { item: Route }) => {
-						return (
+					renderItem={({ item: tab }: { item: Route }) => (
 							<Button
 								size={'medium'}
 								onPress={() => {
@@ -36,8 +36,7 @@ const Tabs: FC<TabsProperties> = ({ routes = [], ...properties }) => {
 								variant={activeTab === tab.key ? 'primary' : 'dust'}
 								text={tab.title}
 							/>
-						)
-					}}
+						)}
 				/>
 			</View>
 			<FlatList
@@ -57,8 +56,7 @@ const Tabs: FC<TabsProperties> = ({ routes = [], ...properties }) => {
 				showsHorizontalScrollIndicator={false}
 				renderToHardwareTextureAndroid={true}
 				data={routes}
-				renderItem={({ item }) => {
-					return (
+				renderItem={({ item }) => (
 						<View
 							style={{
 								maxWidth: WINDOW_WIDTH,
@@ -66,8 +64,7 @@ const Tabs: FC<TabsProperties> = ({ routes = [], ...properties }) => {
 							}}>
 							{item.component}
 						</View>
-					)
-				}}
+					)}
 			/>
 		</View>
 	)

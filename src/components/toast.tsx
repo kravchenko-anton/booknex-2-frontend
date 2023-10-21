@@ -28,8 +28,7 @@ const options = (color: string) => ({
 	}
 })
 
-const Toast: FC = () => {
-	return (
+const Toast: FC = () => (
 		<RnToast
 			autoHide={true}
 			visibilityTime={3000}
@@ -71,6 +70,5 @@ const Toast: FC = () => {
 			}}
 		/>
 	)
-}
 
 export default Toast

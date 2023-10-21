@@ -1,8 +1,8 @@
-import { HeaderProperties } from '@/components/header/header-types'
+import type { HeaderProperties } from '@/components/header/header-types'
 
 export interface AnimatedHeaderProperties
 	extends Pick<HeaderProperties, 'right'> {
-	title: string
+	scrollPosition: { value: number },
+	title: string,
 	transientValue: number
-	scrollPosition: { value: number }
 }

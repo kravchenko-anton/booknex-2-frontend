@@ -1,17 +1,17 @@
 import { theme } from '../../tailwind.config'
 
 export interface ColorsType {
-	gray: '#666666'
-	primary: '#2B6B76'
-	secondary: '#75471E'
+	alert: '#DC3F41',
+	black: '#000',
+	canvas: '#F9EFE8',
 	dust: '#F2E4DC'
-	canvas: '#F9EFE8'
-	black: '#000'
+	gray: '#666666',
+	highlight: '#FFBE0B',
 	pale: '#FDF7F4'
+	primary: '#2B6B76',
+	secondary: '#75471E',
+	transparent: 'transparent',
 	white: '#fff'
-	alert: '#DC3F41'
-	highlight: '#FFBE0B'
-	transparent: 'transparent'
 }
 
 export type LineColorType =

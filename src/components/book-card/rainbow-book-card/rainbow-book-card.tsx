@@ -1,8 +1,8 @@
-import { RainbowBookCardProperties } from '@/components/book-card/rainbow-book-card/rainbow-book-card-types'
+import type { RainbowBookCardProperties } from '@/components/book-card/rainbow-book-card/rainbow-book-card-types'
 import PressableContainer from '@/components/pressable-container/pressable-container'
 import Image from '@/components/ui/image/image'
 import { Title } from '@/components/ui/title/title'
-import { Style } from '@/types/global'
+import type { Style } from '@/types/global'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
 import { View } from 'react-native'
@@ -11,8 +11,7 @@ const RainbowBookCard: FC<RainbowBookCardProperties> = ({
 	image,
 	style,
 	...properties
-}) => {
-	return (
+}) => (
 		<PressableContainer
 			className='h-[300px] w-[300px] justify-between rounded-xl p-4'
 			style={[
@@ -38,6 +37,5 @@ const RainbowBookCard: FC<RainbowBookCardProperties> = ({
 			</Title>
 		</PressableContainer>
 	)
-}
 
 export default RainbowBookCard

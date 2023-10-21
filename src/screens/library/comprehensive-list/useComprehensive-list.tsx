@@ -1,12 +1,12 @@
 import VerticalCard from '@/components/book-card/vertical-card/vertical-card'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
-import { ShortBookType } from '@/services/types/book-service-types'
-import { ShortShelfType } from '@/services/types/shelf-service-types'
+import type { ShortBookType } from '@/services/types/book-service-types'
+import type { ShortShelfType } from '@/services/types/shelf-service-types'
 import { DesignationType } from '@/services/types/user-services-types'
 import { userServices } from '@/services/user-service'
 import { useQuery } from '@tanstack/react-query'
-import { ListRenderItem } from 'react-native'
+import type { ListRenderItem } from 'react-native'
 
 export const useComprehensiveList = () => {
 	const { navigate: navigateFunction } = useTypedNavigation()

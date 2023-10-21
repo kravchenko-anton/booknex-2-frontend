@@ -1,11 +1,13 @@
-import {
+import type {
 	ImageProps,
-	Pressable,
 	PressableProps,
 	ScrollViewProps,
 	TextProps,
-	View,
 	ViewProps
+} from 'react-native';
+import {
+	Pressable,
+	View
 } from 'react-native'
 import Animated from 'react-native-reanimated'
 

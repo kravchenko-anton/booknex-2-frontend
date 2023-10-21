@@ -1,6 +1,6 @@
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
-import { StatisticCardProperties } from '@/screens/book/statistic-card/statistic-card-types'
+import type { StatisticCardProperties } from '@/screens/book/statistic-card/statistic-card-types'
 import type { FC } from 'react'
 import { View } from 'react-native'
 
@@ -8,8 +8,7 @@ const StatisticCard: FC<StatisticCardProperties> = ({
 	icon = 'alert',
 	count,
 	description
-}) => {
-	return (
+}) => (
 		<View className='flex-row items-center'>
 			<Icon name={icon} size={'large'} className='pl-0' />
 			<View>
@@ -22,6 +21,5 @@ const StatisticCard: FC<StatisticCardProperties> = ({
 			</View>
 		</View>
 	)
-}
 
 export default StatisticCard

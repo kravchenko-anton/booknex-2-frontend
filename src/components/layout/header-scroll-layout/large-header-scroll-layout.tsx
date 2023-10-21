@@ -1,20 +1,18 @@
 import AnimatedHeader from '@/components/header/animated-header/animated-header'
-import { LargeHeaderScrollLayoutProperties } from '@/components/layout/header-scroll-layout/header-scroll-layout-types'
+import type { LargeHeaderScrollLayoutProperties } from '@/components/layout/header-scroll-layout/header-scroll-layout-types'
 import ScrollLayout from '@/components/layout/scroll-layout'
-import { FC, PropsWithChildren } from 'react'
+import type { FC, PropsWithChildren } from 'react'
+import { View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
 const LargeHeaderScrollLayout: FC<
 	PropsWithChildren<LargeHeaderScrollLayoutProperties>
-> = ({ children, headerChildren, ...properties }) => {
+> = ({ children, headerChildren, animatedHeader, ...properties }) => {
 	const scrollPosition = useSharedValue(0)
 
 	return (
 		<>
-			<AnimatedHeader
-				scrollPosition={scrollPosition}
-				{...properties.animatedHeader}
-			/>
+			<AnimatedHeader scrollPosition={scrollPosition} {...animatedHeader} />
 			<ScrollLayout
 				onLayout={() => {
 					scrollPosition.value = 0
@@ -23,7 +21,7 @@ const LargeHeaderScrollLayout: FC<
 					scrollPosition.value = event.nativeEvent.contentOffset.y
 				}}>
 				{headerChildren}
-				{children}
+				<View {...properties}>{children}</View>
 			</ScrollLayout>
 		</>
 	)

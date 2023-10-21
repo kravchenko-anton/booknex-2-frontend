@@ -11,7 +11,7 @@ import Profile from '../screens/profile/profile'
 import Reading from '../screens/reading/reading'
 import Search from '../screens/search/search'
 import { adminRoutes } from './admin-routes'
-import { IRoute } from './navigation-types'
+import type { IRoute } from './navigation-types'
 
 export const userRoutes: IRoute[] = [
 	{

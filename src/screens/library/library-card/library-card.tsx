@@ -1,9 +1,9 @@
 import PressableContainer from '@/components/pressable-container/pressable-container'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
-import { LibraryListElementType } from '@/screens/library/library-card/library-card-types'
+import type { LibraryListElementType } from '@/screens/library/library-card/library-card-types'
 import { Color } from '@/utils/color'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { View } from 'react-native'
 
 const LibraryCard: FC<LibraryListElementType> = ({
@@ -12,8 +12,7 @@ const LibraryCard: FC<LibraryListElementType> = ({
 	count,
 	style,
 	...properties
-}) => {
-	return (
+}) => (
 		<PressableContainer
 			className='w-full flex-row items-center justify-between rounded-xl bg-dust p-4'
 			style={style}
@@ -29,6 +28,5 @@ const LibraryCard: FC<LibraryListElementType> = ({
 			</Title>
 		</PressableContainer>
 	)
-}
 
 export default LibraryCard

@@ -23,9 +23,9 @@ export interface FlatListProperties<T>
 	> {
 	data: T[] | undefined
 	elementSpacing?: number
-	renderItem: ListRenderItem<T>
-	headerText?: string
-	mt?: number
-	px?: number
+	headerText?: string,
+	mt?: number,
+	px?: number,
+	renderItem: ListRenderItem<T>,
 	titleMb?: number
 }

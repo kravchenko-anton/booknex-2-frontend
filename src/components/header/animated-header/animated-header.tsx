@@ -1,4 +1,4 @@
-import { AnimatedHeaderProperties } from '@/components/header/animated-header/animated-header-types'
+import type { AnimatedHeaderProperties } from '@/components/header/animated-header/animated-header-types'
 import { useHeaderAnimation } from '@/components/header/animated-header/header-animation'
 import { HeaderElementComponent } from '@/components/header/useHeader'
 import AnimatedIcon from '@/components/ui/icon/animated-icon'

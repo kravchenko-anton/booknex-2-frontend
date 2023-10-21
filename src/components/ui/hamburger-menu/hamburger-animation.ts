@@ -9,8 +9,7 @@ export const useHamburgerAnimation = (
 	isShow: { value: boolean },
 	position: 'left' | 'right'
 ) => {
-	const popupStyle = useAnimatedStyle(() => {
-		return {
+	const popupStyle = useAnimatedStyle(() => ({
 			pointerEvents: isShow.value ? 'auto' : 'none',
 			opacity: withTiming(isShow.value ? 1 : 0),
 			transform: [
@@ -20,14 +19,11 @@ export const useHamburgerAnimation = (
 					)
 				}
 			]
-		}
-	})
-	const backdropStyle = useAnimatedStyle(() => {
-		return {
+		}))
+	const backdropStyle = useAnimatedStyle(() => ({
 			pointerEvents: isShow.value ? 'auto' : 'none',
 			display: isShow.value ? 'flex' : 'none'
-		}
-	})
+		}))
 	const widthSecondLineAnimation = useAnimatedStyle(
 		() => ({
 			width: withTiming(isShow.value ? 0 : 24),

@@ -1,16 +1,15 @@
 import Header from '@/components/header/header'
 import LargeHeaderScrollLayout from '@/components/layout/header-scroll-layout/large-header-scroll-layout'
 import { Title } from '@/components/ui/title/title'
-import { BookLayoutProperties } from '@/screens/book/book-layout/book-layout-types'
+import type { BookLayoutProperties } from '@/screens/book/book-layout/book-layout-types'
 import { Color } from '@/utils/color'
-import { FC, PropsWithChildren } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 import { View } from 'react-native'
 
 const BookLayout: FC<PropsWithChildren<BookLayoutProperties>> = ({
 	children,
 	...properties
-}) => {
-	return (
+}) => (
 		<LargeHeaderScrollLayout
 			animatedHeader={{
 				title: properties.title,
@@ -55,6 +54,5 @@ const BookLayout: FC<PropsWithChildren<BookLayoutProperties>> = ({
 			{children}
 		</LargeHeaderScrollLayout>
 	)
-}
 
 export default BookLayout

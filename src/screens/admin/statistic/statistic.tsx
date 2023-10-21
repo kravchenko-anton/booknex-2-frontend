@@ -1,8 +1,7 @@
 import BookCard from '@/components/book-card/book-card'
-import Header from '@/components/header/header'
-import Layout from '@/components/layout/layout'
 import BigLoader from '@/components/ui/loader/big-loader'
 import { Title } from '@/components/ui/title/title'
+import AdminLayout from '@/screens/admin/admin-layout/admin-layout'
 import { adminService } from '@/services/admin-service'
 import { useQuery } from '@tanstack/react-query'
 import { View } from 'react-native'
@@ -11,40 +10,9 @@ const Statistic = () => {
 	const { data: statistic } = useQuery(['statistic'], () =>
 		adminService.statistics()
 	)
-	// TODO: сделать layout для админки и вынести туда хедер с хамбургером
 	if (!statistic) return <BigLoader />
 	return (
-		<Layout>
-			<Header
-				left={{
-					title: 'Statistic'
-				}}
-				right={{
-					hamburger: {
-						elements: [
-							{
-								title: 'Books',
-								onPress: () => {
-									console.log('Books')
-								}
-							},
-							{
-								title: 'Users',
-								onPress: () => {
-									console.log('Users')
-								}
-							},
-							{
-								title: 'Statistic',
-								onPress: () => {
-									console.log('Statistic')
-								}
-							}
-						]
-					}
-				}}
-			/>
-
+		<AdminLayout title={'Statistic'} className='px-2'>
 			<View className='flex-row items-center justify-between gap-4 pt-4'>
 				<View className='flex-1 items-center rounded-xl border-2 border-b-black p-2'>
 					<Title size={22} weight={'bold'}>
@@ -78,7 +46,7 @@ const Statistic = () => {
 					/>
 				))}
 			</View>
-		</Layout>
+		</AdminLayout>
 	)
 }
 

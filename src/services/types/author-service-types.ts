@@ -1,12 +1,12 @@
-import { ShortBookType } from '@/services/types/book-service-types'
-import { DefaultModelFields } from '@/types/global'
+import type { ShortBookType } from '@/services/types/book-service-types'
+import type { DefaultModelFields } from '@/types/global'
 
 export interface AuthorType extends DefaultModelFields {
-	name: string
-	picture: string
+	books: ShortBookType[],
+	color: string,
 	description: string
-	color: string
-	books: ShortBookType[]
+	name: string,
+	picture: string
 }
 
 export type ShortAuthorType = Pick<

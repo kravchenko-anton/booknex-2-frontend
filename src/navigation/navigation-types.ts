@@ -1,32 +1,32 @@
-import { UserLibraryFieldsType } from '@/services/types/user-services-types'
-import { ComponentType } from 'react'
+import type { UserLibraryFieldsType } from '@/services/types/user-services-types'
+import type { ComponentType } from 'react'
 
 export type TypeRootStackParameterList = {
-	Featured: undefined
-	Profile: undefined
-	UpdateProfile: undefined
-	Reading: { id: number }
-
+	Author: { id: number },
+	Book: { id: number },
 	ComprehensiveList: {
 		type: keyof UserLibraryFieldsType
-	}
+	},
+	Featured: undefined,
+
+	Genre: { id: number },
 	Library: undefined
-	Shelf: { id: number }
-	Book: { id: number }
-	Author: { id: number }
-	Settings: undefined
+	Login: { defaultEmail: string },
+	Profile: undefined,
+	Reading: { id: number },
+	Registration: { defaultEmail: string },
 	Search: undefined
-	Genre: { id: number }
+	Settings: undefined,
+
+	Shelf: { id: number },
+	Statistic: undefined,
+	UpdateProfile: undefined,
 
 	Welcome: undefined
-	Login: { defaultEmail: string }
-	Registration: { defaultEmail: string }
-
-	Statistic: undefined
 }
 
 export interface IRoute {
+	component: ComponentType,
+	isAdmin?: boolean,
 	name: keyof TypeRootStackParameterList
-	component: ComponentType
-	isAdmin?: boolean
 }

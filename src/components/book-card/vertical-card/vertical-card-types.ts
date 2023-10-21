@@ -1,13 +1,13 @@
-import { PressableDefaultProperties } from '@/types/component-types'
+import type { PressableDefaultProperties } from '@/types/component-types'
 
 export interface VerticalBookCardProperties extends PressableDefaultProperties {
-	image: {
-		uri: string
-		size: 'small' | 'medium' | 'large' | 'cube'
-	}
+	buttons?: string[],
 
+	description?: string,
+	descriptionLines?: number,
+	image: {
+		size: 'small' | 'medium' | 'large' | 'cube',
+		uri: string
+	},
 	title: string
-	description?: string
-	descriptionLines?: number
-	buttons?: string[]
 }

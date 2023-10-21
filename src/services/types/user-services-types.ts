@@ -1,6 +1,6 @@
-import { ShortBookType } from '@/services/types/book-service-types'
-import { ShortShelfType } from '@/services/types/shelf-service-types'
-import { DefaultModelFields, IconType } from '@/types/global'
+import type { ShortBookType } from '@/services/types/book-service-types'
+import type { ShortShelfType } from '@/services/types/shelf-service-types'
+import type { DefaultModelFields, IconType } from '@/types/global'
 
 export interface UserProfileTypes
 	extends Pick<UserType, 'email' | 'name' | 'picture'> {
@@ -8,37 +8,37 @@ export interface UserProfileTypes
 }
 export type UserStatisticsType = [
 	{
+		count: number,
+		icon: IconType
 		name: 'Books read'
-		icon: IconType
-		count: number
 	},
 	{
+		count: number,
+		icon: IconType
 		name: 'Pages read'
-		icon: IconType
-		count: number
 	},
 	{
+		count: string,
+		icon: IconType
 		name: 'Time in read'
-		icon: IconType
-		count: string
 	},
 	{
-		name: 'Reading speed'
+		count: string,
 		icon: IconType
-		count: string
+		name: 'Reading speed'
 	}
 ]
 export interface UserType extends DefaultModelFields, UserLibraryFieldsType {
 	email: string
-	name: string
-	isAdmin: boolean
+	isAdmin: boolean,
+	name: string,
 	picture: string
 }
 export interface UserLibraryFieldsType {
-	watchedShelves: ShortShelfType[]
+	finishedBooks: ShortBookType[],
 	hiddenShelves: ShortShelfType[]
-	finishedBooks: ShortBookType[]
-	readingBooks: ShortBookType[]
+	readingBooks: ShortBookType[],
+	watchedShelves: ShortShelfType[]
 }
 
 export const DesignationType = {
@@ -49,10 +49,10 @@ export const DesignationType = {
 }
 
 type UserLibraryElementType = {
+	count: number,
+	icon: IconType,
+	name: string,
 	type: keyof UserLibraryFieldsType
-	name: string
-	icon: IconType
-	count: number
 }
 
 export type GetMoreType<T extends keyof UserLibraryFieldsType> = {

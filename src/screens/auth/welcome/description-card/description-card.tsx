@@ -2,11 +2,12 @@ import image from '@/../assets/icon.png'
 import Button from '@/components/ui/button/button'
 import { Title } from '@/components/ui/title/title'
 import { popupAnimation } from '@/screens/auth/welcome/popup-animation'
-import { WelcomeElementProperties } from '@/screens/auth/welcome/welcome-types'
+import type { WelcomeElementProperties } from '@/screens/auth/welcome/welcome-types'
 import { AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
-import { Image, ImageSourcePropType, View } from 'react-native'
+import type { ImageSourcePropType } from 'react-native';
+import { Image, View } from 'react-native'
 
 const DescriptionCard: FC<WelcomeElementProperties> = ({
 	setIsActivePopup,

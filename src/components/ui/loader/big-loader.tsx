@@ -2,8 +2,7 @@ import { Color } from '@/utils/color'
 import { memo } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
-const BigLoader = () => {
-	return (
+const BigLoader = () => (
 		<View
 			style={{
 				backgroundColor: Color.canvas
@@ -16,6 +15,5 @@ const BigLoader = () => {
 			/>
 		</View>
 	)
-}
 
 export default memo(BigLoader)

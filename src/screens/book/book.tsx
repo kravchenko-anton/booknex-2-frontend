@@ -69,7 +69,7 @@ const Book = () => {
 					name={isSmashedReadingBooks ? 'x' : 'plus'}
 					onPress={() => toggleReadingBooks()}
 					size={'medium'}
-					className='mb-2 w-[50px]'
+					className='w-[50px]'
 					variant={'outlined'}
 					color={Color.primary}
 				/>

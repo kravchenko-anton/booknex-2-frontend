@@ -1,7 +1,8 @@
-import { ImageTypes } from '@/components/ui/image/image-types'
+import type { ImageTypes } from '@/components/ui/image/image-types'
 import { getFileUrl } from '@/services/api-config'
 import { Color } from '@/utils/color'
-import { FC, memo } from 'react'
+import type { FC } from 'react';
+import { memo } from 'react'
 import { Image as DefaultImage } from 'react-native'
 
 const Image: FC<ImageTypes> = ({
@@ -12,8 +13,7 @@ const Image: FC<ImageTypes> = ({
 	style,
 	fullSize,
 	...properties
-}) => {
-	return (
+}) => (
 		<DefaultImage
 			source={{
 				uri: getFileUrl(url),
@@ -32,6 +32,5 @@ const Image: FC<ImageTypes> = ({
 			{...properties}
 		/>
 	)
-}
 
 export default memo(Image)

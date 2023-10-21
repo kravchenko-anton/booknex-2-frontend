@@ -1,4 +1,4 @@
-import { AnimationConfigType } from '@/types/global'
+import type { AnimationConfigType } from '@/types/global'
 import { useMemo } from 'react'
 import {
 	useAnimatedStyle,

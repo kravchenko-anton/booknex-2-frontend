@@ -1,7 +1,7 @@
 import Button from '@/components/ui/button/button'
 import Field from '@/components/ui/field/field'
 import { Title } from '@/components/ui/title/title'
-import { EditPasswordTypes } from '@/screens/profile/update-profile/update-password/update-password-types'
+import type { EditPasswordTypes } from '@/screens/profile/update-profile/update-password/update-password-types'
 import { useUpdatePassword } from '@/screens/profile/update-profile/update-password/useUpdatePassword'
 import { passwordRules } from '@/utils/input-validation'
 import { useForm } from 'react-hook-form'

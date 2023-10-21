@@ -19,7 +19,6 @@ const Featured = () => {
 	const { data: shelves } = useQuery(['library', 'shelves'], () =>
 		shelfService.catalog()
 	)
-	// TODO: возможно вынести всё flatlist в отдельный компонент
 	const { navigate } = useTypedNavigation()
 	if (!catalog) return <FullScreenLoader />
 	return (
@@ -29,22 +28,32 @@ const Featured = () => {
 				data={shelves}
 				renderItem={({ item: shelve }) => (
 					<ShelfCard
-						id={shelve.id}
+						onPress={() => navigate('Shelf', { id: shelve.id })}
 						picture={shelve.picture}
-						icon={shelve.icon}
 						name={shelve.title}
 					/>
 				)}
 			/>
-			<RecommendationList data={catalog.recommendations} />
+			<RecommendationList
+				data={catalog.recommendations}
+				renderItem={({ item: book }) => (
+					<BookCard
+						onPress={() => navigate('Book', { id: book.id })}
+						image={{
+							uri: book.picture,
+							size: 'medium'
+						}}
+						title={book.title}
+						author={book.author.name}
+					/>
+				)}
+			/>
 			<FlatList
 				horizontal
 				data={catalog.mostRelatedGenres}
 				renderItem={({ item: genre }) => (
 					<Button
-						onPress={() => {
-							navigate('Genre', { id: genre.id })
-						}}
+						onPress={() => navigate('Genre', { id: genre.id })}
 						size={'medium'}
 						variant={'ghost'}
 						text={genre.name}
@@ -58,9 +67,7 @@ const Featured = () => {
 				data={catalog.bestSellers}
 				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => {
-							navigate('Book', { id: book.id })
-						}}
+						onPress={() => navigate('Book', { id: book.id })}
 						image={{ uri: book.picture, size: 'large' }}
 						title={book.title}
 						likedPercentage={book.likedPercentage}
@@ -73,9 +80,7 @@ const Featured = () => {
 				data={catalog.popularNow}
 				renderItem={({ item: book }) => (
 					<RainbowBookCard
-						onPress={() => {
-							navigate('Book', { id: book.id })
-						}}
+						onPress={() => navigate('Book', { id: book.id })}
 						backgroundColor={book.color}
 						image={{ uri: book.picture }}
 						title={book.title}
@@ -89,35 +94,29 @@ const Featured = () => {
 				data={catalog.newReleases}
 				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => {
-							navigate('Book', { id: book.id })
-						}}
+						onPress={() => navigate('Book', { id: book.id })}
 						image={{ uri: book.picture, size: 'medium' }}
 					/>
 				)}
 			/>
-			{catalog.genres.map(genre => {
-				return (
-					<FlatList
-						key={genre.name}
-						headerText={removeEmoji(genre.name)}
-						horizontal
-						mt={30}
-						data={genre.majorBooks}
-						renderItem={({ item: book }) => (
-							<BookCard
-								onPress={() => {
-									navigate('Book', { id: book.id })
-								}}
-								image={{
-									uri: book.picture,
-									size: 'small'
-								}}
-							/>
-						)}
-					/>
-				)
-			})}
+			{catalog.genres.map(genre => (
+				<FlatList
+					key={genre.name}
+					headerText={removeEmoji(genre.name)}
+					horizontal
+					mt={30}
+					data={genre.majorBooks}
+					renderItem={({ item: book }) => (
+						<BookCard
+							onPress={() => navigate('Book', { id: book.id })}
+							image={{
+								uri: book.picture,
+								size: 'small'
+							}}
+						/>
+					)}
+				/>
+			))}
 
 			<FlatList
 				headerText={'In the same breath'}
@@ -125,9 +124,7 @@ const Featured = () => {
 				data={catalog.sameBreath}
 				renderItem={({ item: book }) => (
 					<BookCard
-						onPress={() => {
-							navigate('Book', { id: book.id })
-						}}
+						onPress={() => navigate('Book', { id: book.id })}
 						pages={book.pages}
 						image={{
 							uri: book.picture,

@@ -8,7 +8,8 @@ import {
 	NavigationContainer,
 	useNavigationContainerRef
 } from '@react-navigation/native'
-import { FC, useEffect, useState } from 'react'
+import type { FC } from 'react';
+import { useEffect, useState } from 'react'
 import {
 	SafeAreaProvider,
 	initialWindowMetrics
@@ -41,7 +42,7 @@ const Navigation: FC = () => {
 			<NavigationContainer ref={navReference} fallback={<FullScreenLoader />}>
 				<PrivateNavigator />
 			</NavigationContainer>
-			{user && currentRoute && (
+			{user && !!currentRoute && (
 				<BottomMenu nav={navReference.navigate} currentRoute={currentRoute} />
 			)}
 		</SafeAreaProvider>

@@ -1,10 +1,10 @@
 import { useHamburgerAnimation } from '@/components/ui/hamburger-menu/hamburger-animation'
-import { HamburgerMenuProperties } from '@/components/ui/hamburger-menu/hamburger-menu-types'
+import type { HamburgerMenuProperties } from '@/components/ui/hamburger-menu/hamburger-menu-types'
 import { Title } from '@/components/ui/title/title'
 import { AnimatedPressable, AnimatedView } from '@/types/component-types'
 import { Color } from '@/utils/color'
 import { WINDOW_HEIGHT } from '@/utils/dimensions'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 

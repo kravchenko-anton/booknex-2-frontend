@@ -1,5 +1,5 @@
 import { saveTokensStorage } from '@/redux/auth/auth.helper'
-import { AuthResponseType } from '@/redux/auth/auth.types'
+import type { AuthResponseType } from '@/redux/auth/auth.types'
 import { getAuthUrl, SERVER_URL } from '@/services/api-config'
 import axios from 'axios'
 import { getItemAsync } from 'expo-secure-store'
@@ -21,7 +21,8 @@ export const getNewTokens = async () => {
 		if (!response.accessToken) throw new Error('No access token')
 
 		return response
-	} catch {
-		/* empty */
+	} catch (error) {
+		console.log(error)
+		throw error
 	}
 }

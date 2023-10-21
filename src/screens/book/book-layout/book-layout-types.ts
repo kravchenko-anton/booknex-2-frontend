@@ -1,13 +1,13 @@
 export interface BookLayoutProperties {
-	title: string
-	hamburgerMenuElements: {
-		title: string
-		onPress: () => void
-	}[]
-	backgroundColor: string
 	author: {
-		name: string
 		id: number
+		name: string
 		navigate: (id: number) => void
 	}
+	backgroundColor: string
+	hamburgerMenuElements: {
+		onPress: () => void
+		title: string
+	}[]
+	title: string
 }

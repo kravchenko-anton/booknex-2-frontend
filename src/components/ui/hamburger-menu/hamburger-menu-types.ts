@@ -1,9 +1,9 @@
-import { ColorProperties } from '@/utils/color'
+import type { ColorProperties } from '@/utils/color'
 
 export interface HamburgerMenuProperties extends ColorProperties {
-	position: 'left' | 'right'
 	elements: {
+		onPress: () => void,
 		title: string
-		onPress: () => void
-	}[]
+	}[],
+	position: 'left' | 'right'
 }

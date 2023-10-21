@@ -1,5 +1,5 @@
-import { TypeRootStackParameterList } from '@/navigation/navigation-types'
-import { IconProperties } from '@/types/global'
+import type { TypeRootStackParameterList } from '@/navigation/navigation-types'
+import type { IconProperties } from '@/types/global'
 
 export interface IMenuItem extends IconProperties {
 	path: keyof TypeRootStackParameterList

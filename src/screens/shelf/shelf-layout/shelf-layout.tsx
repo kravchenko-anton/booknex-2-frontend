@@ -1,17 +1,16 @@
 import Header from '@/components/header/header'
 import LargeHeaderScrollLayout from '@/components/layout/header-scroll-layout/large-header-scroll-layout'
 import { Title } from '@/components/ui/title/title'
-import { ShelfLayoutProperties } from '@/screens/shelf/shelf-layout/shelf-layout-types'
+import type { ShelfLayoutProperties } from '@/screens/shelf/shelf-layout/shelf-layout-types'
 import { getFileUrl } from '@/services/api-config'
 import { Color } from '@/utils/color'
-import { FC, PropsWithChildren } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 import { ImageBackground, View } from 'react-native'
 
 const ShelfLayout: FC<PropsWithChildren<ShelfLayoutProperties>> = ({
 	children,
 	...properties
-}) => {
-	return (
+}) => (
 		<LargeHeaderScrollLayout
 			animatedHeader={{
 				title: properties.title,
@@ -45,6 +44,5 @@ const ShelfLayout: FC<PropsWithChildren<ShelfLayoutProperties>> = ({
 			{children}
 		</LargeHeaderScrollLayout>
 	)
-}
 
 export default ShelfLayout

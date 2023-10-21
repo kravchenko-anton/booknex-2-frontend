@@ -1,4 +1,4 @@
-import { PopupTypes } from '@/types/global'
+import type { PopupTypes } from '@/types/global'
 
 export type WelcomeElementProperties = PopupTypes<
 	'check-email' | 'description-card'

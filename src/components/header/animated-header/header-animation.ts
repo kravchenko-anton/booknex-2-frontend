@@ -5,8 +5,7 @@ export const useHeaderAnimation = (
 	scrollPosition: { value: number },
 	transientValue: number
 ) => {
-	const headerStyle = useAnimatedStyle(() => {
-		return {
+	const headerStyle = useAnimatedStyle(() => ({
 			opacity: withSpring(scrollPosition.value >= transientValue ? 1 : 0),
 			pointerEvents: scrollPosition.value >= transientValue ? 'auto' : 'none',
 			transform: [
@@ -20,8 +19,7 @@ export const useHeaderAnimation = (
 					)
 				}
 			]
-		}
-	})
+		}))
 
 	return useMemo(() => ({ headerStyle }), [headerStyle])
 }

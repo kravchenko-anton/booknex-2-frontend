@@ -1,6 +1,6 @@
 import { getAuthorUrl } from '@/services/api-config'
 import { request } from '@/services/api/request.api'
-import { AuthorType } from '@/services/types/author-service-types'
+import type { AuthorType } from '@/services/types/author-service-types'
 
 export const authorService = {
 	async byId(id: number) {

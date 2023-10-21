@@ -1,14 +1,14 @@
-import {
+import type {
 	AuthorType,
 	ShortAuthorType
 } from '@/services/types/author-service-types'
-import { BookType, ShortBookType } from '@/services/types/book-service-types'
-import { DefaultModelFields } from '@/types/global'
+import type { BookType, ShortBookType } from '@/services/types/book-service-types'
+import type { DefaultModelFields } from '@/types/global'
 
 export interface GenreType extends DefaultModelFields {
-	name: string
+	books: BookType[],
 	color: string
-	books: BookType[]
+	name: string
 }
 
 export interface SimilarBestSellersType extends Omit<GenreType, 'books'> {
@@ -16,8 +16,8 @@ export interface SimilarBestSellersType extends Omit<GenreType, 'books'> {
 }
 
 export interface GenreByIdType extends Omit<GenreType, 'books'> {
-	newestBooks: Pick<BookType, keyof ShortBookType | 'color' | 'description'>[]
+	bestAuthors: (ShortAuthorType & Pick<AuthorType, 'picture'>)[],
 	bestSellers: ShortBookType[]
 	bestSellersFromSimilar: SimilarBestSellersType[]
-	bestAuthors: (ShortAuthorType & Pick<AuthorType, 'picture'>)[]
+	newestBooks: Pick<BookType, keyof ShortBookType | 'color' | 'description'>[]
 }
