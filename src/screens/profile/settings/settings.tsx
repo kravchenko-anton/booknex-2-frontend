@@ -5,7 +5,7 @@ import { useSettingsList } from '@/screens/profile/settings/useSettingsList'
 import type { IconType } from '@/types/global'
 import { Color } from '@/utils/color'
 import { VERSION } from '@env'
-import { View } from 'react-native'
+import { Pressable, View } from 'react-native'
 // TODO: сделать страницу настройки когда уже многое будет готово
 const Settings = () => {
 	const settingsList = useSettingsList()
@@ -26,8 +26,9 @@ const Settings = () => {
 						{item.title}
 					</Title>
 					{item.list.map(listItem => (
-						<View
+						<Pressable
 							key={listItem.title}
+							onPress={() => listItem.onPress()}
 							className='flex-row items-center justify-between'>
 							<View className='flex-row items-center'>
 								<Icon
@@ -46,7 +47,7 @@ const Settings = () => {
 								color={Color.secondary}
 								name='chevron-right'
 							/>
-						</View>
+						</Pressable>
 					))}
 				</View>
 			))}

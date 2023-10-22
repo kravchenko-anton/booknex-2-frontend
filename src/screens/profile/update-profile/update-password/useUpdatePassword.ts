@@ -1,4 +1,3 @@
-import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import type { EditPasswordTypes } from '@/screens/profile/update-profile/update-password/update-password-types'
 import { userServices } from '@/services/user-service'
 import { errorCatch } from '@/utils/catch-error'
@@ -6,7 +5,6 @@ import { useMutation } from '@tanstack/react-query'
 import Toast from 'react-native-toast-message'
 
 export const useUpdatePassword = () => {
-	const { navigate } = useTypedNavigation()
 	const { mutateAsync } = useMutation(
 		['update profile password'],
 		(data: EditPasswordTypes) => userServices.updatePassword(data),
@@ -24,7 +22,6 @@ export const useUpdatePassword = () => {
 					text2: 'successful',
 					type: 'success'
 				})
-				navigate('Profile')
 			}
 		}
 	)

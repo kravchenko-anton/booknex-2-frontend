@@ -7,6 +7,8 @@ export interface FlatListProperties<T>
 	extends Pick<
 		FlatListDefaultProperties<T>,
 		| 'horizontal'
+		| 'onEndReached'
+		| 'ListHeaderComponent'
 		| 'ListEmptyComponent'
 		| 'keyExtractor'
 		| 'style'
@@ -23,9 +25,9 @@ export interface FlatListProperties<T>
 	> {
 	data: T[] | undefined
 	elementSpacing?: number
-	headerText?: string,
-	mt?: number,
-	px?: number,
-	renderItem: ListRenderItem<T>,
+	headerText?: string
+	mt?: number
+	px?: number
+	renderItem: ListRenderItem<T> | null
 	titleMb?: number
 }

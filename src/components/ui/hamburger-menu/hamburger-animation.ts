@@ -10,20 +10,20 @@ export const useHamburgerAnimation = (
 	position: 'left' | 'right'
 ) => {
 	const popupStyle = useAnimatedStyle(() => ({
-			pointerEvents: isShow.value ? 'auto' : 'none',
-			opacity: withTiming(isShow.value ? 1 : 0),
-			transform: [
-				{
-					translateX: withSpring(
-						isShow.value ? 0 : position === 'left' ? -100 : 100
-					)
-				}
-			]
-		}))
+		pointerEvents: isShow.value ? 'auto' : 'none',
+		opacity: withTiming(isShow.value ? 1 : 0),
+		transform: [
+			{
+				translateX: withSpring(
+					isShow.value ? 0 : position === 'left' ? -100 : 100
+				)
+			}
+		]
+	}))
 	const backdropStyle = useAnimatedStyle(() => ({
-			pointerEvents: isShow.value ? 'auto' : 'none',
-			display: isShow.value ? 'flex' : 'none'
-		}))
+		pointerEvents: isShow.value ? 'auto' : 'none',
+		display: isShow.value ? 'flex' : 'none'
+	}))
 	const widthSecondLineAnimation = useAnimatedStyle(
 		() => ({
 			width: withTiming(isShow.value ? 0 : 24),

@@ -7,7 +7,6 @@ module.exports = {
 		'unicorn',
 		'react-native',
 		'jsx-a11y',
-		'typescript-sort-keys',
 		'jsx-expressions'
 	],
 	extends: [
@@ -22,7 +21,6 @@ module.exports = {
 		'plugin:jsx-a11y/recommended',
 		'plugin:sonarjs/recommended',
 		'plugin:unicorn/all',
-		'plugin:typescript-sort-keys/recommended',
 		'plugin:react-native/all',
 		'plugin:react-hooks/recommended'
 	],
@@ -40,6 +38,8 @@ module.exports = {
 		sourceType: 'module'
 	},
 	rules: {
+		'@typescript-eslint/no-non-null-assertion': 'warn',
+		'@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
 		'@typescript-eslint/consistent-type-imports': 'error',
 		'@typescript-eslint/no-duplicate-enum-values': 'error',
 		'@typescript-eslint/no-duplicate-type-constituents': 'error',
@@ -51,8 +51,6 @@ module.exports = {
 		'arrow-body-style': ['error', 'as-needed'],
 		complexity: ['error', 10],
 		'no-nested-ternary': 'error',
-		'typescript-sort-keys/interface': 'error',
-		'typescript-sort-keys/string-enum': 'error',
 		'no-unneeded-ternary': 'error',
 		// 'no-ternary': 'error',
 		'jsx-expressions/strict-logical-expressions': 'error',
@@ -61,7 +59,6 @@ module.exports = {
 		'react-native/split-platform-components': 2,
 		'react-native/no-inline-styles': 1,
 		'react-native/no-color-literals': 2,
-
 		'react-native/no-single-element-style-arrays': 2,
 		'max-len': [
 			'error',
@@ -128,7 +125,6 @@ module.exports = {
 		'@typescript-eslint/prefer-nullish-coalescing': 'off',
 		'@typescript-eslint/no-throw-literal': 'off',
 		'import/no-extraneous-dependencies': 'off',
-		'react/jsx-filename-extension': 'off',
 		'import/extensions': 'off',
 		'import/named': 'off',
 		'import/no-default-export': 'off',
@@ -140,7 +136,7 @@ module.exports = {
 		'no-await-in-loop': 'off',
 		'no-continue': 'off',
 		'react-native/no-raw-text': 'off',
-		'unicorn/no-null': ['off'],
-		'unicorn/no-nested-ternary': 'off'
+		'unicorn/no-null': 'off',
+		'react/jsx-filename-extension': 'off'
 	}
 }

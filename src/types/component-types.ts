@@ -1,14 +1,12 @@
 import type {
+	FlatListProps,
 	ImageProps,
 	PressableProps,
 	ScrollViewProps,
 	TextProps,
 	ViewProps
-} from 'react-native';
-import {
-	Pressable,
-	View
 } from 'react-native'
+import { Pressable, View } from 'react-native'
 import Animated from 'react-native-reanimated'
 
 export const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
@@ -16,6 +14,22 @@ export const AnimatedView = Animated.createAnimatedComponent(View)
 export type ViewDefaultProperties = Pick<
 	ViewProps,
 	'className' | 'style' | 'onLayout' | 'pointerEvents' | 'onMagicTap'
+>
+export type FlatlistDefaultProperties<T> = Pick<
+	FlatListProps<T>,
+	| 'horizontal'
+	| 'onEndReached'
+	| 'ListEmptyComponent'
+	| 'keyExtractor'
+	| 'style'
+	| 'data'
+	| 'className'
+	| 'snapToInterval'
+	| 'snapToAlignment'
+	| 'scrollEnabled'
+	| 'numColumns'
+	| 'contentContainerStyle'
+	| 'renderItem'
 >
 
 export type PressableDefaultProperties = Pick<
@@ -63,6 +77,9 @@ export type ImageDefaultProperties = Pick<
 export type ScrollViewDefaultProperties = Pick<
 	ScrollViewProps,
 	| 'scrollEnabled'
+	// onScroll end
+	| 'onResponderEnd'
+	| 'onTouchEnd'
 	| 'children'
 	| 'keyboardShouldPersistTaps'
 	| 'automaticallyAdjustKeyboardInsets'

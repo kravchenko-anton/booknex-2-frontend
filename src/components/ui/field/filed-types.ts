@@ -1,3 +1,4 @@
+import type { Style } from '@/types/global'
 import type {
 	Control,
 	FieldPath,
@@ -12,8 +13,10 @@ export interface FieldProperties<T extends FieldValues>
 		'onChange' | 'onChangeText' | 'value' | 'testID'
 	> {
 	control: Control<T>
-	keyboardType?: KeyboardTypeOptions,
-	name: FieldPath<T>,
+	keyboardType?: KeyboardTypeOptions
+	wrapperStyle?: Style
+	wrapperClassName?: string
+	name: FieldPath<T>
 	rules?: Omit<
 		RegisterOptions<T, FieldPath<T>>,
 		'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'

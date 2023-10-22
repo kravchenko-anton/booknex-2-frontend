@@ -34,7 +34,11 @@ export const useComprehensiveList = () => {
 				}}
 				title={book.title}
 				description={book.author.name}
-				buttons={[`👍 ${book.likedPercentage}% liked`]}
+				buttons={[
+					{
+						label: `👍 ${book.likedPercentage}% liked`
+					}
+				]}
 				onPress={() => {
 					navigate.Book(book.id)
 				}}

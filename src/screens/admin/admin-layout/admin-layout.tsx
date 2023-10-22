@@ -1,4 +1,6 @@
-import HeaderScrollLayout from '@/components/layout/header-scroll-layout/header-scroll-layout'
+import Header from '@/components/header/header'
+import Layout from '@/components/layout/layout'
+import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import type { AdminLayoutProperties } from '@/screens/admin/admin-layout/admin-layout-types'
 import type { FC, PropsWithChildren } from 'react'
 import { View } from 'react-native'
@@ -7,11 +9,12 @@ const AdminLayout: FC<PropsWithChildren<AdminLayoutProperties>> = ({
 	children,
 	...properties
 }) => {
+	const { navigate } = useTypedNavigation()
 	const hamburgerMenuElements = [
 		{
 			title: 'Books',
 			onPress: () => {
-				console.log('Books')
+				navigate('BookList')
 			}
 		},
 		{
@@ -23,7 +26,7 @@ const AdminLayout: FC<PropsWithChildren<AdminLayoutProperties>> = ({
 		{
 			title: 'Statistic',
 			onPress: () => {
-				console.log('Statistic')
+				navigate('Statistic')
 			}
 		},
 		{
@@ -41,28 +44,17 @@ const AdminLayout: FC<PropsWithChildren<AdminLayoutProperties>> = ({
 	]
 
 	return (
-		<HeaderScrollLayout
-			animatedHeader={{
-				title: properties.title,
-				transientValue: 85,
-				right: {
-					hamburger: {
-						elements: hamburgerMenuElements
-					}
-				}
-			}}
-			header={{
-				right: {
-					hamburger: {
-						elements: hamburgerMenuElements
-					}
-				},
-				left: {
+		<Layout>
+			<Header
+				right={{
+					hamburger: { elements: hamburgerMenuElements }
+				}}
+				left={{
 					title: properties.title
-				}
-			}}>
+				}}
+			/>
 			<View {...properties}>{children}</View>
-		</HeaderScrollLayout>
+		</Layout>
 	)
 }
 

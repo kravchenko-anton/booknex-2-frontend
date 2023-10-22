@@ -59,7 +59,7 @@ export const useUploadUserPicture = (oldPicture?: string) => {
 		}
 	)
 
-	const onSubmit = async () => {
+	const updatePicture = async () => {
 		const image = await selectImage()
 		if (!image) return
 		const formData = new FormData()
@@ -81,5 +81,5 @@ export const useUploadUserPicture = (oldPicture?: string) => {
 		await UploadPictureMutateSync(formData)
 	}
 
-	return { onSubmit }
+	return { updatePicture }
 }

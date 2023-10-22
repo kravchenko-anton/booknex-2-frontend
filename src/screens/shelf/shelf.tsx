@@ -92,8 +92,12 @@ const Shelf = () => {
 						title={book.title}
 						description={book.author.name}
 						buttons={[
-							`📖 ${book.pages} pages`,
-							`👍 ${book.likedPercentage}% liked`
+							{
+								label: `📖 ${book.pages} pages`
+							},
+							{
+								label: `👍 ${book.likedPercentage}% liked`
+							}
 						]}
 						onPress={() => {
 							navigate('Book', { id: book.id })

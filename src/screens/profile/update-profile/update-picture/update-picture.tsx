@@ -6,7 +6,7 @@ import type { FC } from 'react'
 import { View } from 'react-native'
 
 const UpdatePicture: FC<UpdatePictureProperties> = ({ picture }) => {
-	const { onSubmit } = useUploadUserPicture(picture)
+	const { updatePicture } = useUploadUserPicture(picture)
 	return (
 		<View className='mt-8 w-full items-center'>
 			<Image height={140} width={140} url={picture} />
@@ -15,9 +15,7 @@ const UpdatePicture: FC<UpdatePictureProperties> = ({ picture }) => {
 				<Button
 					className='mt-4 w-full'
 					variant={'primary'}
-					onPress={() => {
-						onSubmit()
-					}}
+					onPress={() => updatePicture()}
 					size={'medium'}
 					text={'Change photo'}
 				/>

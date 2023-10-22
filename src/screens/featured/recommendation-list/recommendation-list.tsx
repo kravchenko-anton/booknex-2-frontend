@@ -1,16 +1,15 @@
 import FlatList from '@/components/ui/flatlist/flatlist'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
+import type { RecommendationProperties } from '@/screens/featured/recommendation-list/recommendation-list-types'
 import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade-color'
 import { LinearGradient } from 'expo-linear-gradient'
 import type { FC } from 'react'
 import { View } from 'react-native'
-import type { RecommendationProperties } from './recommendation-list-types'
 
 const RecommendationList: FC<RecommendationProperties> = ({
-	data = [],
-	renderItem = () => null
+	...properties
 }) => (
 	<View className='relative mt-4 items-center px-2'>
 		<View className='absolute mb-4 h-full w-full rounded-[10px] bg-pale'>
@@ -29,13 +28,7 @@ const RecommendationList: FC<RecommendationProperties> = ({
 		<Title className='mb-4' weight={'bold'} color={Color.white}>
 			Recommended for you
 		</Title>
-		<FlatList
-			mt={0}
-			horizontal
-			className='mb-4'
-			data={data}
-			renderItem={renderItem}
-		/>
+		<FlatList mt={0} horizontal className='mb-4' {...properties} />
 	</View>
 )
 

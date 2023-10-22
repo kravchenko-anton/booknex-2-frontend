@@ -3,7 +3,8 @@ import { request } from '@/services/api/request.api'
 import type {
 	BookByIdType,
 	BookManipulationType,
-	ReviewType
+	ReviewType,
+	ShortBookType
 } from '@/services/types/book-service-types'
 
 export const bookService = {
@@ -32,9 +33,9 @@ export const bookService = {
 		})
 	},
 
-	async all() {
-		return request({
-			url: getBookUrl('/all')
+	async all(cursor?: number) {
+		return request<ShortBookType[]>({
+			url: getBookUrl('/all' + (cursor ? `?cursor=${cursor}` : ''))
 		})
 	},
 

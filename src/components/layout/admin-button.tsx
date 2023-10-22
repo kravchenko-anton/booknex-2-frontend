@@ -1,6 +1,7 @@
 import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import { useAuth } from '@/hooks/useAuth'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
+import { adminRoutes } from '@/navigation/admin-routes'
 import { useRoute } from '@react-navigation/native'
 
 const AdminButton = () => {
@@ -8,7 +9,12 @@ const AdminButton = () => {
 	const { user } = useAuth()
 	const { name } = useRoute()
 	// TODO: Добавить по роуту проверку
-	if ((user && !user?.isAdmin) || !user || name === 'Statistic') return
+	if (
+		(user && !user?.isAdmin) ||
+		!user ||
+		adminRoutes.some(route => route.name === name)
+	)
+		return
 	return (
 		<AnimatedIcon
 			onPress={() => {

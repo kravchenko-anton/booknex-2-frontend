@@ -1,4 +1,3 @@
-import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import type { UserUpdateBioTypes } from '@/screens/profile/update-profile/update-bio/update-bio-types'
 import { userServices } from '@/services/user-service'
 import { errorCatch } from '@/utils/catch-error'
@@ -7,7 +6,6 @@ import Toast from 'react-native-toast-message'
 
 export const useUpdateBio = () => {
 	const queryClient = useQueryClient()
-	const { navigate } = useTypedNavigation()
 	const { mutateAsync } = useMutation(
 		['update profile bio'],
 		(data: UserUpdateBioTypes) => userServices.updateBio(data),
@@ -25,7 +23,6 @@ export const useUpdateBio = () => {
 					text2: 'update was successful',
 					type: 'success'
 				})
-				navigate('Profile')
 				await queryClient.invalidateQueries(['user-profile'])
 			}
 		}
