@@ -2,7 +2,7 @@ import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 
 export const useSettingsList = () => {
-	const { logout } = useAction()
+	const { showAlert, logout } = useAction()
 	const { navigate } = useTypedNavigation()
 	// TODO: сделать тут попап с  отправкой email
 	// TODO: доделать все пункты меню
@@ -68,7 +68,14 @@ export const useSettingsList = () => {
 				{
 					title: 'Sign out',
 					icon: 'sign-out',
-					onPress: () => logout()
+					onPress: () =>
+						showAlert({
+							title: 'Are you sure?',
+							description: 'You want to logout from your account?',
+							acceptText: 'Logout',
+							type: 'warning',
+							onAccept: () => logout()
+						})
 				}
 			]
 		}

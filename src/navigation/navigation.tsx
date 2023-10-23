@@ -8,7 +8,7 @@ import {
 	NavigationContainer,
 	useNavigationContainerRef
 } from '@react-navigation/native'
-import type { FC } from 'react';
+import type { FC } from 'react'
 import { useEffect, useState } from 'react'
 import {
 	SafeAreaProvider,
@@ -32,6 +32,7 @@ const Navigation: FC = () => {
 	}, [])
 	useCheckAuth()
 	const fontLoad = FontProvider()
+
 	if (!fontLoad) return <FullScreenLoader />
 	return (
 		<SafeAreaProvider

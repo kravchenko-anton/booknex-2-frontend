@@ -5,12 +5,10 @@ export const BackgroundColor = {
 	secondary: Color.secondary,
 	ghost: Color.white,
 	dust: Color.dust,
-	pale: Color.pale
-}
-
-export const disableOpacity = {
-	true: 0.7,
-	false: 1
+	pale: Color.pale,
+	danger: Color.alert,
+	warning: Color.highlight,
+	success: Color.primary
 }
 
 export const TextColor = {
@@ -18,7 +16,10 @@ export const TextColor = {
 	secondary: Color.white,
 	ghost: Color.black,
 	dust: Color.black,
-	pale: Color.black
+	pale: Color.black,
+	danger: Color.white,
+	warning: Color.white,
+	success: Color.white
 }
 
 export const TextWeight = {

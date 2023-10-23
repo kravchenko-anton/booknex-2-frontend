@@ -1,4 +1,4 @@
-import type { TokensType } from '@/redux/auth/auth.types'
+import type { TokensType } from '@/redux/auth/auth-types'
 import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store'
 
 export const getAccessToken = async () => {

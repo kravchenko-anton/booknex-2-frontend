@@ -1,4 +1,4 @@
-import { deleteTokensStorage, getAccessToken } from '@/redux/auth/auth.helper'
+import { deleteTokensStorage, getAccessToken } from '@/redux/auth/auth-helper'
 import { SERVER_URL } from '@/services/api-config'
 import { getNewTokens } from '@/services/api/helper.auth'
 import { errorCatch } from '@/utils/catch-error'

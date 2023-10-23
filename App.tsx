@@ -1,4 +1,5 @@
 import Toast from '@/components/toast'
+import Alert from '@/components/ui/alert/alert'
 import FullScreenLoader from '@/components/ui/loader/big-loader'
 import Navigation from '@/navigation/navigation'
 import { persistor, store } from '@/redux/store'
@@ -33,6 +34,7 @@ export default function App() {
 					persistOptions={{ persister: asyncStoragePersister }}>
 					<Navigation />
 					<Toast />
+					<Alert />
 					<StatusBar style={'dark'} />
 				</PersistQueryClientProvider>
 			</PersistGate>

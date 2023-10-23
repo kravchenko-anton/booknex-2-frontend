@@ -30,3 +30,9 @@ export interface PopupTypes<T> {
 	isActivePopup: boolean
 	setIsActivePopup: Dispatch<SetStateAction<T>>
 }
+
+export type HamburgerMenuElementType = {
+	onPress: () => void
+	title: string
+	icon: IconType
+}

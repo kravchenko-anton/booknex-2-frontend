@@ -1,42 +1,48 @@
 import Header from '@/components/header/header'
-import Layout from '@/components/layout/layout'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import type { AdminLayoutProperties } from '@/screens/admin/admin-layout/admin-layout-types'
+import type { HamburgerMenuElementType } from '@/types/global'
 import type { FC, PropsWithChildren } from 'react'
 import { View } from 'react-native'
+import Layout from '../../../components/layout/layout'
 
 const AdminLayout: FC<PropsWithChildren<AdminLayoutProperties>> = ({
 	children,
 	...properties
 }) => {
 	const { navigate } = useTypedNavigation()
-	const hamburgerMenuElements = [
+	const hamburgerMenuElements: HamburgerMenuElementType[] = [
 		{
 			title: 'Books',
+			icon: 'book',
 			onPress: () => {
 				navigate('BookList')
 			}
 		},
 		{
 			title: 'Users',
+			icon: 'person',
 			onPress: () => {
 				console.log('Users')
 			}
 		},
 		{
 			title: 'Statistic',
+			icon: 'graph',
 			onPress: () => {
 				navigate('Statistic')
 			}
 		},
 		{
 			title: 'Shelves',
+			icon: 'log',
 			onPress: () => {
 				console.log('Sheleves')
 			}
 		},
 		{
 			title: 'Authors',
+			icon: 'mortar-board',
 			onPress: () => {
 				console.log('Authors')
 			}

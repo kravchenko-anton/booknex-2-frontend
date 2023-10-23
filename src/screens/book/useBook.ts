@@ -2,6 +2,7 @@ import { useToggle } from '@/hooks/useToggle/useToggle'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedRoute } from '@/hooks/useTypedRoute'
 import { bookService } from '@/services/book-service'
+import type { HamburgerMenuElementType } from '@/types/global'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { Share } from 'react-native'
@@ -21,10 +22,16 @@ export const useBook = () => {
 			['library']
 		)
 
-	const hamburgerMenuElements = [
+	const hamburgerMenuElements: HamburgerMenuElementType[] = [
 		// TODO: доделать список
 		{
+			title: isSmashedReadingBooks ? 'Delete' : 'Add',
+			icon: isSmashedReadingBooks ? 'trash' : 'plus',
+			onPress: () => toggleReadingBooks()
+		},
+		{
 			title: 'Share',
+			icon: 'share',
 			onPress: () => {
 				Share.share({
 					message: `Wow! I see ${
@@ -35,21 +42,17 @@ export const useBook = () => {
 		},
 		{
 			title: 'Report problem',
+			icon: 'alert',
 			onPress: () => {
 				console.log('Report problem')
 			}
 		},
 		{
 			title: 'Write review',
+			icon: 'pencil',
 			onPress: () => {
 				console.log('Write review')
 			}
-		},
-		{
-			title: isSmashedReadingBooks
-				? 'Remove from reading list'
-				: 'Add to reading list',
-			onPress: () => toggleReadingBooks()
 		}
 	]
 

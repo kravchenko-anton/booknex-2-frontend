@@ -38,6 +38,9 @@ module.exports = {
 		sourceType: 'module'
 	},
 	rules: {
+		'no-dupe-keys': 'error',
+		'no-dupe-class-members': 'error',
+		'no-duplicate-case': 'error',
 		'@typescript-eslint/no-non-null-assertion': 'warn',
 		'@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
 		'@typescript-eslint/consistent-type-imports': 'error',

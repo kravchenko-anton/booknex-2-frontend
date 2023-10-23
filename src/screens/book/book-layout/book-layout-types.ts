@@ -1,3 +1,5 @@
+import type { HamburgerMenuElementType } from '@/types/global'
+
 export interface BookLayoutProperties {
 	author: {
 		id: number
@@ -5,9 +7,6 @@ export interface BookLayoutProperties {
 		navigate: (id: number) => void
 	}
 	backgroundColor: string
-	hamburgerMenuElements: {
-		onPress: () => void
-		title: string
-	}[]
+	hamburgerMenuElements: HamburgerMenuElementType[]
 	title: string
 }

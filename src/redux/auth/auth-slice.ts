@@ -1,5 +1,5 @@
 import { login, logout, register } from '@/redux/auth/auth-action'
-import type { IAuthState } from '@/redux/auth/auth.types'
+import type { IAuthState } from '@/redux/auth/auth-types'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {

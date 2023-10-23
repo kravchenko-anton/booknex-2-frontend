@@ -1,5 +1,5 @@
-import { saveTokensStorage } from '@/redux/auth/auth.helper'
-import type { AuthResponseType } from '@/redux/auth/auth.types'
+import { saveTokensStorage } from '@/redux/auth/auth-helper'
+import type { AuthResponseType } from '@/redux/auth/auth-types'
 import { getAuthUrl, SERVER_URL } from '@/services/api-config'
 import axios from 'axios'
 import { getItemAsync } from 'expo-secure-store'

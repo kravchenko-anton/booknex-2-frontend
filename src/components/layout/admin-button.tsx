@@ -1,8 +1,8 @@
 import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import { useAuth } from '@/hooks/useAuth'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
-import { adminRoutes } from '@/navigation/admin-routes'
 import { useRoute } from '@react-navigation/native'
+import { adminRoutes } from '../../navigation/admin-routes'
 
 const AdminButton = () => {
 	const { navigate } = useTypedNavigation()
