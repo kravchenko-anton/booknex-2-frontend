@@ -16,7 +16,7 @@ const UpdateProfile = () => {
 		<ScrollLayout className='p-2'>
 			<Header
 				right={{
-					title: 'Account'
+					title: 'Update Profile'
 				}}
 			/>
 			<UpdatePicture picture={profile.picture} />

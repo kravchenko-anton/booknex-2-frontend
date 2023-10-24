@@ -11,11 +11,6 @@ export const useSettingsList = () => {
 			title: 'Support',
 			list: [
 				{
-					title: 'Get help',
-					icon: 'smiley',
-					onPress: () => console.log('Help')
-				},
-				{
 					title: 'Give feedback',
 					icon: 'star',
 					onPress: () => console.log('Feedback')
@@ -56,7 +51,7 @@ export const useSettingsList = () => {
 			title: 'Account',
 			list: [
 				{
-					title: 'Edit Account',
+					title: 'Update Account',
 					icon: 'person',
 					onPress: () => navigate('UpdateProfile')
 				},

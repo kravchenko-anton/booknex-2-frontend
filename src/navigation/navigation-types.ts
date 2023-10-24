@@ -14,7 +14,7 @@ export type TypeRootStackParameterList = {
 	Library: undefined
 	Login: { defaultEmail: string }
 	Profile: undefined
-	Reading: { id: number }
+	Reading: { id: number; epub: string }
 	Registration: { defaultEmail: string }
 	Search: undefined
 	Settings: undefined

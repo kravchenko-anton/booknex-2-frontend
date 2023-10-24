@@ -2,19 +2,28 @@ import Button from '@/components/ui/button/button'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
+import { AnimatedPressable, AnimatedView } from '@/types/component-types'
 import type { FC } from 'react'
-import { View } from 'react-native'
-// TODO: сделать глобальный allert компонент для всего
+import { FadeIn, FadeInDown, FadeOut } from 'react-native-reanimated'
+// TODO: возможно пофиксить анимацию (может быть баганая)
+
 const Alert: FC = () => {
 	const { alert } = useTypedSelector(state => state.alert)
 	const { closeAlert } = useAction()
 	if (!alert) return null
-	// TODO: добавить анимашку к алерту
 	return (
-		<View className='absolute h-full w-full items-center justify-center bg-[#0000004a]'>
-			<View
-				pointerEvents={'box-none'}
-				className='w-11/12 items-center rounded-xl bg-dust p-4'>
+		<AnimatedView
+			entering={FadeIn}
+			exiting={FadeOut}
+			onTouchStart={event => {
+				event.stopPropagation()
+				closeAlert()
+			}}
+			className='absolute h-full w-full flex-1 items-center justify-center bg-[#0000004a]'>
+			<AnimatedPressable
+				entering={FadeInDown}
+				onTouchStart={event => event.stopPropagation()}
+				className='z-50 w-11/12 items-center rounded-xl bg-dust p-4'>
 				<Title size={28} className='mb-4 mt-2' center weight={'bold'}>
 					{alert.title}
 				</Title>
@@ -29,7 +38,7 @@ const Alert: FC = () => {
 
 				<Button
 					text={alert.acceptText}
-					onPress={alert.onAccept}
+					onPress={() => closeAlert() && alert.onAccept()}
 					className='mt-5 w-4/5'
 					variant={alert.type}
 					size={'medium'}
@@ -41,8 +50,8 @@ const Alert: FC = () => {
 					variant={'dust'}
 					size={'medium'}
 				/>
-			</View>
-		</View>
+			</AnimatedPressable>
+		</AnimatedView>
 	)
 }
 

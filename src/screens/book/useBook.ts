@@ -58,7 +58,7 @@ export const useBook = () => {
 
 	const navigate = {
 		reading: () => {
-			navigateFunction('Reading', { id: params.id })
+			navigateFunction('Reading', { id: params.id, epub: book?.epub || '' })
 		},
 		genre: (id: number) => {
 			navigateFunction('Genre', { id })

@@ -9,9 +9,9 @@ import type { PopupTypes } from '@/types/global'
 import { Color } from '@/utils/color'
 import { useDebounce } from '@/utils/useDebounce'
 import { useMutation } from '@tanstack/react-query'
-import type { FC } from 'react';
-import  { useEffect } from 'react'
-import  { useForm } from 'react-hook-form'
+import type { FC } from 'react'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 const CheckEmail: FC<
 	Pick<PopupTypes<'check-email' | 'description-card'>, 'isActivePopup'>
@@ -63,8 +63,8 @@ const CheckEmail: FC<
 				text={
 					noValidEmail
 						? isEmailExists?.isExist
-							? 'log in'
-							: 'register'
+							? 'Sign in'
+							: 'Sign up'
 						: 'continue'
 				}
 			/>
