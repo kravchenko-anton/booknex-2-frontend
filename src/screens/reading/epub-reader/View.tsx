@@ -94,9 +94,7 @@ export function View({
 
 		if (type === 'onStarted') {
 			setIsRendering(true)
-
 			changeTheme(defaultTheme)
-
 			return onStarted()
 		}
 
@@ -106,7 +104,6 @@ export function View({
 			setTotalLocations(totalLocations)
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
-
 			if (initialLocation) {
 				goToLocation(initialLocation)
 			}
@@ -132,7 +129,6 @@ export function View({
 			setTotalLocations(totalLocations)
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
-
 			if (currentLocation.atStart) setAtStart(true)
 			else if (currentLocation.atEnd) setAtEnd(true)
 			else {
@@ -145,7 +141,6 @@ export function View({
 		if (type === 'onSearch') {
 			const { results } = parsedEvent
 			setSearchResults(results)
-
 			return onSearch(results)
 		}
 
@@ -153,58 +148,48 @@ export function View({
 			const { epubKey, locations } = parsedEvent
 			setLocations(locations)
 			setKey(epubKey)
-
 			return onLocationsReady(epubKey, locations)
 		}
 
 		if (type === 'onSelected') {
 			const { cfiRange, text } = parsedEvent
-
 			return onSelected(text, cfiRange)
 		}
 
 		if (type === 'onMarkPressed') {
 			const { cfiRange, text } = parsedEvent
-
 			return onMarkPressed(cfiRange, text)
 		}
 
 		if (type === 'onOrientationChange') {
 			const { orientation } = parsedEvent
-
 			return onOrientationChange(orientation)
 		}
 
 		if (type === 'onBeginning') {
 			setAtStart(true)
-
 			return onBeginning()
 		}
 
 		if (type === 'onFinish') {
 			setAtEnd(true)
-
 			return onFinish()
 		}
 
 		if (type === 'onRendered') {
 			const { section, currentSection } = parsedEvent
-
 			return onRendered(section, currentSection)
 		}
 
 		if (type === 'onLayout') {
 			const { layout } = parsedEvent
-
 			return onLayout(layout)
 		}
 
 		if (type === 'onNavigationLoaded') {
 			const { toc } = parsedEvent
-
 			return onNavigationLoaded(toc)
 		}
-
 		return () => {}
 	}
 

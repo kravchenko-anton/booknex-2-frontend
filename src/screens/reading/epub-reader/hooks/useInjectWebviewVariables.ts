@@ -8,12 +8,16 @@ export function useInjectWebVieWVariables() {
 		height: '100%',
 		spread: 'none',
 		manager: 'continuous',
-		flow: 'scrolled'
+		flow: 'scrolled',
+		margin: 0,
+		padding: 0
 	}
 
 	const paginatedFlow = {
 		width: '100%',
-		height: '100%'
+		height: '100%',
+		margin: 0,
+		padding: 0
 	}
 
 	const injectWebVieWVariables = useCallback(

@@ -150,19 +150,17 @@ export default `
           layout: layout,
         }));
       });
-
+//TODO: сделать кастомное меню выбора
       rendition.on("selected", function (cfiRange, contents) {
-        rendition.annotations.add("highlight", cfiRange, {}, (e) => {
-          console.log("highlight clicked", e.target);
-        });
-
-        contents.window.getSelection().removeAllRanges();
+       
+        // contents.window.getSelection().removeAllRanges();
           book.getRange(cfiRange).then(function (range) {
             if (range) {
               window.ReactNativeWebView.postMessage(JSON.stringify({
                 type: 'onSelected',
                 cfiRange: cfiRange,
                 text: range.toString(),
+                
               }));
             }
           });

@@ -1,3 +1,4 @@
+import { Color } from '@/utils/color'
 import React, {
 	createContext,
 	useCallback,
@@ -75,37 +76,58 @@ type InitialState = {
 	isRendering: boolean
 	searchResults: SearchResult[]
 }
-
+const defaultFont = 'Impact, fantasy'
+const lineHeight = 1.5
+// Comic Sans MS, cursive -
+// Courier New, Courier, monospace -
+// Arial, Helvetica, sans-serif -
+// Times New Roman, Times, serif -
+// Impact, fantasy
 export const defaultTheme: Theme = {
 	body: {
-		background: '#fff'
+		background: '#fff',
+		padding: '14px !important',
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	span: {
-		color: '#000 !important'
+		color: '#000 !important',
+		'font-family': defaultFont,
+		'line-height': `${lineHeight} !important`
 	},
 	p: {
-		color: '#000 !important'
+		color: '#000 !important',
+		'font-family': defaultFont,
+		'line-height': `${lineHeight} !important`
 	},
 	li: {
-		color: '#000 !important'
+		color: '#000 !important',
+		'font-family': defaultFont,
+		'line-height': `${lineHeight} !important`
 	},
 	h1: {
-		color: '#000 !important'
+		color: '#000 !important',
+		'font-family': defaultFont,
+		'font-weight': 'bold !important',
+		'line-height': `${lineHeight} !important`
 	},
 	a: {
 		color: '#000 !important',
 		'pointer-events': 'auto',
-		cursor: 'pointer'
+		cursor: 'pointer',
+		'font-family': defaultFont,
+		'font-weight': 'bold !important',
+		'line-height': `${lineHeight} !important`
 	},
 	'::selection': {
-		background: 'lightskyblue'
+		background: Color.dust
 	}
 }
 
 const initialState: InitialState = {
 	theme: defaultTheme,
-	fontFamily: 'Helvetica',
-	fontSize: '12pt',
+	fontFamily: 'Arial',
+	fontSize: '14px !important',
 	atStart: false,
 	atEnd: false,
 	key: '',
@@ -257,24 +279,19 @@ const ReaderContext = createContext<ReaderContextProperties>({
 	setLocations: () => {},
 	setIsLoading: () => {},
 	setIsRendering: () => {},
-
 	goToLocation: () => {},
 	goPrevious: () => {},
 	goNext: () => {},
 	getLocations: () => [],
 	getCurrentLocation: () => null,
 	search: () => {},
-
 	changeTheme: () => {},
 	changeFontFamily: () => {},
 	changeFontSize: () => {},
-
 	addMark: () => {},
 	removeMark: () => {},
-
 	setKey: () => {},
 	key: '',
-
 	theme: defaultTheme,
 	atStart: false,
 	atEnd: false,
@@ -284,7 +301,6 @@ const ReaderContext = createContext<ReaderContextProperties>({
 	locations: [],
 	isLoading: true,
 	isRendering: true,
-
 	searchResults: [],
 	setSearchResults: () => {}
 })
@@ -402,7 +418,7 @@ function ReaderProvider({ children }: { children: React.ReactNode }) {
 			className?: string,
 			styles?: any
 		) => {
-			const defaultStyles = { fill: 'yellow' }
+			const defaultStyles = { fill: Color.primary }
 
 			book.current?.injectJavaScript(`
       rendition.annotations.add('${type}', '${cfiRange}', ${JSON.stringify(
@@ -436,25 +452,20 @@ function ReaderProvider({ children }: { children: React.ReactNode }) {
 			setLocations,
 			setIsLoading,
 			setIsRendering,
-
 			goToLocation,
 			goPrevious,
 			goNext,
 			getLocations,
 			getCurrentLocation,
 			search,
-
 			addMark,
 			removeMark,
-
 			setKey,
 			key: state.key,
-
 			changeTheme,
 			changeFontFamily,
 			changeFontSize,
 			theme: state.theme,
-
 			atStart: state.atStart,
 			atEnd: state.atEnd,
 			totalLocations: state.totalLocations,
@@ -463,7 +474,6 @@ function ReaderProvider({ children }: { children: React.ReactNode }) {
 			locations: state.locations,
 			isLoading: state.isLoading,
 			isRendering: state.isRendering,
-
 			searchResults: state.searchResults,
 			setSearchResults
 		}),

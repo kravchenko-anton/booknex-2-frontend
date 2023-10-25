@@ -5603,7 +5603,7 @@ export default `
           if (!this.contents) return;
           const r = Object.assign(
             {
-              'fill': 'yellow',
+              'fill': '#2B6B76',
               'fill-opacity': '0.3',
               'mix-blend-mode': 'multiply',
             },
@@ -13203,4 +13203,4 @@ export default `
     },
   ]).default;
 });
-`;
+`
