@@ -1,14 +1,22 @@
 import { useTypedRoute } from '@/hooks/useTypedRoute'
-
-// TODO: сделать после деплоя бекенда, полного каталога, запуска на свой телефон и реализации обновления чтобы понять где будут с меня стягивать деньги
+import { Reader } from '@/screens/reading/epub-reader'
+import { ReaderProvider } from '@/screens/reading/epub-reader/context'
+import { useFileSystem } from '@/screens/reading/epub-reader/useEpubFileSystem'
+import { getFileUrl } from '@/services/api-config'
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@/utils/dimensions'
+// TODO: сделать тут вертикальный скролл и настройки
 const Reading = () => {
 	const { params } = useTypedRoute<'Reading'>()
-
+	console.log(params)
 	return (
-		<Epub
-			src={'https://s3.amazonaws.com/epubjs/books/moby-dick/OPS/package.opf'}
-			flow={'paginated'}
-		/>
+		<ReaderProvider>
+			<Reader
+				src={getFileUrl(params.epub)}
+				width={WINDOW_WIDTH}
+				height={WINDOW_HEIGHT}
+				fileSystem={useFileSystem}
+			/>
+		</ReaderProvider>
 	)
 }
 

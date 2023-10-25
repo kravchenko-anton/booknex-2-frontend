@@ -43,7 +43,7 @@ const Navigation: FC = () => {
 			<NavigationContainer ref={navReference} fallback={<FullScreenLoader />}>
 				<PrivateNavigator />
 			</NavigationContainer>
-			{user && !!currentRoute && (
+			{user && !!currentRoute && !(currentRoute === 'Reading') && (
 				<BottomMenu nav={navReference.navigate} currentRoute={currentRoute} />
 			)}
 		</SafeAreaProvider>
