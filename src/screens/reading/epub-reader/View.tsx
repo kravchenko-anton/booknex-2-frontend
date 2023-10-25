@@ -1,3 +1,4 @@
+import BigLoader from '@/components/ui/loader/big-loader'
 import React, { useContext, useEffect, useRef } from 'react'
 import {
 	I18nManager,
@@ -13,8 +14,7 @@ import {
 import type { WebViewMessageEvent } from 'react-native-webview'
 import { WebView } from 'react-native-webview'
 import { ReaderContext, defaultTheme as initialTheme } from './context'
-import type { ReaderProperties } from './types'
-import { OpeningBook } from './utils/OpeningBook'
+import type { EPubCfi, Location, ReaderProperties, SearchResult } from './types'
 
 export type ViewProperties = Omit<ReaderProperties, 'src' | 'fileSystem'> & {
 	templateUri: string
@@ -23,6 +23,7 @@ export type ViewProperties = Omit<ReaderProperties, 'src' | 'fileSystem'> & {
 
 export function View({
 	templateUri,
+	flow,
 	allowedUris,
 	onStarted = () => {},
 	onReady = () => {},
@@ -48,13 +49,12 @@ export function View({
 	onSwipeLeft = () => {},
 	onSwipeRight = () => {},
 	defaultTheme = initialTheme,
-	renderOpeningBookComponent = () => <OpeningBook />
+	renderOpeningBookComponent = () => <BigLoader />
 }: ViewProperties) {
 	const {
 		registerBook,
 		setTotalLocations,
 		setCurrentLocation,
-		setMeta,
 		setProgress,
 		setLocations,
 		setAtStart,
@@ -72,16 +72,25 @@ export function View({
 	const book = useRef<WebView>(null)
 
 	const onMessage = (event: WebViewMessageEvent) => {
-		const parsedEvent = JSON.parse(event.nativeEvent.data)
+		const parsedEvent = JSON.parse(event.nativeEvent.data) as {
+			type: string
+			totalLocations: number
+			currentLocation: Location
+			progress: number
+			reason: string
+			layout: string
+			epubKey: string
+			locations: EPubCfi[]
+			results: SearchResult[]
+			cfiRange: string
+			text: string
+			orientation: '-90' | '0' | '90'
+			section: string
+			currentSection: string
+			toc: string
+		}
 
 		const { type } = parsedEvent
-
-		delete parsedEvent.type
-
-		if (type === 'meta') {
-			const { metadata } = parsedEvent
-			setMeta(metadata)
-		}
 
 		if (type === 'onStarted') {
 			setIsRendering(true)
@@ -141,11 +150,11 @@ export function View({
 		}
 
 		if (type === 'onLocationsReady') {
-			const { epubKey } = parsedEvent
-			setLocations(parsedEvent.locations)
+			const { epubKey, locations } = parsedEvent
+			setLocations(locations)
 			setKey(epubKey)
 
-			return onLocationsReady(epubKey, parsedEvent.locations)
+			return onLocationsReady(epubKey, locations)
 		}
 
 		if (type === 'onSelected') {
@@ -222,11 +231,15 @@ export function View({
 	}
 
 	return (
-		<GestureHandlerRootView style={{ width, height }}>
+		<GestureHandlerRootView style={{ width, height, padding: 0, margin: 0 }}>
 			<FlingGestureHandler
 				direction={I18nManager.isRTL ? Directions.LEFT : Directions.RIGHT}
 				onHandlerStateChange={({ nativeEvent }) => {
-					if (nativeEvent.state === State.ACTIVE && enableSwipe) {
+					if (
+						nativeEvent.state === State.ACTIVE &&
+						enableSwipe &&
+						flow === 'paginated'
+					) {
 						goPrevious()
 						onSwipeRight()
 					}
@@ -234,7 +247,11 @@ export function View({
 				<FlingGestureHandler
 					direction={I18nManager.isRTL ? Directions.RIGHT : Directions.LEFT}
 					onHandlerStateChange={({ nativeEvent }) => {
-						if (nativeEvent.state === State.ACTIVE && enableSwipe) {
+						if (
+							nativeEvent.state === State.ACTIVE &&
+							enableSwipe &&
+							flow === 'paginated'
+						) {
 							goNext()
 							onSwipeLeft()
 						}
@@ -243,7 +260,9 @@ export function View({
 						style={{
 							height: '100%',
 							justifyContent: 'center',
-							alignItems: 'center'
+							alignItems: 'center',
+							padding: 0,
+							margin: 0
 						}}>
 						{isRendering && (
 							<RNView
@@ -252,7 +271,9 @@ export function View({
 									height: '100%',
 									position: 'absolute',
 									top: 0,
-									zIndex: 2
+									zIndex: 2,
+									padding: 0,
+									margin: 0
 								}}>
 								{renderOpeningBookComponent()}
 							</RNView>
@@ -265,7 +286,7 @@ export function View({
 								showsVerticalScrollIndicator={false}
 								javaScriptEnabled
 								originWhitelist={['*']}
-								scrollEnabled={false}
+								scrollEnabled={true}
 								mixedContentMode='compatibility'
 								onMessage={onMessage}
 								allowingReadAccessToURL={allowedUris}
@@ -287,7 +308,10 @@ export function View({
 								style={{
 									width,
 									backgroundColor: theme.body.background,
-									height
+									height,
+									zIndex: 1,
+									padding: 0,
+									margin: 0
 								}}
 							/>
 						</TouchableWithoutFeedback>

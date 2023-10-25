@@ -12,7 +12,6 @@ export function useReader() {
 		goNext,
 		getLocations,
 		getCurrentLocation,
-		getMeta,
 		search,
 		addMark,
 		removeMark,
@@ -37,7 +36,6 @@ export function useReader() {
 		goNext,
 		getLocations,
 		getCurrentLocation,
-		getMeta,
 		search,
 		addMark,
 		removeMark,
@@ -61,7 +59,6 @@ export function useReader() {
 		| 'goNext'
 		| 'getLocations'
 		| 'getCurrentLocation'
-		| 'getMeta'
 		| 'search'
 		| 'addMark'
 		| 'removeMark'

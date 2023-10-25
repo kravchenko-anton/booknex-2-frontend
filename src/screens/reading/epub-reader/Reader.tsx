@@ -1,3 +1,4 @@
+import BigLoader from '@/components/ui/loader/big-loader'
 import * as FileSystem from 'expo-file-system'
 import React, { useContext, useEffect, useState } from 'react'
 import { View } from './View'
@@ -6,8 +7,7 @@ import epubjs from './epubjs'
 import { useInjectWebVieWVariables } from './hooks/useInjectWebviewVariables'
 import jszip from './jszip'
 import type { ReaderProperties } from './types'
-import { LoadingFile } from './utils/LoadingFile'
-import { SourceType } from './utils/enums/source-type.enum'
+import { SourceType } from './types'
 import { getSourceName } from './utils/getPathname'
 import { getSourceType } from './utils/getSourceType'
 import { isFsUri } from './utils/isFsUri'
@@ -16,10 +16,11 @@ import { isURL } from './utils/isURL'
 export function Reader({
 	src,
 	width,
+	flow,
 	height,
 	defaultTheme = initialTheme,
 	initialLocations,
-	renderLoadingFileComponent = properties => <LoadingFile {...properties} />,
+	renderLoadingFileComponent = () => <BigLoader />,
 	fileSystem: useFileSystem,
 	...rest
 }: ReaderProperties) {
@@ -78,6 +79,7 @@ export function Reader({
 								epubjs: epubjsFileUri,
 								type: SourceType.BASE64,
 								book: src,
+								flow,
 								theme: defaultTheme,
 								locations: initialLocations,
 								enableSelection: true
@@ -92,6 +94,7 @@ export function Reader({
 								epubjs: epubjsFileUri,
 								type: SourceType.BINARY,
 								book: src,
+								flow,
 								theme: defaultTheme,
 								locations: initialLocations,
 								enableSelection: true
@@ -116,6 +119,7 @@ export function Reader({
 								epubjs: epubjsFileUri,
 								type: sourceType,
 								book: src,
+								flow,
 								theme: defaultTheme,
 								locations: initialLocations,
 								enableSelection: true
@@ -136,6 +140,7 @@ export function Reader({
 								epubjs: epubjsFileUri,
 								type: sourceType,
 								book: bookFileUri,
+								flow,
 								theme: defaultTheme,
 								locations: initialLocations,
 								enableSelection: true
@@ -153,7 +158,8 @@ export function Reader({
 		initialLocations,
 		injectWebVieWVariables,
 		setIsLoading,
-		src
+		src,
+		flow
 	])
 
 	useEffect(() => {
@@ -197,6 +203,7 @@ export function Reader({
 			templateUri={templateUrl}
 			allowedUris={allowedUris}
 			width={width}
+			flow={flow}
 			height={height}
 			{...rest}
 		/>

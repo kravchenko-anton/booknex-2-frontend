@@ -4,7 +4,6 @@ import type { AdminLayoutProperties } from '@/screens/admin/admin-layout/admin-l
 import type { HamburgerMenuElementType } from '@/types/global'
 import type { FC, PropsWithChildren } from 'react'
 import { View } from 'react-native'
-import Layout from '../../../components/layout/layout'
 
 const AdminLayout: FC<PropsWithChildren<AdminLayoutProperties>> = ({
 	children,
@@ -50,7 +49,7 @@ const AdminLayout: FC<PropsWithChildren<AdminLayoutProperties>> = ({
 	]
 
 	return (
-		<Layout>
+		<>
 			<Header
 				right={{
 					hamburger: { elements: hamburgerMenuElements }
@@ -60,7 +59,7 @@ const AdminLayout: FC<PropsWithChildren<AdminLayoutProperties>> = ({
 				}}
 			/>
 			<View {...properties}>{children}</View>
-		</Layout>
+		</>
 	)
 }
 

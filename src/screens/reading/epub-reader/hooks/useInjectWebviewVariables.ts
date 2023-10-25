@@ -1,9 +1,21 @@
 import { useCallback } from 'react'
 import template from '../template'
-import type { EPubCfi, Theme } from '../types'
-import type { SourceType } from '../utils/enums/source-type.enum'
+import type { EPubCfi, SourceType, Theme } from '../types'
 
 export function useInjectWebVieWVariables() {
+	const scrollFlow = {
+		width: '100%',
+		height: '100%',
+		spread: 'none',
+		manager: 'continuous',
+		flow: 'scrolled'
+	}
+
+	const paginatedFlow = {
+		width: '100%',
+		height: '100%'
+	}
+
 	const injectWebVieWVariables = useCallback(
 		({
 			jszip,
@@ -12,17 +24,19 @@ export function useInjectWebVieWVariables() {
 			book,
 			theme,
 			enableSelection,
-			locations
+			locations,
+			flow = 'paginated'
 		}: {
 			jszip: string
 			epubjs: string
 			type: SourceType
 			book: string
 			theme: Theme
+			flow: 'paginated' | 'scrolled'
 			enableSelection: boolean
 			locations?: EPubCfi[]
-		}) => {
-			return template
+		}) =>
+			template
 				.replace(
 					/<script id="jszip"><\/script>/,
 					`<script src="${jszip}"></script>`
@@ -45,7 +59,14 @@ export function useInjectWebVieWVariables() {
 					/const enableSelection = window.enable_selection;/,
 					`const enableSelection = ${enableSelection};`
 				)
-		},
+				.replace(
+					/const flow = window.flow;/,
+					`const flow = ${
+						flow === 'paginated'
+							? JSON.stringify(paginatedFlow)
+							: JSON.stringify(scrollFlow)
+					};`
+				),
 		[]
 	)
 	return { injectWebVieWVariables }

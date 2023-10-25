@@ -40,6 +40,13 @@ export type SearchResult = {
 	excerpt: string
 }
 
+export enum SourceType {
+	BASE64 = 'base64',
+	EPUB = 'epub',
+	OPF = 'opf',
+	BINARY = 'binary'
+}
+
 export type LoadingFileProperties = {
 	fileSize: number
 	downloadProgress: number
@@ -70,6 +77,7 @@ export interface ReaderProperties {
 	src: string
 	initialLocations?: EPubCfi[]
 	onStarted?: () => void
+	flow: 'paginated' | 'scrolled'
 	onReady?: (
 		totalLocations: number,
 		currentLocation: Location,

@@ -11,10 +11,13 @@ export default `
     <style type="text/css">
       body {
         margin: 0;
+        padding: 0
       }
 
       #viewer {
         height: 100vh;
+        padding: 0;
+        margin: 0;
         width: 100vw;
         overflow: hidden !important;
         display: flex;
@@ -36,7 +39,7 @@ export default `
       const theme = window.theme;
       const initialLocations = window.locations;
       const enableSelection = window.enable_selection;
-
+      const flow = window.flow;
       if (!file) {
         alert('Failed load book');
       }
@@ -49,10 +52,7 @@ export default `
         alert('Missing file type');
       }
 
-      rendition = book.renderTo("viewer", {
-        width: "100%",
-        height: "100%",
-      });
+      rendition = book.renderTo("viewer", flow);
 
       window.ReactNativeWebView.postMessage(JSON.stringify({ type: "onStarted" }));
 
@@ -84,44 +84,7 @@ export default `
             }));
           });
 
-          book
-          .coverUrl()
-          .then(async (url) => {
-            var reader = new FileReader();
-            reader.onload = (res) => {
-              window.ReactNativeWebView.postMessage(
-                JSON.stringify({
-                  type: "meta",
-                  metadata: {
-                    cover: reader.result,
-                    author: book.package.metadata.creator,
-                    title: book.package.metadata.title,
-                    description: book.package.metadata.description,
-                    language: book.package.metadata.language,
-                    publisher: book.package.metadata.publisher,
-                    rights: book.package.metadata.rights,
-                  },
-                })
-              );
-            };
-            reader.readAsDataURL(await fetch(url).then((res) => res.blob()));
-          })
-          .catch(() => {
-            window.ReactNativeWebView.postMessage(
-              JSON.stringify({
-                type: "meta",
-                metadata: {
-                  cover: undefined,
-                  author: book.package.metadata.creator,
-                  title: book.package.metadata.title,
-                  description: book.package.metadata.description,
-                  language: book.package.metadata.language,
-                  publisher: book.package.metadata.publisher,
-                  rights: book.package.metadata.rights,
-                },
-              })
-            );
-          });
+        
 
           book.loaded.navigation.then(function (toc) {
             window.ReactNativeWebView.postMessage(JSON.stringify({
@@ -227,4 +190,4 @@ export default `
     </script>
   </body>
 </html>
-`;
+`
