@@ -28,7 +28,11 @@ module.exports = {
 	env: {
 		node: true
 	},
-	ignorePatterns: ['.eslintrc.js', '*.js'],
+	ignorePatterns: [
+		'.eslintrc.js',
+		'*.js',
+		'./src/screens/reading/epub-reader/**'
+	],
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true

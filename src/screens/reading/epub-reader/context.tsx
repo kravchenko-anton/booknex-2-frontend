@@ -88,7 +88,9 @@ export const defaultTheme: Theme = {
 		background: '#fff',
 		padding: '14px !important',
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		'-webkit-user-select': 'text !important',
+		'-webkit-touch-callout': 'none !important'
 	},
 	span: {
 		color: '#000 !important',

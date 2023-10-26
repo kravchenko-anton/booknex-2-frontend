@@ -267,6 +267,23 @@ export function View({
 						<TouchableWithoutFeedback onPress={handleDoublePress}>
 							<WebView
 								ref={book}
+								menuItems={
+									[
+										// TODO: сделать кастомное меню, и ещё справа если quotes популярная срока то делать справа мини блок для емодзи
+									]
+								}
+								suppressMenuItems={['copy', 'share']}
+								onCustomMenuSelection={webViewEvent => {
+									const { label, key, selectedText } = webViewEvent.nativeEvent
+									console.log(
+										'Custom Menu Item Clicked:',
+										label,
+										'::',
+										key,
+										'::',
+										selectedText
+									)
+								}}
 								source={{ uri: templateUri }}
 								showsVerticalScrollIndicator={false}
 								javaScriptEnabled

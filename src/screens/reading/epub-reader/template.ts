@@ -11,7 +11,8 @@ export default `
     <style type="text/css">
       body {
         margin: 0;
-        padding: 0
+        padding: 0;
+        
       }
 
       #viewer {
@@ -29,11 +30,9 @@ export default `
 
   <body oncopy='return false' oncut='return false'>
     <div id="viewer"></div>
-
     <script>
       let book;
       let rendition;
-
       const type = window.type;
       const file = window.book;
       const theme = window.theme;
@@ -150,22 +149,18 @@ export default `
           layout: layout,
         }));
       });
-//TODO: сделать кастомное меню выбора
-      rendition.on("selected", function (cfiRange, contents) {
-       
-        // contents.window.getSelection().removeAllRanges();
-          book.getRange(cfiRange).then(function (range) {
-            if (range) {
-              window.ReactNativeWebView.postMessage(JSON.stringify({
-                type: 'onSelected',
-                cfiRange: cfiRange,
-                text: range.toString(),
-                
-              }));
-            }
-          });
-        });
-
+			
+    rendition.on("selected", function (cfiRange, contents) {
+         book.getRange(cfiRange).then(function (range) {
+         if (range) {
+         window.ReactNativeWebView.postMessage(JSON.stringify({
+        type: 'onSelected',
+        cfiRange: cfiRange,
+        text: range.toString()
+      }))
+    }
+  });
+});
         rendition.on("markClicked", function (cfiRange, contents) {
           rendition.annotations.remove(cfiRange, "highlight");
           book.getRange(cfiRange).then(function (range) {
