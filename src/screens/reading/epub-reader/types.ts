@@ -101,17 +101,13 @@ export interface ReaderProperties {
 	onLayout?: (layout: any) => void
 	onNavigationLoaded?: (toc: any) => void
 	onPress?: () => void
-	onDoublePress?: () => void
 	width: number
 	height: number
 	initialLocation?: string
 	enableSwipe?: boolean
 	onSwipeLeft?: () => void
 	onSwipeRight?: () => void
-	renderLoadingFileComponent?: (
-		properties: LoadingFileProperties
-	) => JSX.Element
-	renderOpeningBookComponent?: () => JSX.Element
+
 	enableSelection?: boolean
 	defaultTheme?: Theme
 	fileSystem(): FileSystem

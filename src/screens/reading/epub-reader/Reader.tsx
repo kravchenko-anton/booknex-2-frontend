@@ -20,17 +20,10 @@ export function Reader({
 	height,
 	defaultTheme = initialTheme,
 	initialLocations,
-	renderLoadingFileComponent = () => <BigLoader />,
 	fileSystem: useFileSystem,
 	...rest
 }: ReaderProperties) {
-	const {
-		downloadFile,
-		size: fileSize,
-		progress: downloadProgress,
-		success: downloadSuccess,
-		error: downloadError
-	} = useFileSystem()
+	const { downloadFile } = useFileSystem()
 
 	const { setIsLoading, isLoading } = useContext(ReaderContext)
 	const { injectWebVieWVariables } = useInjectWebVieWVariables()
@@ -182,21 +175,11 @@ export function Reader({
 	}, [template])
 
 	if (isLoading) {
-		return renderLoadingFileComponent({
-			fileSize,
-			downloadProgress,
-			downloadSuccess,
-			downloadError
-		})
+		return <BigLoader />
 	}
 
 	if (!templateUrl || !allowedUris) {
-		return renderLoadingFileComponent({
-			fileSize,
-			downloadProgress,
-			downloadSuccess,
-			downloadError
-		})
+		return <BigLoader />
 	}
 	return (
 		<View

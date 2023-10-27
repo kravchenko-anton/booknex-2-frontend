@@ -1,4 +1,5 @@
 import BigLoader from '@/components/ui/loader/big-loader'
+import { useAction } from '@/hooks/useAction'
 import React, { useContext, useEffect, useRef } from 'react'
 import {
 	I18nManager,
@@ -41,15 +42,13 @@ export function View({
 	onBeginning = () => {},
 	onFinish = () => {},
 	onPress = () => {},
-	onDoublePress = () => {},
 	width,
 	height,
 	initialLocation,
 	enableSwipe = true,
 	onSwipeLeft = () => {},
 	onSwipeRight = () => {},
-	defaultTheme = initialTheme,
-	renderOpeningBookComponent = () => <BigLoader />
+	defaultTheme = initialTheme
 }: ViewProperties) {
 	const {
 		registerBook,
@@ -70,7 +69,7 @@ export function View({
 		theme
 	} = useContext(ReaderContext)
 	const book = useRef<WebView>(null)
-
+	const { toggleReadingUi } = useAction()
 	const onMessage = (event: WebViewMessageEvent) => {
 		const parsedEvent = JSON.parse(event.nativeEvent.data) as {
 			type: string
@@ -202,7 +201,8 @@ export function View({
 
 	const handleDoublePress = () => {
 		if (lastTap) {
-			onDoublePress()
+			toggleReadingUi()
+			console.log('double')
 			clearTimeout(timer)
 			lastTap = null
 		} else {
@@ -241,26 +241,10 @@ export function View({
 							onSwipeLeft()
 						}
 					}}>
-					<RNView
-						style={{
-							height: '100%',
-							justifyContent: 'center',
-							alignItems: 'center',
-							padding: 0,
-							margin: 0
-						}}>
+					<RNView className='m-0  h-full items-center justify-center p-0'>
 						{isRendering && (
-							<RNView
-								style={{
-									width: '100%',
-									height: '100%',
-									position: 'absolute',
-									top: 0,
-									zIndex: 2,
-									padding: 0,
-									margin: 0
-								}}>
-								{renderOpeningBookComponent()}
+							<RNView className='absolute top-0 z-[2] m-0 h-full w-full p-0'>
+								<BigLoader />
 							</RNView>
 						)}
 
@@ -272,18 +256,6 @@ export function View({
 										// TODO: сделать кастомное меню, и ещё справа если quotes популярная срока то делать справа мини блок для емодзи
 									]
 								}
-								suppressMenuItems={['copy', 'share']}
-								onCustomMenuSelection={webViewEvent => {
-									const { label, key, selectedText } = webViewEvent.nativeEvent
-									console.log(
-										'Custom Menu Item Clicked:',
-										label,
-										'::',
-										key,
-										'::',
-										selectedText
-									)
-								}}
 								source={{ uri: templateUri }}
 								showsVerticalScrollIndicator={false}
 								javaScriptEnabled
