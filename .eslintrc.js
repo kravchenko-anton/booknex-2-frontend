@@ -53,7 +53,6 @@ module.exports = {
 		'@typescript-eslint/no-empty-interface': 'error',
 		'@typescript-eslint/no-explicit-any': 'error',
 		'@typescript-eslint/no-extra-non-null-assertion': 'error',
-		'no-shadow': 'error',
 		'max-params': ['error', 4],
 		'arrow-body-style': ['error', 'as-needed'],
 		complexity: ['error', 10],
@@ -117,11 +116,17 @@ module.exports = {
 				ignore: ['App.tsx', 'use']
 			}
 		],
+		'unicorn/no-keyword-prefix': [
+			'error',
+			{ disallowedPrefixes: ['new', 'class'] }
+		],
 		'@typescript-eslint/no-confusing-void-expression': 'off',
 		'@typescript-eslint/comma-dangle': 'off',
 		'@typescript-eslint/semi': 'off',
 		'@typescript-eslint/unbound-method': 'off',
 		'@typescript-eslint/no-misused-promises': 'off',
+		'no-shadow': 'off',
+		'@typescript-eslint/no-shadow': 'off',
 		'@typescript-eslint/no-floating-promises': 'off',
 		'@typescript-eslint/indent': 'off',
 		'@typescript-eslint/no-extraneous-class': 'off',

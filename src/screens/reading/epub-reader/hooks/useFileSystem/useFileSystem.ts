@@ -1,7 +1,7 @@
 import type { DownloadProgressData } from 'expo-file-system'
 import * as ExpoFileSystem from 'expo-file-system'
 import { useCallback, useState } from 'react'
-import type { FileSystem } from './types'
+import type { FileSystem } from './useFileSystem-types'
 
 export function useFileSystem(): FileSystem {
 	const [file, setFile] = useState<string | null>(null)
@@ -44,9 +44,9 @@ export function useFileSystem(): FileSystem {
 
 				return { uri: value.uri, mimeType: value.mimeType }
 			})
-			.catch(err => {
-				if (err instanceof Error) {
-					setError(err.message)
+			.catch(error_ => {
+				if (error_ instanceof Error) {
+					setError(error_.message)
 				} else setError('Error downloading file')
 
 				return { uri: null, mimeType: null }

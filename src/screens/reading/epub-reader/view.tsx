@@ -1,6 +1,9 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
-import React, { useContext, useEffect, useRef } from 'react'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
+import { defaultTheme } from '@/redux/epub-reader-slice/epub-reader-slice'
+import type { ReactNode } from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
 	I18nManager,
 	View as RNView,
@@ -14,42 +17,20 @@ import {
 } from 'react-native-gesture-handler'
 import type { WebViewMessageEvent } from 'react-native-webview'
 import { WebView } from 'react-native-webview'
-import { ReaderContext, defaultTheme as initialTheme } from './context'
 import type { EPubCfi, Location, ReaderProperties, SearchResult } from './types'
 
 export type ViewProperties = Omit<ReaderProperties, 'src' | 'fileSystem'> & {
 	templateUri: string
 	allowedUris: string
 }
-
+// TODO: убрать передачу пропсов и сделать через redux
 export function View({
 	templateUri,
 	flow,
 	allowedUris,
-	onStarted = () => {},
-	onReady = () => {},
-	onDisplayError = () => {},
-	onResized = () => {},
-	onLocationChange = () => {},
-	onRendered = () => {},
-	onSearch = () => {},
-	onLocationsReady = () => {},
-	onSelected = () => {},
-	onMarkPressed = () => {},
-	onOrientationChange = () => {},
-	onLayout = () => {},
-	onNavigationLoaded = () => {},
-	onBeginning = () => {},
-	onFinish = () => {},
-	onPress = () => {},
 	width,
-	height,
-	initialLocation,
-	enableSwipe = true,
-	onSwipeLeft = () => {},
-	onSwipeRight = () => {},
-	defaultTheme = initialTheme
-}: ViewProperties) {
+	height
+}: ViewProperties): ReactNode {
 	const {
 		registerBook,
 		setTotalLocations,
@@ -60,16 +41,21 @@ export function View({
 		setAtEnd,
 		goNext,
 		goPrevious,
-		isRendering,
 		setIsRendering,
 		goToLocation,
 		changeTheme,
 		setKey,
 		setSearchResults,
-		theme
-	} = useContext(ReaderContext)
+		toggleReadingUi
+	} = useAction()
+	const { isRendering, theme } = useTypedSelector(state => state.reader)
 	const book = useRef<WebView>(null)
-	const { toggleReadingUi } = useAction()
+
+	useEffect(() => {
+		if (book.current) {
+			registerBook(book.current)
+		}
+	}, [book.current])
 	const onMessage = (event: WebViewMessageEvent) => {
 		const parsedEvent = JSON.parse(event.nativeEvent.data) as {
 			type: string
@@ -83,7 +69,6 @@ export function View({
 			results: SearchResult[]
 			cfiRange: string
 			text: string
-			orientation: '-90' | '0' | '90'
 			section: string
 			currentSection: string
 			toc: string
@@ -94,7 +79,6 @@ export function View({
 		if (type === 'onStarted') {
 			setIsRendering(true)
 			changeTheme(defaultTheme)
-			return onStarted()
 		}
 
 		if (type === 'onReady') {
@@ -103,24 +87,16 @@ export function View({
 			setTotalLocations(totalLocations)
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
-			if (initialLocation) {
-				goToLocation(initialLocation)
-			}
-
-			return onReady(totalLocations, currentLocation, progress)
+			// if (initialLocation) {
+			// TODO: сделать в стейте настроек запись о последней странице и переход к ней сразу
+			// goToLocation(initialLocation)
+			// }
 		}
 
 		if (type === 'onDisplayError') {
 			const { reason } = parsedEvent
 			setIsRendering(false)
-
-			return onDisplayError(reason)
-		}
-
-		if (type === 'onResized') {
-			const { layout } = parsedEvent
-
-			return onResized(layout)
+			console.log('onDisplayError', reason)
 		}
 
 		if (type === 'onLocationChange') {
@@ -134,71 +110,60 @@ export function View({
 				setAtStart(false)
 				setAtEnd(false)
 			}
-			return onLocationChange(totalLocations, currentLocation, progress)
+
+			// console.log('onLocationChange', currentLocation)
 		}
 
 		if (type === 'onSearch') {
 			const { results } = parsedEvent
 			setSearchResults(results)
-			return onSearch(results)
+			// search
 		}
 
 		if (type === 'onLocationsReady') {
 			const { epubKey, locations } = parsedEvent
 			setLocations(locations)
 			setKey(epubKey)
-			return onLocationsReady(epubKey, locations)
+			// location ready
 		}
 
 		if (type === 'onSelected') {
 			const { cfiRange, text } = parsedEvent
-			return onSelected(text, cfiRange)
+			console.log('onSelected', cfiRange, text)
 		}
 
 		if (type === 'onMarkPressed') {
 			const { cfiRange, text } = parsedEvent
-			return onMarkPressed(cfiRange, text)
-		}
-
-		if (type === 'onOrientationChange') {
-			const { orientation } = parsedEvent
-			return onOrientationChange(orientation)
+			console.log('onMarkPressed', cfiRange, text)
 		}
 
 		if (type === 'onBeginning') {
 			setAtStart(true)
-			return onBeginning()
+			console.log('onBeginning')
 		}
 
 		if (type === 'onFinish') {
 			setAtEnd(true)
-			return onFinish()
+			console.log('onFinish')
 		}
 
 		if (type === 'onRendered') {
 			const { section, currentSection } = parsedEvent
-			return onRendered(section, currentSection)
+			console.log('onRendered', section, currentSection)
 		}
 
 		if (type === 'onLayout') {
 			const { layout } = parsedEvent
-			return onLayout(layout)
+			console.log('onLayout', layout)
 		}
 
 		if (type === 'onNavigationLoaded') {
-			const { toc } = parsedEvent
-			return onNavigationLoaded(toc)
+			// const { toc } = parsedEvent
+			// console.log('onNavigationLoaded', toc)
 		}
-		return () => {}
 	}
-
-	useEffect(() => {
-		if (book.current) registerBook(book.current)
-	}, [registerBook])
-
 	let lastTap: number | null = null
 	let timer: NodeJS.Timeout
-
 	const handleDoublePress = () => {
 		if (lastTap) {
 			toggleReadingUi()
@@ -208,7 +173,6 @@ export function View({
 		} else {
 			lastTap = Date.now()
 			timer = setTimeout(() => {
-				onPress()
 				lastTap = null
 				clearTimeout(timer)
 			}, 300)
@@ -216,29 +180,21 @@ export function View({
 	}
 
 	return (
-		<GestureHandlerRootView style={{ width, height, padding: 0, margin: 0 }}>
+		<GestureHandlerRootView className='m-0 p-0' style={{ width, height }}>
 			<FlingGestureHandler
 				direction={I18nManager.isRTL ? Directions.LEFT : Directions.RIGHT}
 				onHandlerStateChange={({ nativeEvent }) => {
-					if (
-						nativeEvent.state === State.ACTIVE &&
-						enableSwipe &&
-						flow === 'paginated'
-					) {
+					if (nativeEvent.state === State.ACTIVE && flow === 'paginated') {
 						goPrevious()
-						onSwipeRight()
+						console.log('swipe right')
 					}
 				}}>
 				<FlingGestureHandler
 					direction={I18nManager.isRTL ? Directions.RIGHT : Directions.LEFT}
 					onHandlerStateChange={({ nativeEvent }) => {
-						if (
-							nativeEvent.state === State.ACTIVE &&
-							enableSwipe &&
-							flow === 'paginated'
-						) {
+						if (nativeEvent.state === State.ACTIVE && flow === 'paginated') {
 							goNext()
-							onSwipeLeft()
+							console.log('swipe left')
 						}
 					}}>
 					<RNView className='m-0  h-full items-center justify-center p-0'>
@@ -251,11 +207,7 @@ export function View({
 						<TouchableWithoutFeedback onPress={handleDoublePress}>
 							<WebView
 								ref={book}
-								menuItems={
-									[
-										// TODO: сделать кастомное меню, и ещё справа если quotes популярная срока то делать справа мини блок для емодзи
-									]
-								}
+								menuItems={[]}
 								source={{ uri: templateUri }}
 								showsVerticalScrollIndicator={false}
 								javaScriptEnabled

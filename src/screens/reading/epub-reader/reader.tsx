@@ -1,31 +1,33 @@
 import BigLoader from '@/components/ui/loader/big-loader'
+import { useAction } from '@/hooks/useAction'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
+import { defaultTheme } from '@/redux/epub-reader-slice/epub-reader-slice'
+import { useFileSystem } from '@/screens/reading/epub-reader/hooks/useFileSystem/useFileSystem'
 import * as FileSystem from 'expo-file-system'
-import React, { useContext, useEffect, useState } from 'react'
-import { View } from './View'
-import { ReaderContext, defaultTheme as initialTheme } from './context'
-import epubjs from './epubjs'
+import React, { useEffect, useState } from 'react'
 import { useInjectWebVieWVariables } from './hooks/useInjectWebviewVariables'
-import jszip from './jszip'
+import epubjs from './liblaries/epubjs'
+import jszip from './liblaries/jszip'
 import type { ReaderProperties } from './types'
 import { SourceType } from './types'
 import { getSourceName } from './utils/getPathname'
 import { getSourceType } from './utils/getSourceType'
 import { isFsUri } from './utils/isFsUri'
 import { isURL } from './utils/isURL'
+import { View } from './view'
 
 export function Reader({
 	src,
 	width,
 	flow,
 	height,
-	defaultTheme = initialTheme,
 	initialLocations,
-	fileSystem: useFileSystem,
 	...rest
 }: ReaderProperties) {
 	const { downloadFile } = useFileSystem()
 
-	const { setIsLoading, isLoading } = useContext(ReaderContext)
+	const { setIsLoading } = useAction()
+	const { isLoading } = useTypedSelector(state => state.reader)
 	const { injectWebVieWVariables } = useInjectWebVieWVariables()
 	const [template, setTemplate] = useState<string | null>(null)
 	const [templateUrl, setTemplateUrl] = useState<string | null>(null)
@@ -150,7 +152,6 @@ export function Reader({
 		downloadFile,
 		initialLocations,
 		injectWebVieWVariables,
-		setIsLoading,
 		src,
 		flow
 	])
@@ -174,13 +175,11 @@ export function Reader({
 		}
 	}, [template])
 
-	if (isLoading) {
+	if (isLoading || !templateUrl || !allowedUris) {
 		return <BigLoader />
 	}
-
-	if (!templateUrl || !allowedUris) {
-		return <BigLoader />
-	}
+	console.log('render')
+	// TODO: сделать меньше рендеров
 	return (
 		<View
 			templateUri={templateUrl}

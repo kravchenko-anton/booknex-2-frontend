@@ -8,6 +8,7 @@ import { Color } from '@/utils/color'
 import { StatusBar } from 'expo-status-bar'
 import type { FC } from 'react'
 import { View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const shadow = {
 	shadowColor: '#000',
@@ -22,13 +23,19 @@ const shadow = {
 const ReadingUi: FC = () => {
 	const { goBack } = useTypedNavigation()
 	const { visible } = useTypedSelector(state => state.readingUi)
+	const { top } = useSafeAreaInsets()
 	const { headerAnimation, footerAnimation } = useAnimation(visible)
 	return (
 		<View className='absolute h-screen w-full'>
 			<AnimatedView
-				style={headerAnimation}
+				style={[
+					{
+						top
+					},
+					headerAnimation
+				]}
 				// TODO: сделать тут адаптивный топ
-				className='absolute top-5 z-50 h-[65px] w-full flex-row items-center justify-between px-2'>
+				className='absolute z-50 h-[65px] w-full flex-row items-center justify-between px-2'>
 				<AnimatedIcon
 					name={'arrow-left'}
 					backgroundColor={Color.white}
