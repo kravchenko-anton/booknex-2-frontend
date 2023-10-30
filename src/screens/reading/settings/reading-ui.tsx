@@ -24,7 +24,7 @@ const shadow = {
 const ReadingUi: FC = () => {
 	const { goBack } = useTypedNavigation()
 	const { visible } = useTypedSelector(state => state.readingUi)
-	const { top } = useSafeAreaInsets()
+	const { top, bottom } = useSafeAreaInsets()
 	const { changeFontFamily } = useAction() // TODO: сделать настройки шрифта бо щас не работает
 	const { headerAnimation, footerAnimation } = useAnimation(visible)
 	return (

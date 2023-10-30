@@ -1,6 +1,6 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
-import { defaultTheme } from '@/redux/epub-reader-slice/epub-reader-slice'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { useFileSystem } from '@/screens/reading/epub-reader/hooks/useFileSystem/useFileSystem'
 import * as FileSystem from 'expo-file-system'
 import React, { useEffect, useState } from 'react'
@@ -17,15 +17,14 @@ import { View } from './view'
 
 export function Reader({
 	src,
-	width,
-	flow,
-	height,
 	initialLocations,
+	id,
 	...rest
 }: ReaderProperties) {
 	const { downloadFile } = useFileSystem()
 
 	const { setIsLoading } = useAction()
+	const { flow, theme } = useTypedSelector(state => state.readingSettings)
 	const { injectWebVieWVariables } = useInjectWebVieWVariables()
 	const [template, setTemplate] = useState<string | null>(null)
 	const [templateUrl, setTemplateUrl] = useState<string | null>(null)
@@ -73,7 +72,7 @@ export function Reader({
 								type: SourceType.BASE64,
 								book: src,
 								flow,
-								theme: defaultTheme,
+								theme,
 								locations: initialLocations,
 								enableSelection: true
 							})
@@ -88,7 +87,7 @@ export function Reader({
 								type: SourceType.BINARY,
 								book: src,
 								flow,
-								theme: defaultTheme,
+								theme,
 								locations: initialLocations,
 								enableSelection: true
 							})
@@ -113,7 +112,7 @@ export function Reader({
 								type: sourceType,
 								book: src,
 								flow,
-								theme: defaultTheme,
+								theme,
 								locations: initialLocations,
 								enableSelection: true
 							})
@@ -134,7 +133,7 @@ export function Reader({
 								type: sourceType,
 								book: bookFileUri,
 								flow,
-								theme: defaultTheme,
+								theme,
 								locations: initialLocations,
 								enableSelection: true
 							})
@@ -145,14 +144,7 @@ export function Reader({
 				}
 			}
 		})()
-	}, [
-		defaultTheme,
-		downloadFile,
-		initialLocations,
-		injectWebVieWVariables,
-		src,
-		flow
-	])
+	}, [downloadFile, flow, initialLocations, injectWebVieWVariables, src])
 
 	useEffect(() => {
 		const saveTemplateFileToDocument = async () => {
@@ -180,11 +172,9 @@ export function Reader({
 	// TODO: сделать меньше рендеров
 	return (
 		<View
+			id={id}
 			templateUri={templateUrl}
 			allowedUris={allowedUris}
-			width={width}
-			flow={flow}
-			height={height}
 			{...rest}
 		/>
 	)

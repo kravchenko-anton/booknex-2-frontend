@@ -1,6 +1,7 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@/utils/dimensions'
 import type { ReactNode } from 'react'
 import React, { useEffect, useRef } from 'react'
 import {
@@ -16,86 +17,66 @@ import {
 } from 'react-native-gesture-handler'
 import type { WebViewMessageEvent } from 'react-native-webview'
 import { WebView } from 'react-native-webview'
-import type { EPubCfi, Location, ReaderProperties, SearchResult } from './types'
+import type { ReaderProperties, WebviewMessage } from './types'
 
-export type ViewProperties = Omit<ReaderProperties, 'src' | 'fileSystem'> & {
+export type ViewProperties = Omit<ReaderProperties, 'src'> & {
 	templateUri: string
 	allowedUris: string
 }
 // TODO: убрать передачу пропсов и сделать через redux
 export function View({
 	templateUri,
-	flow,
 	allowedUris,
-	width,
-	height
+	id
 }: ViewProperties): ReactNode {
 	const {
+		setToc,
 		setTotalLocations,
 		setCurrentLocation,
 		setProgress,
 		setLocations,
-		setAtStart,
-		setAtEnd,
 		setIsRendering,
-		changeTheme,
-		setKey,
+		addLastBooksLocation,
 		setSearchResults,
 		toggleReadingUi
 	} = useAction()
 	const WebViewReference = useRef<WebView>(null)
+	const { flow } = useTypedSelector(state => state.readingSettings)
 	const {
 		isRendering,
-		theme,
 		isLoading,
-		fontFamily,
-		fontSize,
 		currentLocation: stateCurrentLocation
 	} = useTypedSelector(state => state.reader)
+	const { theme, fontFamily, fontSize, lastBooksLocation } = useTypedSelector(
+		state => state.readingSettings
+	)
+
 	useEffect(() => {
 		WebViewReference.current?.injectJavaScript(`
        rendition.themes.register({ theme: ${JSON.stringify(theme)} });
        rendition.themes.select('theme');
        rendition.views().forEach(view => view.pane ? view.pane.render() : null); true;
      `)
-		console.log('theme', theme)
 	}, [theme])
 
 	useEffect(() => {
+		console.log('changeFontFamilyssssss')
 		WebViewReference.current?.injectJavaScript(
 			`rendition.themes.font('${fontFamily}');`
 		)
-		console.log('fontFamily', fontFamily)
 	}, [fontFamily])
 
 	useEffect(() => {
+		console.log('changeFontSize')
 		WebViewReference.current?.injectJavaScript(`
 			 rendition.themes.fontSize('${fontSize}'); true
 		 `)
 	}, [fontSize])
 	const onMessage = (event: WebViewMessageEvent) => {
-		const parsedEvent = JSON.parse(event.nativeEvent.data) as {
-			type: string
-			totalLocations: number
-			currentLocation: Location
-			progress: number
-			reason: string
-			layout: string
-			epubKey: string
-			locations: EPubCfi[]
-			results: SearchResult[]
-			cfiRange: string
-			text: string
-			section: string
-			currentSection: string
-			toc: string
-		}
-
+		const parsedEvent = JSON.parse(event.nativeEvent.data) as WebviewMessage
 		const { type } = parsedEvent
 
-		if (type === 'onStarted') {
-			setIsRendering(true)
-		}
+		if (type === 'onStarted') setIsRendering(true)
 
 		if (type === 'onReady') {
 			const { totalLocations, currentLocation, progress } = parsedEvent
@@ -103,10 +84,9 @@ export function View({
 			setTotalLocations(totalLocations)
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
-			// if (initialLocation) {
-			// TODO: сделать в стейте настроек запись о последней странице и переход к ней сразу
-			// goToLocation(initialLocation)
-			// }
+			if (!lastBooksLocation?.[id]) return
+			// TODO: сделать go to
+			goToLocation(initialLocation)
 		}
 
 		if (type === 'onDisplayError') {
@@ -124,6 +104,10 @@ export function View({
 				return
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
+			addLastBooksLocation({
+				id,
+				location: currentLocation
+			})
 		}
 
 		if (type === 'onSearch') {
@@ -133,9 +117,8 @@ export function View({
 		}
 
 		if (type === 'onLocationsReady') {
-			const { epubKey, locations } = parsedEvent
+			const { locations } = parsedEvent
 			setLocations(locations)
-			setKey(epubKey)
 			// location ready
 		}
 
@@ -150,12 +133,10 @@ export function View({
 		}
 
 		if (type === 'onBeginning') {
-			setAtStart(true)
 			console.log('onBeginning')
 		}
 
 		if (type === 'onFinish') {
-			setAtEnd(true)
 			console.log('onFinish')
 		}
 
@@ -170,8 +151,8 @@ export function View({
 		}
 
 		if (type === 'onNavigationLoaded') {
-			// const { toc } = parsedEvent
-			// console.log('onNavigationLoaded', toc)
+			const { toc } = parsedEvent
+			setToc(toc)
 		}
 	}
 	let lastTap: number | null = null
@@ -190,7 +171,9 @@ export function View({
 		}
 	}
 	return (
-		<GestureHandlerRootView className='m-0 p-0' style={{ width, height }}>
+		<GestureHandlerRootView
+			className='m-0 p-0'
+			style={{ width: WINDOW_WIDTH, height: WINDOW_HEIGHT }}>
 			<FlingGestureHandler
 				direction={I18nManager.isRTL ? Directions.LEFT : Directions.RIGHT}
 				onHandlerStateChange={({ nativeEvent }) => {
@@ -245,9 +228,9 @@ export function View({
 									return true
 								}}
 								style={{
-									width,
+									width: WINDOW_WIDTH,
 									backgroundColor: theme.body.background,
-									height,
+									height: WINDOW_HEIGHT,
 									zIndex: 1,
 									padding: 0,
 									margin: 0

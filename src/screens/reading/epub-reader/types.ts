@@ -31,10 +31,27 @@ export type FontSize = string
 
 export type EPubCfi = string
 
-export type Themes = Record<string, Theme>
-
 export type Theme = Record<string, Record<string, string>>
-
+export interface Toc {
+	href: string
+	label: string
+}
+export interface WebviewMessage {
+	type: string
+	totalLocations: number
+	currentLocation: Location
+	progress: number
+	reason: string
+	layout: string
+	epubKey: string
+	locations: EPubCfi[]
+	results: SearchResult[]
+	cfiRange: string
+	text: string
+	section: string
+	currentSection: string
+	toc: Toc[]
+}
 export type SearchResult = {
 	cfi: EPubCfi
 	excerpt: string
@@ -49,11 +66,6 @@ export enum SourceType {
 
 export interface ReaderProperties {
 	src: string
+	id: number
 	initialLocations?: EPubCfi[]
-	onStarted?: () => void
-	flow: 'paginated' | 'scrolled'
-	width: number
-	height: number
-	enableSelection?: boolean
-	defaultTheme?: Theme
 }
