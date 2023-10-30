@@ -1,6 +1,5 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
-import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { defaultTheme } from '@/redux/epub-reader-slice/epub-reader-slice'
 import { useFileSystem } from '@/screens/reading/epub-reader/hooks/useFileSystem/useFileSystem'
 import * as FileSystem from 'expo-file-system'
@@ -27,7 +26,6 @@ export function Reader({
 	const { downloadFile } = useFileSystem()
 
 	const { setIsLoading } = useAction()
-	const { isLoading } = useTypedSelector(state => state.reader)
 	const { injectWebVieWVariables } = useInjectWebVieWVariables()
 	const [template, setTemplate] = useState<string | null>(null)
 	const [templateUrl, setTemplateUrl] = useState<string | null>(null)
@@ -175,7 +173,7 @@ export function Reader({
 		}
 	}, [template])
 
-	if (isLoading || !templateUrl || !allowedUris) {
+	if (!templateUrl || !allowedUris) {
 		return <BigLoader />
 	}
 	console.log('render')

@@ -1,7 +1,6 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import { defaultTheme } from '@/redux/epub-reader-slice/epub-reader-slice'
 import type { ReactNode } from 'react'
 import React, { useEffect, useRef } from 'react'
 import {
@@ -32,30 +31,48 @@ export function View({
 	height
 }: ViewProperties): ReactNode {
 	const {
-		registerBook,
 		setTotalLocations,
 		setCurrentLocation,
 		setProgress,
 		setLocations,
 		setAtStart,
 		setAtEnd,
-		goNext,
-		goPrevious,
 		setIsRendering,
-		goToLocation,
 		changeTheme,
 		setKey,
 		setSearchResults,
 		toggleReadingUi
 	} = useAction()
-	const { isRendering, theme } = useTypedSelector(state => state.reader)
-	const book = useRef<WebView>(null)
+	const WebViewReference = useRef<WebView>(null)
+	const {
+		isRendering,
+		theme,
+		isLoading,
+		fontFamily,
+		fontSize,
+		currentLocation: stateCurrentLocation
+	} = useTypedSelector(state => state.reader)
+	useEffect(() => {
+		WebViewReference.current?.injectJavaScript(`
+       rendition.themes.register({ theme: ${JSON.stringify(theme)} });
+       rendition.themes.select('theme');
+       rendition.views().forEach(view => view.pane ? view.pane.render() : null); true;
+     `)
+		console.log('theme', theme)
+	}, [theme])
 
 	useEffect(() => {
-		if (book.current) {
-			registerBook(book.current)
-		}
-	}, [book.current])
+		WebViewReference.current?.injectJavaScript(
+			`rendition.themes.font('${fontFamily}');`
+		)
+		console.log('fontFamily', fontFamily)
+	}, [fontFamily])
+
+	useEffect(() => {
+		WebViewReference.current?.injectJavaScript(`
+			 rendition.themes.fontSize('${fontSize}'); true
+		 `)
+	}, [fontSize])
 	const onMessage = (event: WebViewMessageEvent) => {
 		const parsedEvent = JSON.parse(event.nativeEvent.data) as {
 			type: string
@@ -78,7 +95,6 @@ export function View({
 
 		if (type === 'onStarted') {
 			setIsRendering(true)
-			changeTheme(defaultTheme)
 		}
 
 		if (type === 'onReady') {
@@ -100,18 +116,14 @@ export function View({
 		}
 
 		if (type === 'onLocationChange') {
-			const { totalLocations, currentLocation, progress } = parsedEvent
-			setTotalLocations(totalLocations)
+			const { currentLocation, progress } = parsedEvent
+			if (
+				stateCurrentLocation?.end.displayed.page ===
+				currentLocation.end.displayed.page
+			)
+				return
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
-			if (currentLocation.atStart) setAtStart(true)
-			else if (currentLocation.atEnd) setAtEnd(true)
-			else {
-				setAtStart(false)
-				setAtEnd(false)
-			}
-
-			// console.log('onLocationChange', currentLocation)
 		}
 
 		if (type === 'onSearch') {
@@ -167,7 +179,6 @@ export function View({
 	const handleDoublePress = () => {
 		if (lastTap) {
 			toggleReadingUi()
-			console.log('double')
 			clearTimeout(timer)
 			lastTap = null
 		} else {
@@ -178,35 +189,34 @@ export function View({
 			}, 300)
 		}
 	}
-
 	return (
 		<GestureHandlerRootView className='m-0 p-0' style={{ width, height }}>
 			<FlingGestureHandler
 				direction={I18nManager.isRTL ? Directions.LEFT : Directions.RIGHT}
 				onHandlerStateChange={({ nativeEvent }) => {
 					if (nativeEvent.state === State.ACTIVE && flow === 'paginated') {
-						goPrevious()
-						console.log('swipe right')
+						WebViewReference.current?.injectJavaScript('rendition.prev(); true')
 					}
 				}}>
 				<FlingGestureHandler
 					direction={I18nManager.isRTL ? Directions.RIGHT : Directions.LEFT}
 					onHandlerStateChange={({ nativeEvent }) => {
 						if (nativeEvent.state === State.ACTIVE && flow === 'paginated') {
-							goNext()
-							console.log('swipe left')
+							WebViewReference.current?.injectJavaScript(
+								'rendition.next(); true'
+							)
 						}
 					}}>
-					<RNView className='m-0  h-full items-center justify-center p-0'>
-						{isRendering && (
-							<RNView className='absolute top-0 z-[2] m-0 h-full w-full p-0'>
+					<RNView className='m-0 h-full w-full items-center justify-center p-0'>
+						{(isLoading || isRendering) && (
+							<RNView className='absolute bottom-0 left-0 right-0 top-0 z-50 m-0 h-full w-full bg-primary p-0'>
 								<BigLoader />
 							</RNView>
 						)}
 
 						<TouchableWithoutFeedback onPress={handleDoublePress}>
 							<WebView
-								ref={book}
+								ref={WebViewReference}
 								menuItems={[]}
 								source={{ uri: templateUri }}
 								showsVerticalScrollIndicator={false}
@@ -225,8 +235,11 @@ export function View({
 										request.mainDocumentURL &&
 										request.url !== request.mainDocumentURL
 									) {
-										goToLocation(
-											request.url.replace(request.mainDocumentURL, '')
+										WebViewReference.current?.injectJavaScript(
+											`rendition.display('${request.url.replace(
+												request.mainDocumentURL,
+												''
+											)}'); true`
 										)
 									}
 									return true

@@ -110,7 +110,6 @@ export default `
 
         window.ReactNativeWebView.postMessage(JSON.stringify({
           type: "onLocationChange",
-          totalLocations: book.locations.total,
           currentLocation: location,
           progress: percentage,
         }));
@@ -126,13 +125,6 @@ export default `
             type: "onFinish",
           }));
         }
-      });
-
-      rendition.on("orientationchange", function (orientation) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
-          type: 'onOrientationChange',
-          orientation: orientation
-        }));
       });
 
       rendition.on("rendered", function (section) {

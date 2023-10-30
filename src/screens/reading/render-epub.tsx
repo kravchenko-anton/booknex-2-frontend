@@ -7,19 +7,7 @@ import type { FC } from 'react'
 import { useEffect } from 'react'
 // TODO: сделать тут вертикальный скролл и настройки
 const RenderEpub: FC = () => {
-	const { params } = useTypedRoute<'Reading'>()
-	const { changeFontFamily } = useAction() // TODO: сделать настройки шрифта бо щас не работает
-	useEffect(() => {
-		changeFontFamily('Impact, fantasy')
-		console.log('change font family')
-	}, [])
-	return (
-		<Reader
-			flow={'scrolled'}
-			src={getFileUrl(params.epub)}
-			width={WINDOW_WIDTH}
-			height={WINDOW_HEIGHT}
-		/>
+>
 	)
 }
 

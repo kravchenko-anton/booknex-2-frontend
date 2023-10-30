@@ -1,5 +1,6 @@
 import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import { Title } from '@/components/ui/title/title'
+import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { useAnimation } from '@/screens/reading/settings/reading-ui-animation'
@@ -24,6 +25,7 @@ const ReadingUi: FC = () => {
 	const { goBack } = useTypedNavigation()
 	const { visible } = useTypedSelector(state => state.readingUi)
 	const { top } = useSafeAreaInsets()
+	const { changeFontFamily } = useAction() // TODO: сделать настройки шрифта бо щас не работает
 	const { headerAnimation, footerAnimation } = useAnimation(visible)
 	return (
 		<View className='absolute h-screen w-full'>
@@ -69,10 +71,16 @@ const ReadingUi: FC = () => {
 				<Title size={24} center weight={'bold'} color={Color.primary}>
 					{'0%'}
 				</Title>
-				<AnimatedIcon name='typography' size='large' color={Color.gray} />
+				<AnimatedIcon
+					onPress={() => changeFontFamily('Impact, fantasy')}
+					name='typography'
+					size='large'
+					color={Color.gray}
+				/>
 				<AnimatedIcon
 					name='note'
 					size='large'
+					onPress={() => changeFontFamily('Arial, Helvetica, sans-serif')}
 					className='pr-0'
 					color={Color.gray}
 				/>

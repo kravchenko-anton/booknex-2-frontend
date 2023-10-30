@@ -8,14 +8,13 @@ import type {
 import { Color } from '@/utils/color'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import type WebView from 'react-native-webview'
 
 type ReaderFonts =
 	| 'Courier New, Courier, monospace'
 	| 'Arial, Helvetica, sans-serif'
 	| 'Times New Roman, Times, serif'
 	| 'Impact, fantasy'
-const defaultFont = 'Courier New, Courier, monospace' as ReaderFonts
+
 const lineHeight = 1.3 + ' !important'
 const color = '#000' + ' !important'
 export const defaultTheme: Theme = {
@@ -29,22 +28,18 @@ export const defaultTheme: Theme = {
 	},
 	span: {
 		color,
-		'font-family': defaultFont,
 		'line-height': lineHeight
 	},
 	p: {
 		color,
-		'font-family': defaultFont,
 		'line-height': lineHeight
 	},
 	li: {
 		color,
-		'font-family': defaultFont,
 		'line-height': lineHeight
 	},
 	h1: {
 		color,
-		'font-family': defaultFont,
 		'font-weight': 'bold !important',
 		'line-height': lineHeight
 	},
@@ -52,7 +47,6 @@ export const defaultTheme: Theme = {
 		color,
 		'pointer-events': 'auto',
 		cursor: 'pointer',
-		'font-family': defaultFont,
 		'font-weight': 'bold !important',
 		'line-height': lineHeight
 	},
@@ -61,7 +55,6 @@ export const defaultTheme: Theme = {
 	}
 }
 const initialState = {
-	book: null as WebView | null,
 	theme: defaultTheme,
 	fontFamily: 'Arial, Helvetica, sans-serif' as ReaderFonts,
 	fontSize: '14px !important' as FontSize,
@@ -81,34 +74,19 @@ const EpubReaderSlice = createSlice({
 	name: 'epub-reader',
 	initialState,
 	reducers: {
-		registerBook: (state, action: PayloadAction<WebView>) => {
-			;(state.book as WebView) = action.payload
-		},
-
 		changeTheme: (state, { payload }: PayloadAction<Theme>) => {
-			console.log('changeTheme', payload)
-			state.book?.injectJavaScript(`
-       rendition.themes.register({ theme: ${JSON.stringify(payload)} });
-       rendition.themes.select('theme');
-       rendition.views().forEach(view => view.pane ? view.pane.render() : null); true;
-     `)
 			state.theme = payload
+			console.log('changeTheme', payload)
 		},
 
 		changeFontFamily: (state, { payload }: PayloadAction<ReaderFonts>) => {
-			console.log('changeFontFamily', payload)
-			state.book?.injectJavaScript(`
-			 rendition.themes.font('${payload}');
-		 `)
 			state.fontFamily = payload
+			console.log('changeFontFamily', payload)
 		},
 
 		changeFontSize: (state, { payload }: PayloadAction<FontSize>) => {
-			console.log('changeFontSize', payload)
-			state.book?.injectJavaScript(`
-			 rendition.themes.fontSize('${payload}'); true
-		 `)
 			state.fontSize = payload
+			console.log('changeFontSize', payload)
 		},
 
 		setAtStart: (state, { payload }: PayloadAction<boolean>) => {
@@ -151,38 +129,28 @@ const EpubReaderSlice = createSlice({
 			state.isRendering = payload
 		},
 
-		goToLocation: (state, { payload }: PayloadAction<EPubCfi>) => {
-			console.log('goToLocation', payload)
-			state.book?.injectJavaScript(`rendition.display('${payload}'); true`)
-		},
+		// goToLocation: (state, { payload }: PayloadAction<EPubCfi>) => {
+		// 	console.log('goToLocation', payload)
 
-		goPrevious: state => {
-			console.log('goPrevious')
-			state.book?.injectJavaScript('rendition.prev(); true')
-		},
-
-		goNext: state => {
-			console.log('goNext')
-			state.book?.injectJavaScript('rendition.next(); true')
-		},
-		search: (state, { payload }: PayloadAction<string>) => {
-			console.log('search', payload)
-			state.book?.injectJavaScript(`
-      Promise.all(
-        book.spine.spineItems.map((item) => {
-          return item.load(book.load.bind(book)).then(() => {
-            let results = item.find('${payload}'.trim());
-            item.unload();
-            return Promise.resolve(results);
-          });
-        })
-      ).then((results) =>
-        window.ReactNativeWebView.postMessage(
-          JSON.stringify({ type: 'onSearch', results: [].concat.apply([], results) })
-        )
-      ); true
-    `)
-		},
+		// },
+		// search: (state, { payload }: PayloadAction<string>) => {
+		// 	console.log('search', payload)
+		// 	state.bookRef?.current.injectJavaScript(`
+		//   Promise.all(
+		//     book.spine.spineItems.map((item) => {
+		//       return item.load(book.load.bind(book)).then(() => {
+		//         let results = item.find('${payload}'.trim());
+		//         item.unload();
+		//         return Promise.resolve(results);
+		//       });
+		//     })
+		//   ).then((results) =>
+		//     window.ReactNativeWebView.postMessage(
+		//       JSON.stringify({ type: 'onSearch', results: [].concat.apply([], results) })
+		//     )
+		//   ); true
+		// `)
+		// },
 
 		setSearchResults: (state, { payload }: PayloadAction<SearchResult[]>) => {
 			console.log('setSearchResults', payload)
