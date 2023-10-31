@@ -57,7 +57,7 @@ const initialState = {
 	fontFamily: 'Arial, Helvetica, sans-serif' as ReaderFonts,
 	fontSize: '14px !important' as FontSize,
 	flow: 'scrolled' as 'paginated' | 'scrolled',
-	lastBooksLocation: null as
+	lastBookLocations: null as
 		| null
 		| {
 				id: number
@@ -92,11 +92,11 @@ const ReadingSettingsSlice = createSlice({
 			console.log('changeFlow', payload)
 		},
 
-		addLastBooksLocation: (
+		addLastBookLocations: (
 			state,
 			{ payload }: PayloadAction<{ id: number; location: Location }>
 		) => {
-			state.lastBooksLocation = [...(state.lastBooksLocation || []), payload]
+			state.lastBookLocations = [...(state.lastBookLocations || []), payload]
 		}
 	}
 })

@@ -23,7 +23,6 @@ export type ViewProperties = Omit<ReaderProperties, 'src'> & {
 	templateUri: string
 	allowedUris: string
 }
-// TODO: убрать передачу пропсов и сделать через redux
 export function View({
 	templateUri,
 	allowedUris,
@@ -34,9 +33,10 @@ export function View({
 		setTotalLocations,
 		setCurrentLocation,
 		setProgress,
+		goToLocation,
 		setLocations,
 		setIsRendering,
-		addLastBooksLocation,
+		addLastBookLocations,
 		setSearchResults,
 		toggleReadingUi
 	} = useAction()
@@ -44,12 +44,28 @@ export function View({
 	const { flow } = useTypedSelector(state => state.readingSettings)
 	const {
 		isRendering,
+		searchTerm,
 		isLoading,
+		goLocation,
 		currentLocation: stateCurrentLocation
 	} = useTypedSelector(state => state.reader)
-	const { theme, fontFamily, fontSize, lastBooksLocation } = useTypedSelector(
+	const { theme, fontFamily, fontSize, lastBookLocations } = useTypedSelector(
 		state => state.readingSettings
 	)
+
+	useEffect(() => {
+		if (goLocation) {
+			goToLocation(goLocation)
+		}
+	}, [goLocation])
+
+	useEffect(() => {
+		if (searchTerm) {
+			WebViewReference.current?.injectJavaScript(
+				`rendition.search('${searchTerm}'); true`
+			)
+		}
+	}, [searchTerm])
 
 	useEffect(() => {
 		WebViewReference.current?.injectJavaScript(`
@@ -60,14 +76,12 @@ export function View({
 	}, [theme])
 
 	useEffect(() => {
-		console.log('changeFontFamilyssssss')
 		WebViewReference.current?.injectJavaScript(
 			`rendition.themes.font('${fontFamily}');`
 		)
 	}, [fontFamily])
 
 	useEffect(() => {
-		console.log('changeFontSize')
 		WebViewReference.current?.injectJavaScript(`
 			 rendition.themes.fontSize('${fontSize}'); true
 		 `)
@@ -84,9 +98,11 @@ export function View({
 			setTotalLocations(totalLocations)
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
-			if (!lastBooksLocation?.[id]) return
-			// TODO: сделать go to
-			goToLocation(initialLocation)
+			const lastLocation = lastBookLocations?.find(item => item.id === id)
+				?.location
+			if (!lastLocation) return
+			// TODO: сделать go to location
+			goToLocation(lastLocation)
 		}
 
 		if (type === 'onDisplayError') {
@@ -104,7 +120,7 @@ export function View({
 				return
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
-			addLastBooksLocation({
+			addLastBookLocations({
 				id,
 				location: currentLocation
 			})
@@ -119,7 +135,6 @@ export function View({
 		if (type === 'onLocationsReady') {
 			const { locations } = parsedEvent
 			setLocations(locations)
-			// location ready
 		}
 
 		if (type === 'onSelected') {

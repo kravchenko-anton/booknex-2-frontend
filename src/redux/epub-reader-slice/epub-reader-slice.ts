@@ -15,7 +15,11 @@ const initialState = {
 	locations: [] as EPubCfi[],
 	isLoading: true as boolean,
 	isRendering: true as boolean,
-	searchResults: [] as SearchResult[]
+
+	searchTerm: null as string | null,
+	searchResults: [] as SearchResult[],
+
+	goLocation: null as Location | null
 }
 
 const EpubReaderSlice = createSlice({
@@ -25,7 +29,6 @@ const EpubReaderSlice = createSlice({
 		setToc: (state, { payload }: PayloadAction<Toc[]>) => {
 			state.toc = payload
 		},
-
 		setTotalLocations: (state, { payload }: PayloadAction<number>) => {
 			console.log('setTotalLocations', payload)
 			state.totalLocations = payload
@@ -56,10 +59,6 @@ const EpubReaderSlice = createSlice({
 			state.isRendering = payload
 		},
 
-		// goToLocation: (state, { payload }: PayloadAction<EPubCfi>) => {
-		// 	console.log('goToLocation', payload)
-
-		// },
 		// search: (state, { payload }: PayloadAction<string>) => {
 		// 	console.log('search', payload)
 		// 	state.bookRef?.current.injectJavaScript(`
@@ -79,6 +78,18 @@ const EpubReaderSlice = createSlice({
 		// `)
 		// },
 
+		goToLocation: (state, action: PayloadAction<Location>) => {
+			state.goLocation = action.payload
+		},
+		clearGoToLocation: state => {
+			state.goLocation = null
+		},
+		search: (state, action: PayloadAction<string>) => {
+			state.searchTerm = action.payload
+		},
+		clearSearch: state => {
+			state.searchTerm = null
+		},
 		setSearchResults: (state, { payload }: PayloadAction<SearchResult[]>) => {
 			console.log('setSearchResults', payload)
 			state.searchResults = payload
