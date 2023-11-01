@@ -35,7 +35,6 @@ export default `
       const type = window.type;
       const file = window.book;
       const theme = window.theme;
-      const initialLocations = window.locations;
       const enableSelection = window.enable_selection;
       const flow = window.flow;
       if (!file) {
@@ -56,10 +55,6 @@ export default `
 
       book.ready
         .then(function () {
-          if (initialLocations) {
-            return book.locations.load(initialLocations);
-          }
-
           book.locations.generate(1600).then(function () {
             window.ReactNativeWebView.postMessage(JSON.stringify({
               type: "onLocationsReady",

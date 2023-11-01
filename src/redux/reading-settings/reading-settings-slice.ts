@@ -1,6 +1,6 @@
 import type {
+	EPubCfi,
 	FontSize,
-	Location,
 	Theme
 } from '@/screens/reading/epub-reader/types'
 import { Color } from '@/utils/color'
@@ -18,7 +18,7 @@ const color = '#000' + ' !important'
 export const defaultTheme: Theme = {
 	body: {
 		background: '#fff',
-		padding: '14px !important',
+		padding: 14 + 'px !important',
 		alignItems: 'center',
 		justifyContent: 'center',
 		'-webkit-user-select': 'text !important',
@@ -61,12 +61,12 @@ const initialState = {
 		| null
 		| {
 				id: number
-				location: Location
+				location: EPubCfi
 		  }[]
 }
 
 const ReadingSettingsSlice = createSlice({
-	name: 'reading-settings',
+	name: 'readingSettings',
 	initialState,
 	reducers: {
 		changeTheme: (state, { payload }: PayloadAction<Theme>) => {
@@ -94,9 +94,17 @@ const ReadingSettingsSlice = createSlice({
 
 		addLastBookLocations: (
 			state,
-			{ payload }: PayloadAction<{ id: number; location: Location }>
+			{ payload }: PayloadAction<{ id: number; location: EPubCfi }>
 		) => {
-			state.lastBookLocations = [...(state.lastBookLocations || []), payload]
+			console.log('addLastBookLocations', payload)
+			// write to state but if the id already exists, replace the location
+
+			state.lastBookLocations = [
+				...(state.lastBookLocations ?? []).filter(
+					({ id }) => id !== payload.id
+				),
+				payload
+			]
 		}
 	}
 })

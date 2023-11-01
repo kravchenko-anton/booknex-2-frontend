@@ -19,7 +19,7 @@ const initialState = {
 	searchTerm: null as string | null,
 	searchResults: [] as SearchResult[],
 
-	goLocation: null as Location | null
+	goLocation: null as EPubCfi | null
 }
 
 const EpubReaderSlice = createSlice({
@@ -35,7 +35,6 @@ const EpubReaderSlice = createSlice({
 		},
 
 		setCurrentLocation: (state, { payload }: PayloadAction<Location>) => {
-			console.log('setCurrentLocation', payload)
 			state.currentLocation = payload
 		},
 
@@ -45,7 +44,6 @@ const EpubReaderSlice = createSlice({
 		},
 
 		setLocations: (state, { payload }: PayloadAction<EPubCfi[]>) => {
-			// console.log('setLocations', payload)
 			state.locations = payload
 		},
 
@@ -59,26 +57,8 @@ const EpubReaderSlice = createSlice({
 			state.isRendering = payload
 		},
 
-		// search: (state, { payload }: PayloadAction<string>) => {
-		// 	console.log('search', payload)
-		// 	state.bookRef?.current.injectJavaScript(`
-		//   Promise.all(
-		//     book.spine.spineItems.map((item) => {
-		//       return item.load(book.load.bind(book)).then(() => {
-		//         let results = item.find('${payload}'.trim());
-		//         item.unload();
-		//         return Promise.resolve(results);
-		//       });
-		//     })
-		//   ).then((results) =>
-		//     window.ReactNativeWebView.postMessage(
-		//       JSON.stringify({ type: 'onSearch', results: [].concat.apply([], results) })
-		//     )
-		//   ); true
-		// `)
-		// },
-
-		goToLocation: (state, action: PayloadAction<Location>) => {
+		goToLocation: (state, action: PayloadAction<EPubCfi>) => {
+			console.log('goToLocation', action.payload)
 			state.goLocation = action.payload
 		},
 		clearGoToLocation: state => {

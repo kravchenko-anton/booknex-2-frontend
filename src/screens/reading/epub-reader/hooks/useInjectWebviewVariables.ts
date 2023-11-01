@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import template from '../template'
-import type { EPubCfi, SourceType, Theme } from '../types'
+import type { SourceType, Theme } from '../types'
 
 export function useInjectWebVieWVariables() {
 	const scrollFlow = {
@@ -28,7 +28,6 @@ export function useInjectWebVieWVariables() {
 			book,
 			theme,
 			enableSelection,
-			locations,
 			flow = 'paginated'
 		}: {
 			jszip: string
@@ -38,7 +37,6 @@ export function useInjectWebVieWVariables() {
 			theme: Theme
 			flow: 'paginated' | 'scrolled'
 			enableSelection: boolean
-			locations?: EPubCfi[]
 		}) =>
 			template
 				.replace(
@@ -55,10 +53,7 @@ export function useInjectWebVieWVariables() {
 					/const theme = window.theme;/,
 					`const theme = ${JSON.stringify(theme)};`
 				)
-				.replace(
-					/const initialLocations = window.locations;/,
-					`const initialLocations = ${locations};`
-				)
+
 				.replace(
 					/const enableSelection = window.enable_selection;/,
 					`const enableSelection = ${enableSelection};`

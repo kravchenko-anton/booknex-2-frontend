@@ -15,12 +15,7 @@ import { isFsUri } from './utils/isFsUri'
 import { isURL } from './utils/isURL'
 import { View } from './view'
 
-export function Reader({
-	src,
-	initialLocations,
-	id,
-	...rest
-}: ReaderProperties) {
+export function Reader({ src, id, ...rest }: ReaderProperties) {
 	const { downloadFile } = useFileSystem()
 
 	const { setIsLoading } = useAction()
@@ -73,7 +68,6 @@ export function Reader({
 								book: src,
 								flow,
 								theme,
-								locations: initialLocations,
 								enableSelection: true
 							})
 						)
@@ -88,7 +82,6 @@ export function Reader({
 								book: src,
 								flow,
 								theme,
-								locations: initialLocations,
 								enableSelection: true
 							})
 						)
@@ -113,7 +106,6 @@ export function Reader({
 								book: src,
 								flow,
 								theme,
-								locations: initialLocations,
 								enableSelection: true
 							})
 						)
@@ -134,7 +126,6 @@ export function Reader({
 								book: bookFileUri,
 								flow,
 								theme,
-								locations: initialLocations,
 								enableSelection: true
 							})
 						)
@@ -144,7 +135,7 @@ export function Reader({
 				}
 			}
 		})()
-	}, [downloadFile, flow, initialLocations, injectWebVieWVariables, src])
+	}, [downloadFile, flow, injectWebVieWVariables, src])
 
 	useEffect(() => {
 		const saveTemplateFileToDocument = async () => {

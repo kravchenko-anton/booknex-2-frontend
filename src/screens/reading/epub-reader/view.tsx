@@ -1,6 +1,7 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
+import type { LineColorType } from '@/utils/color'
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@/utils/dimensions'
 import type { ReactNode } from 'react'
 import React, { useEffect, useRef } from 'react'
@@ -32,6 +33,8 @@ export function View({
 		setToc,
 		setTotalLocations,
 		setCurrentLocation,
+		clearSearch,
+		clearGoToLocation,
 		setProgress,
 		goToLocation,
 		setLocations,
@@ -41,7 +44,6 @@ export function View({
 		toggleReadingUi
 	} = useAction()
 	const WebViewReference = useRef<WebView>(null)
-	const { flow } = useTypedSelector(state => state.readingSettings)
 	const {
 		isRendering,
 		searchTerm,
@@ -49,21 +51,35 @@ export function View({
 		goLocation,
 		currentLocation: stateCurrentLocation
 	} = useTypedSelector(state => state.reader)
-	const { theme, fontFamily, fontSize, lastBookLocations } = useTypedSelector(
-		state => state.readingSettings
-	)
-
+	const { theme, flow, fontFamily, fontSize, lastBookLocations } =
+		useTypedSelector(state => state.readingSettings)
 	useEffect(() => {
 		if (goLocation) {
-			goToLocation(goLocation)
+			WebViewReference.current?.injectJavaScript(
+				`rendition.display('${goLocation}'); true`
+			)
+			clearGoToLocation()
 		}
 	}, [goLocation])
 
 	useEffect(() => {
 		if (searchTerm) {
-			WebViewReference.current?.injectJavaScript(
-				`rendition.search('${searchTerm}'); true`
-			)
+			WebViewReference.current?.injectJavaScript(`
+      Promise.all(
+        book.spine.spineItems.map((item) => {
+          return item.load(book.load.bind(book)).then(() => {
+            let results = item.find('${searchTerm}'.trim());
+            item.unload();
+            return Promise.resolve(results);
+          });
+        })
+      ).then((results) =>
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ type: 'onSearch', results: [].concat.apply([], results) })
+        )
+      ); true
+    `)
+			clearSearch()
 		}
 	}, [searchTerm])
 
@@ -101,7 +117,7 @@ export function View({
 			const lastLocation = lastBookLocations?.find(item => item.id === id)
 				?.location
 			if (!lastLocation) return
-			// TODO: сделать go to location
+			console.log('lastLocation', lastLocation)
 			goToLocation(lastLocation)
 		}
 
@@ -122,7 +138,7 @@ export function View({
 			setProgress(progress)
 			addLastBookLocations({
 				id,
-				location: currentLocation
+				location: currentLocation.start.cfi
 			})
 		}
 
@@ -208,7 +224,9 @@ export function View({
 					<RNView className='m-0 h-full w-full items-center justify-center p-0'>
 						{(isLoading || isRendering) && (
 							<RNView className='absolute bottom-0 left-0 right-0 top-0 z-50 m-0 h-full w-full bg-primary p-0'>
-								<BigLoader />
+								<BigLoader
+									backgroundColor={theme.body.background as LineColorType}
+								/>
 							</RNView>
 						)}
 

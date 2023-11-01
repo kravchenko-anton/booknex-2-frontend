@@ -67,5 +67,4 @@ export enum SourceType {
 export interface ReaderProperties {
 	src: string
 	id: number
-	initialLocations?: EPubCfi[]
 }

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 
-export const useAnimation = (visible: boolean) => {
+export const useReadingAnimation = (visible: boolean) => {
 	const headerAnimation = useAnimatedStyle(() => ({
 		transform: [
 			{
