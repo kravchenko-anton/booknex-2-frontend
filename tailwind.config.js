@@ -11,8 +11,8 @@ module.exports = {
 			pale: '#FDF7F4',
 			dust: '#F2E4DC',
 			canvas: '#F9EFE8',
-			black: '#000',
-			white: '#fff',
+			black: '#000000',
+			white: '#ffffff',
 			alert: '#DC3F41',
 			highlight: '#FFBE0B',
 			transparent: colors.transparent

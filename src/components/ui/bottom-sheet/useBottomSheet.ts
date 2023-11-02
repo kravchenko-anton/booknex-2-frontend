@@ -20,28 +20,28 @@ export const useBottomSheet = (visible: boolean) => {
 	const { closeBottomSheet } = useAction()
 
 	useEffect(() => {
-		// TODO: доделать выпригивание
-		translationY.value = withSpring(-SCREEN_HEIGHT / 3, {
-			stiffness: 2,
-			damping: 10,
-			overshootClamping: true,
-			restDisplacementThreshold: 0.1,
-			restSpeedThreshold: 0.1
-		})
+		if (!visible) {
+			translationY.value = withTiming(0)
+			return
+		}
+		translationY.value = withSpring(-SCREEN_HEIGHT / 3)
 	}, [visible])
 
 	const gesture = Gesture.Pan()
 		.onStart(() => (oldTranslationY.value = translationY.value))
+		.activeOffsetY([-20, 20])
 		.onUpdate(event => {
 			translationY.value = event.translationY + oldTranslationY.value
 			translationY.value = Math.max(translationY.value, -SCREEN_HEIGHT)
 		})
 		.onEnd(() => {
 			switch (true) {
-				case translationY.value < -SCREEN_HEIGHT / 2: {
-					translationY.value = withTiming(-SCREEN_HEIGHT)
+				case translationY.value < -SCREEN_HEIGHT / 1.2: {
+					translationY.value = withSpring(-SCREEN_HEIGHT, { damping: 10 })
+
 					break
 				}
+
 				case translationY.value > -SCREEN_HEIGHT / 5: {
 					translationY.value = withTiming(
 						0,
@@ -54,13 +54,17 @@ export const useBottomSheet = (visible: boolean) => {
 					translationY.value = withSpring(-SCREEN_HEIGHT / 3, { damping: 10 })
 					break
 				}
+				case translationY.value > -SCREEN_HEIGHT / 1.2: {
+					translationY.value = withSpring(-SCREEN_HEIGHT / 1.6, { damping: 10 })
+					break
+				}
 			}
 		})
 	const bottomSheetStyle = useAnimatedStyle(() => {
 		const borderRaduis = interpolate(
 			translationY.value,
 			[-SCREEN_HEIGHT + 100, -SCREEN_HEIGHT + 50],
-			[25, 0],
+			[23, 0],
 			Extrapolation.CLAMP
 		)
 		return {

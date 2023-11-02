@@ -3,30 +3,26 @@ import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
+import { ThemeColor } from '@/redux/reading-settings/reading-settings-slice'
 import { useReadingAnimation } from '@/screens/reading/settings/reading-ui-animation'
 import { AnimatedView } from '@/types/component-types'
+import type { LineColorType } from '@/utils/color'
 import { Color } from '@/utils/color'
+import { shadeRGBColor } from '@/utils/shade-color'
 import { StatusBar } from 'expo-status-bar'
 import type { FC } from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-const shadow = {
-	shadowColor: '#000',
-	shadowOffset: {
-		width: 0,
-		height: 3
-	},
-	shadowOpacity: 0.27,
-	shadowRadius: 4.65,
-	elevation: 7
-}
+export const shadeBackground = -15
 const ReadingUi: FC = () => {
 	const { goBack } = useTypedNavigation()
-	const { visible } = useTypedSelector(state => state.readingUi)
 	const { top } = useSafeAreaInsets()
-	const { theme } = useTypedSelector(state => state.readingSettings)
 	const { openBottomSheet } = useAction()
+	const { progress } = useTypedSelector(state => state.reader)
+	const { visible } = useTypedSelector(state => state.readingUi)
+	const { theme } = useTypedSelector(state => state.readingSettings)
+
 	const { headerAnimation, footerAnimation } = useReadingAnimation(visible)
 	return (
 		<View className='absolute h-screen w-full'>
@@ -37,62 +33,78 @@ const ReadingUi: FC = () => {
 					},
 					headerAnimation
 				]}
-				// TODO: сделать тут адаптивный топ
 				className='absolute z-50 h-[65px] w-full flex-row items-center justify-between px-2'>
 				<AnimatedIcon
 					name={'arrow-left'}
-					backgroundColor={Color.white}
+					backgroundColor={
+						shadeRGBColor(
+							ThemeColor(theme.body.background),
+							shadeBackground
+						) as LineColorType
+					}
 					size={'medium'}
-					style={shadow}
 					className='w-[50px]'
 					onPress={() => goBack()}
-					color={Color.black}
+					color={ThemeColor(theme.p.color)}
 				/>
 				<AnimatedIcon
 					name={'kebab-horizontal'}
-					backgroundColor={Color.white}
+					backgroundColor={
+						shadeRGBColor(
+							ThemeColor(theme.body.background),
+							shadeBackground
+						) as LineColorType
+					}
 					className='w-[50px]'
-					style={shadow}
 					size={'medium'}
-					color={Color.black}
+					color={ThemeColor(theme.p.color)}
 				/>
 			</AnimatedView>
 
 			<AnimatedView
-				style={footerAnimation}
-				className='h-18 absolute bottom-0 z-50 w-full flex-1 flex-row items-center justify-between  bg-white px-4'>
+				style={[
+					footerAnimation,
+					{
+						backgroundColor: shadeRGBColor(
+							ThemeColor(theme.body.background),
+							shadeBackground
+						)
+					}
+				]}
+				className='h-18 absolute bottom-0 z-50 w-full flex-1 flex-row items-center justify-between   px-4'>
 				{/* //TODO: сделать тут слайдер*/}
 				<AnimatedIcon
 					name='quote'
 					size='large'
-					color={Color.gray}
+					color={ThemeColor(theme.p.color) as LineColorType}
 					className='pl-0'
 				/>
-				<AnimatedIcon name='search' size='large' color={Color.gray} />
-				<Title size={24} center weight={'bold'} color={Color.primary}>
-					{'0%'}
+				<AnimatedIcon
+					name='search'
+					size='large'
+					color={ThemeColor(theme.p.color)}
+				/>
+				<Title
+					size={24}
+					center
+					weight={'bold'}
+					color={ThemeColor(theme.a.color)}>
+					{(progress || 0) + '%'}
 				</Title>
 				<AnimatedIcon
-					onPress={() =>
-						openBottomSheet([
-							'readingSettings',
-							{
-								background: theme.body.background
-							}
-						])
-					}
+					onPress={() => openBottomSheet('readingSettings')}
 					name='typography'
 					size='large'
-					color={Color.gray}
+					color={ThemeColor(theme.p.color)}
 				/>
 				<AnimatedIcon
 					name='note'
 					size='large'
 					className='pr-0'
-					color={Color.gray}
+					color={ThemeColor(theme.p.color)}
 				/>
 			</AnimatedView>
-			<StatusBar hidden={!visible} backgroundColor={Color.white} />
+			<StatusBar backgroundColor={Color.white} />
 		</View>
 	)
 }

@@ -3,64 +3,131 @@ import type {
 	FontSize,
 	Theme
 } from '@/screens/reading/epub-reader/types'
+import type { LineColorType } from '@/utils/color'
 import { Color } from '@/utils/color'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
-type ReaderFonts =
-	| 'Courier New, Courier, monospace'
-	| 'Arial, Helvetica, sans-serif'
-	| 'Times New Roman, Times, serif'
-	| 'Impact, fantasy'
-
-const lineHeight = 1.3 + ' !important'
-const color = '#000' + ' !important'
+export enum ReaderFontsEnum {
+	CourierNew = 'Courier New, Courier, monospace',
+	Arial = 'Arial, Helvetica, sans-serif',
+	TimesNewRoman = 'Times New Roman, Times, serif',
+	Impact = 'Impact, fantasy'
+}
+export type LineReaderFontsType =
+	(typeof ReaderFontsEnum)[keyof typeof ReaderFontsEnum]
+export const ReaderFontTitle = [
+	{
+		title: 'Courier New',
+		fontFamily: ReaderFontsEnum.CourierNew
+	},
+	{
+		title: 'Arial',
+		fontFamily: ReaderFontsEnum.Arial
+	},
+	{
+		title: 'Times New Roman',
+		fontFamily: ReaderFontsEnum.TimesNewRoman
+	}
+]
+export const ImportantProperty = (property: string | number) =>
+	property + ' !important'
+export const ThemeColor = (property: string | number): LineColorType =>
+	property.toString().replace(' !important', '') as LineColorType
+const color = ImportantProperty('#000000')
+export const boldTextStyle = ImportantProperty('bold')
 export const defaultTheme: Theme = {
 	body: {
-		background: '#fff',
-		padding: 14 + 'px !important',
-		alignItems: 'center',
-		justifyContent: 'center',
-		'-webkit-user-select': 'text !important',
-		'-webkit-touch-callout': 'none !important'
+		background: '#ffffff',
+		padding: ImportantProperty(`${14}px`),
+		'line-height': ImportantProperty(1.3)
+	},
+	i: {
+		color: ImportantProperty(Color.primary)
 	},
 	span: {
-		color,
-		'line-height': lineHeight
+		color
 	},
 	p: {
-		color,
-		'line-height': lineHeight
+		color
 	},
 	li: {
-		color,
-		'line-height': lineHeight
-	},
-	h1: {
-		color,
-		'font-weight': 'bold !important',
-		'line-height': lineHeight
+		color
 	},
 	a: {
-		color,
-		'pointer-events': 'auto',
-		cursor: 'pointer',
-		'font-weight': 'bold !important',
-		'line-height': lineHeight
+		color: ImportantProperty(Color.secondary),
+		'font-weight': boldTextStyle,
+		textDecoration: ImportantProperty('none'),
+		transition: 'color 0.3s',
+		'font-style': ImportantProperty('italic')
+	},
+	h1: {
+		'font-weight': boldTextStyle,
+		color: ImportantProperty(Color.primary),
+		'font-size': ImportantProperty('36px')
+	},
+	h2: {
+		'font-weight': boldTextStyle,
+		color: ImportantProperty(Color.primary),
+		'font-size': ImportantProperty('32px')
+	},
+	h3: {
+		'font-weight': boldTextStyle,
+		color: ImportantProperty(Color.primary),
+		'font-size': ImportantProperty('28px')
+	},
+	h4: {
+		color: ImportantProperty(Color.primary),
+		'font-weight': boldTextStyle,
+		'font-size': ImportantProperty('24px')
+	},
+	h5: {
+		color: ImportantProperty(Color.primary),
+		'font-weight': boldTextStyle,
+		'font-size': ImportantProperty('20px')
+	},
+	h6: {
+		color: ImportantProperty(Color.primary),
+		'font-weight': boldTextStyle,
+		'font-size': ImportantProperty('18px')
 	},
 	'::selection': {
-		background: Color.dust
+		background: Color.primary,
+		color: '#fff'
+	},
+	ul: {
+		color,
+		'list-style-type': ImportantProperty('disc')
+	},
+	ol: {
+		color,
+		'list-style-type': ImportantProperty('decimal')
+	},
+	strong: {
+		color,
+		'font-weight': boldTextStyle
+	},
+	em: {
+		color,
+		fontStyle: 'italic'
+	},
+	b: {
+		'font-weight': boldTextStyle,
+		color: ImportantProperty(Color.primary)
 	}
 }
 const initialState = {
 	theme: defaultTheme,
-	fontFamily: 'Arial, Helvetica, sans-serif' as ReaderFonts,
-	fontSize: '14px !important' as FontSize,
+	fontFamily: 'Arial, Helvetica, sans-serif' as LineReaderFontsType,
+	fontSize: ImportantProperty('14px'),
 	flow: 'scrolled' as 'paginated' | 'scrolled',
+	lineHeight: 1.3 as number,
+	padding: 14 as number,
 	lastBookLocations: null as
 		| null
 		| {
 				id: number
+				progress: number
 				location: EPubCfi
 		  }[]
 }
@@ -73,8 +140,22 @@ const ReadingSettingsSlice = createSlice({
 			state.theme = payload
 			console.log('changeTheme', payload)
 		},
-
-		changeFontFamily: (state, { payload }: PayloadAction<ReaderFonts>) => {
+		changeLineHeight: (state, { payload }: PayloadAction<number>) => {
+			state.theme.body = {
+				...state.theme.body,
+				'line-height': ImportantProperty(payload)
+			}
+		},
+		changePadding: (state, { payload }: PayloadAction<number>) => {
+			state.theme.body = {
+				...state.theme.body,
+				padding: `${payload}px !important`
+			}
+		},
+		changeFontFamily: (
+			state,
+			{ payload }: PayloadAction<LineReaderFontsType>
+		) => {
 			state.fontFamily = payload
 			console.log('changeFontFamily', payload)
 		},
@@ -94,7 +175,9 @@ const ReadingSettingsSlice = createSlice({
 
 		addLastBookLocations: (
 			state,
-			{ payload }: PayloadAction<{ id: number; location: EPubCfi }>
+			{
+				payload
+			}: PayloadAction<{ id: number; location: EPubCfi; progress: number }>
 		) => {
 			console.log('addLastBookLocations', payload)
 			// write to state but if the id already exists, replace the location

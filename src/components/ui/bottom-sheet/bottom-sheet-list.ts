@@ -10,7 +10,6 @@ export enum BottomSheetListEnum {
 export interface SheetType {
 	name: keyof typeof BottomSheetListEnum
 	component: FC
-	background?: string
 }
 export const BottomSheetList: SheetType[] = [
 	{

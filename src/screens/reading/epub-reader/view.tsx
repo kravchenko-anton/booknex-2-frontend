@@ -1,7 +1,7 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import type { LineColorType } from '@/utils/color'
+import { ThemeColor } from '@/redux/reading-settings/reading-settings-slice'
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@/utils/dimensions'
 import type { ReactNode } from 'react'
 import React, { useEffect, useRef } from 'react'
@@ -53,6 +53,7 @@ export function View({
 	} = useTypedSelector(state => state.reader)
 	const { theme, flow, fontFamily, fontSize, lastBookLocations } =
 		useTypedSelector(state => state.readingSettings)
+
 	useEffect(() => {
 		if (goLocation) {
 			WebViewReference.current?.injectJavaScript(
@@ -115,10 +116,10 @@ export function View({
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
 			const lastLocation = lastBookLocations?.find(item => item.id === id)
-				?.location
+
 			if (!lastLocation) return
-			console.log('lastLocation', lastLocation)
-			goToLocation(lastLocation)
+			setProgress(lastLocation.progress)
+			goToLocation(lastLocation.location)
 		}
 
 		if (type === 'onDisplayError') {
@@ -138,6 +139,7 @@ export function View({
 			setProgress(progress)
 			addLastBookLocations({
 				id,
+				progress,
 				location: currentLocation.start.cfi
 			})
 		}
@@ -154,8 +156,8 @@ export function View({
 		}
 
 		if (type === 'onSelected') {
-			const { cfiRange, text } = parsedEvent
-			console.log('onSelected', cfiRange, text)
+			const { cfiRange, text, htmlElement } = parsedEvent
+			console.log('onSelected', htmlElement)
 		}
 
 		if (type === 'onMarkPressed') {
@@ -225,7 +227,7 @@ export function View({
 						{(isLoading || isRendering) && (
 							<RNView className='absolute bottom-0 left-0 right-0 top-0 z-50 m-0 h-full w-full bg-primary p-0'>
 								<BigLoader
-									backgroundColor={theme.body.background as LineColorType}
+									backgroundColor={ThemeColor(theme.body.background)}
 								/>
 							</RNView>
 						)}
@@ -262,7 +264,7 @@ export function View({
 								}}
 								style={{
 									width: WINDOW_WIDTH,
-									backgroundColor: theme.body.background,
+									backgroundColor: ThemeColor(theme.body.background),
 									height: WINDOW_HEIGHT,
 									zIndex: 1,
 									padding: 0,

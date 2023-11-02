@@ -17,7 +17,9 @@ const Genre = () => {
 		<GenreLayout title={genre.name} transientValue={50}>
 			<FlatList
 				horizontal
-				headerText={'Best Sellers'}
+				title={{
+					text: 'Best Sellers'
+				}}
 				data={genre.bestSellers}
 				renderItem={({ item: book }) => (
 					<BookCard
@@ -33,7 +35,9 @@ const Genre = () => {
 
 			<FlatList
 				horizontal
-				headerText={'Newest Books'}
+				title={{
+					text: 'Newest Books'
+				}}
 				data={genre.newestBooks}
 				renderItem={({ item: book }) => (
 					<RainbowBookCard
@@ -49,7 +53,9 @@ const Genre = () => {
 			/>
 			<FlatList
 				horizontal
-				headerText={'Best Authors'}
+				title={{
+					text: 'Best Authors'
+				}}
 				data={genre.bestAuthors}
 				renderItem={({ item: author }) => (
 					<PressableContainer
@@ -63,23 +69,25 @@ const Genre = () => {
 				)}
 			/>
 			{genre.bestSellersFromSimilar.map(simular => (
-					<FlatList
-						key={simular.name}
-						headerText={removeEmoji(simular.name)}
-						horizontal
-						mt={30}
-						data={simular.majorBooks}
-						renderItem={({ item: book }) => (
-							<BookCard
-								onPress={() => navigate.Book(book.id)}
-								image={{
-									uri: book.picture,
-									size: 'medium'
-								}}
-							/>
-						)}
-					/>
-				))}
+				<FlatList
+					key={simular.name}
+					title={{
+						text: removeEmoji(simular.name)
+					}}
+					horizontal
+					mt={30}
+					data={simular.majorBooks}
+					renderItem={({ item: book }) => (
+						<BookCard
+							onPress={() => navigate.Book(book.id)}
+							image={{
+								uri: book.picture,
+								size: 'medium'
+							}}
+						/>
+					)}
+				/>
+			))}
 		</GenreLayout>
 	)
 }

@@ -1,12 +1,12 @@
 import type { FlatListProperties } from '@/components/ui/flatlist/flatlist-types'
 import { Title } from '@/components/ui/title/title'
+import { Color } from '@/utils/color'
 import { FlatList as DefaultFlatlist, View } from 'react-native'
 
 const FlatList = <T,>({
-	headerText,
+	title,
 	data = [],
 	elementSpacing = 12,
-	titleMb = 16,
 	contentContainerStyle,
 	mt = 24,
 	px = 8,
@@ -20,15 +20,16 @@ const FlatList = <T,>({
 				style={{
 					marginTop: mt,
 					paddingHorizontal: properties.horizontal ? px : 0,
-					marginBottom: titleMb
+					marginBottom: title?.mb ?? 12
 				}}
+				color={title?.color ?? Color.black}
 				size={22}
 				weight='semiBold'>
-				{headerText}
+				{title?.text}
 			</Title>
 			<DefaultFlatlist
 				data={data}
-				style={headerText ? style : [{ marginTop: mt }, style]}
+				style={title?.text ? style : [{ marginTop: mt }, style]}
 				ItemSeparatorComponent={() => (
 					<View
 						style={

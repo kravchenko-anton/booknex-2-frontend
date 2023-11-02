@@ -3,7 +3,6 @@ import type {
 	SheetType
 } from '@/components/ui/bottom-sheet/bottom-sheet-list'
 import { BottomSheetList } from '@/components/ui/bottom-sheet/bottom-sheet-list'
-import { Color } from '@/utils/color'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 // TODO: сделать слайс
@@ -17,15 +16,10 @@ const BottomSheetSlice = createSlice({
 	reducers: {
 		openBottomSheet(
 			state,
-			action: PayloadAction<
-				[keyof typeof BottomSheetListEnum, { background?: string }]
-			>
+			action: PayloadAction<keyof typeof BottomSheetListEnum>
 		) {
-			const [name, { background }] = action.payload
-			state.bottomSheet = {
-				...BottomSheetList.find(sheet => sheet.name === name),
-				background: background ?? Color.dust
-			} as SheetType
+			state.bottomSheet =
+				BottomSheetList.find(sheet => sheet.name === action.payload) || null
 		},
 		closeBottomSheet(state) {
 			state.bottomSheet = null

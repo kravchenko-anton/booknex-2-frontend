@@ -38,6 +38,7 @@ export interface Toc {
 }
 export interface WebviewMessage {
 	type: string
+	htmlElement: string
 	totalLocations: number
 	currentLocation: Location
 	progress: number

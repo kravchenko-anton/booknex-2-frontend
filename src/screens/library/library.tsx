@@ -23,7 +23,9 @@ const Library = () => {
 			<FlatList
 				mt={25}
 				scrollEnabled={false}
-				headerText={'Books'}
+				title={{
+					text: 'Books'
+				}}
 				data={library.books}
 				renderItem={({ item }) => (
 					<LibraryCard
@@ -40,7 +42,9 @@ const Library = () => {
 				mt={25}
 				className='mb-5'
 				scrollEnabled={false}
-				headerText={'Shelves'}
+				title={{
+					text: 'Shelves'
+				}}
 				data={library.shelves}
 				renderItem={({ item }) => (
 					<LibraryCard

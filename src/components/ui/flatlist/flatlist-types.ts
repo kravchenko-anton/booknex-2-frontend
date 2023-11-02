@@ -1,3 +1,4 @@
+import type { LineColorType } from '@/utils/color'
 import type {
 	FlatListProps as FlatListDefaultProperties,
 	ListRenderItem
@@ -25,9 +26,12 @@ export interface FlatListProperties<T>
 	> {
 	data: T[] | undefined
 	elementSpacing?: number
-	headerText?: string
+	title?: {
+		text: string
+		color?: LineColorType
+		mb?: number
+	}
 	mt?: number
 	px?: number
 	renderItem: ListRenderItem<T> | null
-	titleMb?: number
 }
