@@ -62,7 +62,9 @@ const Featured = () => {
 				)}
 			/>
 			<FlatList
-				headerText={'Best Sellers'}
+				title={{
+					text: 'Best Sellers'
+				}}
 				horizontal
 				data={catalog.bestSellers}
 				renderItem={({ item: book }) => (
@@ -89,7 +91,9 @@ const Featured = () => {
 				)}
 			/>
 			<FlatList
-				headerText={'New Releases'}
+				title={{
+					text: 'New Releases'
+				}}
 				horizontal
 				data={catalog.newReleases}
 				renderItem={({ item: book }) => (
@@ -102,7 +106,9 @@ const Featured = () => {
 			{catalog.genres.map(genre => (
 				<FlatList
 					key={genre.name}
-					headerText={removeEmoji(genre.name)}
+					title={{
+						text: removeEmoji(genre.name)
+					}}
 					horizontal
 					mt={30}
 					data={genre.majorBooks}
@@ -119,7 +125,9 @@ const Featured = () => {
 			))}
 
 			<FlatList
-				headerText={'In the same breath'}
+				title={{
+					text: 'In the same breath'
+				}}
 				horizontal
 				data={catalog.sameBreath}
 				renderItem={({ item: book }) => (

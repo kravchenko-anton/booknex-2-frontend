@@ -1,7 +1,7 @@
 import { useBottomSheet } from '@/components/ui/bottom-sheet/useBottomSheet'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import { ThemeColor } from '@/redux/reading-settings/reading-settings-slice'
 import { shadeBackground } from '@/screens/reading/settings/reading-ui'
+import { ThemeColor } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import { AnimatedView } from '@/types/component-types'
 import { SCREEN_HEIGHT } from '@/utils/dimensions'
 import { shadeRGBColor } from '@/utils/shade-color'
@@ -13,7 +13,7 @@ import { FadeIn, FadeOut } from 'react-native-reanimated'
 // TODO: улучшить тут код до иделала по производительности и тж
 const BottomSheet: FC = () => {
 	const { bottomSheet } = useTypedSelector(state => state.bottomSheet)
-	const { theme } = useTypedSelector(state => state.readingSettings)
+	const { colorScheme } = useTypedSelector(state => state.readingSettings)
 	const { bottomSheetStyle, gesture, touch } = useBottomSheet(!!bottomSheet)
 	if (!bottomSheet) return null
 	const { component: Component } = bottomSheet
@@ -33,8 +33,9 @@ const BottomSheet: FC = () => {
 						{
 							top: SCREEN_HEIGHT,
 							height: SCREEN_HEIGHT,
+							// во первых сделать чтобы сразу показывался весь контент и при слайде вниз он сразу закрывался, ток если фул то не, и сделать динамический бг в зависимости от того, где чел находиться
 							backgroundColor: shadeRGBColor(
-								ThemeColor(theme.body.background),
+								ThemeColor(colorScheme.theme.body.background),
 								shadeBackground
 							)
 						},

@@ -19,7 +19,7 @@ export function Reader({ src, id, ...rest }: ReaderProperties) {
 	const { downloadFile } = useFileSystem()
 
 	const { setIsLoading } = useAction()
-	const { flow, theme } = useTypedSelector(state => state.readingSettings)
+	const { flow, colorScheme } = useTypedSelector(state => state.readingSettings)
 	const { injectWebVieWVariables } = useInjectWebVieWVariables()
 	const [template, setTemplate] = useState<string | null>(null)
 	const [templateUrl, setTemplateUrl] = useState<string | null>(null)
@@ -67,7 +67,7 @@ export function Reader({ src, id, ...rest }: ReaderProperties) {
 								type: SourceType.BASE64,
 								book: src,
 								flow,
-								theme,
+								theme: colorScheme.theme,
 								enableSelection: true
 							})
 						)
@@ -81,7 +81,7 @@ export function Reader({ src, id, ...rest }: ReaderProperties) {
 								type: SourceType.BINARY,
 								book: src,
 								flow,
-								theme,
+								theme: colorScheme.theme,
 								enableSelection: true
 							})
 						)
@@ -105,7 +105,7 @@ export function Reader({ src, id, ...rest }: ReaderProperties) {
 								type: sourceType,
 								book: src,
 								flow,
-								theme,
+								theme: colorScheme.theme,
 								enableSelection: true
 							})
 						)
@@ -125,7 +125,7 @@ export function Reader({ src, id, ...rest }: ReaderProperties) {
 								type: sourceType,
 								book: bookFileUri,
 								flow,
-								theme,
+								theme: colorScheme.theme,
 								enableSelection: true
 							})
 						)

@@ -27,11 +27,86 @@ export type Location = {
 
 export type Mark = 'highlight' | 'underline'
 
-export type FontSize = string
-
 export type EPubCfi = string
 
-export type Theme = Record<string, Record<string, string>>
+export type Theme = {
+	body: {
+		background: string
+	}
+	i: {
+		color: string
+	}
+	span: {
+		color: string
+	}
+	p: {
+		color: string
+	}
+	li: {
+		color: string
+	}
+	a: {
+		color: string
+		'font-weight': string
+		textDecoration: string
+		transition: string
+		'font-style': string
+	}
+	h1: {
+		'font-weight': string
+		color: string
+		'font-size': string
+	}
+	h2: {
+		'font-weight': string
+		color: string
+		'font-size': string
+	}
+	h3: {
+		'font-weight': string
+		color: string
+		'font-size': string
+	}
+	h4: {
+		color: string
+		'font-weight': string
+		'font-size': string
+	}
+	h5: {
+		color: string
+		'font-weight': string
+		'font-size': string
+	}
+	h6: {
+		color: string
+		'font-weight': string
+		'font-size': string
+	}
+	'::selection': {
+		background: string
+		color: string
+	}
+	ul: {
+		color: string
+		'list-style-type': string
+	}
+	ol: {
+		color: string
+		'list-style-type': string
+	}
+	strong: {
+		color: string
+		'font-weight': string
+	}
+	em: {
+		color: string
+		fontStyle: string
+	}
+	b: {
+		'font-weight': string
+		color: string
+	}
+}
 export interface Toc {
 	href: string
 	label: string

@@ -9,6 +9,7 @@ export interface FlatListProperties<T>
 		FlatListDefaultProperties<T>,
 		| 'horizontal'
 		| 'onEndReached'
+		| 'onLayout'
 		| 'ListHeaderComponent'
 		| 'ListEmptyComponent'
 		| 'keyExtractor'

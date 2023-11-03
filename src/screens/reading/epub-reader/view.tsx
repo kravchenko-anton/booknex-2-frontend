@@ -1,7 +1,10 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import { ThemeColor } from '@/redux/reading-settings/reading-settings-slice'
+import {
+	ImportantProperty,
+	ThemeColor
+} from '@/screens/reading/settings/sheet/reading/theme-pack'
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@/utils/dimensions'
 import type { ReactNode } from 'react'
 import React, { useEffect, useRef } from 'react'
@@ -51,8 +54,15 @@ export function View({
 		goLocation,
 		currentLocation: stateCurrentLocation
 	} = useTypedSelector(state => state.reader)
-	const { theme, flow, fontFamily, fontSize, lastBookLocations } =
-		useTypedSelector(state => state.readingSettings)
+	const {
+		colorScheme,
+		padding,
+		lineHeight,
+		flow,
+		fontFamily,
+		fontSize,
+		lastBookLocations
+	} = useTypedSelector(state => state.readingSettings)
 
 	useEffect(() => {
 		if (goLocation) {
@@ -86,11 +96,18 @@ export function View({
 
 	useEffect(() => {
 		WebViewReference.current?.injectJavaScript(`
-       rendition.themes.register({ theme: ${JSON.stringify(theme)} });
+       rendition.themes.register({ theme: ${JSON.stringify({
+					...colorScheme.theme,
+					body: {
+						...colorScheme.theme.body,
+						padding: ImportantProperty(padding),
+						'line-height': ImportantProperty(lineHeight)
+					} as { background: string }
+				})} });
        rendition.themes.select('theme');
        rendition.views().forEach(view => view.pane ? view.pane.render() : null); true;
      `)
-	}, [theme])
+	}, [colorScheme.theme, lineHeight, padding])
 
 	useEffect(() => {
 		WebViewReference.current?.injectJavaScript(
@@ -156,8 +173,8 @@ export function View({
 		}
 
 		if (type === 'onSelected') {
-			const { cfiRange, text, htmlElement } = parsedEvent
-			console.log('onSelected', htmlElement)
+			const { cfiRange, text } = parsedEvent
+			console.log('onSelected', cfiRange, text)
 		}
 
 		if (type === 'onMarkPressed') {
@@ -227,7 +244,9 @@ export function View({
 						{(isLoading || isRendering) && (
 							<RNView className='absolute bottom-0 left-0 right-0 top-0 z-50 m-0 h-full w-full bg-primary p-0'>
 								<BigLoader
-									backgroundColor={ThemeColor(theme.body.background)}
+									backgroundColor={ThemeColor(
+										colorScheme.theme.body.background
+									)}
 								/>
 							</RNView>
 						)}
@@ -264,7 +283,9 @@ export function View({
 								}}
 								style={{
 									width: WINDOW_WIDTH,
-									backgroundColor: ThemeColor(theme.body.background),
+									backgroundColor: ThemeColor(
+										colorScheme.theme.body.background
+									),
 									height: WINDOW_HEIGHT,
 									zIndex: 1,
 									padding: 0,

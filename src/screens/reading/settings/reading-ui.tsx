@@ -3,11 +3,10 @@ import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import { ThemeColor } from '@/redux/reading-settings/reading-settings-slice'
 import { useReadingAnimation } from '@/screens/reading/settings/reading-ui-animation'
+import { ThemeColor } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import { AnimatedView } from '@/types/component-types'
 import type { LineColorType } from '@/utils/color'
-import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade-color'
 import { StatusBar } from 'expo-status-bar'
 import type { FC } from 'react'
@@ -21,8 +20,7 @@ const ReadingUi: FC = () => {
 	const { openBottomSheet } = useAction()
 	const { progress } = useTypedSelector(state => state.reader)
 	const { visible } = useTypedSelector(state => state.readingUi)
-	const { theme } = useTypedSelector(state => state.readingSettings)
-
+	const { colorScheme } = useTypedSelector(state => state.readingSettings)
 	const { headerAnimation, footerAnimation } = useReadingAnimation(visible)
 	return (
 		<View className='absolute h-screen w-full'>
@@ -38,26 +36,26 @@ const ReadingUi: FC = () => {
 					name={'arrow-left'}
 					backgroundColor={
 						shadeRGBColor(
-							ThemeColor(theme.body.background),
+							ThemeColor(colorScheme.theme.body.background),
 							shadeBackground
 						) as LineColorType
 					}
 					size={'medium'}
 					className='w-[50px]'
 					onPress={() => goBack()}
-					color={ThemeColor(theme.p.color)}
+					color={ThemeColor(colorScheme.theme.p.color)}
 				/>
 				<AnimatedIcon
 					name={'kebab-horizontal'}
 					backgroundColor={
 						shadeRGBColor(
-							ThemeColor(theme.body.background),
+							ThemeColor(colorScheme.theme.body.background),
 							shadeBackground
 						) as LineColorType
 					}
 					className='w-[50px]'
 					size={'medium'}
-					color={ThemeColor(theme.p.color)}
+					color={ThemeColor(colorScheme.theme.p.color)}
 				/>
 			</AnimatedView>
 
@@ -66,7 +64,7 @@ const ReadingUi: FC = () => {
 					footerAnimation,
 					{
 						backgroundColor: shadeRGBColor(
-							ThemeColor(theme.body.background),
+							ThemeColor(colorScheme.theme.body.background),
 							shadeBackground
 						)
 					}
@@ -76,35 +74,41 @@ const ReadingUi: FC = () => {
 				<AnimatedIcon
 					name='quote'
 					size='large'
-					color={ThemeColor(theme.p.color) as LineColorType}
+					color={ThemeColor(colorScheme.theme.p.color) as LineColorType}
 					className='pl-0'
 				/>
 				<AnimatedIcon
 					name='search'
 					size='large'
-					color={ThemeColor(theme.p.color)}
+					color={ThemeColor(colorScheme.theme.p.color)}
 				/>
 				<Title
 					size={24}
 					center
 					weight={'bold'}
-					color={ThemeColor(theme.a.color)}>
+					color={ThemeColor(colorScheme.theme.a.color)}>
 					{(progress || 0) + '%'}
 				</Title>
 				<AnimatedIcon
 					onPress={() => openBottomSheet('readingSettings')}
 					name='typography'
 					size='large'
-					color={ThemeColor(theme.p.color)}
+					color={ThemeColor(colorScheme.theme.p.color)}
 				/>
 				<AnimatedIcon
 					name='note'
 					size='large'
 					className='pr-0'
-					color={ThemeColor(theme.p.color)}
+					color={ThemeColor(colorScheme.theme.p.color)}
 				/>
 			</AnimatedView>
-			<StatusBar backgroundColor={Color.white} />
+			{
+				// решить что делать с статус баром чтобы адаптивно подстраивался цвет
+			}
+			<StatusBar
+				style={colorScheme.statusBar}
+				backgroundColor={colorScheme.theme.body.background}
+			/>
 		</View>
 	)
 }
