@@ -54,7 +54,8 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 'error',
 		'@typescript-eslint/no-extra-non-null-assertion': 'error',
 		'max-params': ['error', 4],
-		'arrow-body-style': ['error', 'as-needed'],
+		// TODO: enable this rule when it will be fixed
+		'arrow-body-style': ['off', 'as-needed'],
 		complexity: ['error', 10],
 		'no-nested-ternary': 'error',
 		'no-unneeded-ternary': 'error',

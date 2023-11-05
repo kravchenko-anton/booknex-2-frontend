@@ -72,7 +72,7 @@ const ReadingUi: FC = () => {
 				className='h-18 absolute bottom-0 z-50 w-full flex-1 flex-row items-center justify-between   px-4'>
 				{/* //TODO: сделать тут слайдер*/}
 				<AnimatedIcon
-					name='quote'
+					name='list-unordered'
 					size='large'
 					color={ThemeColor(colorScheme.theme.p.color) as LineColorType}
 					className='pl-0'

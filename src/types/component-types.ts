@@ -1,3 +1,4 @@
+import ScrollView from '@/components/ui/scroll-view/scroll-view'
 import type {
 	FlatListProps,
 	ImageProps,
@@ -15,9 +16,16 @@ export type ViewDefaultProperties = Pick<
 	ViewProps,
 	'className' | 'style' | 'onLayout' | 'pointerEvents' | 'onMagicTap'
 >
+export const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
+
 export type FlatlistDefaultProperties<T> = Pick<
 	FlatListProps<T>,
 	| 'horizontal'
+	| 'onScroll'
+	| 'onLayout'
+	| 'onScrollBeginDrag'
+	| 'onScrollEndDrag'
+	| 'onEndReachedThreshold'
 	| 'onEndReached'
 	| 'ListEmptyComponent'
 	| 'keyExtractor'
@@ -31,7 +39,6 @@ export type FlatlistDefaultProperties<T> = Pick<
 	| 'contentContainerStyle'
 	| 'renderItem'
 >
-
 export type PressableDefaultProperties = Pick<
 	PressableProps,
 	| 'onLayout'

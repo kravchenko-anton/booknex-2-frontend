@@ -2,6 +2,7 @@ import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { useFileSystem } from '@/screens/reading/epub-reader/hooks/useFileSystem/useFileSystem'
+import type { LineColorType } from '@/utils/color'
 import * as FileSystem from 'expo-file-system'
 import React, { useEffect, useState } from 'react'
 import { useInjectWebVieWVariables } from './hooks/useInjectWebviewVariables'
@@ -24,11 +25,11 @@ export function Reader({ src, id, ...rest }: ReaderProperties) {
 	const [template, setTemplate] = useState<string | null>(null)
 	const [templateUrl, setTemplateUrl] = useState<string | null>(null)
 	const [allowedUris, setAllowedUris] = useState<string | null>(null)
-
+	const { isLoading } = useTypedSelector(state => state.reader)
 	useEffect(() => {
 		;(async () => {
 			setIsLoading(true)
-
+			console.log('useEffect', flow)
 			const jszipFileUri = `${FileSystem.documentDirectory}jszip.min.js`
 			const epubjsFileUri = `${FileSystem.documentDirectory}epub.min.js`
 
@@ -156,11 +157,14 @@ export function Reader({ src, id, ...rest }: ReaderProperties) {
 		}
 	}, [template])
 
-	if (!templateUrl || !allowedUris) {
-		return <BigLoader />
+	if (!templateUrl || !allowedUris || isLoading) {
+		return (
+			<BigLoader
+				backgroundColor={colorScheme.theme.body.background as LineColorType}
+			/>
+		)
 	}
-	console.log('render')
-	// TODO: сделать меньше рендеров
+
 	return (
 		<View
 			id={id}

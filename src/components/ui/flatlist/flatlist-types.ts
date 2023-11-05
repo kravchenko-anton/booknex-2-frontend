@@ -1,31 +1,11 @@
+import type { FlatlistDefaultProperties } from '@/types/component-types'
 import type { LineColorType } from '@/utils/color'
-import type {
-	FlatListProps as FlatListDefaultProperties,
-	ListRenderItem
-} from 'react-native'
+import type { RefObject } from 'react'
+import type { FlatList, ListRenderItem } from 'react-native'
 
-export interface FlatListProperties<T>
-	extends Pick<
-		FlatListDefaultProperties<T>,
-		| 'horizontal'
-		| 'onEndReached'
-		| 'onLayout'
-		| 'ListHeaderComponent'
-		| 'ListEmptyComponent'
-		| 'keyExtractor'
-		| 'style'
-		| 'data'
-		| 'className'
-		| 'snapToInterval'
-		| 'snapToAlignment'
-		| 'extraData'
-		| 'inverted'
-		| 'scrollEnabled'
-		| 'numColumns'
-		| 'contentContainerStyle'
-		| 'columnWrapperStyle'
-	> {
+export interface FlatListProperties<T> extends FlatlistDefaultProperties<T> {
 	data: T[] | undefined
+	Ref?: RefObject<FlatList<T>>
 	elementSpacing?: number
 	title?: {
 		text: string

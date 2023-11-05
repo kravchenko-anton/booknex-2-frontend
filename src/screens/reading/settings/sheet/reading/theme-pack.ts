@@ -49,33 +49,27 @@ export const themeTemplate = ({
 	},
 	h1: {
 		'font-weight': boldTextStyle,
-		color: ImportantProperty(primaryColor),
-		'font-size': '36px !important'
+		color: ImportantProperty(primaryColor)
 	},
 	h2: {
 		'font-weight': boldTextStyle,
-		color: ImportantProperty(primaryColor),
-		'font-size': '32px !important'
+		color: ImportantProperty(primaryColor)
 	},
 	h3: {
 		'font-weight': boldTextStyle,
-		color: ImportantProperty(primaryColor),
-		'font-size': '28px !important'
+		color: ImportantProperty(primaryColor)
 	},
 	h4: {
 		color: ImportantProperty(primaryColor),
-		'font-weight': boldTextStyle,
-		'font-size': '24px !important'
+		'font-weight': boldTextStyle
 	},
 	h5: {
 		color: ImportantProperty(primaryColor),
-		'font-weight': boldTextStyle,
-		'font-size': '20px !important'
+		'font-weight': boldTextStyle
 	},
 	h6: {
 		color: ImportantProperty(primaryColor),
-		'font-weight': boldTextStyle,
-		'font-size': '18px !important'
+		'font-weight': boldTextStyle
 	},
 	'::selection': {
 		background: highlight.background,
@@ -127,12 +121,14 @@ export interface ThemePackType {
 		| 'kanagawa'
 		| 'pink-owl'
 	statusBar: 'dark' | 'light'
+	colorPalette: string[]
 	theme: Theme
 }
 
 export const defaultTheme = {
 	title: 'Light',
 	slug: 'light',
+	colorPalette: [Color.white, Color.black, Color.primary, Color.secondary],
 	statusBar: 'dark',
 	theme: {
 		body: {
@@ -159,36 +155,30 @@ export const defaultTheme = {
 		},
 		h1: {
 			'font-weight': 'bold !important',
-			color: Color.primary + ' !important',
-			'font-size': '36px !important'
+			color: Color.primary + ' !important'
 		},
 		h2: {
 			'font-weight': 'bold !important',
-			color: Color.primary + ' !important',
-			'font-size': '32px !important'
+			color: Color.primary + ' !important'
 		},
 		h3: {
 			'font-weight': 'bold !important',
-			color: Color.primary + ' !important',
-			'font-size': '28px !important'
+			color: Color.primary + ' !important'
 		},
 		h4: {
 			color: Color.primary + ' !important',
-			'font-weight': 'bold !important',
-			'font-size': '24px !important'
+			'font-weight': 'bold !important'
 		},
 		h5: {
 			color: Color.primary + ' !important',
-			'font-weight': 'bold !important',
-			'font-size': '20px !important'
+			'font-weight': 'bold !important'
 		},
 		h6: {
 			color: Color.primary + ' !important',
-			'font-weight': 'bold !important',
-			'font-size': '18px !important'
+			'font-weight': 'bold !important'
 		},
 		'::selection': {
-			background: Color.dust,
+			background: '#214283',
 			color: Color.white
 		},
 		ul: {
@@ -219,13 +209,14 @@ export const themePack: ThemePackType[] = [
 		title: 'Light',
 		slug: 'light',
 		statusBar: 'dark',
+		colorPalette: [Color.white, Color.black, Color.primary, Color.secondary],
 		theme: themeTemplate({
 			backgroundColor: Color.white,
 			textColor: Color.black,
 			primaryColor: Color.primary,
 			secondaryColor: Color.secondary,
 			highlight: {
-				background: Color.dust,
+				background: '#214283',
 				color: Color.white
 			}
 		})
@@ -234,6 +225,7 @@ export const themePack: ThemePackType[] = [
 		title: 'Dark',
 		slug: 'dark',
 		statusBar: 'light',
+		colorPalette: ['#202020', '#fff', '#4d92d3', '#cf8e6d'],
 		theme: themeTemplate({
 			backgroundColor: '#202020',
 			textColor: '#fff',
@@ -249,11 +241,12 @@ export const themePack: ThemePackType[] = [
 		title: 'Sepia',
 		slug: 'sepia',
 		statusBar: 'dark',
+		colorPalette: ['#f4ecd8', '#2d2a32', '#606c38', '#684E32'],
 		theme: themeTemplate({
 			backgroundColor: '#f4ecd8',
 			textColor: '#2d2a32',
-			primaryColor: '#f3c623',
-			secondaryColor: '#710000',
+			primaryColor: '#606c38',
+			secondaryColor: '#684E32',
 			highlight: {
 				background: '#007f5f',
 				color: '#fff'
@@ -263,6 +256,7 @@ export const themePack: ThemePackType[] = [
 	{
 		title: 'Dark purple',
 		slug: 'dark-purple',
+		colorPalette: ['#1f1d2e', '#d3cedc', '#bb77b0', '#ebbcba'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#1f1d2e',
@@ -278,6 +272,7 @@ export const themePack: ThemePackType[] = [
 	{
 		title: 'Dark green',
 		slug: 'dark-green',
+		colorPalette: ['#1d2021', '#c2ccd7', '#fb4934', '#ffc66d'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#1d2021' as string,
@@ -293,6 +288,7 @@ export const themePack: ThemePackType[] = [
 	{
 		title: 'Tokyo night',
 		slug: 'tokyo-night',
+		colorPalette: ['#1a1b26', '#b7bcd9', '#72d7c8', '#ffc66d'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#1a1b26',
@@ -308,6 +304,7 @@ export const themePack: ThemePackType[] = [
 	{
 		title: 'Solarized',
 		slug: 'solarized',
+		colorPalette: ['#002b36', '#a8b4b5', '#b58900', '#cb4b16'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#002b36',
@@ -324,6 +321,7 @@ export const themePack: ThemePackType[] = [
 		title: 'Blue night',
 		slug: 'blue-night',
 		statusBar: 'light',
+		colorPalette: ['#121726', '#c2c8db', '#24b5a8', '#3398d3'],
 		theme: themeTemplate({
 			backgroundColor: '#121726',
 			textColor: '#c2c8db',
@@ -339,6 +337,7 @@ export const themePack: ThemePackType[] = [
 		title: 'Kanagawa',
 		slug: 'kanagawa',
 		statusBar: 'light',
+		colorPalette: ['#1f1f28', '#dcd7ba', '#957fb8', '#ff4848'],
 		theme: themeTemplate({
 			backgroundColor: '#1f1f28',
 			textColor: '#dcd7ba',
@@ -353,6 +352,7 @@ export const themePack: ThemePackType[] = [
 	{
 		title: 'Pink owl',
 		slug: 'pink-owl',
+		colorPalette: ['#13111b', '#dcd7ba', '#ff699a', '#e7de79'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#13111b',

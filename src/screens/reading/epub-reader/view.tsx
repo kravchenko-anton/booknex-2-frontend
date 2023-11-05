@@ -50,7 +50,6 @@ export function View({
 	const {
 		isRendering,
 		searchTerm,
-		isLoading,
 		goLocation,
 		currentLocation: stateCurrentLocation
 	} = useTypedSelector(state => state.reader)
@@ -59,11 +58,17 @@ export function View({
 		padding,
 		lineHeight,
 		flow,
-		fontFamily,
+		font,
 		fontSize,
 		lastBookLocations
 	} = useTypedSelector(state => state.readingSettings)
-
+	useEffect(() => {
+		console.log(`${fontSize}px`, 'render')
+		WebViewReference.current?.injectJavaScript(`
+			 rendition.themes.fontSize('${fontSize}px'); true
+		 `)
+		console.log(`${fontSize}px`, 'render end')
+	}, [fontSize])
 	useEffect(() => {
 		if (goLocation) {
 			WebViewReference.current?.injectJavaScript(
@@ -100,7 +105,7 @@ export function View({
 					...colorScheme.theme,
 					body: {
 						...colorScheme.theme.body,
-						padding: ImportantProperty(padding),
+						padding: ImportantProperty(`${padding}px`),
 						'line-height': ImportantProperty(lineHeight)
 					} as { background: string }
 				})} });
@@ -111,15 +116,10 @@ export function View({
 
 	useEffect(() => {
 		WebViewReference.current?.injectJavaScript(
-			`rendition.themes.font('${fontFamily}');`
+			`rendition.themes.font('${font.fontFamily}');`
 		)
-	}, [fontFamily])
+	}, [font])
 
-	useEffect(() => {
-		WebViewReference.current?.injectJavaScript(`
-			 rendition.themes.fontSize('${fontSize}'); true
-		 `)
-	}, [fontSize])
 	const onMessage = (event: WebViewMessageEvent) => {
 		const parsedEvent = JSON.parse(event.nativeEvent.data) as WebviewMessage
 		const { type } = parsedEvent
@@ -132,8 +132,10 @@ export function View({
 			setTotalLocations(totalLocations)
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
+			WebViewReference.current?.injectJavaScript(`
+			 rendition.themes.fontSize('${fontSize}px'); true
+		 `)
 			const lastLocation = lastBookLocations?.find(item => item.id === id)
-
 			if (!lastLocation) return
 			setProgress(lastLocation.progress)
 			goToLocation(lastLocation.location)
@@ -241,7 +243,7 @@ export function View({
 						}
 					}}>
 					<RNView className='m-0 h-full w-full items-center justify-center p-0'>
-						{(isLoading || isRendering) && (
+						{isRendering && (
 							<RNView className='absolute bottom-0 left-0 right-0 top-0 z-50 m-0 h-full w-full bg-primary p-0'>
 								<BigLoader
 									backgroundColor={ThemeColor(

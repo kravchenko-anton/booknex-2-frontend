@@ -6,6 +6,7 @@ import { FlatList as DefaultFlatlist, View } from 'react-native'
 const FlatList = <T,>({
 	title,
 	data = [],
+	Ref,
 	elementSpacing = 12,
 	contentContainerStyle,
 	mt = 24,
@@ -29,6 +30,7 @@ const FlatList = <T,>({
 			</Title>
 			<DefaultFlatlist
 				data={data}
+				ref={Ref}
 				style={title?.text ? style : [{ marginTop: mt }, style]}
 				ItemSeparatorComponent={() => (
 					<View

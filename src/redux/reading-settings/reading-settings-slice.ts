@@ -1,38 +1,78 @@
 import type { EPubCfi } from '@/screens/reading/epub-reader/types'
 import type { ThemePackType } from '@/screens/reading/settings/sheet/reading/theme-pack'
-import { defaultTheme } from '@/screens/reading/settings/sheet/reading/theme-pack'
+import {
+	defaultTheme,
+	themePack
+} from '@/screens/reading/settings/sheet/reading/theme-pack'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
 export enum ReaderFontsEnum {
-	CourierNew = 'Courier New, Courier, monospace',
+	Courier = 'Courier New, Courier, monospace',
 	Arial = 'Arial, Helvetica, sans-serif',
-	TimesNewRoman = 'Times New Roman, Times, serif'
+	TimesRoman = 'Times New Roman, Times, serif'
 }
-export type LineReaderFontsType =
-	(typeof ReaderFontsEnum)[keyof typeof ReaderFontsEnum]
 export const ReaderFont = [
 	{
-		title: 'Courier New',
-		fontFamily: ReaderFontsEnum.CourierNew
+		title: 'Courier',
+		fontFamily: ReaderFontsEnum.Courier
 	},
 	{
 		title: 'Arial',
 		fontFamily: ReaderFontsEnum.Arial
 	},
 	{
-		title: 'Times New Roman',
-		fontFamily: ReaderFontsEnum.TimesNewRoman
+		title: 'Time Roman',
+		fontFamily: ReaderFontsEnum.TimesRoman
+	},
+	{
+		title: 'Courier',
+		fontFamily: ReaderFontsEnum.Courier
+	},
+	{
+		title: 'Arial',
+		fontFamily: ReaderFontsEnum.Arial
+	},
+	{
+		title: 'Time Roman',
+		fontFamily: ReaderFontsEnum.TimesRoman
+	},
+	{
+		title: 'Courier',
+		fontFamily: ReaderFontsEnum.Courier
+	},
+	{
+		title: 'Arial',
+		fontFamily: ReaderFontsEnum.Arial
+	},
+	{
+		title: 'Time Roman',
+		fontFamily: ReaderFontsEnum.TimesRoman
+	},
+	{
+		title: 'Courier',
+		fontFamily: ReaderFontsEnum.Courier
+	},
+	{
+		title: 'Arial',
+		fontFamily: ReaderFontsEnum.Arial
+	},
+	{
+		title: 'Time Roman',
+		fontFamily: ReaderFontsEnum.TimesRoman
 	}
 ]
 
 const initialState = {
 	colorScheme: defaultTheme as ThemePackType,
-	fontFamily: 'Arial, Helvetica, sans-serif' as LineReaderFontsType,
+	font: {
+		title: 'Courier New',
+		fontFamily: ReaderFontsEnum.Courier
+	} as (typeof ReaderFont)[0],
 	fontSize: 14,
-	flow: 'scrolled' as 'paginated' | 'scrolled',
-	lineHeight: 1.3 as number,
-	padding: 14 as number,
+	flow: 'paginated' as 'paginated' | 'scrolled',
+	lineHeight: 1.3 as 1.3 | 1.5 | 1.8,
+	padding: 14 as 14 | 8 | 20,
 	lastBookLocations: null as
 		| null
 		| {
@@ -46,25 +86,28 @@ const ReadingSettingsSlice = createSlice({
 	name: 'readingSettings',
 	initialState,
 	reducers: {
-		changeTheme: (state, { payload }: PayloadAction<ThemePackType>) => {
-			state.colorScheme = payload
+		changeTheme: (state, { payload }: PayloadAction<ThemePackType['slug']>) => {
+			const theme = themePack.find(value => value.slug === payload)
+			if (payload === state.colorScheme.slug || !theme) return
+			state.colorScheme = theme
 			console.log('changeTheme', payload)
 		},
-		changeLineHeight: (state, { payload }: PayloadAction<number>) => {
+		changeLineHeight: (state, { payload }: PayloadAction<1.3 | 1.5 | 1.8>) => {
 			state.lineHeight = payload
 		},
-		changePadding: (state, { payload }: PayloadAction<number>) => {
+		changePadding: (state, { payload }: PayloadAction<14 | 8 | 20>) => {
 			state.padding = payload
 		},
 		changeFontFamily: (
 			state,
-			{ payload }: PayloadAction<LineReaderFontsType>
+			{ payload }: PayloadAction<(typeof ReaderFont)[number]>
 		) => {
-			state.fontFamily = payload
+			state.font = payload
 			console.log('changeFontFamily', payload)
 		},
 
 		changeFontSize: (state, { payload }: PayloadAction<number>) => {
+			if (payload <= 8 || payload >= 28) return
 			state.fontSize = payload
 			console.log('changeFontSize', payload)
 		},
@@ -74,7 +117,6 @@ const ReadingSettingsSlice = createSlice({
 			{ payload }: PayloadAction<'paginated' | 'scrolled'>
 		) => {
 			state.flow = payload
-			console.log('changeFlow', payload)
 		},
 
 		addLastBookLocations: (

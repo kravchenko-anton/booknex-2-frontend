@@ -55,32 +55,26 @@ export type Theme = {
 	h1: {
 		'font-weight': string
 		color: string
-		'font-size': string
 	}
 	h2: {
 		'font-weight': string
 		color: string
-		'font-size': string
 	}
 	h3: {
 		'font-weight': string
 		color: string
-		'font-size': string
 	}
 	h4: {
 		color: string
 		'font-weight': string
-		'font-size': string
 	}
 	h5: {
 		color: string
 		'font-weight': string
-		'font-size': string
 	}
 	h6: {
 		color: string
 		'font-weight': string
-		'font-size': string
 	}
 	'::selection': {
 		background: string
