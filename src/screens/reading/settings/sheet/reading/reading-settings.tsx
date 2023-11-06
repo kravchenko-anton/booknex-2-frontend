@@ -1,4 +1,5 @@
 import PressableContainer from '@/components/pressable-container/pressable-container'
+import { BottomSheetListEnum } from '@/components/ui/bottom-sheet/bottom-sheet-list'
 import Icon from '@/components/ui/icon/icon'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
@@ -25,10 +26,14 @@ const ReadingSettings: FC = () => {
 							<PressableContainer
 								key={`${theme.slug}-${theme.title}`}
 								style={{
-									backgroundColor: ThemeColor(theme.theme.body.background)
+									backgroundColor: ThemeColor(theme.theme.body.background),
+									borderColor:
+										colorScheme.slug === theme.slug
+											? ThemeColor(colorScheme.theme.p.color)
+											: ThemeColor(theme.theme.body.background)
 								}}
 								onPress={() => changeTheme(theme.slug)}
-								className='rounded-xl p-2 px-4'>
+								className='rounded-xl border-2 p-2 px-4'>
 								<Title
 									weight={'semiBold'}
 									size={18}
@@ -39,10 +44,13 @@ const ReadingSettings: FC = () => {
 						)
 					}),
 					<PressableContainer
+						key={'other theme'}
 						style={{
 							backgroundColor: '#1f1f28'
 						}}
-						onPress={() => openBottomSheet('selectTheme')}
+						onPress={() =>
+							openBottomSheet(BottomSheetListEnum.readerSelectTheme)
+						}
 						className='flex-row items-center rounded-xl p-2 px-4'>
 						<Title
 							color={'#dcd7ba' as LineColorType}

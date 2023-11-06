@@ -7,14 +7,26 @@ import { SCREEN_HEIGHT } from '@/utils/dimensions'
 import { shadeRGBColor } from '@/utils/shade-color'
 import { StatusBar } from 'expo-status-bar'
 import type { FC } from 'react'
+import { useEffect, useRef } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { GestureDetector } from 'react-native-gesture-handler'
+import type Animated from 'react-native-reanimated'
 import { FadeIn, FadeOut } from 'react-native-reanimated'
 // TODO: улучшить тут код до иделала по производительности и тж
 const BottomSheet: FC = () => {
 	const { bottomSheet } = useTypedSelector(state => state.bottomSheet)
 	const { colorScheme } = useTypedSelector(state => state.readingSettings)
-	const { bottomSheetStyle, gesture, touch } = useBottomSheet(!!bottomSheet)
+	const bottomSheetReference = useRef<Animated.View>(null)
+	const { bottomSheetStyle, toggle, gesture, touch } = useBottomSheet(
+		!!bottomSheet
+	)
+	useEffect(() => {
+		if (!bottomSheetReference.current) return
+		bottomSheetReference.current?.measure((x, y, width, height) => {
+			if (!height) return
+			toggle(height)
+		})
+	}, [toggle])
 	if (!bottomSheet) return null
 	const { component: Component } = bottomSheet
 	return (
@@ -29,11 +41,11 @@ const BottomSheet: FC = () => {
 			<StatusBar hidden={true} />
 			<GestureDetector gesture={gesture}>
 				<AnimatedView
+					ref={bottomSheetReference}
 					style={[
 						{
 							top: SCREEN_HEIGHT,
-							height: SCREEN_HEIGHT,
-							// во первых сделать чтобы сразу показывался весь контент и при слайде вниз он сразу закрывался, ток если фул то не, и сделать динамический бг в зависимости от того, где чел находиться
+							paddingBottom: 40,
 							backgroundColor: shadeRGBColor(
 								ThemeColor(colorScheme.theme.body.background),
 								shadeBackground
@@ -41,8 +53,8 @@ const BottomSheet: FC = () => {
 						},
 						bottomSheetStyle
 					]}
-					className='absolute z-50 w-full pt-4'>
-					<View className='mt-1 h-[6px] w-[50px] items-center justify-center self-center rounded-full bg-gray' />
+					className='absolute z-50 w-full pt-3.5'>
+					<View className='mb-2 mt-1 h-[6px] w-[50px] items-center justify-center self-center rounded-full bg-gray' />
 					<Component />
 				</AnimatedView>
 			</GestureDetector>

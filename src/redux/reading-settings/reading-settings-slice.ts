@@ -24,42 +24,6 @@ export const ReaderFont = [
 	{
 		title: 'Time Roman',
 		fontFamily: ReaderFontsEnum.TimesRoman
-	},
-	{
-		title: 'Courier',
-		fontFamily: ReaderFontsEnum.Courier
-	},
-	{
-		title: 'Arial',
-		fontFamily: ReaderFontsEnum.Arial
-	},
-	{
-		title: 'Time Roman',
-		fontFamily: ReaderFontsEnum.TimesRoman
-	},
-	{
-		title: 'Courier',
-		fontFamily: ReaderFontsEnum.Courier
-	},
-	{
-		title: 'Arial',
-		fontFamily: ReaderFontsEnum.Arial
-	},
-	{
-		title: 'Time Roman',
-		fontFamily: ReaderFontsEnum.TimesRoman
-	},
-	{
-		title: 'Courier',
-		fontFamily: ReaderFontsEnum.Courier
-	},
-	{
-		title: 'Arial',
-		fontFamily: ReaderFontsEnum.Arial
-	},
-	{
-		title: 'Time Roman',
-		fontFamily: ReaderFontsEnum.TimesRoman
 	}
 ]
 

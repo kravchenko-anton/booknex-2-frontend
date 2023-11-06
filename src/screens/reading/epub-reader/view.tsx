@@ -128,13 +128,26 @@ export function View({
 
 		if (type === 'onReady') {
 			const { totalLocations, currentLocation, progress } = parsedEvent
-			setIsRendering(false)
 			setTotalLocations(totalLocations)
 			setCurrentLocation(currentLocation)
 			setProgress(progress)
 			WebViewReference.current?.injectJavaScript(`
 			 rendition.themes.fontSize('${fontSize}px'); true
 		 `)
+			WebViewReference.current?.injectJavaScript(`
+       rendition.themes.register({ theme: ${JSON.stringify({
+					...colorScheme.theme,
+					body: {
+						...colorScheme.theme.body,
+						padding: ImportantProperty(`${padding}px`),
+						'line-height': ImportantProperty(lineHeight)
+					} as { background: string }
+				})} });
+       rendition.themes.select('theme');
+       rendition.views().forEach(view => view.pane ? view.pane.render() : null); true;
+     `)
+			setIsRendering(false)
+
 			const lastLocation = lastBookLocations?.find(item => item.id === id)
 			if (!lastLocation) return
 			setProgress(lastLocation.progress)

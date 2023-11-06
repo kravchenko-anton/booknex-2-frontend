@@ -14,10 +14,7 @@ const BottomSheetSlice = createSlice({
 	name: 'bottom-sheet',
 	initialState,
 	reducers: {
-		openBottomSheet(
-			state,
-			action: PayloadAction<keyof typeof BottomSheetListEnum>
-		) {
+		openBottomSheet(state, action: PayloadAction<BottomSheetListEnum>) {
 			state.bottomSheet =
 				BottomSheetList.find(sheet => sheet.name === action.payload) || null
 		},

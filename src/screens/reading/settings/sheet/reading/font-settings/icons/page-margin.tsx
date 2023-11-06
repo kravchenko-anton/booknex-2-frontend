@@ -21,7 +21,7 @@ const PageMarginIcon: FC<PageMarginIconProperties> = ({
 			.map((_, index) => {
 				return (
 					<View
-						key={index}
+						key={`${index} margin`}
 						className={LineStyle}
 						style={{
 							backgroundColor: backgroundColor

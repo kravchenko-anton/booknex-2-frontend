@@ -9,6 +9,9 @@ import type { FieldProperties } from './filed-types'
 const Field = <T extends Record<string, any>>({
 	wrapperStyle,
 	wrapperClassName,
+	backgroundColor = Color.dust,
+	borderColor = Color.secondary,
+	color = Color.secondary,
 	...properties
 }: FieldProperties<T>): JSX.Element | null => (
 	<Controller
@@ -21,8 +24,8 @@ const Field = <T extends Record<string, any>>({
 				<View
 					style={[
 						{
-							borderColor: error ? Color.alert : Color.secondary,
-							backgroundColor: Color.dust
+							borderColor: error ? Color.alert : borderColor,
+							backgroundColor
 						},
 						wrapperStyle
 					]}
@@ -33,7 +36,7 @@ const Field = <T extends Record<string, any>>({
 						onChangeText={onChange}
 						keyboardAppearance='default'
 						renderToHardwareTextureAndroid={true}
-						placeholderTextColor={Color.secondary}
+						placeholderTextColor={color}
 						defaultValue={properties.defaultValue}
 						value={(value ?? '').toString()}
 						className='text-base text-secondary'

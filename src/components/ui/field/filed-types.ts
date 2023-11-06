@@ -15,6 +15,9 @@ export interface FieldProperties<T extends FieldValues>
 	control: Control<T>
 	keyboardType?: KeyboardTypeOptions
 	wrapperStyle?: Style
+	backgroundColor?: string
+	borderColor?: string
+	color?: string
 	wrapperClassName?: string
 	name: FieldPath<T>
 	rules?: Omit<

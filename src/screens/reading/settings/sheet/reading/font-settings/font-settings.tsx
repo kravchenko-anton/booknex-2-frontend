@@ -2,6 +2,7 @@ import Icon from '@/components/ui/icon/icon'
 import Select from '@/components/ui/select/select'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
+import type { ReaderFontsEnum } from '@/redux/reading-settings/reading-settings-slice'
 import { ReaderFont } from '@/redux/reading-settings/reading-settings-slice'
 import LineHeightIcon from '@/screens/reading/settings/sheet/reading/font-settings/icons/line-height'
 import PageMarginIcon from '@/screens/reading/settings/sheet/reading/font-settings/icons/page-margin'
@@ -14,14 +15,18 @@ const FontSettings: FC = () => {
 	const { colorScheme, padding, lineHeight, font, fontSize } = useTypedSelector(
 		state => state.readingSettings
 	)
-	const { changePadding, changeLineHeight, changeFontSize } = useAction()
+	const { changePadding, changeLineHeight, changeFontFamily, changeFontSize } =
+		useAction()
 	console.log(FontSettings)
 	return (
 		<View className='px-4'>
 			<View className='mt-4 w-full flex-row  items-center justify-between'>
 				<Select
 					onSelect={value => {
-						console.log(value)
+						changeFontFamily({
+							fontFamily: value.value as ReaderFontsEnum,
+							title: value.label
+						})
 					}}
 					color={ThemeColor(colorScheme.theme.p.color)}
 					backgroundColor={ThemeColor(colorScheme.theme.body.background)}

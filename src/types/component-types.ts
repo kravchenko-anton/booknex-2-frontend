@@ -1,4 +1,3 @@
-import ScrollView from '@/components/ui/scroll-view/scroll-view'
 import type {
 	FlatListProps,
 	ImageProps,
@@ -7,7 +6,7 @@ import type {
 	TextProps,
 	ViewProps
 } from 'react-native'
-import { Pressable, View } from 'react-native'
+import { Pressable, ScrollView, View } from 'react-native'
 import Animated from 'react-native-reanimated'
 
 export const AnimatedPressable = Animated.createAnimatedComponent(Pressable)

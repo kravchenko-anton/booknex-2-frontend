@@ -15,7 +15,7 @@ import {
 } from 'react-native-reanimated'
 
 interface SelectProperties extends ViewDefaultProperties {
-	onSelect: (value: string) => void
+	onSelect: (value: { value: string; label: string }) => void
 	activeTitle: string
 	elements: {
 		value: string
@@ -27,6 +27,7 @@ interface SelectProperties extends ViewDefaultProperties {
 }
 const Select: FC<SelectProperties> = ({ ...properties }) => {
 	const active = useSharedValue(false)
+	// TODO: доделать анимацию попапа и много другого по оптимизации
 	const popupAnimation = useAnimatedStyle(() => {
 		return {
 			opacity: withTiming(active.value ? 1 : 0),
@@ -61,22 +62,24 @@ const Select: FC<SelectProperties> = ({ ...properties }) => {
 				// TODO: сделать useOutsideClick
 			}
 			<AnimatedScrollView
-				style={popupAnimation}
-				className='absolute left-0 z-50 mt-1 rounded-xl bg-gray'>
+				style={[
+					{
+						backgroundColor: ThemeColor(
+							properties.backgroundColor || 'transparent'
+						)
+					},
+					popupAnimation
+				]}
+				className='absolute left-0 z-[100] mt-1 max-h-[300px] rounded-lg'>
 				{properties.elements.map(element => {
 					return (
 						<Pressable
 							onPress={() => {
-								properties.onSelect(element.value)
+								properties.onSelect(element)
 								active.value = false
 							}}
 							key={`${element.value}-${element.label}`}
-							className='flex-row items-center justify-between p-2'
-							style={{
-								backgroundColor: ThemeColor(
-									properties.backgroundColor || 'transparent'
-								)
-							}}>
+							className='flex-row items-center justify-between p-2 '>
 							<Title
 								weight={'bold'}
 								color={(properties.color || Color.white) as LineColorType}>

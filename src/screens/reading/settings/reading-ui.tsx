@@ -1,3 +1,4 @@
+import { BottomSheetListEnum } from '@/components/ui/bottom-sheet/bottom-sheet-list'
 import AnimatedIcon from '@/components/ui/icon/animated-icon'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
@@ -80,6 +81,7 @@ const ReadingUi: FC = () => {
 				<AnimatedIcon
 					name='search'
 					size='large'
+					onPress={() => openBottomSheet(BottomSheetListEnum.readerSearch)}
 					color={ThemeColor(colorScheme.theme.p.color)}
 				/>
 				<Title
@@ -90,7 +92,7 @@ const ReadingUi: FC = () => {
 					{(progress || 0) + '%'}
 				</Title>
 				<AnimatedIcon
-					onPress={() => openBottomSheet('readingSettings')}
+					onPress={() => openBottomSheet(BottomSheetListEnum.readerSettings)}
 					name='typography'
 					size='large'
 					color={ThemeColor(colorScheme.theme.p.color)}

@@ -21,7 +21,7 @@ const LineHeightIcon: FC<LineHeightIconProperties> = ({
 		{Array.from({ length: lineCount }).map((_, index) => {
 			return (
 				<View
-					key={index}
+					key={`${index} line`}
 					className={LineStyle}
 					style={{
 						backgroundColor: backgroundColor

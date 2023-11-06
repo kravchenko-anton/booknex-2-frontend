@@ -3,19 +3,22 @@ import ReaderSearch from '@/screens/reading/settings/sheet/search/reader-search'
 import SelectTheme from '@/screens/reading/settings/sheet/select-theme/select-theme'
 import type { FC } from 'react'
 
+// TODO: разделить на страницы
 export enum BottomSheetListEnum {
-	readingSettings = 'readingSettings',
-	readerSearch = 'readerSearch',
-	selectTheme = 'selectTheme'
+	readerSettings = 'reader/settings',
+	readerSearch = 'reader/Search',
+	readerNoteBook = 'reader/NoteBook',
+	readerChapters = 'reader/Chapters',
+	readerSelectTheme = 'reader/Select-theme'
 }
 
 export interface SheetType {
-	name: keyof typeof BottomSheetListEnum
+	name: BottomSheetListEnum
 	component: FC
 }
 export const BottomSheetList: SheetType[] = [
 	{
-		name: BottomSheetListEnum.readingSettings,
+		name: BottomSheetListEnum.readerSettings,
 		component: ReadingSettings
 	},
 	{
@@ -23,7 +26,7 @@ export const BottomSheetList: SheetType[] = [
 		component: ReaderSearch
 	},
 	{
-		name: BottomSheetListEnum.selectTheme,
+		name: BottomSheetListEnum.readerSelectTheme,
 		component: SelectTheme
 	}
 ]
