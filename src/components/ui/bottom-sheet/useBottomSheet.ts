@@ -1,5 +1,13 @@
+import { BottomSheetListPagesEnum } from '@/components/ui/bottom-sheet/bottom-sheet-list'
+import { CalculateSnapPoints } from '@/components/ui/bottom-sheet/calculate-snap-point'
 import { useAction } from '@/hooks/useAction'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
+import { shadeBackground } from '@/screens/reading/settings/reading-ui'
+import { ThemeColor } from '@/screens/reading/settings/sheet/reading/theme-pack'
+import { Color } from '@/utils/color'
 import { SCREEN_HEIGHT } from '@/utils/dimensions'
+import { shadeRGBColor } from '@/utils/shade-color'
+import { useEffect } from 'react'
 import type { GestureResponderEvent } from 'react-native'
 import { Gesture } from 'react-native-gesture-handler'
 import {
@@ -12,40 +20,24 @@ import {
 	withSpring,
 	withTiming
 } from 'react-native-reanimated'
-
-export const useBottomSheet = (visible: boolean) => {
+// TODO: сделать в bottomSheet всё максимально оптимизировано
+export const useBottomSheet = () => {
+	const { bottomSheet } = useTypedSelector(state => state.bottomSheet)
+	const { colorScheme } = useTypedSelector(state => state.readingSettings)
 	const translationY = useSharedValue(0)
 	const oldTranslationY = useSharedValue(0)
 	const { closeBottomSheet } = useAction()
-
-	const gesture = Gesture.Pan()
-		.onStart(() => (oldTranslationY.value = translationY.value))
-		.activeOffsetY([-20, 20])
-		.onUpdate(event => {
-			translationY.value = event.translationY + oldTranslationY.value
-			translationY.value = Math.max(translationY.value, -SCREEN_HEIGHT)
-		})
-		.onEnd(() => {
-			switch (true) {
-				case translationY.value < -SCREEN_HEIGHT / 1.5: {
-					translationY.value = withSpring(-SCREEN_HEIGHT, { damping: 15 })
-
-					break
-				}
-				case translationY.value < -SCREEN_HEIGHT / 2: {
-					translationY.value = withSpring(-SCREEN_HEIGHT / 3, { damping: 15 })
-					break
-				}
-				case translationY.value > -SCREEN_HEIGHT / 5: {
-					translationY.value = withTiming(
-						0,
-						{ duration: 200, easing: Easing.ease },
-						() => runOnJS(closeBottomSheet)()
-					)
-					break
-				}
-			}
-		})
+	const CalculatedSnapPoints = CalculateSnapPoints(
+		bottomSheet?.snapPoints ?? []
+	)
+	useEffect(() => {
+		if (!CalculatedSnapPoints[0]) return
+		if (!bottomSheet) {
+			translationY.value = withTiming(0)
+			return
+		}
+		translationY.value = withSpring(-CalculatedSnapPoints[0], { damping: 15 })
+	}, [CalculatedSnapPoints])
 	const bottomSheetStyle = useAnimatedStyle(() => {
 		const borderRaduis = interpolate(
 			translationY.value,
@@ -59,15 +51,16 @@ export const useBottomSheet = (visible: boolean) => {
 			borderTopRightRadius: borderRaduis
 		}
 	})
-	const toggle = (height: number) => {
-		console.log('toggle', visible)
-		if (!visible) {
-			translationY.value = withTiming(0)
-			return
-		}
-		console.log('toggle', height, -SCREEN_HEIGHT / 3)
-		translationY.value = withSpring(-height, { damping: 15 })
+
+	const colorPallet = {
+		backgroundColor: bottomSheet?.name.includes(BottomSheetListPagesEnum.reader)
+			? shadeRGBColor(
+					ThemeColor(colorScheme.theme.body.background),
+					shadeBackground
+			  )
+			: Color.dust
 	}
+
 	const touch = {
 		wrapper: (event: GestureResponderEvent) => {
 			event.stopPropagation()
@@ -81,10 +74,48 @@ export const useBottomSheet = (visible: boolean) => {
 			event.stopPropagation()
 		}
 	}
+
+	const gesture = Gesture.Pan()
+		.onStart(() => (oldTranslationY.value = translationY.value))
+		.activeOffsetY([-20, 20])
+		.onUpdate(event => {
+			translationY.value = event.translationY + oldTranslationY.value
+			translationY.value = Math.max(
+				translationY.value,
+				-Number(CalculatedSnapPoints.at(-1))
+			)
+		})
+		.onEnd(() => {
+			if (!CalculatedSnapPoints[0]) return
+			if (translationY.value > -CalculatedSnapPoints[0]) {
+				translationY.value = withSpring(-CalculatedSnapPoints[0], {
+					damping: 15
+				})
+			}
+			if (translationY.value > -CalculatedSnapPoints[0] / 1.6) {
+				translationY.value = withTiming(
+					0,
+					{ duration: 200, easing: Easing.ease },
+					() => runOnJS(closeBottomSheet)()
+				)
+			}
+
+			for (const [index, point] of CalculatedSnapPoints.entries()) {
+				if (!point) return
+				if (!CalculatedSnapPoints[index + 1]) return
+				if (
+					translationY.value < -point &&
+					translationY.value > -Number(CalculatedSnapPoints[index + 1])
+				) {
+					translationY.value = withSpring(-point, { damping: 15 })
+				}
+			}
+		})
 	return {
+		bottomSheet,
+		colorPallet,
 		bottomSheetStyle,
 		gesture,
-		touch,
-		toggle
+		touch
 	}
 }

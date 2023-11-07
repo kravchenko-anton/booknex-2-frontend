@@ -4,6 +4,10 @@ import SelectTheme from '@/screens/reading/settings/sheet/select-theme/select-th
 import type { FC } from 'react'
 
 // TODO: разделить на страницы
+
+export enum BottomSheetListPagesEnum {
+	reader = 'reader'
+}
 export enum BottomSheetListEnum {
 	readerSettings = 'reader/settings',
 	readerSearch = 'reader/Search',
@@ -14,19 +18,23 @@ export enum BottomSheetListEnum {
 
 export interface SheetType {
 	name: BottomSheetListEnum
+	snapPoints: (string | number)[]
 	component: FC
 }
 export const BottomSheetList: SheetType[] = [
 	{
 		name: BottomSheetListEnum.readerSettings,
+		snapPoints: [300],
 		component: ReadingSettings
 	},
 	{
 		name: BottomSheetListEnum.readerSearch,
+		snapPoints: ['60%', '80%', '100%'],
 		component: ReaderSearch
 	},
 	{
 		name: BottomSheetListEnum.readerSelectTheme,
+		snapPoints: ['40%', '100%'],
 		component: SelectTheme
 	}
 ]
