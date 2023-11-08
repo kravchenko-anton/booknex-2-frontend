@@ -3,7 +3,6 @@ import { CalculateSnapPoints } from '@/components/ui/bottom-sheet/calculate-snap
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { shadeBackground } from '@/screens/reading/settings/reading-ui'
-import { ThemeColor } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import { Color } from '@/utils/color'
 import { SCREEN_HEIGHT } from '@/utils/dimensions'
 import { shadeRGBColor } from '@/utils/shade-color'
@@ -54,16 +53,12 @@ export const useBottomSheet = () => {
 
 	const colorPallet = {
 		backgroundColor: bottomSheet?.name.includes(BottomSheetListPagesEnum.reader)
-			? shadeRGBColor(
-					ThemeColor(colorScheme.theme.body.background),
-					shadeBackground
-			  )
+			? shadeRGBColor(colorScheme.colorPalette.background, shadeBackground)
 			: Color.dust
 	}
 
 	const touch = {
-		wrapper: (event: GestureResponderEvent) => {
-			event.stopPropagation()
+		wrapper: () => {
 			translationY.value = withTiming(
 				0,
 				{ duration: 200, easing: Easing.ease },

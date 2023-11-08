@@ -5,10 +5,7 @@ import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import FontSettings from '@/screens/reading/settings/sheet/reading/font-settings/font-settings'
-import {
-	ThemeColor,
-	themePack
-} from '@/screens/reading/settings/sheet/reading/theme-pack'
+import { themePack } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import type { LineColorType } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade-color'
 import type { FC } from 'react'
@@ -26,18 +23,18 @@ const ReadingSettings: FC = () => {
 							<PressableContainer
 								key={`${theme.slug}-${theme.title}`}
 								style={{
-									backgroundColor: ThemeColor(theme.theme.body.background),
+									backgroundColor: theme.colorPalette.background,
 									borderColor:
 										colorScheme.slug === theme.slug
-											? ThemeColor(colorScheme.theme.p.color)
-											: ThemeColor(theme.theme.body.background)
+											? colorScheme.colorPalette.text
+											: theme.colorPalette.background
 								}}
 								onPress={() => changeTheme(theme.slug)}
 								className='rounded-xl border-2 p-2 px-4'>
 								<Title
 									weight={'semiBold'}
 									size={18}
-									style={{ color: ThemeColor(theme.theme.p.color) }}>
+									style={{ color: theme.colorPalette.text }}>
 									{theme.title}
 								</Title>
 							</PressableContainer>
@@ -70,19 +67,19 @@ const ReadingSettings: FC = () => {
 			</View>
 			<FontSettings />
 			<View className='mt-4 flex-row items-center justify-center'>
-				<Title weight={'bold'} color={ThemeColor(colorScheme.theme.p.color)}>
+				<Title weight={'bold'} color={colorScheme.colorPalette.text}>
 					Scrolling
 				</Title>
 				<Switch
 					className='m-0 ml-3 mt-1.5 p-0'
 					trackColor={{
-						false: ThemeColor(colorScheme.theme.p.color),
-						true: shadeRGBColor(ThemeColor(colorScheme.theme.h1.color), -10)
+						false: colorScheme.colorPalette.text,
+						true: shadeRGBColor(colorScheme.colorPalette.primary, -10)
 					}}
 					thumbColor={
 						flow === 'paginated'
-							? ThemeColor(colorScheme.theme.p.color)
-							: ThemeColor(colorScheme.theme.h1.color)
+							? colorScheme.colorPalette.text
+							: colorScheme.colorPalette.primary
 					}
 					onValueChange={() => {
 						console.log(flow)

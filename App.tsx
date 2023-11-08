@@ -2,6 +2,7 @@ import Toast from '@/components/toast'
 import Alert from '@/components/ui/alert/alert'
 import BottomSheet from '@/components/ui/bottom-sheet/bottom-sheet'
 import FullScreenLoader from '@/components/ui/loader/big-loader'
+import EventProvider from '@/hooks/outside-press/components/event-provider'
 import Navigation from '@/navigation/navigation'
 import { persistor, store } from '@/redux/store'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -34,13 +35,15 @@ export default function App() {
 				<PersistQueryClientProvider
 					client={queryClient}
 					persistOptions={{ persister: asyncStoragePersister }}>
-					<GestureHandlerRootView className='flex-1'>
-						<Navigation />
-						<BottomSheet />
-					</GestureHandlerRootView>
+					<EventProvider>
+						<GestureHandlerRootView className='flex-1'>
+							<Navigation />
+							<BottomSheet />
+						</GestureHandlerRootView>
+					</EventProvider>
+					<StatusBar style={'dark'} />
 					<Toast />
 					<Alert />
-					<StatusBar style={'dark'} />
 				</PersistQueryClientProvider>
 			</PersistGate>
 		</Provider>

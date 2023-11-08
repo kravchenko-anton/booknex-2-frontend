@@ -1,10 +1,7 @@
 import BigLoader from '@/components/ui/loader/big-loader'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import {
-	ImportantProperty,
-	ThemeColor
-} from '@/screens/reading/settings/sheet/reading/theme-pack'
+import { ImportantProperty } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@/utils/dimensions'
 import type { ReactNode } from 'react'
 import React, { useEffect, useRef } from 'react'
@@ -63,7 +60,6 @@ export function View({
 		lastBookLocations
 	} = useTypedSelector(state => state.readingSettings)
 	useEffect(() => {
-		console.log(`${fontSize}px`, 'render')
 		WebViewReference.current?.injectJavaScript(`
 			 rendition.themes.fontSize('${fontSize}px'); true
 		 `)
@@ -259,9 +255,7 @@ export function View({
 						{isRendering && (
 							<RNView className='absolute bottom-0 left-0 right-0 top-0 z-50 m-0 h-full w-full bg-primary p-0'>
 								<BigLoader
-									backgroundColor={ThemeColor(
-										colorScheme.theme.body.background
-									)}
+									backgroundColor={colorScheme.colorPalette.background}
 								/>
 							</RNView>
 						)}
@@ -298,9 +292,7 @@ export function View({
 								}}
 								style={{
 									width: WINDOW_WIDTH,
-									backgroundColor: ThemeColor(
-										colorScheme.theme.body.background
-									),
+									backgroundColor: colorScheme.colorPalette.background,
 									height: WINDOW_HEIGHT,
 									zIndex: 1,
 									padding: 0,

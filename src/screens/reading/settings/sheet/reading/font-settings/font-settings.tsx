@@ -6,7 +6,6 @@ import type { ReaderFontsEnum } from '@/redux/reading-settings/reading-settings-
 import { ReaderFont } from '@/redux/reading-settings/reading-settings-slice'
 import LineHeightIcon from '@/screens/reading/settings/sheet/reading/font-settings/icons/line-height'
 import PageMarginIcon from '@/screens/reading/settings/sheet/reading/font-settings/icons/page-margin'
-import { ThemeColor } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import type { FC } from 'react'
 import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -28,8 +27,8 @@ const FontSettings: FC = () => {
 							title: value.label
 						})
 					}}
-					color={ThemeColor(colorScheme.theme.p.color)}
-					backgroundColor={ThemeColor(colorScheme.theme.body.background)}
+					color={colorScheme.colorPalette.text}
+					backgroundColor={colorScheme.colorPalette.background}
 					elements={ReaderFont.map(font => {
 						return {
 							value: font.fontFamily,
@@ -44,31 +43,29 @@ const FontSettings: FC = () => {
 						<Icon
 							className='w-[60px] rounded-r-none border-r-0 p-1'
 							style={{
-								borderColor: ThemeColor(
-									colorScheme.theme[fontSize === 10 ? 'h1' : 'p'].color
-								)
+								borderColor:
+									colorScheme.colorPalette[fontSize === 10 ? 'primary' : 'text']
 							}}
 							onPress={() => {
 								changeFontSize(fontSize - 2)
 							}}
 							name='dash'
 							size='medium'
-							color={ThemeColor(colorScheme.theme.p.color)}
+							color={colorScheme.colorPalette.text}
 						/>
 					</TouchableOpacity>
 					<TouchableOpacity>
 						<Icon
 							name='plus'
 							style={{
-								borderColor: ThemeColor(
-									colorScheme.theme[fontSize === 26 ? 'h1' : 'p'].color
-								)
+								borderColor:
+									colorScheme.colorPalette[fontSize === 26 ? 'primary' : 'text']
 							}}
 							onPress={() => {
 								changeFontSize(fontSize + 2)
 							}}
 							className='w-[60px] rounded-l-none p-1'
-							color={ThemeColor(colorScheme.theme.p.color)}
+							color={colorScheme.colorPalette.text}
 							size='medium'
 						/>
 					</TouchableOpacity>
@@ -80,24 +77,24 @@ const FontSettings: FC = () => {
 					<LineHeightIcon
 						lineCount={3}
 						onPress={() => changeLineHeight(1.8)}
-						backgroundColor={ThemeColor(
-							colorScheme.theme[lineHeight === 1.8 ? 'h1' : 'p'].color
-						)}
+						backgroundColor={
+							colorScheme.colorPalette[lineHeight === 1.8 ? 'primary' : 'text']
+						}
 					/>
 					<LineHeightIcon
 						lineCount={4}
 						className='mx-3'
 						onPress={() => changeLineHeight(1.5)}
-						backgroundColor={ThemeColor(
-							colorScheme.theme[lineHeight === 1.5 ? 'h1' : 'p'].color
-						)}
+						backgroundColor={
+							colorScheme.colorPalette[lineHeight === 1.5 ? 'primary' : 'text']
+						}
 					/>
 					<LineHeightIcon
 						lineCount={5}
 						onPress={() => changeLineHeight(1.3)}
-						backgroundColor={ThemeColor(
-							colorScheme.theme[lineHeight === 1.3 ? 'h1' : 'p'].color
-						)}
+						backgroundColor={
+							colorScheme.colorPalette[lineHeight === 1.3 ? 'primary' : 'text']
+						}
 					/>
 				</View>
 
@@ -105,23 +102,23 @@ const FontSettings: FC = () => {
 					<PageMarginIcon
 						className='p-1  pb-0.5'
 						onPress={() => changePadding(8)}
-						backgroundColor={ThemeColor(
-							colorScheme.theme[padding === 8 ? 'h1' : 'p'].color
-						)}
+						backgroundColor={
+							colorScheme.colorPalette[padding === 8 ? 'primary' : 'text']
+						}
 					/>
 					<PageMarginIcon
 						className='mx-3 p-1.5  pb-0.5'
 						onPress={() => changePadding(14)}
-						backgroundColor={ThemeColor(
-							colorScheme.theme[padding === 14 ? 'h1' : 'p'].color
-						)}
+						backgroundColor={
+							colorScheme.colorPalette[padding === 14 ? 'primary' : 'text']
+						}
 					/>
 					<PageMarginIcon
 						className='p-2 pb-0.5'
 						onPress={() => changePadding(20)}
-						backgroundColor={ThemeColor(
-							colorScheme.theme[padding === 20 ? 'h1' : 'p'].color
-						)}
+						backgroundColor={
+							colorScheme.colorPalette[padding === 20 ? 'primary' : 'text']
+						}
 					/>
 				</View>
 			</View>

@@ -5,7 +5,7 @@ import { memo } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
 interface BigLoaderProperties {
-	backgroundColor?: LineColorType
+	backgroundColor?: LineColorType | string
 }
 const BigLoader: FC<BigLoaderProperties> = ({
 	backgroundColor = Color.canvas

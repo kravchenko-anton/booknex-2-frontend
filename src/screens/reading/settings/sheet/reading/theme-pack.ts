@@ -1,11 +1,8 @@
 import type { Theme } from '@/screens/reading/epub-reader/types'
-import type { LineColorType } from '@/utils/color'
 import { Color } from '@/utils/color'
 
 export const ImportantProperty = (property: string | number) =>
 	property + ' !important'
-export const ThemeColor = (property: string | number): LineColorType =>
-	property.toString().replace(' !important', '') as LineColorType
 export const boldTextStyle = ImportantProperty('bold')
 export interface ThemeTemplateProperties {
 	backgroundColor: string
@@ -121,14 +118,24 @@ export interface ThemePackType {
 		| 'kanagawa'
 		| 'pink-owl'
 	statusBar: 'dark' | 'light'
-	colorPalette: string[]
+	colorPalette: {
+		primary: string
+		secondary: string
+		background: string
+		text: string
+	}
 	theme: Theme
 }
 
 export const defaultTheme = {
 	title: 'Light',
 	slug: 'light',
-	colorPalette: [Color.white, Color.black, Color.primary, Color.secondary],
+	colorPalette: {
+		primary: Color.primary,
+		secondary: Color.secondary,
+		background: Color.white,
+		text: Color.black
+	},
 	statusBar: 'dark',
 	theme: {
 		body: {
@@ -209,7 +216,12 @@ export const themePack: ThemePackType[] = [
 		title: 'Light',
 		slug: 'light',
 		statusBar: 'dark',
-		colorPalette: [Color.white, Color.black, Color.primary, Color.secondary],
+		colorPalette: {
+			primary: Color.primary,
+			secondary: Color.secondary,
+			background: Color.white,
+			text: Color.black
+		},
 		theme: themeTemplate({
 			backgroundColor: Color.white,
 			textColor: Color.black,
@@ -225,7 +237,6 @@ export const themePack: ThemePackType[] = [
 		title: 'Dark',
 		slug: 'dark',
 		statusBar: 'light',
-		colorPalette: ['#202020', '#fff', '#4d92d3', '#cf8e6d'],
 		theme: themeTemplate({
 			backgroundColor: '#202020',
 			textColor: '#fff',
@@ -235,13 +246,18 @@ export const themePack: ThemePackType[] = [
 				background: '#214283',
 				color: Color.white
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#4d92d3',
+			secondary: '#cf8e6d',
+			background: '#202020',
+			text: '#fff'
+		}
 	},
 	{
 		title: 'Sepia',
 		slug: 'sepia',
 		statusBar: 'dark',
-		colorPalette: ['#f4ecd8', '#2d2a32', '#606c38', '#684E32'],
 		theme: themeTemplate({
 			backgroundColor: '#f4ecd8',
 			textColor: '#2d2a32',
@@ -251,12 +267,17 @@ export const themePack: ThemePackType[] = [
 				background: '#007f5f',
 				color: '#fff'
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#606c38',
+			secondary: '#684E32',
+			background: '#f4ecd8',
+			text: '#2d2a32'
+		}
 	},
 	{
 		title: 'Dark purple',
 		slug: 'dark-purple',
-		colorPalette: ['#1f1d2e', '#d3cedc', '#bb77b0', '#ebbcba'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#1f1d2e',
@@ -267,15 +288,20 @@ export const themePack: ThemePackType[] = [
 				background: '#214283',
 				color: '#fff'
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#bb77b0',
+			secondary: '#ebbcba',
+			background: '#1f1d2e',
+			text: '#d3cedc'
+		}
 	},
 	{
 		title: 'Dark green',
 		slug: 'dark-green',
-		colorPalette: ['#1d2021', '#c2ccd7', '#fb4934', '#ffc66d'],
 		statusBar: 'light',
 		theme: themeTemplate({
-			backgroundColor: '#1d2021' as string,
+			backgroundColor: '#1d2021',
 			textColor: '#c2ccd7',
 			primaryColor: '#fb4934',
 			secondaryColor: '#ffc66d',
@@ -283,12 +309,17 @@ export const themePack: ThemePackType[] = [
 				background: '#82a497',
 				color: '#fff'
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#fb4934',
+			secondary: '#ffc66d',
+			background: '#1d2021',
+			text: '#c2ccd7'
+		}
 	},
 	{
 		title: 'Tokyo night',
 		slug: 'tokyo-night',
-		colorPalette: ['#1a1b26', '#b7bcd9', '#72d7c8', '#ffc66d'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#1a1b26',
@@ -299,12 +330,17 @@ export const themePack: ThemePackType[] = [
 				background: '#414868',
 				color: '#fff'
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#72d7c8',
+			secondary: '#ffc66d',
+			background: '#1a1b26',
+			text: '#b7bcd9'
+		}
 	},
 	{
 		title: 'Solarized',
 		slug: 'solarized',
-		colorPalette: ['#002b36', '#a8b4b5', '#b58900', '#cb4b16'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#002b36',
@@ -315,13 +351,18 @@ export const themePack: ThemePackType[] = [
 				background: '#073642',
 				color: '#fff'
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#b58900',
+			secondary: '#cb4b16',
+			background: '#002b36',
+			text: '#a8b4b5'
+		}
 	},
 	{
 		title: 'Blue night',
 		slug: 'blue-night',
 		statusBar: 'light',
-		colorPalette: ['#121726', '#c2c8db', '#24b5a8', '#3398d3'],
 		theme: themeTemplate({
 			backgroundColor: '#121726',
 			textColor: '#c2c8db',
@@ -331,13 +372,18 @@ export const themePack: ThemePackType[] = [
 				background: '#2b3d65',
 				color: '#fff'
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#24b5a8',
+			secondary: '#3398d3',
+			background: '#121726',
+			text: '#c2c8db'
+		}
 	},
 	{
 		title: 'Kanagawa',
 		slug: 'kanagawa',
 		statusBar: 'light',
-		colorPalette: ['#1f1f28', '#dcd7ba', '#957fb8', '#ff4848'],
 		theme: themeTemplate({
 			backgroundColor: '#1f1f28',
 			textColor: '#dcd7ba',
@@ -347,12 +393,17 @@ export const themePack: ThemePackType[] = [
 				background: '#202839',
 				color: '#fff'
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#957fb8',
+			secondary: '#ff4848',
+			background: '#1f1f28',
+			text: '#dcd7ba'
+		}
 	},
 	{
 		title: 'Pink owl',
 		slug: 'pink-owl',
-		colorPalette: ['#13111b', '#dcd7ba', '#ff699a', '#e7de79'],
 		statusBar: 'light',
 		theme: themeTemplate({
 			backgroundColor: '#13111b',
@@ -363,6 +414,12 @@ export const themePack: ThemePackType[] = [
 				background: '#2a2934',
 				color: '#fff'
 			}
-		})
+		}),
+		colorPalette: {
+			primary: '#ff699a',
+			secondary: '#e7de79',
+			background: '#13111b',
+			text: '#dcd7ba'
+		}
 	}
 ]

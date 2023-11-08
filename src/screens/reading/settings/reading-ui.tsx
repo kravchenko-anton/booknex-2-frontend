@@ -5,7 +5,6 @@ import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { useReadingAnimation } from '@/screens/reading/settings/reading-ui-animation'
-import { ThemeColor } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import { AnimatedView } from '@/types/component-types'
 import type { LineColorType } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade-color'
@@ -37,26 +36,24 @@ const ReadingUi: FC = () => {
 					name={'arrow-left'}
 					backgroundColor={
 						shadeRGBColor(
-							ThemeColor(colorScheme.theme.body.background),
+							colorScheme.colorPalette.background,
 							shadeBackground
 						) as LineColorType
 					}
 					size={'medium'}
 					className='w-[50px]'
 					onPress={() => goBack()}
-					color={ThemeColor(colorScheme.theme.p.color)}
+					color={colorScheme.colorPalette.text}
 				/>
 				<AnimatedIcon
 					name={'kebab-horizontal'}
-					backgroundColor={
-						shadeRGBColor(
-							ThemeColor(colorScheme.theme.body.background),
-							shadeBackground
-						) as LineColorType
-					}
+					backgroundColor={shadeRGBColor(
+						colorScheme.colorPalette.background,
+						shadeBackground
+					)}
 					className='w-[50px]'
 					size={'medium'}
-					color={ThemeColor(colorScheme.theme.p.color)}
+					color={colorScheme.colorPalette.text as LineColorType}
 				/>
 			</AnimatedView>
 
@@ -65,7 +62,7 @@ const ReadingUi: FC = () => {
 					footerAnimation,
 					{
 						backgroundColor: shadeRGBColor(
-							ThemeColor(colorScheme.theme.body.background),
+							colorScheme.colorPalette.background,
 							shadeBackground
 						)
 					}
@@ -75,33 +72,33 @@ const ReadingUi: FC = () => {
 				<AnimatedIcon
 					name='list-unordered'
 					size='large'
-					color={ThemeColor(colorScheme.theme.p.color) as LineColorType}
+					color={colorScheme.colorPalette.text}
 					className='pl-0'
 				/>
 				<AnimatedIcon
 					name='search'
 					size='large'
 					onPress={() => openBottomSheet(BottomSheetListEnum.readerSearch)}
-					color={ThemeColor(colorScheme.theme.p.color)}
+					color={colorScheme.colorPalette.text}
 				/>
 				<Title
 					size={24}
 					center
 					weight={'bold'}
-					color={ThemeColor(colorScheme.theme.a.color)}>
+					color={colorScheme.colorPalette.text}>
 					{(progress || 0) + '%'}
 				</Title>
 				<AnimatedIcon
 					onPress={() => openBottomSheet(BottomSheetListEnum.readerSettings)}
 					name='typography'
 					size='large'
-					color={ThemeColor(colorScheme.theme.p.color)}
+					color={colorScheme.colorPalette.text}
 				/>
 				<AnimatedIcon
 					name='note'
 					size='large'
 					className='pr-0'
-					color={ThemeColor(colorScheme.theme.p.color)}
+					color={colorScheme.colorPalette.text}
 				/>
 			</AnimatedView>
 			{
@@ -109,7 +106,7 @@ const ReadingUi: FC = () => {
 			}
 			<StatusBar
 				style={colorScheme.statusBar}
-				backgroundColor={colorScheme.theme.body.background}
+				backgroundColor={colorScheme.colorPalette.background}
 			/>
 		</View>
 	)

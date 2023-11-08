@@ -28,7 +28,7 @@ export type LineColorType =
 	| 'transparent'
 
 export interface ColorProperties {
-	color?: LineColorType
+	color?: string | LineColorType
 }
 
 export const Color = theme.colors as ColorsType

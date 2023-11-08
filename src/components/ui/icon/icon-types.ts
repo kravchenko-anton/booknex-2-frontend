@@ -5,7 +5,7 @@ import type { ColorProperties, LineColorType } from '@/utils/color'
 export interface IconProperties
 	extends PressableDefaultProperties,
 		ColorProperties {
-	backgroundColor?: LineColorType
+	backgroundColor?: LineColorType | string
 	name: IconType
 	noPadding?: boolean
 	size: 'small' | 'medium' | 'large'

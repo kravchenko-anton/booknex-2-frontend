@@ -1,18 +1,15 @@
 import PressableContainer from '@/components/pressable-container/pressable-container'
 import Icon from '@/components/ui/icon/icon'
+import ScrollView from '@/components/ui/scroll-view/scroll-view'
 import { Title } from '@/components/ui/title/title'
-import { ThemeColor } from '@/screens/reading/settings/sheet/reading/theme-pack'
+import OutsidePressHandler from '@/hooks/outside-press/components/outside-press-handler'
 import type { ViewDefaultProperties } from '@/types/component-types'
-import { AnimatedScrollView } from '@/types/component-types'
 import type { LineColorType } from '@/utils/color'
 import { Color } from '@/utils/color'
 import type { FC } from 'react'
+import { useState } from 'react'
 import { Pressable } from 'react-native'
-import {
-	useAnimatedStyle,
-	useSharedValue,
-	withTiming
-} from 'react-native-reanimated'
+import { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 
 interface SelectProperties extends ViewDefaultProperties {
 	onSelect: (value: { value: string; label: string }) => void
@@ -26,23 +23,20 @@ interface SelectProperties extends ViewDefaultProperties {
 	fullSize?: boolean
 }
 const Select: FC<SelectProperties> = ({ ...properties }) => {
-	const active = useSharedValue(false)
-	// TODO: доделать анимацию попапа и много другого по оптимизации
+	const [active, setActive] = useState(false)
 	const popupAnimation = useAnimatedStyle(() => {
 		return {
-			opacity: withTiming(active.value ? 1 : 0),
-			display: active.value ? 'flex' : 'none'
+			opacity: withTiming(active ? 1 : 0),
+			display: active ? 'flex' : 'none'
 		}
 	})
 	return (
 		<>
 			<PressableContainer
-				onPress={() => (active.value = !active.value)}
-				className='h-full flex-row items-center rounded-xl p-2 px-3'
+				onPress={() => setActive(!active)}
+				className='relative h-full flex-row items-center rounded-xl p-2 px-3'
 				style={{
-					backgroundColor: ThemeColor(
-						properties.backgroundColor || 'transparent'
-					)
+					backgroundColor: properties.backgroundColor || 'transparent'
 				}}>
 				<Title
 					weight={'bold'}
@@ -58,37 +52,38 @@ const Select: FC<SelectProperties> = ({ ...properties }) => {
 					color={(properties.color || Color.white) as LineColorType}
 				/>
 			</PressableContainer>
-			{
-				// TODO: сделать useOutsideClick
-			}
-			<AnimatedScrollView
+			<OutsidePressHandler
+				onOutsidePress={() => {
+					setActive(active)
+				}}
+				disabled={!active}
 				style={[
+					popupAnimation,
 					{
-						backgroundColor: ThemeColor(
-							properties.backgroundColor || 'transparent'
-						)
-					},
-					popupAnimation
+						backgroundColor: properties.backgroundColor || 'transparent'
+					}
 				]}
-				className='absolute left-0 z-[100] mt-1 max-h-[300px] rounded-lg'>
-				{properties.elements.map(element => {
-					return (
-						<Pressable
-							onPress={() => {
-								properties.onSelect(element)
-								active.value = false
-							}}
-							key={`${element.value}-${element.label}`}
-							className='flex-row items-center justify-between p-2 '>
-							<Title
-								weight={'bold'}
-								color={(properties.color || Color.white) as LineColorType}>
-								{element.label}
-							</Title>
-						</Pressable>
-					)
-				})}
-			</AnimatedScrollView>
+				className='absolute left-0 top-0 z-50 mt-1 max-h-[300px] rounded-lg'>
+				<ScrollView>
+					{properties.elements.map(element => {
+						return (
+							<Pressable
+								onPress={() => {
+									properties.onSelect(element)
+									setActive(!active)
+								}}
+								key={`${element.value}-${element.label}`}
+								className='flex-row items-center justify-between p-2 '>
+								<Title
+									weight={'bold'}
+									color={(properties.color || Color.white) as LineColorType}>
+									{element.label}
+								</Title>
+							</Pressable>
+						)
+					})}
+				</ScrollView>
+			</OutsidePressHandler>
 		</>
 	)
 }
