@@ -35,7 +35,10 @@ const FontSettings: FC = () => {
 							label: font.title
 						}
 					})}
-					activeTitle={font.title}
+					active={{
+						value: font.fontFamily,
+						label: font.title
+					}}
 				/>
 
 				<View className='flex-row items-center'>

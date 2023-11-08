@@ -80,6 +80,7 @@ export const useBottomSheet = () => {
 				-Number(CalculatedSnapPoints.at(-1))
 			)
 		})
+
 		.onEnd(() => {
 			if (!CalculatedSnapPoints[0]) return
 			if (translationY.value > -CalculatedSnapPoints[0]) {
@@ -94,12 +95,14 @@ export const useBottomSheet = () => {
 					() => runOnJS(closeBottomSheet)()
 				)
 			}
-
+			// TODO: сделать чтобы было если близко то привязка
+			// TODO: сделать скролл если есть flatlist
 			for (const [index, point] of CalculatedSnapPoints.entries()) {
 				if (!point) return
 				if (!CalculatedSnapPoints[index + 1]) return
 				if (
 					translationY.value < -point &&
+					translationY.value < -point - 100 &&
 					translationY.value > -Number(CalculatedSnapPoints[index + 1])
 				) {
 					translationY.value = withSpring(-point, { damping: 15 })
