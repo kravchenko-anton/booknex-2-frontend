@@ -97,7 +97,7 @@ export const useHeader = (
 			HeaderElementComponent(
 				Object.keys(properties.left)[0] || 'back',
 				properties.left,
-				properties.color,
+				properties.color as LineColorType,
 				'left'
 			)
 		),
@@ -105,7 +105,7 @@ export const useHeader = (
 			? HeaderElementComponent(
 					Object.keys(properties.right)[0] || 'back',
 					properties.right,
-					properties.color,
+					properties.color as LineColorType,
 					'right'
 			  )
 			: null

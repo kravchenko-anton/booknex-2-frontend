@@ -120,7 +120,7 @@ export interface WebviewMessage {
 	text: string
 	section: string
 	currentSection: string
-	toc: Toc[]
+	toc: { toc: Toc[] }
 }
 export type SearchResult = {
 	cfi: EPubCfi

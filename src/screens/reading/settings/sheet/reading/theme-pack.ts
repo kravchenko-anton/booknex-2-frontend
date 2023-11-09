@@ -23,19 +23,20 @@ export const themeTemplate = ({
 	highlight
 }: ThemeTemplateProperties) => ({
 	body: {
-		background: backgroundColor
+		background: backgroundColor,
+		color: textColor
 	},
 	i: {
 		color: ImportantProperty(primaryColor)
 	},
 	span: {
-		color: textColor
+		color: ImportantProperty(textColor)
 	},
 	p: {
-		color: textColor
+		color: ImportantProperty(textColor)
 	},
 	li: {
-		color: textColor
+		color: ImportantProperty(textColor)
 	},
 	a: {
 		color: ImportantProperty(secondaryColor),
@@ -73,19 +74,19 @@ export const themeTemplate = ({
 		color: highlight.color
 	},
 	ul: {
-		color: textColor,
+		color: ImportantProperty(textColor),
 		'list-style-type': 'disc !important'
 	},
 	ol: {
-		color: textColor,
+		color: ImportantProperty(textColor),
 		'list-style-type': 'decimal !important'
 	},
 	strong: {
-		color: textColor,
+		color: ImportantProperty(textColor),
 		'font-weight': boldTextStyle
 	},
 	em: {
-		color: textColor,
+		color: ImportantProperty(textColor),
 		fontStyle: 'italic'
 	},
 	b: {

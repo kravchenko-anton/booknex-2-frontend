@@ -26,14 +26,16 @@ const BottomSheet: FC = () => {
 					style={[
 						{
 							top: SCREEN_HEIGHT,
-							minHeight: SCREEN_HEIGHT,
 							paddingBottom: 40,
 							backgroundColor: colorPallet.backgroundColor
 						},
 						bottomSheetStyle
 					]}
-					className='absolute w-full pt-3.5'>
-					<View className='mb-2 mt-1 h-[6px] w-[50px] items-center justify-center self-center rounded-full bg-gray' />
+					className='absolute w-full flex-1 pt-3.5'>
+					<View
+						pointerEvents={'none'}
+						className='mb-3 mt-1 h-[6px] w-[50px] items-center justify-center self-center rounded-full bg-gray'
+					/>
 					<bottomSheet.component />
 				</AnimatedView>
 			</GestureDetector>

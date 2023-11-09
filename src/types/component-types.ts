@@ -6,7 +6,7 @@ import type {
 	TextProps,
 	ViewProps
 } from 'react-native'
-import { Pressable, ScrollView, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import Animated from 'react-native-reanimated'
 
 export const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
@@ -15,7 +15,6 @@ export type ViewDefaultProperties = Pick<
 	ViewProps,
 	'className' | 'style' | 'onLayout' | 'pointerEvents' | 'onMagicTap'
 >
-export const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 
 export type FlatlistDefaultProperties<T> = Pick<
 	FlatListProps<T>,

@@ -7,7 +7,7 @@ export const menuItems: IMenuItem[] = [
 	},
 
 	{
-		icon: 'repo',
+		icon: 'bookmark',
 		path: 'Library'
 	},
 	{

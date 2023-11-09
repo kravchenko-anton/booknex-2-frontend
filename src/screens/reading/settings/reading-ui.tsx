@@ -12,13 +12,14 @@ import { StatusBar } from 'expo-status-bar'
 import type { FC } from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 
 export const shadeBackground = -15
 const ReadingUi: FC = () => {
 	const { goBack } = useTypedNavigation()
 	const { top } = useSafeAreaInsets()
 	const { openBottomSheet } = useAction()
-	const { progress } = useTypedSelector(state => state.reader)
+	const { progress, toc } = useTypedSelector(state => state.reader)
 	const { visible } = useTypedSelector(state => state.readingUi)
 	const { colorScheme } = useTypedSelector(state => state.readingSettings)
 	const { headerAnimation, footerAnimation } = useReadingAnimation(visible)
@@ -71,6 +72,15 @@ const ReadingUi: FC = () => {
 				{/* //TODO: сделать тут слайдер*/}
 				<AnimatedIcon
 					name='list-unordered'
+					onPress={() =>
+						toc
+							? openBottomSheet(BottomSheetListEnum.readerChapters)
+							: Toast.show({
+									type: 'error',
+									text1: 'Error',
+									text2: 'Charapters is not loaded'
+							  })
+					}
 					size='large'
 					color={colorScheme.colorPalette.text}
 					className='pl-0'
@@ -95,8 +105,9 @@ const ReadingUi: FC = () => {
 					color={colorScheme.colorPalette.text}
 				/>
 				<AnimatedIcon
-					name='note'
+					name='repo'
 					size='large'
+					onPress={() => openBottomSheet(BottomSheetListEnum.readerNoteBook)}
 					className='pr-0'
 					color={colorScheme.colorPalette.text}
 				/>

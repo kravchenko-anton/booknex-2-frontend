@@ -44,10 +44,31 @@ export const useBottomSheet = () => {
 			[23, 0],
 			Extrapolation.CLAMP
 		)
+		// TODO: пофиксить баг с высотой где снизу маленькая хуйня которая закрывает последний елемент и не дает прокрутке
+		const inputRange = CalculatedSnapPoints.map((_, index) => {
+			return index === 0
+				? -SCREEN_HEIGHT
+				: -Number(CalculatedSnapPoints[index - 1])
+		}) || [SCREEN_HEIGHT, -SCREEN_HEIGHT]
+
+		const outputRange = CalculatedSnapPoints.map((_, index) => {
+			return index === 0
+				? SCREEN_HEIGHT
+				: Number(CalculatedSnapPoints[index - 1])
+		}) || [SCREEN_HEIGHT, -SCREEN_HEIGHT]
 		return {
 			transform: [{ translateY: translationY.value }],
 			borderTopLeftRadius: borderRaduis,
-			borderTopRightRadius: borderRaduis
+			borderTopRightRadius: borderRaduis,
+			height:
+				CalculatedSnapPoints[0] && CalculatedSnapPoints[1]
+					? interpolate(
+							translationY.value,
+							inputRange,
+							outputRange,
+							Extrapolation.CLAMP
+					  )
+					: SCREEN_HEIGHT
 		}
 	})
 
@@ -72,7 +93,7 @@ export const useBottomSheet = () => {
 
 	const gesture = Gesture.Pan()
 		.onStart(() => (oldTranslationY.value = translationY.value))
-		.activeOffsetY([-20, 20])
+		.activeOffsetX([-20, 20])
 		.onUpdate(event => {
 			translationY.value = event.translationY + oldTranslationY.value
 			translationY.value = Math.max(
@@ -96,13 +117,10 @@ export const useBottomSheet = () => {
 				)
 			}
 			// TODO: сделать чтобы было если близко то привязка
-			// TODO: сделать скролл если есть flatlist
 			for (const [index, point] of CalculatedSnapPoints.entries()) {
-				if (!point) return
-				if (!CalculatedSnapPoints[index + 1]) return
+				if (!point || !Number(CalculatedSnapPoints[index + 1])) return
 				if (
-					translationY.value < -point &&
-					translationY.value < -point - 100 &&
+					(translationY.value < -point || translationY.value < -point / 1.4) &&
 					translationY.value > -Number(CalculatedSnapPoints[index + 1])
 				) {
 					translationY.value = withSpring(-point, { damping: 15 })

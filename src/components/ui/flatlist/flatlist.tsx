@@ -18,11 +18,14 @@ const FlatList = <T,>({
 	return (
 		<>
 			<Title
-				style={{
-					marginTop: mt,
-					paddingHorizontal: properties.horizontal ? px : 0,
-					marginBottom: title?.mb ?? 12
-				}}
+				style={[
+					{
+						marginTop: mt,
+						paddingHorizontal: properties.horizontal ? px : 0,
+						marginBottom: title?.mb ?? 12
+					},
+					title?.style ?? {}
+				]}
 				color={title?.color ?? Color.black}
 				size={22}
 				weight='semiBold'>

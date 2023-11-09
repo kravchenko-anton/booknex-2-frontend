@@ -1,3 +1,4 @@
+import ChaptersList from '@/screens/reading/settings/sheet/chapters-list/chapters-list'
 import ReadingSettings from '@/screens/reading/settings/sheet/reading/reading-settings'
 import ReaderSearch from '@/screens/reading/settings/sheet/search/reader-search'
 import SelectTheme from '@/screens/reading/settings/sheet/select-theme/select-theme'
@@ -34,7 +35,17 @@ export const BottomSheetList: SheetType[] = [
 	},
 	{
 		name: BottomSheetListEnum.readerSelectTheme,
-		snapPoints: ['40%', '100%'],
+		snapPoints: ['50%', '90%'],
 		component: SelectTheme
+	},
+	{
+		name: BottomSheetListEnum.readerNoteBook,
+		snapPoints: ['50%', '90%'],
+		component: SelectTheme
+	},
+	{
+		name: BottomSheetListEnum.readerChapters,
+		snapPoints: ['50%', '90%'],
+		component: ChaptersList
 	}
 ]
