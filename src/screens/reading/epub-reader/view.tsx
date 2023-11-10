@@ -38,6 +38,7 @@ export function View({
 		setProgress,
 		goToLocation,
 		setLocations,
+		clearGoToProgress,
 		setIsRendering,
 		addLastBookLocations,
 		setSearchResults,
@@ -47,6 +48,7 @@ export function View({
 	const {
 		isRendering,
 		searchTerm,
+		goToProgress,
 		goLocation,
 		currentLocation: stateCurrentLocation
 	} = useTypedSelector(state => state.reader)
@@ -59,6 +61,24 @@ export function View({
 		fontSize,
 		lastBookLocations
 	} = useTypedSelector(state => state.readingSettings)
+	useEffect(() => {
+		if (goToProgress) {
+			console.log('goToProgress', Math.round(goToProgress))
+			WebViewReference.current?.injectJavaScript(
+				`var location = book.locations.cfiFromPercentage(${Math.round(
+					goToProgress
+				)});
+			book.getRange(cfiRange).then(range => {
+if (range.toString()) {
+		rendition.display(range.startPath);
+}})
+
+			`
+			)
+		}
+		clearGoToProgress()
+	}, [goToProgress])
+
 	useEffect(() => {
 		WebViewReference.current?.injectJavaScript(`
 			 rendition.themes.fontSize('${fontSize}px'); true
@@ -124,6 +144,7 @@ export function View({
 
 		if (type === 'onReady') {
 			const { totalLocations } = parsedEvent
+			console.log('onReady', totalLocations)
 			setTotalLocations(totalLocations)
 			WebViewReference.current?.injectJavaScript(`
 			 rendition.themes.fontSize('${fontSize}px'); true

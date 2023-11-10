@@ -19,7 +19,9 @@ const initialState = {
 	searchTerm: null as string | null,
 	searchResults: [] as SearchResult[],
 
-	goLocation: null as EPubCfi | null
+	goLocation: null as EPubCfi | null,
+
+	goToProgress: null as number | null
 }
 
 const EpubReaderSlice = createSlice({
@@ -38,6 +40,12 @@ const EpubReaderSlice = createSlice({
 			state.currentLocation = payload
 		},
 
+		goToProgress: (state, { payload }: PayloadAction<number>) => {
+			state.goToProgress = payload
+		},
+		clearGoToProgress: state => {
+			state.goToProgress = null
+		},
 		setProgress: (state, { payload }: PayloadAction<number>) => {
 			console.log('setProgress', payload)
 			state.progress = payload

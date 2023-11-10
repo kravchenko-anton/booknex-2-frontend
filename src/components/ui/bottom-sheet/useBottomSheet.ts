@@ -95,7 +95,7 @@ export const useBottomSheet = () => {
 		.onStart(() => (oldTranslationY.value = translationY.value))
 		.activeOffsetX([-20, 20])
 		.onUpdate(event => {
-			translationY.value = event.translationY + oldTranslationY.value
+			;`translationY.value = event.translationY + oldTranslationY.value`
 			translationY.value = Math.max(
 				translationY.value,
 				-Number(CalculatedSnapPoints.at(-1))

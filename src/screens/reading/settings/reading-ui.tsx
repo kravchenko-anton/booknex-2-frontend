@@ -1,5 +1,6 @@
 import { BottomSheetListEnum } from '@/components/ui/bottom-sheet/bottom-sheet-list'
 import AnimatedIcon from '@/components/ui/icon/animated-icon'
+import { Slider } from '@/components/ui/slider/slider'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
@@ -7,6 +8,7 @@ import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { useReadingAnimation } from '@/screens/reading/settings/reading-ui-animation'
 import { AnimatedView } from '@/types/component-types'
 import type { LineColorType } from '@/utils/color'
+import { WINDOW_WIDTH } from '@/utils/dimensions'
 import { shadeRGBColor } from '@/utils/shade-color'
 import { StatusBar } from 'expo-status-bar'
 import type { FC } from 'react'
@@ -18,8 +20,10 @@ export const shadeBackground = -15
 const ReadingUi: FC = () => {
 	const { goBack } = useTypedNavigation()
 	const { top } = useSafeAreaInsets()
-	const { openBottomSheet } = useAction()
-	const { progress, toc } = useTypedSelector(state => state.reader)
+	const { openBottomSheet, goToProgress } = useAction()
+	const { progress: readerProgress, toc } = useTypedSelector(
+		state => state.reader
+	)
 	const { visible } = useTypedSelector(state => state.readingUi)
 	const { colorScheme } = useTypedSelector(state => state.readingSettings)
 	const { headerAnimation, footerAnimation } = useReadingAnimation(visible)
@@ -68,53 +72,64 @@ const ReadingUi: FC = () => {
 						)
 					}
 				]}
-				className='h-18 absolute bottom-0 z-50 w-full flex-1 flex-row items-center justify-between   px-4'>
+				className='h-18 absolute bottom-0 z-50 mt-0 w-full flex-1 pt-0'>
 				{/* //TODO: сделать тут слайдер*/}
-				<AnimatedIcon
-					name='list-unordered'
-					onPress={() =>
-						toc
-							? openBottomSheet(BottomSheetListEnum.readerChapters)
-							: Toast.show({
-									type: 'error',
-									text1: 'Error',
-									text2: 'Charapters is not loaded'
-							  })
-					}
-					size='large'
-					color={colorScheme.colorPalette.text}
-					className='pl-0'
+				<Slider
+					trumbInside={true}
+					initialValue={readerProgress}
+					minValue={0}
+					maxValue={100}
+					className='mb-1 mt-2'
+					borderRadius={0}
+					width={WINDOW_WIDTH}
+					onIndexChange={value => {
+						console.log(value)
+					}}
 				/>
-				<AnimatedIcon
-					name='search'
-					size='large'
-					onPress={() => openBottomSheet(BottomSheetListEnum.readerSearch)}
-					color={colorScheme.colorPalette.text}
-				/>
-				<Title
-					size={24}
-					center
-					weight={'bold'}
-					color={colorScheme.colorPalette.text}>
-					{(progress || 0) + '%'}
-				</Title>
-				<AnimatedIcon
-					onPress={() => openBottomSheet(BottomSheetListEnum.readerSettings)}
-					name='typography'
-					size='large'
-					color={colorScheme.colorPalette.text}
-				/>
-				<AnimatedIcon
-					name='repo'
-					size='large'
-					onPress={() => openBottomSheet(BottomSheetListEnum.readerNoteBook)}
-					className='pr-0'
-					color={colorScheme.colorPalette.text}
-				/>
+				<View className='mt-0 flex-row items-center justify-between  px-4'>
+					<AnimatedIcon
+						name='list-unordered'
+						onPress={() =>
+							toc
+								? openBottomSheet(BottomSheetListEnum.readerChapters)
+								: Toast.show({
+										type: 'error',
+										text1: 'Error',
+										text2: 'Charapters is not loaded'
+								  })
+						}
+						size='large'
+						color={colorScheme.colorPalette.text}
+						className='pl-0'
+					/>
+					<AnimatedIcon
+						name='search'
+						size='large'
+						onPress={() => openBottomSheet(BottomSheetListEnum.readerSearch)}
+						color={colorScheme.colorPalette.text}
+					/>
+					<Title
+						size={24}
+						center
+						weight={'bold'}
+						color={colorScheme.colorPalette.text}>
+						{(readerProgress || 0) + '%'}
+					</Title>
+					<AnimatedIcon
+						onPress={() => openBottomSheet(BottomSheetListEnum.readerSettings)}
+						name='typography'
+						size='large'
+						color={colorScheme.colorPalette.text}
+					/>
+					<AnimatedIcon
+						name='repo'
+						size='large'
+						onPress={() => openBottomSheet(BottomSheetListEnum.readerNoteBook)}
+						className='pr-0'
+						color={colorScheme.colorPalette.text}
+					/>
+				</View>
 			</AnimatedView>
-			{
-				// решить что делать с статус баром чтобы адаптивно подстраивался цвет
-			}
 			<StatusBar
 				style={colorScheme.statusBar}
 				backgroundColor={colorScheme.colorPalette.background}
