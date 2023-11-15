@@ -1,6 +1,5 @@
 import { BottomSheetListEnum } from '@/components/ui/bottom-sheet/bottom-sheet-list'
 import AnimatedIcon from '@/components/ui/icon/animated-icon'
-import { Slider } from '@/components/ui/slider/slider'
 import { Title } from '@/components/ui/title/title'
 import { useAction } from '@/hooks/useAction'
 import { useTypedNavigation } from '@/hooks/useTypedNavigation'
@@ -8,7 +7,6 @@ import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { useReadingAnimation } from '@/screens/reading/settings/reading-ui-animation'
 import { AnimatedView } from '@/types/component-types'
 import type { LineColorType } from '@/utils/color'
-import { WINDOW_WIDTH } from '@/utils/dimensions'
 import { shadeRGBColor } from '@/utils/shade-color'
 import { StatusBar } from 'expo-status-bar'
 import type { FC } from 'react'
@@ -20,7 +18,7 @@ export const shadeBackground = -15
 const ReadingUi: FC = () => {
 	const { goBack } = useTypedNavigation()
 	const { top } = useSafeAreaInsets()
-	const { openBottomSheet, goToProgress } = useAction()
+	const { openBottomSheet } = useAction()
 	const { progress: readerProgress, toc } = useTypedSelector(
 		state => state.reader
 	)
@@ -73,19 +71,6 @@ const ReadingUi: FC = () => {
 					}
 				]}
 				className='h-18 absolute bottom-0 z-50 mt-0 w-full flex-1 pt-0'>
-				{/* //TODO: сделать тут слайдер*/}
-				<Slider
-					trumbInside={true}
-					initialValue={readerProgress}
-					minValue={0}
-					maxValue={100}
-					className='mb-1 mt-2'
-					borderRadius={0}
-					width={WINDOW_WIDTH}
-					onIndexChange={value => {
-						console.log(value)
-					}}
-				/>
 				<View className='mt-0 flex-row items-center justify-between  px-4'>
 					<AnimatedIcon
 						name='list-unordered'
@@ -112,7 +97,7 @@ const ReadingUi: FC = () => {
 						size={24}
 						center
 						weight={'bold'}
-						color={colorScheme.colorPalette.text}>
+						color={colorScheme.colorPalette.primary}>
 						{(readerProgress || 0) + '%'}
 					</Title>
 					<AnimatedIcon

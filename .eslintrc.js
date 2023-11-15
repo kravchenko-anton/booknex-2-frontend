@@ -10,19 +10,19 @@ module.exports = {
 		'jsx-expressions'
 	],
 	extends: [
-		'eslint:recommended',
 		'airbnb-typescript',
 		'airbnb-typescript/base',
+		'eslint:recommended',
+		'plugin:unicorn/all',
+		'plugin:sonarjs/recommended',
+		'plugin:jsx-a11y/recommended',
+		'plugin:react-native/all',
+		'plugin:react-hooks/recommended',
 		'plugin:@typescript-eslint/eslint-recommended',
 		'plugin:@typescript-eslint/strict',
 		'plugin:@typescript-eslint/strict-type-checked',
 		'plugin:@typescript-eslint/stylistic-type-checked',
-		'plugin:@typescript-eslint/stylistic',
-		'plugin:jsx-a11y/recommended',
-		'plugin:sonarjs/recommended',
-		'plugin:unicorn/all',
-		'plugin:react-native/all',
-		'plugin:react-hooks/recommended'
+		'plugin:@typescript-eslint/stylistic'
 	],
 	root: true,
 	env: {
@@ -54,7 +54,6 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 'error',
 		'@typescript-eslint/no-extra-non-null-assertion': 'error',
 		'max-params': ['error', 4],
-		// TODO: enable this rule when it will be fixed
 		'arrow-body-style': ['off', 'as-needed'],
 		complexity: ['error', 10],
 		'no-nested-ternary': 'error',
@@ -121,12 +120,13 @@ module.exports = {
 			'error',
 			{ disallowedPrefixes: ['new', 'class'] }
 		],
+		// Disable rules
+
 		'@typescript-eslint/no-confusing-void-expression': 'off',
 		'@typescript-eslint/comma-dangle': 'off',
 		'@typescript-eslint/semi': 'off',
 		'@typescript-eslint/unbound-method': 'off',
 		'@typescript-eslint/no-misused-promises': 'off',
-		'no-shadow': 'off',
 		'@typescript-eslint/no-shadow': 'off',
 		'@typescript-eslint/no-floating-promises': 'off',
 		'@typescript-eslint/indent': 'off',
@@ -137,19 +137,19 @@ module.exports = {
 		'@typescript-eslint/consistent-type-definitions': 'off',
 		'@typescript-eslint/prefer-nullish-coalescing': 'off',
 		'@typescript-eslint/no-throw-literal': 'off',
-		'import/no-extraneous-dependencies': 'off',
-		'import/extensions': 'off',
-		'import/named': 'off',
-		'import/no-default-export': 'off',
-		'import/prefer-default-export': 'off',
+
+		'no-shadow': 'off',
 		'no-mixed-spaces-and-tabs': 'off',
 		'class-methods-use-this': 'off',
 		'consistent-return': 'off',
 		'newline-per-chained-call': 'off',
 		'no-await-in-loop': 'off',
 		'no-continue': 'off',
-		'react-native/no-raw-text': 'off',
 		'unicorn/no-null': 'off',
-		'react/jsx-filename-extension': 'off'
+		'react-native/no-raw-text': 'off',
+		'react/jsx-filename-extension': 'off',
+
+		'import/no-extraneous-dependencies': 'off',
+		'import/extensions': 'off'
 	}
 }

@@ -25,8 +25,6 @@ export type Location = {
 	}
 }
 
-export type Mark = 'highlight' | 'underline'
-
 export type EPubCfi = string
 
 export type Theme = {

@@ -92,13 +92,13 @@ export function Slider({
 	)
 
 	const start = useSharedValue(translateX.value)
+
 	const gesture = Gesture.Pan()
 		.hitSlop(touchSlop)
 		.maxPointers(1)
 		.minPointers(1)
 		.activeOffsetX(activeOffsetX)
 		.onStart(e => {
-			isPressed.value = true
 			start.value = translateX.value
 		})
 		.onUpdate(e => {
@@ -127,13 +127,22 @@ export function Slider({
 				}
 			}
 		})
-		.onFinalize(() => {
-			isPressed.value = false
-		})
 
 	return (
 		<Pressable
-			className='justify-center py-2'
+			// onPress={e => {
+			// 	isPressed.value = true
+			// 	const estimate = e.nativeEvent.locationX
+			// 	console.log(estimate, 'estimate')
+			// 	const EndValue = clamp(estimate, CalcMin, CalcWidth)
+			// 	if (onIndexChange) {
+			// 		runOnJS(onIndexChange)(
+			// 			(EndValue / CalcWidth) * (maxValue - minValue) + minValue
+			// 		)
+			// 	}
+			// 	isPressed.value = false
+			// }}
+			className='justify-center'
 			style={{
 				height: thumbSize,
 				width: width

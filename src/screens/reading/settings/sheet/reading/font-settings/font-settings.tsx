@@ -3,7 +3,10 @@ import Select from '@/components/ui/select/select'
 import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import type { ReaderFontsEnum } from '@/redux/reading-settings/reading-settings-slice'
-import { ReaderFont } from '@/redux/reading-settings/reading-settings-slice'
+import {
+	fontSizeSettings,
+	ReaderFont
+} from '@/redux/reading-settings/reading-settings-slice'
 import LineHeightIcon from '@/screens/reading/settings/sheet/reading/font-settings/icons/line-height'
 import PageMarginIcon from '@/screens/reading/settings/sheet/reading/font-settings/icons/page-margin'
 import type { FC } from 'react'
@@ -16,7 +19,7 @@ const FontSettings: FC = () => {
 	)
 	const { changePadding, changeLineHeight, changeFontFamily, changeFontSize } =
 		useAction()
-	console.log(FontSettings)
+	console.log(fontSize)
 	return (
 		<View className='px-4'>
 			<View className='mt-4 w-full flex-row  items-center justify-between'>
@@ -47,7 +50,9 @@ const FontSettings: FC = () => {
 							className='w-[60px] rounded-r-none border-r-0 p-1'
 							style={{
 								borderColor:
-									colorScheme.colorPalette[fontSize === 10 ? 'primary' : 'text']
+									colorScheme.colorPalette[
+										fontSize === fontSizeSettings.min ? 'primary' : 'text'
+									]
 							}}
 							onPress={() => {
 								changeFontSize(fontSize - 2)
@@ -62,7 +67,9 @@ const FontSettings: FC = () => {
 							name='plus'
 							style={{
 								borderColor:
-									colorScheme.colorPalette[fontSize === 26 ? 'primary' : 'text']
+									colorScheme.colorPalette[
+										fontSize === fontSizeSettings.max ? 'primary' : 'text'
+									]
 							}}
 							onPress={() => {
 								changeFontSize(fontSize + 2)

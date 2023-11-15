@@ -12,6 +12,11 @@ export enum ReaderFontsEnum {
 	Arial = 'Arial, Helvetica, sans-serif',
 	TimesRoman = 'Times New Roman, Times, serif'
 }
+
+export const fontSizeSettings = {
+	min: 24,
+	max: 38
+}
 export const ReaderFont = [
 	{
 		title: 'Courier',
@@ -33,7 +38,7 @@ const initialState = {
 		title: 'Courier New',
 		fontFamily: ReaderFontsEnum.Courier
 	} as (typeof ReaderFont)[0],
-	fontSize: 14,
+	fontSize: fontSizeSettings.min,
 	flow: 'paginated' as 'paginated' | 'scrolled',
 	lineHeight: 1.3 as 1.3 | 1.5 | 1.8,
 	padding: 14 as 14 | 8 | 20,
@@ -71,7 +76,9 @@ const ReadingSettingsSlice = createSlice({
 		},
 
 		changeFontSize: (state, { payload }: PayloadAction<number>) => {
-			if (payload <= 8 || payload >= 28) return
+			console.log(payload)
+			if (payload < fontSizeSettings.min || payload > fontSizeSettings.max)
+				return
 			state.fontSize = payload
 			console.log('changeFontSize', payload)
 		},
