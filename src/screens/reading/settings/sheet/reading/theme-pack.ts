@@ -1,4 +1,4 @@
-import type { Theme } from '@/screens/reading/epub-reader/types'
+import type { Theme } from '@/screens/reading/reader/types'
 import { Color } from '@/utils/color'
 
 export const ImportantProperty = (property: string | number) =>

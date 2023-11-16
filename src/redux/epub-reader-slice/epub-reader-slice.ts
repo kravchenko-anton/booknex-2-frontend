@@ -3,7 +3,7 @@ import type {
 	Location,
 	SearchResult,
 	Toc
-} from '@/screens/reading/epub-reader/types'
+} from '@/screens/reading/reader/types'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -25,7 +25,7 @@ const initialState = {
 }
 
 const EpubReaderSlice = createSlice({
-	name: 'epub-reader',
+	name: 'reader',
 	initialState,
 	reducers: {
 		setToc: (state, { payload }: PayloadAction<Toc[]>) => {

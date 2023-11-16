@@ -31,7 +31,7 @@ module.exports = {
 	ignorePatterns: [
 		'.eslintrc.js',
 		'*.js',
-		'./src/screens/reading/epub-reader/**'
+		'./src/screens/reading/reader/**'
 	],
 	parserOptions: {
 		ecmaFeatures: {

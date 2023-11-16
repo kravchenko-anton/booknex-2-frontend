@@ -7,9 +7,8 @@ import { useTypedSelector } from '@/hooks/useTypedSelector'
 import FontSettings from '@/screens/reading/settings/sheet/reading/font-settings/font-settings'
 import { themePack } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import type { LineColorType } from '@/utils/color'
-import { shadeRGBColor } from '@/utils/shade-color'
 import type { FC } from 'react'
-import { Switch, View } from 'react-native'
+import { View } from 'react-native'
 
 const ReadingSettings: FC = () => {
 	const { colorScheme, flow } = useTypedSelector(state => state.readingSettings)
@@ -70,23 +69,26 @@ const ReadingSettings: FC = () => {
 				<Title weight={'bold'} color={colorScheme.colorPalette.text}>
 					Scrolling
 				</Title>
-				<Switch
-					className='m-0 ml-3 mt-1.5 p-0'
-					trackColor={{
-						false: colorScheme.colorPalette.text,
-						true: shadeRGBColor(colorScheme.colorPalette.primary, -10)
-					}}
-					thumbColor={
-						flow === 'paginated'
-							? colorScheme.colorPalette.text
-							: colorScheme.colorPalette.primary
-					}
-					onValueChange={() => {
-						console.log(flow)
-						changeFlow(flow === 'paginated' ? 'scrolled' : 'paginated')
-					}}
-					value={flow !== 'paginated'}
-				/>
+				{
+					// TODO: сделать flow
+				}
+				{/* <Switch*/}
+				{/*	className='m-0 ml-3 mt-1.5 p-0'*/}
+				{/*	trackColor={{*/}
+				{/*		false: colorScheme.colorPalette.text,*/}
+				{/*		true: shadeRGBColor(colorScheme.colorPalette.primary, -10)*/}
+				{/*	}}*/}
+				{/*	thumbColor={*/}
+				{/*		flow === 'paginated'*/}
+				{/*			? colorScheme.colorPalette.text*/}
+				{/*			: colorScheme.colorPalette.primary*/}
+				{/*	}*/}
+				{/*	onValueChange={() => {*/}
+				{/*		console.log(flow)*/}
+				{/*		changeFlow(flow === 'paginated' ? 'scrolled' : 'paginated')*/}
+				{/*	}}*/}
+				{/*	value={flow !== 'paginated'}*/}
+				{/* />*/}
 			</View>
 		</View>
 	)

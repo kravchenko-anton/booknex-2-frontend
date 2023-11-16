@@ -1,4 +1,4 @@
-import type { EPubCfi } from '@/screens/reading/epub-reader/types'
+import type { EPubCfi } from '@/screens/reading/reader/types'
 import type { ThemePackType } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import {
 	defaultTheme,

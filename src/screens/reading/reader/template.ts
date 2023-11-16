@@ -4,9 +4,6 @@ export default `
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EPUB.js</title>
-    <script id="jszip"></script>
-    <script id="epubjs"></script>
 
     <style type="text/css">
       body {
@@ -35,20 +32,9 @@ export default `
       const type = window.type;
       const file = window.book;
       const theme = window.theme;
-      const enableSelection = window.enable_selection;
       const flow = window.flow;
-      if (!file) {
-        alert('Failed load book');
-      }
 
-      if (type === 'epub' || type === 'opf' || type === 'binary') {
-        book = ePub(file);
-      } else if (type === 'base64') {
-        book = ePub(file, { encoding: "base64" });
-      } else {
-        alert('Missing file type');
-      }
-
+   
       rendition = book.renderTo("viewer", flow);
 
       window.ReactNativeWebView.postMessage(JSON.stringify({ type: "onStarted" }));

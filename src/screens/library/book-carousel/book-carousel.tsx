@@ -6,7 +6,7 @@ import { Color } from '@/utils/color'
 import { shadeRGBColor } from '@/utils/shade-color'
 import { LinearGradient } from 'expo-linear-gradient'
 import { View } from 'react-native'
-//			<View className='px-4'>
+//			<Reader className='px-4'>
 // 					<Title size={24} weight={'bold'} color={Color.white}>
 // 						You have no book
 // 					</Title>
@@ -19,7 +19,7 @@ import { View } from 'react-native'
 // 						text={'Browse book'}
 // 						className='mt-4'
 // 					/>
-// 				</View>
+// 				</Reader>
 const BookCarousel = () => (
 	<View className='mt-2'>
 		<LinearGradient
