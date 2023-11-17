@@ -12,16 +12,13 @@ import { StatusBar } from 'expo-status-bar'
 import type { FC } from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import Toast from 'react-native-toast-message'
 
 export const shadeBackground = -15
 const ReadingUi: FC = () => {
 	const { goBack } = useTypedNavigation()
 	const { top } = useSafeAreaInsets()
 	const { openBottomSheet } = useAction()
-	const { progress: readerProgress, toc } = useTypedSelector(
-		state => state.reader
-	)
+	const { progress: readerProgress } = useTypedSelector(state => state.reader)
 	const { visible } = useTypedSelector(state => state.readingUi)
 	const { colorScheme } = useTypedSelector(state => state.readingSettings)
 	const { headerAnimation, footerAnimation } = useReadingAnimation(visible)
@@ -74,15 +71,7 @@ const ReadingUi: FC = () => {
 				<View className='mt-0 flex-row items-center justify-between  px-4'>
 					<AnimatedIcon
 						name='list-unordered'
-						onPress={() =>
-							toc
-								? openBottomSheet(BottomSheetListEnum.readerChapters)
-								: Toast.show({
-										type: 'error',
-										text1: 'Error',
-										text2: 'Charapters is not loaded'
-								  })
-						}
+						onPress={() => openBottomSheet(BottomSheetListEnum.readerChapters)}
 						size='large'
 						color={colorScheme.colorPalette.text}
 						className='pl-0'

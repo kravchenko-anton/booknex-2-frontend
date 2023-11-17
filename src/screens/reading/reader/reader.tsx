@@ -1,6 +1,10 @@
-import { useAction } from '@/hooks/useAction'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import { handleDoublePress } from '@/screens/reading/reader/additional-function'
+import {
+	beforeLoad,
+	insertStyle,
+	scrollProgressDetect
+} from '@/screens/reading/reader/additional-function'
+import { useReader } from '@/screens/reading/reader/useReader'
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '@/utils/dimensions'
 import type { ReactNode } from 'react'
 import React, { useEffect, useRef } from 'react'
@@ -10,140 +14,25 @@ import { WebView } from 'react-native-webview'
 import type { ReaderProperties } from './types'
 
 export function Reader({ id }: ReaderProperties): ReactNode {
-	const { toggleReadingUi } = useAction()
 	const WebViewReference = useRef<WebView>(null)
-	const { colorScheme, padding, lineHeight, flow, font, fontSize } =
-		useTypedSelector(state => state.readingSettings)
-	const goToToc = () => {
-		WebViewReference.current?.injectJavaScript(
-			`         // get Element by text content Twenty-Four
-							var element = document.;
-							element.scrollIntoView({ behavior: 'smooth' });
-							window.ReactNativeWebView.postMessage(JSON.stringify({
-								type: "goToToc"
-							}));
-							`
-		)
-	}
-	const styleTag = `body {
-		background: ${colorScheme.theme.body.background} !important;
-		font-family: ${font.fontFamily} !important;
-		font-size: ${fontSize}px;
-		line-height: ${lineHeight};
-		padding: ${padding}px;
-	}
-	i {
-		color: ${colorScheme.colorPalette.primary} !important;
-	}
-	span {
-		color: ${colorScheme.colorPalette.text} !important;
-	}
-	p {
-		color: ${colorScheme.colorPalette.text} !important;
-	}
-	li {
-		color: ${colorScheme.colorPalette.text} !important;
-	}
-	a {
-		color: ${colorScheme.colorPalette.secondary} !important;
-		'font-weight': "bold !important";
-		textDecoration: "none !important";
-		'font-style': "italic !important";
-	}
-	h1 {
-		font-size: ${fontSize * 1.6}px !important;
-		'font-weight': "bold !important";
-		color: ${colorScheme.colorPalette.primary} !important;
-	}
-	h2 {
-		'font-weight': "bold !important";
-		color: ${colorScheme.colorPalette.primary} !important;
-		font-size: ${fontSize * 1.5}px !important;
-	}
-	h3 {
-		'font-weight': "bold !important";
-		color: ${colorScheme.colorPalette.primary} !important;
-		font-size: ${fontSize * 1.4}px !important;
-	}
-	h4 {
-		'font-weight': "bold !important";
-		color: ${colorScheme.colorPalette.primary} !important;
-		font-size: ${fontSize * 1.3}px !important;
-	}
-	h5 {
-		'font-weight': "bold !important";
-		font-size: ${fontSize * 1.2}px !important;
-		color: ${colorScheme.colorPalette.primary} !important;
-	}
-	h6 {
-		font-size: ${fontSize * 1.1}px !important;
-		'font-weight': "bold !important";
-		color: ${colorScheme.colorPalette.primary} !important;
-	}
-	'::selection' {
-		background: ${colorScheme.colorPalette.primary} !important;
-		color: ${colorScheme.colorPalette.text} !important;
-	}
-	ul {
-		color: ${colorScheme.colorPalette.text} !important;
-		'list-style-type': "none";
-	}
-	ol {
-		color: ${colorScheme.colorPalette.text} !important;
-		'list-style-type': "none";
-	}
-	strong {
-		'font-weight': "bold !important" !important;
-	}
-	em {
-		'font-style': "italic !important";
-	}
-	b {
-		'font-weight': "bold !important";
-		color: ${colorScheme.colorPalette.primary} !important;
-	}`
+	const { books } = useTypedSelector(state => state.readingSettings)
+	const { styleTag, colorScheme, doubleTap, onMessage } = useReader(id)
+	console.log(
+		Math.round(books?.find(book => book.id === id)?.lastProgress.location || 0)
+	)
 	useEffect(() => {
 		if (!WebViewReference.current) return
-
-		WebViewReference.current.injectJavaScript(`
-				var style = document.createElement('style');
-				style.type = 'text/css';
-				style.innerHTML = \`${styleTag}\`;
-				document.getElementsByTagName('head')[0].appendChild(style);
-			`)
+		WebViewReference.current.injectJavaScript(insertStyle(styleTag))
 	}, [WebViewReference, styleTag])
 	return (
 		<GestureHandlerRootView className='m-0 h-screen w-screen p-0 pb-6'>
 			<RNView className='m-0 h-full w-full items-center justify-center p-0'>
-				<TouchableWithoutFeedback
-					onPress={() => handleDoublePress(toggleReadingUi)}>
+				<TouchableWithoutFeedback onPress={doubleTap}>
 					<WebView
 						menuItems={[]}
 						showsVerticalScrollIndicator={false}
 						javaScriptEnabled
 						ref={WebViewReference}
-						injectedJavaScriptBeforeContentLoaded={`
-									var style = document.createElement('style');
-				style.type = 'text/css';
-				style.innerHTML = \`${styleTag}\`;
-				document.getElementsByTagName('head')[0].appendChild(style);
-                var body = document.body;
-                // do scroll progress of book in value
-                var scrollProgress = 0;
-                var scrollHeight = body.scrollHeight;
-                var clientHeight = body.clientHeight;
-                var scrollValue = scrollHeight / clientHeight;
-			window.addEventListener('scroll', function() {
-				scrollProgress = window.scrollY * scrollValue;
-				window.ReactNativeWebView.postMessage(JSON.stringify({
-					type: "scrollProgress",
-					value: scrollProgress
-				}));
-			});
-       
-       
-       
-							`}
 						source={{
 							html: `
 <body>
@@ -187,9 +76,14 @@ export function Reader({ id }: ReaderProperties): ReactNode {
 						originWhitelist={['*']}
 						scrollEnabled={true}
 						mixedContentMode='compatibility'
-						onMessage={event => {
-							console.log(event.nativeEvent.data)
-						}}
+						injectedJavaScript={scrollProgressDetect()}
+						injectedJavaScriptBeforeContentLoaded={beforeLoad(
+							styleTag,
+							Math.round(
+								books?.find(book => book.id === id)?.lastProgress.location || 0
+							)
+						)}
+						onMessage={onMessage}
 						allowUniversalAccessFromFileURLs
 						allowFileAccessFromFileURLs
 						allowFileAccess

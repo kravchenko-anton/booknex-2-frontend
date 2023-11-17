@@ -1,4 +1,3 @@
-import type { EPubCfi } from '@/screens/reading/reader/types'
 import type { ThemePackType } from '@/screens/reading/settings/sheet/reading/theme-pack'
 import {
 	defaultTheme,
@@ -39,15 +38,19 @@ const initialState = {
 		fontFamily: ReaderFontsEnum.Courier
 	} as (typeof ReaderFont)[0],
 	fontSize: fontSizeSettings.min,
-	flow: 'paginated' as 'paginated' | 'scrolled',
 	lineHeight: 1.3 as 1.3 | 1.5 | 1.8,
 	padding: 14 as 14 | 8 | 20,
-	lastBookLocations: null as
+	books: null as
 		| null
 		| {
 				id: number
-				progress: number
-				location: EPubCfi
+				lastProgress: {
+					location: number
+					progress: number
+				}
+				highlights: {
+					text: string
+				}[]
 		  }[]
 }
 
@@ -83,28 +86,31 @@ const ReadingSettingsSlice = createSlice({
 			console.log('changeFontSize', payload)
 		},
 
-		changeFlow: (
-			state,
-			{ payload }: PayloadAction<'paginated' | 'scrolled'>
-		) => {
-			state.flow = payload
-		},
-
-		addLastBookLocations: (
+		updateReadingProgress: (
 			state,
 			{
 				payload
-			}: PayloadAction<{ id: number; location: EPubCfi; progress: number }>
+			}: PayloadAction<{ id: number; progress: number; location: number }>
 		) => {
-			console.log('addLastBookLocations', payload)
-			// write to state but if the id already exists, replace the location
-
-			state.lastBookLocations = [
-				...(state.lastBookLocations ?? []).filter(
-					({ id }) => id !== payload.id
-				),
-				payload
-			]
+			const book = state.books?.find(value => value.id === payload.id)
+			if (book) {
+				book.lastProgress = {
+					progress: payload.progress,
+					location: payload.location
+				}
+			} else {
+				state.books = [
+					...(state.books ?? []),
+					{
+						id: payload.id,
+						lastProgress: {
+							progress: payload.progress,
+							location: payload.location
+						},
+						highlights: []
+					}
+				]
+			}
 		}
 	}
 })

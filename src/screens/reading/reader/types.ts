@@ -103,33 +103,32 @@ export interface Toc {
 	href: string
 	label: string
 }
-export interface WebviewMessage {
-	type: string
-	htmlElement: string
-	totalLocations: number
-	currentLocation: Location
-	progress: number
-	reason: string
-	layout: string
-	epubKey: string
-	locations: EPubCfi[]
-	results: SearchResult[]
-	cfiRange: string
-	text: string
-	section: string
-	currentSection: string
-	toc: { toc: Toc[] }
-}
+export type WebviewMessage =
+	| {
+			type: 'ScrollToText'
+			payload: {
+				text: string
+			}
+	  }
+	| {
+			type: 'ScrollToProgress'
+			payload: {
+				scrollTop: number
+				scrollHeight: number
+				progress: number
+			}
+	  }
+	| {
+			type: 'scroll'
+			payload: {
+				scrollTop: number
+				scrollHeight: number
+				progress: number
+			}
+	  }
 export type SearchResult = {
 	cfi: EPubCfi
 	excerpt: string
-}
-
-export enum SourceType {
-	BASE64 = 'base64',
-	EPUB = 'epub',
-	OPF = 'opf',
-	BINARY = 'binary'
 }
 
 export interface ReaderProperties {
